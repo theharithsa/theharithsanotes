@@ -3,6 +3,8 @@
 | Feature | Acceptance and coverage | Owner |
 | --- | --- | --- |
 | Editorial pages | Static home/about/projects/privacy/404; responsive desktop and phone browser checks | website |
+| Personal gallery | Six selected photographs, replacement About portrait, native modal, arrow keys/Escape/focus restoration; desktop/mobile checks | website |
+| Project workbench | Eleven entries verified against GitHub/public project pages; user supplied FinVision AI link; local image/link checks | website |
 | Article migration | 12 original paths and substantive sanitized article bodies; local images and link resolution tested | website |
 | Discovery | Case-insensitive title/description/topic search, topic filtering, live count, empty/reset states; browser checked | website |
 | Accessibility | Skip link, semantic controls, selected state, keyboard focus, Escape menu, reduced motion | website |

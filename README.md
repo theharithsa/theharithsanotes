@@ -2,7 +2,7 @@
 
 Template version: **1.9.0**.
 
-Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Editorial design inspired by Gates Notes, with original branding, a forest feature, topic browsing, search, project pages, and 12 migrated articles at their original URLs.
+Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Gates Notes-inspired editorial design with classic locally served typography, original illustrations, eleven projects, a personal photo gallery, and 12 migrated articles at their original URLs. See the [design and media provenance](docs/editorial-design.md).
 
 ## Run locally
 

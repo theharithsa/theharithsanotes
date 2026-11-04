@@ -1,0 +1,7 @@
+---
+import { gallery } from '../data/gallery';
+interface Props { limit?: number }
+const { limit = gallery.length } = Astro.props;
+---
+<div class="gallery-grid">{gallery.slice(0,limit).map((photo,index) => <figure class={`gallery-photo photo-${photo.shape}`}><button class="gallery-open" data-gallery-open data-src={photo.src} data-title={photo.title} data-caption={photo.caption} data-alt={photo.alt} aria-label={`Enlarge photo: ${photo.title}`}><img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy"/><span class="gallery-enlarge" aria-hidden="true">↗</span></button><figcaption><span class="gallery-number">{String(index+1).padStart(2,'0')}</span><div><h3>{photo.title}</h3><p>{photo.caption}</p></div></figcaption></figure>)}</div>
+<dialog class="photo-lightbox" aria-labelledby="photo-dialog-title"><div class="lightbox-toolbar"><span class="eyebrow">FROM MY CAMERA ROLL</span><button class="lightbox-close" aria-label="Close photograph" autofocus>Close ×</button></div><div class="lightbox-image-frame"><img class="lightbox-image" alt=""/></div><div class="lightbox-bottom"><div><h2 id="photo-dialog-title"></h2><p class="lightbox-caption"></p></div><div class="lightbox-controls"><button data-gallery-prev aria-label="Previous photograph">←</button><span class="lightbox-count" aria-live="polite"></span><button data-gallery-next aria-label="Next photograph">→</button></div></div></dialog>

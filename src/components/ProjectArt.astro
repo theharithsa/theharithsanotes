@@ -1,0 +1,9 @@
+---
+import type { Project } from '../data/projects';
+interface Props { project: Project }
+const { project } = Astro.props;
+---
+<div class={`project-art editorial-project-art art-${project.colour}`}>
+  <img src={project.image ?? '/images/curiosity-editorial.webp'} alt={project.imageAlt ?? 'Original notebook illustration'} loading="lazy" width="1200" height="750" />
+  <span class="project-art-label">{project.category}</span>
+</div>

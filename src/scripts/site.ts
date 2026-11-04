@@ -1,4 +1,9 @@
 const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+const articleContents = document.querySelector<HTMLDetailsElement>(
+  ".article-outline details",
+);
+if (articleContents && window.matchMedia("(min-width: 951px)").matches)
+  articleContents.open = true;
 const menu = document.querySelector<HTMLElement>("#mobile-menu");
 function closeMenu(): void {
   if (!toggle || !menu) return;
@@ -64,6 +69,71 @@ document.querySelector("[data-reset-search]")?.addEventListener("click", () => {
   search?.focus();
 });
 if (notes.length && filters.length) filterNotes();
+
+const photoDialog =
+  document.querySelector<HTMLDialogElement>(".photo-lightbox");
+const photoButtons = [
+  ...document.querySelectorAll<HTMLButtonElement>("[data-gallery-open]"),
+];
+let activePhoto = 0;
+let photoOpener: HTMLButtonElement | undefined;
+function showPhoto(index: number): void {
+  if (!photoDialog || !photoButtons.length) return;
+  activePhoto = (index + photoButtons.length) % photoButtons.length;
+  const button = photoButtons[activePhoto];
+  const image = photoDialog.querySelector<HTMLImageElement>(".lightbox-image");
+  const title = photoDialog.querySelector<HTMLElement>("#photo-dialog-title");
+  const caption = photoDialog.querySelector<HTMLElement>(".lightbox-caption");
+  const count = photoDialog.querySelector<HTMLElement>(".lightbox-count");
+  if (image) {
+    image.alt = button.dataset.alt ?? "";
+    image.src = button.dataset.src ?? "";
+  }
+  if (title) title.textContent = button.dataset.title ?? "Photograph";
+  if (caption) caption.textContent = button.dataset.caption ?? "";
+  if (count) count.textContent = `${activePhoto + 1} / ${photoButtons.length}`;
+}
+photoButtons.forEach((button, index) =>
+  button.addEventListener("click", () => {
+    if (!photoDialog) return;
+    photoOpener = button;
+    showPhoto(index);
+    photoDialog.showModal();
+    document.documentElement.classList.add("photo-dialog-open");
+  }),
+);
+photoDialog
+  ?.querySelector(".lightbox-close")
+  ?.addEventListener("click", () => photoDialog.close());
+photoDialog
+  ?.querySelector("[data-gallery-prev]")
+  ?.addEventListener("click", () => showPhoto(activePhoto - 1));
+photoDialog
+  ?.querySelector("[data-gallery-next]")
+  ?.addEventListener("click", () => showPhoto(activePhoto + 1));
+photoDialog?.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    showPhoto(activePhoto + 1);
+  }
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    showPhoto(activePhoto - 1);
+  }
+});
+photoDialog?.addEventListener("click", (event) => {
+  if (event.target === photoDialog) photoDialog.close();
+});
+photoDialog?.addEventListener("close", () => {
+  document.documentElement.classList.remove("photo-dialog-open");
+  photoOpener?.focus();
+});
+photoDialog?.querySelector(".lightbox-image")?.addEventListener("error", () => {
+  const caption = photoDialog.querySelector<HTMLElement>(".lightbox-caption");
+  if (caption)
+    caption.textContent =
+      "This photograph could not load. Please try another or reopen it.";
+});
 
 document
   .querySelector("[data-copy-link]")

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0] — 2026-11-05
+
+- Refined the editorial identity with locally served Source Serif 4/Public Sans, original notebook and planning illustrations, and a warmer paper/navy/terracotta palette.
+- Corrected article list rhythm, nested paragraphs, numbered lists, headings, code and tables; added section contents with preserved anchors.
+- Added eleven repository/profile-verified projects including SalesDrone, Aroha Retreat, Budget Buddy/FinBuddy, FinVision AI, ChaiCart and InspiredLearning.
+- Replaced the About portrait with a selected studio photograph and added a six-photo gallery with keyboard-operated enlargement, focus restoration and mobile layouts.
+
 ## [1.0.0] — 2026-11-05
 
 - Built the Astro/TypeScript editorial site with responsive pages, archive search, topic filters and 12 migrated articles at their original paths.

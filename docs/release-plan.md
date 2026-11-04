@@ -1,6 +1,8 @@
 # Release impact and verification plan
 
-Version: 1.0.0. Scope: [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1). Source: feature branch `feat/1-personal-website`, reviewed through a linked PR. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94.
+Version: 1.1.0. Scope: [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1) and [editorial refinement #3](https://github.com/theharithsa/theharithsanotes/issues/3). Source: feature branch `feat/1-personal-website`, reviewed through PR #2. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94, then requested article formatting, classic typography, more projects, and selected Downloads photographs.
+
+Refinement: locally served font packages/notices, original illustrations, article contents/formatting, eleven project entries and gallery/About photography. No article path changes, database writes, tenant changes, or production DNS cutover. Rebuild all static pages/assets and redeploy only the existing Firebase review channel. Code and preview acceptance remain separate from a production launch.
 
 Changed: static editorial UI, article migration, browser search/filter/menu, consent and browser monitoring, metadata/feed/sitemap, Hosting headers/config, docs, service inventory and application CI. No database, server migrations, privileged secret bindings, Auth rules, or Functions.
 

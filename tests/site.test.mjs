@@ -32,6 +32,7 @@ test("every internal page link and local asset resolves in the built site", asyn
     "about/index.html",
     "notes/index.html",
     "projects/index.html",
+    "gallery/index.html",
     "privacy/index.html",
     ...articles.map((article) => `${article.slug}/index.html`),
   ];
@@ -46,6 +47,20 @@ test("every internal page link and local asset resolves in the built site", asyn
         access(new URL(`dist/${file}`, root)),
         `${route}: ${pathname}`,
       );
+    }
+  }
+});
+
+test("article contents links resolve and original ordered/unordered lists survive sanitization", async () => {
+  for (const article of articles) {
+    const page = await readPage(`${article.slug}/index.html`);
+    const countLists = (html) =>
+      (html.match(/<(?:ul|ol)(?:\s[^>]*|)>/g) ?? []).length;
+    const body =
+      page.split('class="article-body">')[1]?.split('<div class="article-margin-note"')[0] ?? "";
+    assert.equal(countLists(body), countLists(article.html), article.slug);
+    for (const [, id] of page.matchAll(/href="#(heading-[^"]+)"/g)) {
+      assert.ok(page.includes(`id="${id}"`), `Missing article section ${id}`);
     }
   }
 });

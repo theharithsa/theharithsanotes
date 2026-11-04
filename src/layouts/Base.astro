@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css';
+import '../styles/editorial.css';
+import '@fontsource-variable/source-serif-4';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import '@fontsource-variable/public-sans';
 import { site } from '../data/site';
 interface Props { title?: string; description?: string; image?: string; article?: boolean }
 const { title, description = site.description, image = '/images/forest.jpg', article = false } = Astro.props;
@@ -36,9 +40,10 @@ const current = Astro.url.pathname;
         <a href="/notes" aria-current={current === '/notes' ? 'page' : undefined}>The notes</a>
         <a href="/about" aria-current={current === '/about' ? 'page' : undefined}>Meet Vishruth</a>
         <a href="/projects" aria-current={current === '/projects' ? 'page' : undefined}>Things I build</a>
+        <a href="/gallery" aria-current={current === '/gallery' ? 'page' : undefined}>Life in frames</a>
       </nav>
       <div class="header-actions"><a class="search-link" href="/notes#search" aria-label="Search notes"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a><a href={site.mentoring} class="button button-small header-connect">Let’s connect <span aria-hidden="true">↗</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation">☰</button></div>
-      <nav id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/">Home</a><a href="/notes">The notes</a><a href="/about">Meet Vishruth</a><a href="/projects">Things I build</a><a href={site.mentoring}>Let’s connect ↗</a></nav>
+      <nav id="mobile-menu" aria-label="Mobile navigation" hidden><a href="/">Home</a><a href="/notes">The notes</a><a href="/about">Meet Vishruth</a><a href="/projects">Things I build</a><a href="/gallery">Life in frames</a><a href={site.mentoring}>Let’s connect ↗</a></nav>
     </header>
     <main id="main"><slot /></main>
     <footer class="site-footer">

@@ -2,15 +2,15 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-  "release": "1.0.0 preview",
+  "revision": null,
+  "release": "1.1.0 review preview",
   "checks": [
     {
       "id": "typescript",
       "status": "passed",
       "command": "npm run check",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -18,17 +18,17 @@
       "id": "static-build",
       "status": "passed",
       "command": "npm run build",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
     {
-      "id": "application-tests-6",
+      "id": "application-tests-7",
       "status": "passed",
       "command": "npm test",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -36,8 +36,8 @@
       "id": "foundation-20-pass-1-skip",
       "status": "passed",
       "command": "python -m unittest discover -s tests -v",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -45,8 +45,8 @@
       "id": "discovery",
       "status": "passed",
       "command": "python scripts/check_foundation.py --ready --json",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -54,8 +54,8 @@
       "id": "links",
       "status": "passed",
       "command": "python scripts/check_links.py",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -63,8 +63,8 @@
       "id": "dependency-audit",
       "status": "passed",
       "command": "npm audit --audit-level=high",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -72,8 +72,8 @@
       "id": "browser-desktop-mobile",
       "status": "passed",
       "command": "CUA desktop 1440x1000 and mobile 390x844",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
     },
@@ -81,14 +81,23 @@
       "id": "firebase-preview",
       "status": "passed",
       "command": "firebase hosting:channel:deploy review --expires 7d --project the-harithsa-notes-94",
-      "revision": "dceb62c9966602c36bcffa35faad858abd21f36b",
-      "observedAt": "2026-11-04T19:09:58.536Z",
+      "revision": null,
+      "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app"
+    },
+    {
+      "id": "editorial-gallery-responsive",
+      "status": "passed",
+      "revision": null,
+      "command": "CUA desktop 1440x1000; phones 390x844 and 320x740; gallery open/arrow/Escape/focus; article list inspection",
+      "observedAt": "2026-11-04T19:42:42.664Z",
+      "environment": "local Windows browser",
+      "artifact": null
     }
   ],
   "limits": [
-    "Working-tree checks; CI checked-head state must be verified independently.",
+    "Working-tree checks for the 1.1.0 refinement; current-head CI must be verified independently.",
     "One POSIX-shell case skipped on Windows; Linux CI runs it.",
     "GA/Dynatrace receipt and tenant searchability not verified.",
     "No backend or native backend trace linkage exists.",
@@ -101,7 +110,7 @@
     "checkedHeadSha": null,
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 89c34f2eb49866a9",
+    "deploymentId": "Firebase review version aab661f8af83fd70",
     "artifactDigest": null,
     "sdlcEvidence": []
   }

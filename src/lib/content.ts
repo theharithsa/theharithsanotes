@@ -30,6 +30,11 @@ export const articles: Article[] = raw.map((article) => ({
       img: ["src", "alt", "width", "height", "loading"],
       code: ["class"],
       pre: ["class"],
+      h2: ["id"],
+      h3: ["id"],
+      h4: ["id"],
+      ol: ["start", "reversed"],
+      li: ["value"],
     },
     allowedSchemes: ["https", "http", "mailto"],
     transformTags: {

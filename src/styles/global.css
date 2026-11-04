@@ -1,14 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Libre+Caslon+Display&display=swap");
-
 :root {
-  --paper: #f7f7f2;
-  --ink: #1d2c26;
+  --paper: #f8f5ee;
+  --ink: #1e2d43;
   --muted: #666d65;
-  --green: #244b3b;
+  --green: #253d55;
   --lime: #d9e9bd;
   --line: #d9ddd2;
-  --serif: "Libre Caslon Display", Georgia, serif;
-  --sans: "DM Sans", Arial, sans-serif;
+  --serif: "Source Serif 4 Variable", Georgia, serif;
+  --sans: "Public Sans Variable", Arial, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -60,7 +58,7 @@ p {
 h1,
 h2,
 h3 {
-  font-weight: 400;
+  font-weight: 600;
 }
 h1,
 h2,
