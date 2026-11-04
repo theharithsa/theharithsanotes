@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
-  "release": "1.1.0 review preview",
+  "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+  "release": "1.1.1 review preview",
   "checks": [
     {
       "id": "typescript",
@@ -94,6 +94,51 @@
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows browser",
       "artifact": null
+    },
+    {
+      "id": "content-types",
+      "status": "passed",
+      "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+      "command": "npm run check",
+      "observedAt": "2026-11-04T20:01:46.798Z",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "content-build",
+      "status": "passed",
+      "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+      "command": "npm run build",
+      "observedAt": "2026-11-04T20:01:46.798Z",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "content-tests-8",
+      "status": "passed",
+      "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+      "command": "npm test",
+      "observedAt": "2026-11-04T20:01:46.798Z",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "content-discovery",
+      "status": "passed",
+      "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+      "command": "python scripts/check_foundation.py --ready --json",
+      "observedAt": "2026-11-04T20:01:46.798Z",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "content-links",
+      "status": "passed",
+      "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
+      "command": "python scripts/check_links.py",
+      "observedAt": "2026-11-04T20:01:46.798Z",
+      "environment": "local Windows",
+      "artifact": null
     }
   ],
   "limits": [
@@ -110,7 +155,7 @@
     "checkedHeadSha": null,
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 5837da957d6643c9",
+    "deploymentId": "Firebase review version 8d14fc8d4bee73e0",
     "artifactDigest": null,
     "sdlcEvidence": [
       {
@@ -120,6 +165,14 @@
         "sourceRevision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
         "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
         "observedAt": "2026-11-04T19:44:57.561Z"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "version": "8d14fc8d4bee73e0",
+        "sourceRevision": "797913390ed10a26f426489ffd16a32c291c01ab",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-04T20:01:46.798Z"
       }
     ]
   }
