@@ -91,6 +91,7 @@ test("the LinkedIn note is published with attribution and dt-mac-agent is discov
     (article) => article.slug === "the-war-room-is-dead",
   );
   assert.ok(note);
+  assert.ok(note.minutes >= 5, 'The full-length essay must not be labelled as a one-minute read');
   const page = await readPage(`${note.slug}/index.html`);
   assert.ok(page.includes(note.source));
   assert.ok(page.includes("Photo by Photos of Korea on Unsplash"));
