@@ -60,6 +60,15 @@ export const projects: Project[] = [
     colour: "terracotta",
   },
   {
+    slug: "dt-mac-agent",
+    title: "dt-mac-agent",
+    category: "Observability",
+    description:
+      "Lightweight macOS monitoring built with Bash and system tools. Collects CPU, memory, disk, network, battery, processes, and running apps, and sends health signals to Dynatrace.",
+    href: "https://github.com/theharithsa/dt-mac-agent",
+    colour: "blue",
+  },
+  {
     slug: "chaicart",
     title: "ChaiCart",
     category: "People & places",

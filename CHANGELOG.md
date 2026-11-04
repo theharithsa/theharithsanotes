@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] — 2026-11-05
+
+- Added the complete “The War Room Is Dead” article from the author’s supplied LinkedIn URL, including original displayed publication date, source link, cover and photo credit.
+- Added dt-mac-agent to the project workbench from its verified public README.
+- Preserved separately authored notes when refreshing the original Hashnode RSS import.
+
 ## [1.1.0] — 2026-11-05
 
 - Refined the editorial identity with locally served Source Serif 4/Public Sans, original notebook and planning illustrations, and a warmer paper/navy/terracotta palette.

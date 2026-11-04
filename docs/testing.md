@@ -1,6 +1,6 @@
 # Website and foundation checks
 
-Node.js 24, npm, Python 3.11+. Run `npm ci`, `npm run check`, `npm run build`, then `npm test`. Seven Node tests cover complete article migration/path preservation, every internal built link/local asset (including gallery), preserved list counts/section anchors, RSS/sitemap completeness, secret exclusion, first-visit/denied-consent isolation, and localhost/blocked-storage isolation. They exercise built artifacts and the actual telemetry script in an isolated VM; they do not contact production telemetry.
+Node.js 24, npm, Python 3.11+. Run `npm ci`, `npm run check`, `npm run build`, then `npm test`. Eight Node tests cover complete article migration/path preservation, every internal built link/local asset (including gallery), preserved list counts/section anchors, RSS/sitemap completeness, LinkedIn attribution/content discovery and dt-mac-agent, secret exclusion, first-visit/denied-consent isolation, and localhost/blocked-storage isolation. They exercise built artifacts and the actual telemetry script in an isolated VM; they do not contact production telemetry.
 
 Browser checks performed at 1440×1000 and 390×844: desktop hero, mobile archive, search to one result, no-results message, reset, topic filter, mobile menu, Escape dismissal and focus return. Mobile archive had zero broken loaded images and no horizontal overflow. Provider receipts/tenant sessions remain separate from these local checks. Tests do not claim Firebase writes, real GA ingestion, or Dynatrace receipt.
 

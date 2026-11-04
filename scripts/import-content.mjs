@@ -1,5 +1,5 @@
 import { XMLParser } from "fast-xml-parser";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const host = "https://theharithsa.com";
 const parser = new XMLParser({
@@ -68,9 +68,16 @@ try {
     "https://github.com/theharithsa.png?size=800",
     "public/images/vishruth.jpg",
   );
+  const existing = JSON.parse(await readFile("src/data/articles.json", "utf8"));
+  const preserved = existing.filter(
+    (article) => !article.source.startsWith(`${host}/`),
+  );
+  const combined = [...articles, ...preserved].sort(
+    (left, right) => Date.parse(right.date) - Date.parse(left.date),
+  );
   await writeFile(
     "src/data/articles.json",
-    `${JSON.stringify(articles, null, 2)}\n`,
+    `${JSON.stringify(combined, null, 2)}\n`,
   );
   process.stdout.write(
     `Imported ${articles.length} articles, cover images, and profile image.\n`,

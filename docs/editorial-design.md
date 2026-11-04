@@ -49,3 +49,9 @@ Descriptions were checked against actual public README files, without copying pr
 - [App Launchpad](https://github.com/theharithsa/app-launchpad-template)
 
 Original Dynatrace MCP entry was retained. Displaying a project describes work/contributions; it does not claim exclusive authorship or verified production health.
+
+## Content addition — 1.1.1
+
+Added [The War Room Is Dead](https://www.linkedin.com/pulse/war-room-dead-your-observability-tool-just-doesnt-know-harithsa-iicyc/) at `/the-war-room-is-dead`. The author explicitly requested republication. All 51 article text blocks were imported; LinkedIn recommendations, sign-in elements, comments and page chrome were excluded. Headings, bullets, numbered lists and quotations remain in semantic HTML and go through the same build sanitizer. The displayed original publication day is 27 March 2026; the source timestamp is retained separately in article metadata. The original cover is stored locally with the credit “Photo by Photos of Korea on Unsplash”. The original LinkedIn link is visible on the note. The site now has 13 notes; the original 12 paths remain unchanged.
+
+Added [dt-mac-agent](https://github.com/theharithsa/dt-mac-agent) from its public README: a lightweight macOS agent collecting system/process/application health for Dynatrace. No installation or credential-handling commands are copied into the personal site. Twelve projects are listed. The three home-page project highlights remain SalesDrone, Aroha Retreat and FinVision AI.

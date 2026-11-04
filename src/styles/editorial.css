@@ -1401,3 +1401,14 @@ em {
     overflow: visible;
   }
 }
+.article-source {
+  margin: -10px 0 25px;
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--muted);
+}
+.article-source a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

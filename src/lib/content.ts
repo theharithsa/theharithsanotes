@@ -13,6 +13,9 @@ export interface Article {
   minutes: number;
   html: string;
   source: string;
+  sourceLabel?: string;
+  sourcePublishedAt?: string;
+  imageCredit?: string;
 }
 
 export const articles: Article[] = raw.map((article) => ({

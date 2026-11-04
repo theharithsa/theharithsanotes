@@ -12,12 +12,19 @@ const articles = JSON.parse(
 );
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
 
-test("all 12 migrated articles keep their original paths and substantive content", async () => {
-  assert.equal(articles.length, 12);
-  assert.equal(new Set(articles.map((article) => article.slug)).size, 12);
+test("the original 12 article paths and all published note bodies are preserved", async () => {
+  const migrated = articles.filter(
+    (article) => new URL(article.source).hostname === "theharithsa.com",
+  );
+  assert.equal(migrated.length, 12);
+  assert.equal(
+    new Set(articles.map((article) => article.slug)).size,
+    articles.length,
+  );
   for (const article of articles) {
     const page = await readPage(`${article.slug}/index.html`);
-    assert.equal(new URL(article.source).pathname, `/${article.slug}`);
+    if (migrated.includes(article))
+      assert.equal(new URL(article.source).pathname, `/${article.slug}`);
     assert.ok(page.includes(`href="https://theharithsa.com/${article.slug}"`));
     assert.ok(page.includes('class="article-body"'));
     assert.ok(article.html.length > 1000);
@@ -57,7 +64,9 @@ test("article contents links resolve and original ordered/unordered lists surviv
     const countLists = (html) =>
       (html.match(/<(?:ul|ol)(?:\s[^>]*|)>/g) ?? []).length;
     const body =
-      page.split('class="article-body">')[1]?.split('<div class="article-margin-note"')[0] ?? "";
+      page
+        .split('class="article-body">')[1]
+        ?.split('<div class="article-margin-note"')[0] ?? "";
     assert.equal(countLists(body), countLists(article.html), article.slug);
     for (const [, id] of page.matchAll(/href="#(heading-[^"]+)"/g)) {
       assert.ok(page.includes(`id="${id}"`), `Missing article section ${id}`);
@@ -68,13 +77,33 @@ test("article contents links resolve and original ordered/unordered lists surviv
 test("feed and sitemap include every migrated canonical article exactly once", async () => {
   const feed = await readPage("rss.xml");
   const sitemap = await readPage("sitemap.xml");
-  assert.equal((feed.match(/<item>/g) ?? []).length, 12);
+  assert.equal((feed.match(/<item>/g) ?? []).length, articles.length);
   for (const article of articles)
     assert.equal(
       sitemap.split(`<loc>https://theharithsa.com/${article.slug}</loc>`)
         .length - 1,
       1,
     );
+});
+
+test("the LinkedIn note is published with attribution and dt-mac-agent is discoverable", async () => {
+  const note = articles.find(
+    (article) => article.slug === "the-war-room-is-dead",
+  );
+  assert.ok(note);
+  const page = await readPage(`${note.slug}/index.html`);
+  assert.ok(page.includes(note.source));
+  assert.ok(page.includes("Photo by Photos of Korea on Unsplash"));
+  assert.ok(page.includes("The signal is there. Every time."));
+  assert.ok(!page.includes("Recommended by LinkedIn"));
+  for (const route of ["index.html", "notes/index.html"]) {
+    assert.ok((await readPage(route)).includes(`href="/${note.slug}"`));
+  }
+  assert.ok(
+    (await readPage("projects/index.html")).includes(
+      'href="https://github.com/theharithsa/dt-mac-agent"',
+    ),
+  );
 });
 
 test("built assets contain no Dynatrace ingestion credentials or private-key material", async () => {
