@@ -1,5 +1,9 @@
 # Foundation tooling continuation
 
+## Website adoption — 5 November 2026
+
+The upstream notes below are historical template context, not settings or evidence for this new repository. Current application work is issue #1 / PR #2. Implementation revision dceb62c9966602c36bcffa35faad858abd21f36b fixes Windows rooted-path rejection and lock handle cleanup. Synthetic tests are independent of the app’s approved decisions/catalog. Local suite: 21 discovered, 20 passed, one POSIX-shell case skipped. Linux PR CI runs the complete suite. Foundation/discovery and local Markdown link checks passed. No repository ruleset was created in the new repository; no tenant observer was configured.
+
 - Scope: resolve template issues #9–#18: instruction owners, schemas/tooling, examples, agent intake, license, protection, bootstrap removal and SemVer.
 - Reviewed implementation revision: 953717c787dd37d1500c04767f818f4e0a0faffd. The continuation/catalog pointer was updated afterward; verify current-head CI separately.
 - Original source baseline inspected: f3d497930c732c557b2cbbd12c04450584fa0813. Subsequent reviewed action upgrades are PRs #3 and #4 (merged); the maintenance PR is linked from issues #9–#18.

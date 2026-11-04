@@ -130,7 +130,7 @@
         "sh scripts/check.sh"
       ],
       "continuation": "skills/service-foundation-tooling/continuation.md",
-      "lastReviewedRevision": "953717c787dd37d1500c04767f818f4e0a0faffd"
+      "lastReviewedRevision": "dceb62c9966602c36bcffa35faad858abd21f36b"
     },
     {
       "id": "website",
@@ -157,7 +157,7 @@
         "npm test"
       ],
       "continuation": "skills/service-website/continuation.md",
-      "lastReviewedRevision": null
+      "lastReviewedRevision": "dceb62c9966602c36bcffa35faad858abd21f36b"
     }
   ]
 }
