@@ -1,11 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
-import { site } from '../data/site';
-import { portrait } from '../data/gallery';
+import MeetVish from "./meet-vish.astro";
 ---
-<Base title="Meet Vishruth">
-  <section class="about-hero wrap"><div><span class="section-kicker">THE PERSON BEHIND THE NOTES</span><h1>Hi, I’m<br /><em>Vishruth.</em></h1><p class="large-copy">A technologist by profession.<br />A student by choice.</p><p>I’m a Senior Customer Success Engineer at Dynatrace, based in Bengaluru. I work with engineers to understand complicated systems and make observability useful in the real world.</p><p>Outside that work, I build tools, write about what I’m learning, and make time for people finding their way in technology.</p><a class="button" href={site.mentoring}>Let’s have a conversation ↗</a></div><div class="portrait-frame updated-portrait"><img src={portrait} alt="Vishruth Harithsa seated in a light jacket against a charcoal background" width="1200" height="1800"/><span>VISHRUTH HARITHSA · BENGALURU</span></div></section>
-  <section class="about-interlude wrap"><img src="/images/gallery/cafe-moment.webp" alt="Vishruth enjoying a conversation at a café" width="1200" height="1594" loading="lazy"/><blockquote>“Some of the best conversations<br />start with <em>‘what if?’</em>”<span>A NOTE TO MYSELF</span></blockquote><a href="/gallery" class="underlined-link">A few moments from my life ↗</a></section>
-  <section class="about-story wrap"><span class="section-kicker">WHY THIS NOTEBOOK EXISTS</span><div><h2>Learn something.<br /><em>Pass it on.</em></h2><p>I’ve always been drawn to how things work: the request moving through a browser, the signals hiding inside a system, the idea that could become something useful.</p><p>This notebook is a place for those questions. Some notes are technical. Some are about work and life. All of them begin with curiosity.</p><p>My interests stretch from open source and AI to books and astrophysics. I don’t have all the answers. Writing helps me ask better questions.</p></div></section>
-  <section class="wrap about-links"><div class="section-heading"><h2>Elsewhere on the internet.</h2></div><a href={site.github}><span>01</span><h3>What I’m building</h3><span>GitHub ↗</span></a><a href={site.linkedin}><span>02</span><h3>What I’m thinking about</h3><span>LinkedIn ↗</span></a><a href={site.mentoring}><span>03</span><h3>A conversation, one to one</h3><span>Topmate ↗</span></a><a href="https://community.dynatrace.com/t5/Community-news/Video-interview-with-the-Member-of-the-Month-Vishruth-Harithsa/ba-p/186472"><span>04</span><h3>A little more of my story</h3><span>Dynatrace Community ↗</span></a></section>
-</Base>
+
+<MeetVish />

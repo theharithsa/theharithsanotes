@@ -1,10 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
-import NoteCard from '../components/NoteCard.astro';
-import { articles } from '../lib/content';
-import { topics } from '../data/site';
+import Blogs from "./blogs.astro";
 ---
-<Base title="The notes">
-  <section class="page-intro wrap"><span class="section-kicker">THE OPEN NOTEBOOK</span><h1>Ideas, explored<span class="brand-dot">.</span></h1><p>Field notes on technology, work, and the things that make me stop and think.</p></section>
-  <section class="archive wrap" aria-label="Browse notes"><div class="archive-tools"><div class="filters" aria-label="Filter by topic">{topics.map((topic) => <button data-filter={topic} aria-pressed={topic === 'All notes'}>{topic}</button>)}</div><div class="search-field"><label for="search">Search the notebook</label><input id="search" type="search" placeholder="Find a thought…" autocomplete="off" /></div></div><p id="result-count" class="result-count" aria-live="polite">{articles.length} notes</p><div class="notes-grid">{articles.map((article, index) => <NoteCard article={article} index={index} />)}</div><div id="empty-state" class="empty-state" hidden><h2>No notes found.</h2><p>Try a different word or explore another topic.</p><button class="button" data-reset-search>Show all notes</button></div></section>
-</Base>
+
+<Blogs />

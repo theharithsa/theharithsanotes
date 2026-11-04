@@ -1,19 +1,86 @@
 const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+const navSections = [
+  ...document.querySelectorAll<HTMLElement>("[data-nav-section]"),
+];
+let menuCloseTimer: ReturnType<typeof setTimeout> | undefined;
+function closeSectionMenus(): void {
+  navSections.forEach((section) => {
+    section.querySelector("button")?.setAttribute("aria-expanded", "false");
+    const panel = section.querySelector<HTMLElement>(".mega-menu");
+    if (panel) panel.hidden = true;
+  });
+}
+function openSectionMenu(section: HTMLElement): void {
+  if (!window.matchMedia("(min-width: 981px)").matches) return;
+  clearTimeout(menuCloseTimer);
+  closeSectionMenus();
+  section.querySelector("button")?.setAttribute("aria-expanded", "true");
+  const panel = section.querySelector<HTMLElement>(".mega-menu");
+  if (panel) panel.hidden = false;
+}
+navSections.forEach((section) => {
+  section.addEventListener("pointerenter", (event) => {
+    if (event.pointerType === "mouse") openSectionMenu(section);
+  });
+  section.addEventListener("pointerleave", () => {
+    menuCloseTimer = setTimeout(closeSectionMenus, 160);
+  });
+  section.addEventListener("focusin", (event) => {
+    if (event.target instanceof HTMLAnchorElement) openSectionMenu(section);
+  });
+  section.addEventListener("focusout", (event) => {
+    if (
+      !(event.relatedTarget instanceof Node) ||
+      !section.contains(event.relatedTarget)
+    )
+      closeSectionMenus();
+  });
+  section.querySelector("button")?.addEventListener("click", (event) => {
+    const panel = section.querySelector<HTMLElement>(".mega-menu");
+    if (panel?.hidden || event.detail > 0) openSectionMenu(section);
+    else closeSectionMenus();
+  });
+});
+document.addEventListener("click", (event) => {
+  if (
+    event.target instanceof Node &&
+    !document.querySelector(".site-header")?.contains(event.target)
+  )
+    closeSectionMenus();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  const activeSection = navSections.find(
+    (section) =>
+      section.querySelector("button")?.getAttribute("aria-expanded") === "true",
+  );
+  activeSection?.querySelector("button")?.focus();
+  closeSectionMenus();
+});
+window.addEventListener("resize", () => {
+  closeSectionMenus();
+  closeMenu();
+});
 const articleContents = document.querySelector<HTMLDetailsElement>(
   ".article-outline details",
 );
-if (articleContents && window.matchMedia("(min-width: 951px)").matches)
+if (articleContents && window.matchMedia("(min-width: 981px)").matches)
   articleContents.open = true;
 const menu = document.querySelector<HTMLElement>("#mobile-menu");
 function closeMenu(): void {
   if (!toggle || !menu) return;
   toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-label", "Open navigation");
   menu.hidden = true;
 }
 toggle?.addEventListener("click", () => {
   if (!menu) return;
   const open = toggle.getAttribute("aria-expanded") !== "true";
   toggle.setAttribute("aria-expanded", String(open));
+  toggle.setAttribute(
+    "aria-label",
+    open ? "Close navigation" : "Open navigation",
+  );
   menu.hidden = !open;
 });
 document.addEventListener("keydown", (event) => {
@@ -51,7 +118,7 @@ function filterNotes(): void {
   );
   const results = document.querySelector<HTMLElement>("#result-count");
   if (results)
-    results.textContent = `${count} ${count === 1 ? "note" : "notes"}`;
+    results.textContent = `${count} ${count === 1 ? "article" : "articles"}`;
   const empty = document.querySelector<HTMLElement>("#empty-state");
   if (empty) empty.hidden = count !== 0;
 }
@@ -69,6 +136,28 @@ document.querySelector("[data-reset-search]")?.addEventListener("click", () => {
   search?.focus();
 });
 if (notes.length && filters.length) filterNotes();
+
+const shelfFilters = document.querySelectorAll<HTMLButtonElement>(
+  "[data-shelf-filter]",
+);
+const bookCards = document.querySelectorAll<HTMLElement>("[data-book]");
+shelfFilters.forEach((button) =>
+  button.addEventListener("click", () => {
+    let count = 0;
+    bookCards.forEach((book) => {
+      book.hidden =
+        button.dataset.shelfFilter !== "All books" &&
+        book.dataset.status !== button.dataset.shelfFilter;
+      if (!book.hidden) count++;
+    });
+    shelfFilters.forEach((filter) =>
+      filter.setAttribute("aria-pressed", String(filter === button)),
+    );
+    const countLabel = document.querySelector("#shelf-count");
+    if (countLabel)
+      countLabel.textContent = `${count} ${count === 1 ? "book" : "books"}`;
+  }),
+);
 
 const photoDialog =
   document.querySelector<HTMLDialogElement>(".photo-lightbox");

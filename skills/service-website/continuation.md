@@ -1,5 +1,7 @@
 # website continuation
 
+Current change: issue #5, version 1.2.0. Seven sections, wide pointer/focus/click disclosures, selective home, Notion-derived bookshelf/listening notes, simplified articles, and one src/styles/site.css. All original article URLs and telemetry consent boundaries remain. Nine Node tests and type/build/audit passed; foundation and links passed; Python 20 passed/one Windows skip. Browser checks and sources are in docs/testing.md and docs/editorial-design.md. Pending current-head CI and review-channel deployment receipt are recorded separately after implementation commit. Production/merge/DNS remain unperformed.
+
 Status: implemented in [PR #2](https://github.com/theharithsa/theharithsanotes/pull/2) for issue #1; consult GitHub for current-head checks.
 
 Content addition: issue #4 / version 1.1.1 imports the author-requested LinkedIn “War Room” article with 51 original text blocks, displayed publication day, original URL and cover credit. Recommendations/comments are excluded. The library now has 13 notes and twelve projects, including dt-mac-agent. RSS refresh preserves non-Hashnode source notes. Original article paths and featured projects stay intact. Implementation revision 797913390ed10a26f426489ffd16a32c291c01ab passed type/build/eight Node tests, foundation discovery/links, and GitHub checks. Firebase review version 8d14fc8d4bee73e0 is deployed. Preceding release notes below remain historical; verify the current PR head independently after documentation commits.

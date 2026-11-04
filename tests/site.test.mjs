@@ -38,6 +38,11 @@ test("every internal page link and local asset resolves in the built site", asyn
     "index.html",
     "about/index.html",
     "notes/index.html",
+    "blogs/index.html",
+    "books/index.html",
+    "podcasts/index.html",
+    "entertainment/index.html",
+    "meet-vish/index.html",
     "projects/index.html",
     "gallery/index.html",
     "privacy/index.html",
@@ -54,8 +59,29 @@ test("every internal page link and local asset resolves in the built site", asyn
         access(new URL(`dist/${file}`, root)),
         `${route}: ${pathname}`,
       );
+      const target = new URL(match[1], "https://theharithsa.com");
+      if (target.hash && /\.html$/.test(file)) {
+        const targetHtml = await readPage(file);
+        const id = decodeURIComponent(target.hash.slice(1));
+        assert.ok(
+          targetHtml.includes(`id="${id}"`),
+          `${route}: missing ${target.pathname}${target.hash}`,
+        );
+      }
     }
   }
+});
+
+test("home does not repeat visible story headings", async () => {
+  const main = (await readPage("index.html"))
+    .split('<main id="main">')[1]
+    ?.split("</main>")[0];
+  assert.ok(main);
+  const headings = [...main.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/g)].map(
+    (match) => match[1].replace(/<[^>]+>/g, "").trim(),
+  );
+  assert.ok(headings.length > 0);
+  assert.equal(new Set(headings).size, headings.length);
 });
 
 test("article contents links resolve and original ordered/unordered lists survive sanitization", async () => {
@@ -91,7 +117,10 @@ test("the LinkedIn note is published with attribution and dt-mac-agent is discov
     (article) => article.slug === "the-war-room-is-dead",
   );
   assert.ok(note);
-  assert.ok(note.minutes >= 5, 'The full-length essay must not be labelled as a one-minute read');
+  assert.ok(
+    note.minutes >= 5,
+    "The full-length essay must not be labelled as a one-minute read",
+  );
   const page = await readPage(`${note.slug}/index.html`);
   assert.ok(page.includes(note.source));
   assert.ok(page.includes("Photo by Photos of Korea on Unsplash"));

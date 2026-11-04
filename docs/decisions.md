@@ -29,3 +29,6 @@ None are pre-approved by this template. Ask the user directly when the answer is
 | Template version | 1.9.0 / approved | Replace custom 1.09.0 with valid SemVer for interoperable tooling | Issue #18 and human authorization to resolve all issues | No leading-zero numeric identifiers; tag v1.9.0 matches metadata |
 | Partial bootstrap | Remove / approved implementation choice | Synchronizing partial assets still leaves missing catalog/tool references; full GitHub template is the default | Issue #17 alternative and human authorization to resolve all issues | No bundled asset duplicates; unavailable GitHub means adoption pending |
 | Main protection | PR + foundation check; no force-push/deletion / approved | Sole-owner workflow uses zero mandatory approvals; actual checks remain required | Issue #13 and human authorization to resolve all issues | Apply opt-in settings procedure; no bypass actors |
+
+
+Seven-section information architecture and Gates Notes reference direction approved by the owner in the 5 November 2026 chat. Owner subsequently authorized Notion discovery for personal details. Import scope is selected book/podcast interests only, preserving statuses and keeping private-source URLs out of the public build. No new hosted service or credential is required. Old article URLs remain stable.

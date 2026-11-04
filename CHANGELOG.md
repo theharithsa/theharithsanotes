@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0] — 2026-11-05
+
+- Rebuilt Home, Blogs, Books, Podcasts, Projects, Entertainment and Meet Vish around a Gates Notes browser reference study.
+- Replaced the legacy CSS cascade with one responsive design system, wide section menus, native lists, keyboard disclosures and a selective home page.
+- Added a twelve-book shelf and five deduplicated listening entries from the owner-authorized Notion reading/podcast logs; statuses preserved and private links excluded.
+- Kept all thirteen article bodies and original URLs, project links, gallery controls, consent-gated Firebase Analytics and Dynatrace RUM.
+- Fixed the no-sidebar article grid column and pointer-enter/click menu interaction. Added pinned Astro formatting support.
+
 ## [1.1.1] — 2026-11-05
 
 - Added the complete “The War Room Is Dead” article from the author’s supplied LinkedIn URL, including original displayed publication date, source link, cover and photo credit.

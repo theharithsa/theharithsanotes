@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import { listening } from "../data/interests";
+const [lead, ...rest] = listening;
+---
+
+<Base title="Podcasts">
+  <section class="podcast-hero tone-lilac">
+    <div class="wrap">
+      <span class="eyebrow">THE LISTENING ROOM</span>
+      <h1>
+        Pull up a chair.
+        <br />
+        <em>Stay for a conversation.</em>
+      </h1>
+      <p>
+        Ideas I’ve listened to, a few takeaways, and the episodes on my list.
+      </p>
+      <div class="soundwave" aria-hidden="true">
+        {Array.from({ length: 45 }, (_, i) => (
+          <i style={`--bar:${15 + Math.sin(i * 1.7) ** 2 * 85}%`} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="wrap space">
+    <div class="listening-feature">
+      <div class="record-art tone-peach" aria-hidden="true">
+        <div class="record">
+          <span>
+            HUMAN
+            <br />
+            CONNECTION
+            <br />↗
+          </span>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">
+          A LISTENING NOTE · {lead.status.toUpperCase()}
+        </span>
+        <h2>{lead.title}</h2>
+        <p class="show-name">{lead.show}</p>
+        <p class="large-copy">{lead.note}</p>
+        <a class="text-link" href={lead.href}>
+          Listen to the episode ↗
+        </a>
+      </div>
+    </div>
+    <div class="section-heading listening-heading">
+      <h2>In the queue & in my notes.</h2>
+    </div>
+    <div class="episode-list">
+      {rest.map((episode, index) => (
+        <article>
+          <span class="episode-number">
+            {String(index + 2).padStart(2, "0")}
+          </span>
+          <div>
+            <span class="eyebrow">{episode.status}</span>
+            <h3>
+              <a href={episode.href}>{episode.title} ↗</a>
+            </h3>
+            <p class="show-name">{episode.show}</p>
+            <p>{episode.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

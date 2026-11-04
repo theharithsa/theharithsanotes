@@ -11,7 +11,7 @@ Status: active. Read [catalog](../catalog.json), [continuation](continuation.md)
 | --- | --- |
 | Purpose/owner | Public personal journal; accountable owner theharithsa |
 | Source/entrypoints | src/pages/index.astro, src/pages/[slug].astro, src/scripts/telemetry.ts; static dist output |
-| Design/contracts | src/styles/global.css owns tokens/breakpoints; src/data/articles.json owns notes; no API, permissions or data migrations; Astro + Firebase browser SDK |
+| Design/contracts | src/styles/site.css owns tokens/breakpoints; src/data/articles.json owns notes; no API, permissions or data migrations; Astro + Firebase browser SDK |
 | Code/invariants | src/lib/content.ts sanitizes imported HTML; original slugs stay stable; Base owns navigation/metadata; consent gates monitoring; never browser ingestion tokens |
 | Editorial/media | src/data/projects.ts and gallery.ts own verified project/photo entries; GalleryGrid uses a native dialog with keyboard/focus cleanup; Source Serif 4/Public Sans are self-hosted; original media provenance in docs/editorial-design.md |
 | Tests | Node 24/npm: npm run check, npm run build, npm test; tests/site.test.mjs exercises artifacts and consent; see docs/testing.md |

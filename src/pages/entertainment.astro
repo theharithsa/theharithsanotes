@@ -1,0 +1,55 @@
+---
+import Base from "../layouts/Base.astro";
+import { articles } from "../lib/content";
+const senna = articles.find((a) => a.slug.includes("ayrton-senna"))!;
+---
+
+<Base title="Entertainment">
+  <section class="section-masthead tone-ochre">
+    <div class="wrap">
+      <span class="eyebrow">MOVIES, SERIES & THE LIFE BETWEEN</span>
+      <h1>Entertainment</h1>
+      <p>The story ends. The thinking doesn’t.</p>
+    </div>
+  </section>
+  <section class="wrap space entertainment-feature">
+    <div class="cinema-frame">
+      <img
+        src={senna.image}
+        alt={senna.imageAlt}
+        width="1200"
+        height="800"
+        fetchpriority="high"
+      />
+      <span>THE SCREEN NOTES</span>
+    </div>
+    <div>
+      <span class="eyebrow">SENNA · AMBITION & PERSPECTIVE</span>
+      <h2>
+        <a href={`/${senna.slug}`}>
+          What Ayrton Senna taught me about chasing greatness.
+        </a>
+      </h2>
+      <p>{senna.description}</p>
+      <a href={`/${senna.slug}`} class="text-link">
+        Read my reflection ↗
+      </a>
+    </div>
+  </section>
+  <section class="wrap reflection-band">
+    <span class="eyebrow">MORE THAN A REVIEW</span>
+    <h2>
+      What did this story
+      <br />
+      <em>leave with me?</em>
+    </h2>
+    <p>
+      That’s the question behind this corner of the site: the characters,
+      choices, and moments that connect what I watch to how I live and work.
+    </p>
+    <p class="editorial-caption">
+      The screen journal starts with Senna. More movie and series reflections
+      will join it as I write them.
+    </p>
+  </section>
+</Base>

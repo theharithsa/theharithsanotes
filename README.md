@@ -30,7 +30,7 @@ python -m unittest discover -s tests -v
 - `src/pages`: home, archive, About, projects, privacy, 404, generated article routes, RSS and sitemap.
 - `src/layouts` and `src/components`: shared shell and cards.
 - `src/scripts`: browser navigation/search and consent-aware monitoring.
-- `src/styles/global.css`: design tokens, responsive layouts, keyboard focus, reduced-motion support.
+- `src/styles/site.css`: design tokens, responsive layouts, keyboard focus, reduced-motion support.
 - `public/images`: local covers, profile photo, forest photograph, and original SVG fallback artwork.
 - `skills/service-website`: service ownership and continuation, registered in the App Launchpad catalog.
 

@@ -1,6 +1,16 @@
 # Website and foundation checks
 
-Node.js 24, npm, Python 3.11+. Run `npm ci`, `npm run check`, `npm run build`, then `npm test`. Eight Node tests cover complete article migration/path preservation, every internal built link/local asset (including gallery), preserved list counts/section anchors, RSS/sitemap completeness, LinkedIn attribution/content discovery and dt-mac-agent, secret exclusion, first-visit/denied-consent isolation, and localhost/blocked-storage isolation. They exercise built artifacts and the actual telemetry script in an isolated VM; they do not contact production telemetry.
+## 1.2.0 integrated verification
+
+`npm run check`: 31 files, zero diagnostics. Static build: 25 pages. Nine Node tests passed, including all new routes and section-anchor destinations, original article/list preservation, consent isolation and duplicate home heading regression. `npm audit --audit-level=high`: zero vulnerabilities. Foundation ready gate and Markdown links passed; Python suite: 21 discovered, 20 passed, one POSIX case skipped on Windows.
+
+Browser observations: desktop Home, Books, Podcasts, Entertainment, Meet Vish and War Room essay; project disclosure click, keyboard focus opening and Escape closure; bookshelf Reading filter returned four visible books; gallery next/Escape/focus return; mobile home/menu/blog search/empty/reset and native bullet/decimal lists. All six section/journal routes were inspected at 390px, with no horizontal overflow. War Room body width was 720px on desktop. A dev-server restart interrupted one tab; a fresh tab recovered normally. This is local UI evidence, not an automated cross-browser accessibility audit.
+
+The formatter now has the pinned Astro plugin; the earlier no-parser formatting failure was corrected. Saved local screenshot: qa/local/home-redesign.jpg (ignored, not deployed).
+
+## Earlier verification history
+
+Node.js 24, npm, Python 3.11+. Run `npm ci`, `npm run check`, `npm run build`, then `npm test`. Nine Node tests cover complete article migration/path preservation, every internal built link/local asset (including gallery), preserved list counts/section anchors, RSS/sitemap completeness, LinkedIn attribution/content discovery and dt-mac-agent, secret exclusion, first-visit/denied-consent isolation, and localhost/blocked-storage isolation. They exercise built artifacts and the actual telemetry script in an isolated VM; they do not contact production telemetry.
 
 Browser checks performed at 1440×1000 and 390×844: desktop hero, mobile archive, search to one result, no-results message, reset, topic filter, mobile menu, Escape dismissal and focus return. Mobile archive had zero broken loaded images and no horizontal overflow. Provider receipts/tenant sessions remain separate from these local checks. Tests do not claim Firebase writes, real GA ingestion, or Dynatrace receipt.
 
