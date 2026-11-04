@@ -2,14 +2,14 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": null,
+  "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
   "release": "1.1.0 review preview",
   "checks": [
     {
       "id": "typescript",
       "status": "passed",
       "command": "npm run check",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -18,7 +18,7 @@
       "id": "static-build",
       "status": "passed",
       "command": "npm run build",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -27,7 +27,7 @@
       "id": "application-tests-7",
       "status": "passed",
       "command": "npm test",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -36,7 +36,7 @@
       "id": "foundation-20-pass-1-skip",
       "status": "passed",
       "command": "python -m unittest discover -s tests -v",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -45,7 +45,7 @@
       "id": "discovery",
       "status": "passed",
       "command": "python scripts/check_foundation.py --ready --json",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -54,7 +54,7 @@
       "id": "links",
       "status": "passed",
       "command": "python scripts/check_links.py",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -63,7 +63,7 @@
       "id": "dependency-audit",
       "status": "passed",
       "command": "npm audit --audit-level=high",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -72,7 +72,7 @@
       "id": "browser-desktop-mobile",
       "status": "passed",
       "command": "CUA desktop 1440x1000 and mobile 390x844",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
@@ -81,7 +81,7 @@
       "id": "firebase-preview",
       "status": "passed",
       "command": "firebase hosting:channel:deploy review --expires 7d --project the-harithsa-notes-94",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows / Firebase review channel",
       "artifact": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app"
@@ -89,7 +89,7 @@
     {
       "id": "editorial-gallery-responsive",
       "status": "passed",
-      "revision": null,
+      "revision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
       "command": "CUA desktop 1440x1000; phones 390x844 and 320x740; gallery open/arrow/Escape/focus; article list inspection",
       "observedAt": "2026-11-04T19:42:42.664Z",
       "environment": "local Windows browser",
@@ -110,8 +110,17 @@
     "checkedHeadSha": null,
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version aab661f8af83fd70",
+    "deploymentId": "Firebase review version 5837da957d6643c9",
     "artifactDigest": null,
-    "sdlcEvidence": []
+    "sdlcEvidence": [
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "version": "5837da957d6643c9",
+        "sourceRevision": "7393c4b35e2b5b8208bbb136149031ac7cc584b9",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-04T19:44:57.561Z"
+      }
+    ]
   }
 }
