@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "797913390ed10a26f426489ffd16a32c291c01ab",
-  "release": "1.1.1 review preview",
+  "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+  "release": "1.2.0 review preview",
   "checks": [
     {
       "id": "typescript",
@@ -139,10 +139,72 @@
       "observedAt": "2026-11-04T20:01:46.798Z",
       "environment": "local Windows",
       "artifact": null
+    },
+    {
+      "id": "typescript-1.2.0",
+      "status": "passed",
+      "command": "npm run check",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "static-build-25-pages",
+      "status": "passed",
+      "command": "npm run build",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "application-tests-9",
+      "status": "passed",
+      "command": "npm test",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "audit-zero-vulnerabilities",
+      "status": "passed",
+      "command": "npm audit --audit-level=high",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "foundation-1.2.0",
+      "status": "passed",
+      "command": "python scripts/check_foundation.py --ready --json",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "links-1.2.0",
+      "status": "passed",
+      "command": "python scripts/check_links.py",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "python-20-pass-1-skip-1.2.0",
+      "status": "passed",
+      "command": "python -m unittest discover -s tests -v",
+      "revision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+      "observedAt": "2026-11-04T20:28:09.386901+00:00",
+      "environment": "local Windows",
+      "artifact": null
     }
   ],
   "limits": [
-    "Working-tree checks for the 1.1.0 refinement; current-head CI must be verified independently.",
     "One POSIX-shell case skipped on Windows; Linux CI runs it.",
     "GA/Dynatrace receipt and tenant searchability not verified.",
     "No backend or native backend trace linkage exists.",
@@ -150,13 +212,13 @@
     "Domain DNS and production cutover not performed."
   ],
   "lifecycle": {
-    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/1",
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/5",
     "pullRequestUrl": "https://github.com/theharithsa/theharithsanotes/pull/2",
-    "checkedHeadSha": null,
+    "checkedHeadSha": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 8d14fc8d4bee73e0",
-    "artifactDigest": null,
+    "deploymentId": "Firebase review version f1ef7989b3531a52",
+    "artifactDigest": "707e01ac2bdc2aa0ee897dac09562b9b4ee858cef45b197bc29797262addfec9",
     "sdlcEvidence": [
       {
         "authority": "firebase-cli",
@@ -173,6 +235,42 @@
         "sourceRevision": "797913390ed10a26f426489ffd16a32c291c01ab",
         "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
         "observedAt": "2026-11-04T20:01:46.798Z"
+      },
+      {
+        "authority": "github-api",
+        "stage": "checks-passed",
+        "sourceRevision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+        "checks": [
+          "foundation",
+          "website",
+          "GitGuardian Security Checks"
+        ],
+        "observedAt": "2026-11-04T20:28:09.386901+00:00"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "version": "f1ef7989b3531a52",
+        "sourceRevision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-04T20:28:09.386901+00:00"
+      },
+      {
+        "authority": "http-artifact-comparison",
+        "stage": "preview-verified",
+        "sourceRevision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
+        "paths": [
+          "/",
+          "/blogs",
+          "/books",
+          "/podcasts",
+          "/projects",
+          "/entertainment",
+          "/meet-vish",
+          "/the-war-room-is-dead"
+        ],
+        "status": "all 200 and byte-identical to local build; missing path returns 404",
+        "observedAt": "2026-11-04T20:28:09.386901+00:00"
       }
     ]
   }
