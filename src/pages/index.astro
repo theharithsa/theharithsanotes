@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import NoteCard from '../components/NoteCard.astro';
+import { articles } from '../lib/content';
+import { site } from '../data/site';
+const featured = articles.find((article) => article.slug === 'mcp-server-part-one')!;
+const latest = articles.filter((article) => article !== featured).slice(0, 3);
+---
+<Base>
+  <section class="intro-bar wrap"><p>A personal journal by <a href="/about">Vishruth Harithsa <span aria-hidden="true">↗</span></a></p><span>TECHNOLOGY. PERSPECTIVE. POSSIBILITY.</span></section>
+  <section class="hero" aria-labelledby="hero-title">
+    <img class="hero-image" src="/images/forest.jpg" alt="Sunlight finding its way through a quiet green forest" width="2000" height="1333" fetchpriority="high" />
+    <div class="hero-shade"></div>
+    <div class="hero-heading"><span class="eyebrow"><span class="live-dot"></span> THE BIG PICTURE</span><h1 id="hero-title">A curious mind.<br />An open notebook.</h1><p>Exploring technology, making things,<br />and learning a little more along the way.</p></div>
+    <a class="hero-story" href={`/${featured.slug}`}><span class="eyebrow">AI & BUILDING <span>01 / 12</span></span><h2>Old systems.<br />New possibilities.</h2><p>How MCP servers bring modern insight to managed environments.</p><span class="story-link">Read the note <span aria-hidden="true">↗</span></span></a>
+    <span class="hero-caption">IDEAS WORTH EXPLORING. NOTES WORTH SHARING.</span>
+  </section>
+  <section class="welcome wrap"><span class="section-kicker">HELLO, I’M VISHRUTH <span aria-hidden="true">↘</span></span><div><h2>I believe the best way to<br class="desktop-break" /> learn is to <em>stay curious.</em></h2><p>I’m a Customer Success Engineer at Dynatrace, a builder, and a lifelong student. This is where I connect the dots between the systems we build and the lives we lead.</p><a class="underlined-link" href="/about">A little more about me <span aria-hidden="true">↗</span></a></div><span class="curiosity-mark" aria-hidden="true">✳</span></section>
+  <section class="notes-section wrap"><div class="section-heading"><div><span class="section-kicker">FROM MY NOTEBOOK</span><h2>The latest notes<span class="brand-dot">.</span></h2></div><a class="underlined-link" href="/notes">View all notes <span aria-hidden="true">↗</span></a></div><div class="notes-grid">{latest.map((article, index) => <NoteCard article={article} index={index} />)}</div></section>
+  <section class="topics-section"><div class="wrap"><span class="section-kicker">FOLLOW YOUR CURIOSITY</span><h2>A few things on my mind.</h2><div class="topic-grid"><a href="/notes?topic=Observability"><span class="topic-symbol" aria-hidden="true">◎</span><span><h3>Seeing the unseen</h3><p>Observability, systems, and making sense of complexity.</p></span><span class="topic-arrow" aria-hidden="true">↗</span></a><a href="/notes?topic=AI+%26+building"><span class="topic-symbol" aria-hidden="true">⌘</span><span><h3>Building what’s next</h3><p>AI, open source, and ideas turned into working things.</p></span><span class="topic-arrow" aria-hidden="true">↗</span></a><a href="/notes?topic=Life+%26+learning"><span class="topic-symbol" aria-hidden="true">✳</span><span><h3>A life of learning</h3><p>Perspective, possibility, and the lessons in between.</p></span><span class="topic-arrow" aria-hidden="true">↗</span></a></div></div></section>
+  <section class="personal-section wrap"><div class="portrait-frame"><img src="/images/vishruth.jpg" alt="Vishruth Harithsa" width="800" height="800" loading="lazy"/><span>BENGALURU, INDIA · ALWAYS A STUDENT</span></div><div class="personal-copy"><span class="section-kicker">BEYOND THE CODE</span><h2>Technology is interesting.<br /><em>People make it matter.</em></h2><p>The most rewarding part of what I do is helping someone else take their next step. Whether you’re finding your way in observability, exploring an idea, or figuring out a career in technology, let’s talk.</p><a href={site.mentoring} class="button">Find time for a conversation <span aria-hidden="true">↗</span></a></div></section>
+  <section class="closing-note wrap"><span class="eyebrow">THE NOTEBOOK IS OPEN</span><h2>Good ideas are better<br />when they’re shared.</h2><p>Follow the things I’m learning, writing, and building.</p><div><a class="button" href={site.linkedin}>Follow on LinkedIn ↗</a><a class="underlined-link" href="/rss.xml">Subscribe via RSS ↗</a></div><span class="signature">Vishruth</span></section>
+</Base>

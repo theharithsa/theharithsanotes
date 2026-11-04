@@ -1,20 +1,107 @@
 {
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
-  "application": "New application (needs-user-input)",
+  "application": "The Harithsa Notes",
   "revision": null,
-  "release": null,
-  "checks": [],
+  "release": "1.0.0 preview",
+  "checks": [
+    {
+      "id": "typescript",
+      "status": "passed",
+      "command": "npm run check",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "static-build",
+      "status": "passed",
+      "command": "npm run build",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "application-tests-6",
+      "status": "passed",
+      "command": "npm test",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "foundation-20-pass-1-skip",
+      "status": "passed",
+      "command": "python -m unittest discover -s tests -v",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "discovery",
+      "status": "passed",
+      "command": "python scripts/check_foundation.py --ready --json",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "links",
+      "status": "passed",
+      "command": "python scripts/check_links.py",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "dependency-audit",
+      "status": "passed",
+      "command": "npm audit --audit-level=high",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "browser-desktop-mobile",
+      "status": "passed",
+      "command": "CUA desktop 1440x1000 and mobile 390x844",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "firebase-preview",
+      "status": "passed",
+      "command": "firebase hosting:channel:deploy review --expires 7d --project the-harithsa-notes-94",
+      "revision": null,
+      "observedAt": "2026-11-04T19:09:58.536Z",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app"
+    }
+  ],
   "limits": [
-    "No checks have been executed by this template."
+    "Working-tree checks; CI checked-head state must be verified independently.",
+    "One POSIX-shell case skipped on Windows; Linux CI runs it.",
+    "GA/Dynatrace receipt and tenant searchability not verified.",
+    "No backend or native backend trace linkage exists.",
+    "No SDLC/CI tenant exporter configured.",
+    "Domain DNS and production cutover not performed."
   ],
   "lifecycle": {
-    "issueUrl": null,
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/1",
     "pullRequestUrl": null,
     "checkedHeadSha": null,
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": null,
+    "deploymentId": "Firebase review version 73b62ab4eec7eb7c",
     "artifactDigest": null,
     "sdlcEvidence": []
   }

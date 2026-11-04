@@ -1,46 +1,56 @@
-# App Launchpad Template
+# The Harithsa Notes
 
-Template version: **1.9.0** · [changelog](docs/template-changelog.md) · [MIT license](LICENSE)
+Template version: **1.9.0**.
 
-A stack-neutral, **Dynatrace-opinionated** foundation for building and enhancing apps. Choose each product's stack and hosting deliberately; Dynatrace is the chosen observability platform. No tenant or application deployment is preconfigured.
+Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Editorial design inspired by Gates Notes, with original branding, a forest feature, topic browsing, search, project pages, and 12 migrated articles at their original URLs.
 
-## Create a project
+## Run locally
 
-Confirm the new owner, name, visibility and empty local destination, then use **Use this template → Create a new repository**, or:
-
-```sh
-gh repo create OWNER/PROJECT --template theharithsa/app-launchpad-template --private --clone
-cd PROJECT
-sh scripts/check.sh
-```
-
-Use public visibility only when approved. Follow [getting started](docs/getting-started.md): record source template version/revision, complete discovery decisions and register each actual service before implementation. Then run the discovery gate:
+Requires Node.js 24 and npm. Dependencies are pinned in package.json and package-lock.json.
 
 ```sh
-python3 scripts/check_foundation.py --ready --json
+npm ci
+npm run dev
 ```
 
-The gate checks decisions, not application/release readiness. Add real stack-specific build, test and deployment checks for the selected app.
+Open http://127.0.0.1:4321. Local monitoring is disabled unless `PUBLIC_ENABLE_LOCAL_TELEMETRY=true` is explicitly set. To verify:
 
-## What is included
+```sh
+npm run check
+npm run build
+npm test
+python scripts/check_foundation.py
+python scripts/check_links.py
+python -m unittest discover -s tests -v
+```
 
-- [Agent entrypoint](AGENTS.md), tool-specific pointer files and [policy ownership map](docs/policy-map.md).
-- [Visible skills catalog](skills/README.md): design, implementation, tests, deployment, Dynatrace observability, documentation and handoff.
-- Per-service skills/continuation, safe registration tooling and [JSON Schemas](schemas/README.md).
-- [Synthetic worked examples](examples/README.md) for decisions, execution evidence, continuation and a service skill.
-- Issue/agent-brief forms, PR checklist, CI, CODEOWNERS and an opt-in [repository ruleset procedure](docs/repository-ruleset.md).
-- [Ian Xiaohei Illustrations](skills/ian-xiaohei-illustrations/SKILL.md) for useful explanatory images under the [illustration policy](docs/illustrations.md).
+## Content and structure
 
-## Checks and maintenance
+- `src/data/articles.json`: locally stored article text, dates, categories, original source URLs, and image references. Edit this file to publish or revise notes; rebuilding creates every static route.
+- `src/pages`: home, archive, About, projects, privacy, 404, generated article routes, RSS and sitemap.
+- `src/layouts` and `src/components`: shared shell and cards.
+- `src/scripts`: browser navigation/search and consent-aware monitoring.
+- `src/styles/global.css`: design tokens, responsive layouts, keyboard focus, reduced-motion support.
+- `public/images`: local covers, profile photo, forest photograph, and original SVG fallback artwork.
+- `skills/service-website`: service ownership and continuation, registered in the App Launchpad catalog.
 
-Run **`sh scripts/check.sh`** locally and in CI: metadata validation, local Markdown links and safety/contract tests. For machine-readable diagnostics use `python3 scripts/check_foundation.py --json`; `--ready` adds discovery checks. Foundation success does not certify an application's behavior, deployment or tenant signals.
+The initial import came from the author’s public RSS feed on 5 November 2026. `npm run content:import` refreshes from that original feed **only while the old publication is still serving the domain**; after migration, author locally instead. Imported HTML is sanitized at build time. No live Hashnode dependency is required to build or serve the migrated text. Some inline article images still use original providers. Review image rights before public launch. The forest photograph is from [Unsplash](https://images.unsplash.com/photo-1441974231531-c6227db76b6e); covers were retained from the author’s publication, and the profile photo came from the author’s GitHub profile.
 
-GitHub template generation copies files, not repository settings or future updates. Adopt upgrades through reviewed PRs and retain project-specific choices. See [versioning and migration](docs/versioning.md), [delivery](docs/delivery.md) and [service inventory](docs/services.md). The partial planning bootstrap was removed; use GitHub template generation or record adoption pending.
+## Hosting
 
-## Licensing
+Firebase Hosting project alias: `the-harithsa-notes-94`. Only static Hosting is configured; no Auth, database, rules, paid backend, or Cloud Functions are created.
 
-The template is MIT-licensed by Vishruth Harithsa. Bundled Ian Xiaohei Illustrations retains its own [MIT license](skills/ian-xiaohei-illustrations/LICENSE) and [attribution](skills/ian-xiaohei-illustrations/NOTICE.md).
+```sh
+npm run check
+npm run build
+npm test
+npx --yes firebase-tools@15.34.2 hosting:channel:deploy review --project the-harithsa-notes-94
+```
 
-A generated application's license is a separate `needs-user-input` decision. Preserve the template and third-party copyright/license notices for inherited material; when selecting the app's license, retain those notices (for example under `LICENSES/`) and document the app's chosen terms separately. Copying the template does not record an approved license choice for new application code.
+After reviewing the preview, publish the tested `dist` with `npx --yes firebase-tools@15.34.2 deploy --only hosting --project the-harithsa-notes-94`. Attach `theharithsa.com` in Firebase Hosting and apply the exact DNS records supplied there. The domain already hosts the old blog; keep it until the new Hosting release is verified. No DNS change occurs from merely deploying a Hosting preview.
 
-[GitHub template documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository)
+## Monitoring and delivery
+
+See [observability](docs/observability.md), [decisions](docs/decisions.md), [testing](docs/testing.md), and [release plan](docs/release-plan.md). Firebase Analytics uses the supplied public config. Privileged Dynatrace credentials are never needed in this static client. Do not add them to browser variables, build files, or GitHub PR jobs.
+
+The repository was generated from `theharithsa/app-launchpad-template` v1.9.0, revision `f04c042a9e000f606982863518fa7bb9cfbb7d85`. The inherited root LICENSE covers template material. Article content and new application assets remain the author’s; no additional open-source license is granted by this project.

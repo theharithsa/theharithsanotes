@@ -1,9 +1,11 @@
 # Release impact and verification plan
 
-Status: pending decisions and implementation. This is not deployment authorization.
+Version: 1.0.0. Scope: [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1). Source: feature branch `feat/1-personal-website`, reviewed through a linked PR. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94.
 
-Record issue URL/acceptance criteria, verified issue-to-PR relationship and resolution state, version, source revision, PR/checked head/merge SHA, workflow/run/attempt, target environment and authorized scope. List affected UI, modules/contracts/policies, settings, data/indexes/migrations, secret bindings, telemetry, docs/screenshots and rollback consequences. Define executable predeploy gates and separate postdeploy checks for the chosen stack.
+Changed: static editorial UI, article migration, browser search/filter/menu, consent and browser monitoring, metadata/feed/sitemap, Hosting headers/config, docs, service inventory and application CI. No database, server migrations, privileged secret bindings, Auth rules, or Functions.
 
-Postdeploy evidence must include exact version/SHA/service revisions; public/protected-route checks; independent docs checks; per-signal transport and partial rejection counts; tenant queries for events/logs/traces/actual metric samples; actual native RUM linkage status; failures/limits. No customer writes without explicit authorization. Never label these pending checks passed.
+Predeploy: `npm run check`, `npm run build`, `npm test`, `npm audit --audit-level=high`; inherited foundation validation, link checker and Python suite. Manual browser coverage: desktop home 1440×1000, mobile archive/navigation 390×844, search/empty/reset/filter and Escape/focus return. Preview deployment uses the validated dist directory. CI must pass for the current PR head. Merge is not yet authorized by a separate request; leave the concrete PR reviewable.
 
-Track SDLC events from intake/development through review/checks/merge, release/deployment, runtime verification and rollback. Document source authority, stable IDs, safe fields, delivery/recovery, and source-to-tenant proof separately from application signal evidence.
+Launch: verify Firebase preview first. Production deployment and domain cutover are separate from a preview. Keep the current domain publication until the new release is accepted. Firebase supplies exact DNS values; do not invent or overwrite records. Roll back with the prior Hosting release and prior DNS if changed. No state migration is required.
+
+Postdeploy: HTTP pages/assets, canonical URLs and preserved article slugs; correct 404; consent/no-consent script and beacon behavior; GA Realtime and exact Dynatrace application session. Tenant searchability remains unverified until observed. No backend native linkage exists for this static site. GitHub source facts and CI results are evidence; no SDLC tenant exporter is configured. See [observability](observability.md) and [execution evidence](../qa/evidence.json).

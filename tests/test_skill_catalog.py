@@ -81,7 +81,7 @@ class CatalogTests(unittest.TestCase):
     def test_generation_rejects_unsafe_paths_symlinks_existing_output_and_lock(self):
         root = self.fixture()
         before = (root / 'skills/catalog.json').read_bytes()
-        for value in ('../outside', '/absolute'):
+        for value in ('../outside', '/absolute', 'C:relative', 'C:/absolute'):
             result = self.generate(root, '--id', 'synthetic', '--source-path', value)
             self.assertNotEqual(result.returncode, 0)
         external = self.base / 'external'

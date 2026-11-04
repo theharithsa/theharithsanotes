@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import NoteCard from '../components/NoteCard.astro';
+import { articles, formatDate, type Article } from '../lib/content';
+export function getStaticPaths() { return articles.map((article) => ({ params: { slug: article.slug }, props: { article } })); }
+interface Props { article: Article }
+const { article } = Astro.props;
+const related = articles.filter((note) => note.slug !== article.slug && note.topic === article.topic).slice(0, 2);
+---
+<Base title={article.title} description={article.description} image={article.image} article>
+  <article class="article-page"><header class="article-header wrap"><a class="back-link" href="/notes">← Back to the notebook</a><span class="eyebrow">{article.topic}</span><h1>{article.title}</h1><p class="article-deck">{article.description}</p><div class="article-byline"><img src="/images/vishruth.jpg" width="44" height="44" alt=""/><span>By <a href="/about">Vishruth Harithsa</a><br /><time datetime={article.date}>{formatDate(article.date)}</time> · {article.minutes} min read</span><button class="text-button" data-copy-link aria-live="polite">Copy link ↗</button></div></header><div class="article-cover wrap"><img src={article.image} alt={article.imageAlt} width="1400" height="800" fetchpriority="high"/></div><div class="article-body" set:html={article.html} /><div class="article-end"><span aria-hidden="true">✳</span><p>Thanks for reading.<br />There’s always more to learn.</p><a href="/notes" class="underlined-link">Explore the notebook ↗</a></div></article>
+  {related.length > 0 && <section class="wrap related"><div class="section-heading"><h2>Keep exploring.</h2><a href="/notes" class="underlined-link">All notes ↗</a></div><div class="notes-grid notes-grid-two">{related.map((note, index) => <NoteCard article={note} index={index}/>)}</div></section>}
+</Base>

@@ -1,0 +1,17 @@
+---
+import { formatDate, type Article } from '../lib/content';
+interface Props { article: Article; index?: number }
+const { article, index = 0 } = Astro.props;
+---
+<article class="note-card" data-note data-topic={article.topic} data-search={`${article.title} ${article.description} ${article.topic}`.toLowerCase()}>
+  <a href={`/${article.slug}`} class="card-image-link" tabindex="-1" aria-hidden="true">
+    <img src={article.image} alt="" loading="lazy" width="960" height="600" />
+    <span class="image-number">{String(index + 1).padStart(2, '0')}</span>
+  </a>
+  <div class="card-copy">
+    <span class="eyebrow">{article.topic}</span>
+    <h3><a href={`/${article.slug}`}>{article.title}</a></h3>
+    <p>{article.description}</p>
+    <div class="note-meta"><time datetime={article.date}>{formatDate(article.date)}</time><span>·</span><span>{article.minutes} min read</span></div>
+  </div>
+</article>

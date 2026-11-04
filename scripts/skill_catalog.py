@@ -1,17 +1,19 @@
 """Validate declared skill/service ownership, accumulating deterministic diagnostics."""
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import re
 from schema_validation import load_json, validate_record
 
 
 def safe_path(root, value):
-    if (not isinstance(value, str) or not value or Path(value).is_absolute()
+    if (not isinstance(value, str) or not value or Path(value).anchor or PureWindowsPath(value).anchor
             or '..' in Path(value).parts or '\\' in value or any(ord(c) < 32 for c in value)):
         raise ValueError('Expected safe repository-relative path')
     root = root.resolve()
     candidate = root / value
     cursor = candidate
     while cursor != root:
+        if cursor == cursor.parent:
+            raise ValueError('Path escapes repository root')
         if cursor.is_symlink():
             raise ValueError('Symlink path is not allowed')
         cursor = cursor.parent

@@ -44,7 +44,7 @@ def main():
             return
         # Exclusive lock coordinates this tool; never replace external edits detected during generation.
         lock = root / 'skills/.catalog.lock'
-        with lock.open('x'):
+        with lock.open('x') as lock_handle:
             created = False
             try:
                 if registry.read_text() != before:
@@ -99,6 +99,7 @@ Status: planned; no service implementation or deployment has been verified.
                     shutil.rmtree(destination)
                 raise
             finally:
+                lock_handle.close()
                 lock.unlink(missing_ok=True)
     except (OSError, ValueError) as error:
         p.error(str(error))
