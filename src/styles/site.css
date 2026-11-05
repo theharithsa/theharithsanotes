@@ -2703,3 +2703,301 @@ figure {
     font-size: 9px;
   }
 }
+
+/* Original motorsport-inspired wordmark; open-source fonts, no F1 logo assets. */
+:root {
+  --mono: "JetBrains Mono Variable", Consolas, monospace;
+  --racing: "Racing Sans One", Arial, sans-serif;
+  --terminal: #163a30;
+  --signal: #b6e97b;
+}
+.wordmark {
+  font-family: var(--racing);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  min-width: 171px;
+  width: 171px;
+  position: relative;
+  flex-shrink: 0;
+  padding-bottom: 7px;
+  color: var(--ink);
+}
+.wordmark .brand-line {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.wordmark .brand-name {
+  font-size: 32px;
+}
+.wordmark .brand-the {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: -0.08em;
+}
+.wordmark .brand-notes {
+  font-size: 28px;
+  padding-left: 34px;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+.wordmark::after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  bottom: 8px;
+  width: 38px;
+  height: 3px;
+  background: #bb6845;
+  box-shadow: -7px 5px 0 #bb6845;
+  transform: skewX(-30deg);
+}
+/* A developer voice for technical stories and the open-source workbench. */
+.technical-card h3 {
+  font-family: var(--mono);
+  font-size: 21px;
+  line-height: 1.4;
+  letter-spacing: -0.045em;
+}
+.technical-card .eyebrow,
+.technical-card .note-meta {
+  font-family: var(--mono);
+}
+.technical-card .card-image-link {
+  position: relative;
+}
+.technical-card .card-image-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 0 solid #81a65c;
+  box-shadow: inset 0 0 0 0 #b6e97b;
+  transition: box-shadow 0.2s;
+  pointer-events: none;
+}
+.technical-card:hover .card-image-link::after,
+.technical-card:focus-within .card-image-link::after {
+  box-shadow: inset 0 0 0 3px #b6e97b;
+}
+.technical-card h3 a:hover,
+.technical-card h3 a:focus-visible {
+  color: #345b3b;
+  text-decoration-color: #81a65c;
+}
+.side-stories .technical-card h3 {
+  font: 500 20px/1.4 var(--mono);
+  letter-spacing: -0.04em;
+}
+.technical-article .article-header {
+  position: relative;
+  border-top: 2px solid #a4bf83;
+  background-image:
+    linear-gradient(#6175570b 1px, transparent 1px),
+    linear-gradient(90deg, #6175570b 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding: 45px 30px 28px;
+  margin-top: 40px;
+}
+.technical-article .article-header > .eyebrow {
+  font-family: var(--mono);
+  color: #41634b;
+}
+.technical-article .article-header > .eyebrow::before {
+  content: ">_ ";
+  color: #739254;
+}
+.technical-article .article-header h1 {
+  font-family: var(--mono);
+  font-size: clamp(30px, 3.8vw, 49px);
+  line-height: 1.25;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+}
+.technical-article .article-deck {
+  font-family: var(--mono);
+  font-size: 17px;
+  line-height: 1.8;
+}
+.technical-article .article-body {
+  font-family: var(--mono);
+  font-size: 17px;
+  line-height: 1.95;
+  letter-spacing: -0.025em;
+}
+.technical-article .article-body h2 {
+  font-family: var(--mono);
+  font-size: 27px;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.technical-article .article-body h3 {
+  font-family: var(--mono);
+  font-size: 23px;
+  line-height: 1.4;
+}
+.technical-article .article-outline {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.8;
+}
+.article-body code,
+.article-body pre {
+  font-family: var(--mono);
+  font-feature-settings:
+    "calt" 1,
+    "liga" 1;
+}
+.article-body pre {
+  background: #152a24;
+  color: #e3f0d6;
+  border: 1px solid #48634b;
+  border-radius: 5px;
+  padding: 42px 23px 23px;
+  position: relative;
+  box-shadow: 0 5px 0 #d6dfcf;
+}
+.article-body pre::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 16px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e69b78;
+  box-shadow:
+    14px 0 #e6c97d,
+    28px 0 #9acb81;
+}
+.article-body pre code {
+  background: transparent;
+  color: inherit;
+}
+.technical-workbench {
+  background: #16332b;
+  color: #edf2e4;
+  padding: 38px 42px 20px;
+  border-radius: 5px;
+  margin-bottom: 70px;
+  position: relative;
+  box-shadow: 0 7px 0 #e2e8d8;
+}
+.technical-workbench > .section-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--signal);
+  padding-bottom: 20px;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+.technical-workbench > .section-kicker::before {
+  content: ">_ ";
+}
+.technical-workbench > article {
+  border-color: #b2c5a637;
+  transition: background-color 0.18s;
+}
+.technical-workbench > article:hover,
+.technical-workbench > article:focus-within {
+  background: #233f32;
+}
+.technical-workbench h2 {
+  font-family: var(--mono);
+  font-size: 25px;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.technical-workbench .eyebrow {
+  font-family: var(--mono);
+  color: #b9d5a2;
+  font-size: 9px;
+}
+.technical-workbench .project-index-number {
+  font-family: var(--mono);
+  font-size: 19px;
+  color: #95ae86;
+}
+.technical-workbench .project-index-arrow {
+  color: var(--signal);
+}
+.technical-workbench p {
+  color: #cedac6;
+}
+@media (max-width: 640px) {
+  .wordmark {
+    min-width: 144px;
+    width: 144px;
+  }
+  .wordmark .brand-name {
+    font-size: 28px;
+  }
+  .wordmark .brand-the {
+    font-size: 20px;
+  }
+  .wordmark .brand-notes {
+    font-size: 25px;
+    padding-left: 30px;
+  }
+  .wordmark::after {
+    width: 31px;
+    right: 0;
+    bottom: 7px;
+    height: 2px;
+    box-shadow: -6px 4px 0 #bb6845;
+  }
+  .technical-card h3 {
+    font-size: 24px;
+  }
+  .side-stories .technical-card h3 {
+    font-size: 17px;
+    line-height: 1.45;
+  }
+  .technical-article .article-header {
+    padding: 25px 16px 20px;
+    margin-top: 22px;
+  }
+  .technical-article .article-header h1 {
+    font-size: 29px;
+  }
+  .technical-article .article-deck {
+    font-size: 14px;
+  }
+  .technical-article .article-body {
+    font-size: 15px;
+    line-height: 1.95;
+  }
+  .technical-article .article-body h2 {
+    font-size: 23px;
+  }
+  .technical-article .article-body h3 {
+    font-size: 21px;
+  }
+  .technical-workbench {
+    padding: 27px 20px 12px;
+    margin-bottom: 50px;
+  }
+  .technical-workbench h2 {
+    font-size: 20px;
+  }
+  .technical-workbench p {
+    font-size: 13px;
+  }
+  .technical-workbench .project-index-number {
+    font-size: 15px;
+  }
+}
+
+.footer-top .wordmark {
+  width: 171px;
+  flex-basis: 171px;
+  align-self: flex-start;
+}
+@media (max-width: 640px) {
+  .footer-top .wordmark {
+    width: 144px;
+    flex-basis: 144px;
+  }
+}

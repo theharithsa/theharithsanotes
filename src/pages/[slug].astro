@@ -31,7 +31,12 @@ const headings = [
   image={article.image}
   article
 >
-  <article class="article-page">
+  <article
+    class:list={[
+      "article-page",
+      { "technical-article": article.topic !== "Life & learning" },
+    ]}
+  >
     <header class="article-header wrap">
       <a class="back-link" href="/blogs">
         ← All articles

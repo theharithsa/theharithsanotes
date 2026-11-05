@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import ScreenPoster from "../components/ScreenPoster.astro";
+import ScreenArt from "../components/ScreenArt.astro";
 import { screenNotes } from "../data/screen-notes";
 import { articles, formatDate } from "../lib/content";
 const [lead, ...otherNotes] = screenNotes;
@@ -18,7 +18,9 @@ const senna = articles.find((article) =>
     </div>
   </section>
   <section class="wrap space screen-lead">
-    <ScreenPoster note={lead} eager />
+    <a href={`/entertainment/${lead.slug}`} tabindex="-1" aria-hidden="true">
+      <ScreenArt note={lead} />
+    </a>
     <div>
       <span class="eyebrow">
         {lead.kind} · {lead.title}
@@ -67,7 +69,13 @@ const senna = articles.find((article) =>
           data-screen-note
           data-kind={note.kind}
         >
-          <ScreenPoster note={note} />
+          <a
+            href={`/entertainment/${note.slug}`}
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <ScreenArt note={note} />
+          </a>
           <div class="screen-card-copy">
             <span class="eyebrow">
               {note.kind} · {note.title}

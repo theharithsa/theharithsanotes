@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0] — 2026-11-05
+
+- Restored illustrated Entertainment covers; real posters remain inside opened reflections, with official links retained.
+- Added the complete “the harithsa notes” wordmark with Racing Sans One, a cursive “the” and original speed-line accents.
+- Added JetBrains Mono to technical article typography, technical cards, code blocks and open-source projects, with restrained grid, terminal and hover effects.
+- Self-hosted exact font versions with preserved OFL notices and updated poster-placement regression coverage.
+
 ## [1.3.1] — 2026-11-05
 
 - Added five verified promotional posters and official title-page links to Entertainment and every screen-note page.

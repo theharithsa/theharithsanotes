@@ -54,3 +54,6 @@ After reviewing the preview, publish the tested `dist` with `npx --yes firebase-
 See [observability](docs/observability.md), [decisions](docs/decisions.md), [testing](docs/testing.md), and [release plan](docs/release-plan.md). Firebase Analytics uses the supplied public config. Privileged Dynatrace credentials are never needed in this static client. Do not add them to browser variables, build files, or GitHub PR jobs.
 
 The repository was generated from `theharithsa/app-launchpad-template` v1.9.0, revision `f04c042a9e000f606982863518fa7bb9cfbb7d85`. The inherited root LICENSE covers template material. Article content and new application assets remain the author’s; no additional open-source license is granted by this project.
+
+
+Typography: Source Serif 4 and Public Sans for editorial pages, Racing Sans One for the original motorsport-inspired wordmark, and JetBrains Mono for technical content. All are self-hosted; font licenses are retained in LICENSES. Promotional film/series images retain their respective rights-holder ownership; sources are in docs/screen-media.json.

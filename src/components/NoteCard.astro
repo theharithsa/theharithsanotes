@@ -8,7 +8,10 @@ const { article } = Astro.props;
 ---
 
 <article
-  class="note-card"
+  class:list={[
+    "note-card",
+    { "technical-card": article.topic !== "Life & learning" },
+  ]}
   data-note
   data-topic={article.topic}
   data-search={`${article.title} ${article.description} ${article.topic}`.toLowerCase()}

@@ -56,3 +56,8 @@ Astro check: 35 files, zero diagnostics. Build: 30 pages. Ten Node tests cover u
 
 
 1.3.1 preview version 7c95643d040ce258 from eae5cc13e0f0e3c46b479b6646b541d057e048aa: six pages and five poster images returned 200 with exact artifact bytes. Deployed browser loaded all five posters and official links after refresh. Implementation CI foundation/website/GitGuardian passed; documentation-only follow-up head is checked separately.
+
+
+## 1.4.0 cover and typography checks
+
+Astro check: 36 files, zero diagnostics. Build: 30 pages. Ten Node tests passed, including the corrected regression that archive covers are illustrated and posters are confined to detail pages. Existing full-body/list/canonical/consent checks remain active. Browser observations: five illustrated covers and zero real posters on Entertainment; opened series page has one loaded real poster. Racing Sans One and JetBrains Mono were loaded and confirmed by computed styles. Technical MCP article heading/body use JetBrains Mono; screen-note body uses Source Serif. Desktop 1440px and phone 390px technical layouts had no overflow; screen detail at 320px also fit. Open-source workbench was inspected at 390px. Footer wordmark width is constrained separately to keep speed lines beside its lettering.

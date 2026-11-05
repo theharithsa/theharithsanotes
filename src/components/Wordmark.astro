@@ -1,0 +1,20 @@
+---
+interface Props {
+  homeLabel?: boolean;
+}
+const { homeLabel = false } = Astro.props;
+---
+
+<a
+  class="wordmark"
+  href="/"
+  aria-label={homeLabel ? "The Harithsa Notes home" : "The Harithsa Notes"}
+>
+  <span class="brand-line">
+    <span class="brand-the">the</span>
+    <span class="brand-name">harithsa</span>
+  </span>
+  <span class="brand-notes">
+    notes<span class="brand-dot">.</span>
+  </span>
+</a>
