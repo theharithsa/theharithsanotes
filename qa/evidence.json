@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
-  "release": "1.4.0 review preview",
+  "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+  "release": "1.5.0 review preview",
   "checks": [
     {
       "id": "typescript",
@@ -337,6 +337,51 @@
       "observedAt": "2026-11-05T03:52:01.794708+00:00",
       "environment": "local Windows",
       "artifact": null
+    },
+    {
+      "id": "projects-static-build-42",
+      "status": "passed",
+      "command": "npm run build",
+      "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+      "observedAt": "2026-11-05T07:54:29.278558+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "projects-artifact-tests-11",
+      "status": "passed",
+      "command": "npm test",
+      "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+      "observedAt": "2026-11-05T07:54:29.278558+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "projects-desktop-mobile-browser",
+      "status": "passed",
+      "command": "cua_repl: technical fonts, equal grid, local detail/back links, responsive layout",
+      "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+      "observedAt": "2026-11-05T07:54:29.278558+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "projects-responsive-preview-http",
+      "status": "passed",
+      "command": "13 HTML routes and 60 WebP variants: HTTP 200 and byte equality",
+      "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+      "observedAt": "2026-11-05T07:54:29.278558+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "projects-audit",
+      "status": "passed",
+      "command": "npm audit --audit-level=high",
+      "revision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+      "observedAt": "2026-11-05T07:54:29.278558+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
     }
   ],
   "limits": [
@@ -344,16 +389,17 @@
     "GA/Dynatrace receipt and tenant searchability not verified.",
     "No backend or native backend trace linkage exists.",
     "No SDLC/CI tenant exporter configured.",
-    "Domain DNS and production cutover not performed."
+    "Domain DNS and production cutover not performed.",
+    "FinVision AI repository URL awaits owner confirmation; live site linked, issue #9 remains open for this resource."
   ],
   "lifecycle": {
-    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/8",
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/9",
     "pullRequestUrl": "https://github.com/theharithsa/theharithsanotes/pull/2",
-    "checkedHeadSha": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+    "checkedHeadSha": "b078727cd497ca240521fcb8ca29fe78f7372392",
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 9cf264c03c868b32",
-    "artifactDigest": "bf8e772acc63f6b1341dd5a86f6db65be06d4d25139cc6d4fe640251d1439728",
+    "deploymentId": "Firebase review version ebda4f918210a33c",
+    "artifactDigest": "081587c7643c0a63e39c2c4a940272588f6a2d4e6b5c5d831f3dd74f1a4b3718",
     "sdlcEvidence": [
       {
         "authority": "firebase-cli",
@@ -375,11 +421,7 @@
         "authority": "github-api",
         "stage": "checks-passed",
         "sourceRevision": "97311f59ca6703f7cc9c1dbc524f4c6d4304f67e",
-        "checks": [
-          "foundation",
-          "website",
-          "GitGuardian Security Checks"
-        ],
+        "checks": ["foundation", "website", "GitGuardian Security Checks"],
         "observedAt": "2026-11-04T20:28:09.386901+00:00"
       },
       {
@@ -411,11 +453,7 @@
         "authority": "github-api",
         "stage": "checks-passed",
         "sourceRevision": "842acb64b851432d7164c3dae449e41003326904",
-        "checks": [
-          "foundation",
-          "website",
-          "GitGuardian Security Checks"
-        ],
+        "checks": ["foundation", "website", "GitGuardian Security Checks"],
         "observedAt": "2026-11-05T03:10:55.748674+00:00"
       },
       {
@@ -445,11 +483,7 @@
         "authority": "github-api",
         "stage": "checks-passed",
         "sourceRevision": "eae5cc13e0f0e3c46b479b6646b541d057e048aa",
-        "checks": [
-          "foundation",
-          "website",
-          "GitGuardian Security Checks"
-        ],
+        "checks": ["foundation", "website", "GitGuardian Security Checks"],
         "observedAt": "2026-11-05T03:38:54.012166+00:00"
       },
       {
@@ -471,11 +505,7 @@
         "authority": "github-api",
         "stage": "checks-passed",
         "sourceRevision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
-        "checks": [
-          "foundation",
-          "website",
-          "GitGuardian Security Checks"
-        ],
+        "checks": ["foundation", "website", "GitGuardian Security Checks"],
         "observedAt": "2026-11-05T03:52:01.794708+00:00"
       },
       {
@@ -492,6 +522,28 @@
         "sourceRevision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
         "status": "home, Entertainment, screen detail, technical article and Projects returned 200 and matched tested artifact bytes",
         "observedAt": "2026-11-05T03:52:01.794708+00:00"
+      },
+      {
+        "authority": "github-api",
+        "stage": "checks-passed",
+        "sourceRevision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+        "checks": ["foundation", "website", "GitGuardian Security Checks"],
+        "observedAt": "2026-11-05T07:54:29.278558+00:00"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "sourceRevision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+        "version": "ebda4f918210a33c",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-05T07:54:29.278558+00:00"
+      },
+      {
+        "authority": "http-artifact-comparison",
+        "stage": "preview-verified",
+        "sourceRevision": "b078727cd497ca240521fcb8ca29fe78f7372392",
+        "status": "13 project HTML routes and 60 responsive WebP variants returned 200 and matched tested artifact bytes; browser confirmed grid/detail fonts and loaded WebP covers.",
+        "observedAt": "2026-11-05T07:54:29.278558+00:00"
       }
     ]
   }
