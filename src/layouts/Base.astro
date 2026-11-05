@@ -75,7 +75,7 @@ const current = Astro.url.pathname;
           Home
         </a>
         {navigation.map((item, index) => (
-          <div class="nav-section" data-nav-section>
+          <div class="nav-section" data-nav-section style={`--menu-tone: var(--${item.tone})`}>
             <div class="nav-label">
               <button
                 class="nav-disclosure"

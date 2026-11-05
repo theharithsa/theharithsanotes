@@ -1,5 +1,7 @@
 # Release impact and verification plan
 
+1.7.1 / issue #15 restores the existing blue, peach, lilac, sage and ochre navigation palette using a section-scoped CSS property. Only the shared header markup/styles and package version change; no data, dependency, monitoring, DNS or interaction changes. Type/build/fourteen artifact tests and all six menu colours verified locally. Prior production Hosting version 3c655055dc9ec2fa is the rollback source. Deploy the tested build after current-head delivery checks.
+
 Current production authorization and actual launch status are recorded in [production launch](production-launch.md). The owner explicitly approved production/domain cutover on 5 November 2026, superseding the historical preview-only holds below. The tested 1.7.0 artifact is now on Firebase's live channel; custom-domain DNS is pending GoDaddy sign-in.
 
 Version: 1.7.0. Scope: issue #11 (site artwork, portrait menus and listening journeys), issue #10 (editorial mosaic and illustrated details), issue #9 (uniform technical project grid, local details and generated covers), issue #5 (seven-section rebuild), plus [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1) and [editorial refinement #3](https://github.com/theharithsa/theharithsanotes/issues/3). Source: feature branch `feat/1-personal-website`, reviewed through PR #2. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94, then requested article formatting, classic typography, more projects, and selected Downloads photographs.

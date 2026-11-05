@@ -3497,7 +3497,7 @@ figure {
 .nav-disclosure[aria-expanded="true"],
 .nav-disclosure:hover,
 .desktop-nav > a:hover {
-  background: #f2ede6;
+  background: var(--menu-tone, #f2ede6);
   border-color: #d9d0c5;
   transform: none;
 }
@@ -3506,7 +3506,7 @@ figure {
   outline-offset: 3px;
 }
 .mega-menu {
-  background: #fffdfa;
+  background: var(--menu-tone, #fffdfa);
   padding-top: 36px;
   padding-bottom: 36px;
   gap: 40px;
@@ -3526,7 +3526,7 @@ figure {
 }
 .mega-links a:hover,
 .mega-links a:focus-visible {
-  background: #f2ede6;
+  background: #ffffff70;
   padding-left: 12px;
 }
 .menu-toggle {
