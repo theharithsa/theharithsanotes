@@ -63,13 +63,9 @@ const { project } = Astro.props;
         <a class="project-visit" href={project.href}>
           {project.linkLabel} <span aria-hidden="true">↗</span>
         </a>
-        {project.source ? (
-          <a class="project-source" href={project.source}>
-            GitHub repository ↗
-          </a>
-        ) : (
-          <p class="project-source-note">Repository link not yet published.</p>
-        )}
+        <a class="project-source" href={project.source}>
+          GitHub repository ↗
+        </a>
         <div class="project-stack">
           <h3>Built with</h3>
           <ul>

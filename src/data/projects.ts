@@ -4,7 +4,7 @@ export interface Project {
   category: string;
   description: string;
   href: string;
-  source?: string;
+  source: string;
   image: string;
   imageAlt: string;
   colour: string;
@@ -108,12 +108,13 @@ export const projects: Project[] = [
     description:
       "A financial planning tool for modern India: explore wealth projections, tax planning, and the life goals you’re working towards.",
     href: "https://finvision-ai.web.app/",
+    source: "https://github.com/spmsuhas/finvision-ai",
     image: "/images/projects/finvision-ai-concept-v1.png",
     imageAlt: "Financial projection curves, rupee coin and planning milestones",
     colour: "ochre",
     overview: [
       "FinVision AI is a visual financial-planning workspace. Instead of looking at investments, liabilities, expenses and goals in isolation, it brings them into a plan that can be explored over time.",
-      "The public interface includes individual and household views, wealth projections, goal funding, a tax comparison and an AI Advisor marked beta. Projections are scenarios based on inputs; the project is presented here as a planning tool.",
+      "The application combines deterministic financial calculations with a Gemini-powered AI Advisor. Its year-by-year projections account for expenses, salary growth and asset allocation; charts and downloadable reports make the plan easier to explore. The open-source repository is maintained at spmsuhas/finvision-ai.",
     ],
     features: [
       {
@@ -137,7 +138,14 @@ export const projects: Project[] = [
           "The interface provides tax comparison, report export and a beta AI Advisor.",
       },
     ],
-    stack: ["Web application", "Firebase", "Scenario planning"],
+    stack: [
+      "JavaScript",
+      "Vite",
+      "Tailwind CSS",
+      "Chart.js",
+      "Firebase",
+      "Gemini",
+    ],
     linkLabel: "Open FinVision AI",
   },
   {

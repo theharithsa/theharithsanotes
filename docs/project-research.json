@@ -15,10 +15,10 @@
   },
   {
     "slug": "finvision-ai",
-    "url": "https://finvision-ai.web.app/",
-    "readmeSha": null,
+    "url": "https://github.com/spmsuhas/finvision-ai/blob/main/README.md",
+    "readmeSha": "6f33f99986fe77a6389e055be5b6b19ee7b9be70",
     "reviewedOn": "2026-11-05",
-    "scope": "Public interface inspected; repository unconfirmed. No unrelated stock-analysis repository substituted."
+    "scope": "Owner supplied repository URL; README confirms vanilla ES modules, Vite, Tailwind, Chart.js, Firebase and Gemini. Repository ownership is retained; no sole-authorship or production-readiness claim is inferred."
   },
   {
     "slug": "budget-buddy",

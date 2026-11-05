@@ -302,13 +302,9 @@ test("every project opens a researched detail page with a distinct cover and ver
     assert.ok(archive.includes(`href="${route}"`));
     assert.ok(page.includes(`href="${project.href}"`));
     assert.ok(page.includes(`href="/projects#${project.slug}"`));
-    if (project.source) assert.ok(page.includes(`href="${project.source}"`));
-    else
-      assert.equal(
-        project.slug,
-        "finvision-ai",
-        "Only FinVision has an unconfirmed repository",
-      );
+    assert.ok(project.source.startsWith("https://github.com/"));
+    assert.ok(page.includes(`href="${project.source}"`));
+    assert.ok(!page.includes("Repository link not yet published"));
     assert.ok(project.overview.join(" ").length > 300);
     assert.equal(project.features.length, 4);
     assert.ok(page.includes("Concept illustration"));

@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.1] — 2026-11-05
+
+- Added the owner-supplied spmsuhas/finvision-ai repository to FinVision’s detail page and updated its overview/stack from the repository README.
+- Require a confirmed source link for all twelve projects and remove the unavailable-repository fallback.
+
 ## [1.5.0] — 2026-11-05
 
 - Rebuilt Projects as one uniform twelve-card grid, with the technical journal’s JetBrains Mono typography, grid header and restrained hover treatment.
