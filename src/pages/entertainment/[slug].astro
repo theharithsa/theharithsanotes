@@ -1,6 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
-import ScreenArt from "../../components/ScreenArt.astro";
+import ScreenPoster from "../../components/ScreenPoster.astro";
 import { screenNotes, type ScreenNote } from "../../data/screen-notes";
 import { formatDate } from "../../lib/content";
 export function getStaticPaths() {
@@ -20,7 +20,11 @@ const next =
   ];
 ---
 
-<Base title={`${note.title}: ${note.headline}`} description={note.description}>
+<Base
+  title={`${note.title}: ${note.headline}`}
+  description={note.description}
+  image={note.poster.src}
+>
   <article class="screen-note-page">
     <header class="wrap screen-note-header">
       <a href="/entertainment" class="back-link">
@@ -37,9 +41,19 @@ const next =
       </p>
     </header>
     <div class="wrap screen-note-visual">
-      <ScreenArt note={note} />
+      <ScreenPoster note={note} eager />
     </div>
     <div class="wrap screen-note-reading">
+      <p class="screen-title-link">
+        <a
+          class="text-link"
+          href={note.officialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {note.linkLabel} ↗
+        </a>
+      </p>
       <p class="editorial-caption">
         Edited from my personal viewing notes. Contains story details.
       </p>

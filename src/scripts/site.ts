@@ -165,6 +165,19 @@ const photoDialog =
 const screenFilters = document.querySelectorAll<HTMLButtonElement>(
   "[data-screen-filter]",
 );
+document
+  .querySelectorAll<HTMLImageElement>("[data-poster-image]")
+  .forEach((image) => {
+    const showFallback = (): void => {
+      image.hidden = true;
+      const fallback = image.parentElement?.querySelector<HTMLElement>(
+        "[data-poster-fallback]",
+      );
+      if (fallback) fallback.hidden = false;
+    };
+    image.addEventListener("error", showFallback);
+    if (image.complete && image.naturalWidth === 0) showFallback();
+  });
 const screenCards =
   document.querySelectorAll<HTMLElement>("[data-screen-note]");
 screenFilters.forEach((button) =>

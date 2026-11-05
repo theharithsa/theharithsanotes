@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1] — 2026-11-05
+
+- Added five verified promotional posters and official title-page links to Entertainment and every screen-note page.
+- Preserved complete artwork with contain sizing, local image delivery, source credits, accessible external links and an image-load fallback.
+- Added poster/source validation to existing screen-note artifact coverage and recorded media provenance.
+
 ## [1.3.0] — 2026-11-05
 
 - Expanded Entertainment with five edited Notion-sourced screen reflections: Subservience, Made in Korea, War Machine, The Taj Story, and Oh My Ghost Clients.

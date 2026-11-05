@@ -11,13 +11,34 @@ export interface ScreenNote {
   artwork: string;
   motif: "sunrise" | "orbit" | "steps" | "balance" | "conversation";
   titleNote?: string;
-  officialUrl?: string;
+  officialUrl: string;
+  linkLabel: string;
+  poster: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    credit: string;
+    source: string;
+  };
 }
 
 /** Edited screen reflections only; source journal excerpts stay outside the public build. */
 export const screenNotes: ScreenNote[] = [
   {
     slug: "subservience",
+    officialUrl:
+      "https://tv.apple.com/us/movie/subservience/umc.cmc.3p39mkx1zt2xfx6tc4fb55rzy",
+    linkLabel: "Film details on Apple TV",
+    poster: {
+      src: "/images/screen/subservience.jpg",
+      alt: "Subservience promotional poster featuring Megan Fox and the film title",
+      width: 1200,
+      height: 675,
+      credit: "Apple TV",
+      source:
+        "https://tv.apple.com/us/movie/subservience/umc.cmc.3p39mkx1zt2xfx6tc4fb55rzy",
+    },
     title: "Subservience",
     kind: "Movie",
     date: "2026-03-28",
@@ -38,6 +59,16 @@ export const screenNotes: ScreenNote[] = [
   },
   {
     slug: "oh-my-ghost-clients",
+    officialUrl: "https://content.mbc.co.kr/program/drama/3898635_64285.html",
+    linkLabel: "Series details on MBC",
+    poster: {
+      src: "/images/screen/oh-my-ghost-clients.jpg",
+      alt: "Oh My Ghost Clients poster showing the ensemble cast around a desk",
+      width: 300,
+      height: 400,
+      credit: "MBC",
+      source: "https://content.mbc.co.kr/program/drama/3898635_64285.html",
+    },
     title: "Oh My Ghost Clients",
     kind: "Series",
     date: "2026-03-27",
@@ -57,10 +88,21 @@ export const screenNotes: ScreenNote[] = [
     motif: "balance",
     titleNote:
       "Recorded as “Oh My Ghost” in my journal. The labour-attorney storyline matches Oh My Ghost Clients.",
-    officialUrl: "https://content.mbc.co.kr/program/drama/3898635_64285.html",
   },
   {
     slug: "the-taj-story",
+    officialUrl:
+      "https://tv.apple.com/in/movie/the-taj-story/umc.cmc.3gllc14z4bhjnq357fdxhg6h2",
+    linkLabel: "Film details on Apple TV",
+    poster: {
+      src: "/images/screen/the-taj-story.jpg",
+      alt: "The Taj Story poster featuring Paresh Rawal, the film title, and a model of the Taj Mahal",
+      width: 1200,
+      height: 675,
+      credit: "Apple TV",
+      source:
+        "https://tv.apple.com/in/movie/the-taj-story/umc.cmc.3gllc14z4bhjnq357fdxhg6h2",
+    },
     title: "The Taj Story",
     kind: "Movie",
     date: "2026-03-20",
@@ -81,6 +123,16 @@ export const screenNotes: ScreenNote[] = [
   },
   {
     slug: "made-in-korea",
+    officialUrl: "https://www.netflix.com/title/81754582",
+    linkLabel: "Title page on Netflix",
+    poster: {
+      src: "/images/screen/made-in-korea.jpg",
+      alt: "Made in Korea poster featuring Priyanka Mohan on a street in Seoul",
+      width: 450,
+      height: 630,
+      credit: "Netflix",
+      source: "https://media.netflix.com/en/only-on-netflix/81754582",
+    },
     title: "Made in Korea",
     kind: "Movie",
     date: "2026-03-14",
@@ -101,6 +153,16 @@ export const screenNotes: ScreenNote[] = [
   },
   {
     slug: "war-machine",
+    officialUrl: "https://www.netflix.com/title/81768525",
+    linkLabel: "Title page on Netflix",
+    poster: {
+      src: "/images/screen/war-machine.jpg",
+      alt: "War Machine 2026 poster featuring Alan Ritchson beneath a red-lit machine",
+      width: 450,
+      height: 630,
+      credit: "Netflix",
+      source: "https://media.netflix.com/en/only-on-netflix/81768525",
+    },
     title: "War Machine",
     kind: "Movie",
     date: "2026-03-08",

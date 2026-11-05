@@ -25,6 +25,14 @@ test("screen reflections have reading pages, lessons and discoverable canonical 
   for (const note of screenNotes) {
     const route = `/entertainment/${note.slug}`;
     const page = await readPage(`entertainment/${note.slug}/index.html`);
+    assert.equal(new URL(note.officialUrl).protocol, 'https:');
+    const poster = await readFile(new URL(`public${note.poster.src}`, root));
+    assert.equal(poster.readUInt16BE(0), 0xffd8, `Invalid poster: ${note.title}`);
+    for (const html of [archive,page]) {
+      assert.ok(html.includes(`src="${note.poster.src}"`));
+      assert.ok(html.includes(`href="${note.officialUrl}"`));
+      assert.ok(html.includes(`href="${note.poster.source}"`));
+    }
     assert.ok(archive.includes(`href="${route}"`));
     assert.equal(
       sitemap.split(`<loc>https://theharithsa.com${route}</loc>`).length - 1,

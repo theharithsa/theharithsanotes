@@ -2611,3 +2611,95 @@ figure {
     font-size: 29px;
   }
 }
+
+/* Promotional posters retain their complete original artwork and title text. */
+.screen-poster {
+  margin: 0;
+  min-width: 0;
+}
+.poster-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 340px;
+  padding: 18px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.poster-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.poster-open {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: #fffffff0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+}
+.screen-poster figcaption {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+  padding-top: 9px;
+}
+.screen-poster figcaption a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.screen-lead .poster-frame {
+  height: 430px;
+}
+.screen-note-visual .poster-frame {
+  height: 520px;
+  padding: 25px;
+}
+.screen-title-link {
+  margin: 18px 0;
+}
+.screen-title-link .text-link {
+  font-size: 12px;
+}
+.poster-fallback {
+  font: 500 34px/1.2 var(--serif);
+  text-align: center;
+  padding: 25px;
+}
+.poster-fallback small {
+  display: block;
+  font: 12px/1.5 var(--sans);
+  margin-top: 20px;
+}
+@media (max-width: 640px) {
+  .poster-frame {
+    height: 330px;
+    padding: 15px;
+  }
+  .screen-lead .poster-frame {
+    height: auto;
+    aspect-ratio: 16/10;
+  }
+  .screen-note-visual .poster-frame {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 3/4;
+    padding: 15px;
+  }
+  .screen-note-visual .poster-frame img {
+    position: absolute;
+    inset: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+  }
+  .screen-poster figcaption {
+    font-size: 9px;
+  }
+}

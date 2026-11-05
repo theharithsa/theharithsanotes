@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import ScreenArt from "../components/ScreenArt.astro";
+import ScreenPoster from "../components/ScreenPoster.astro";
 import { screenNotes } from "../data/screen-notes";
 import { articles, formatDate } from "../lib/content";
 const [lead, ...otherNotes] = screenNotes;
@@ -18,9 +18,7 @@ const senna = articles.find((article) =>
     </div>
   </section>
   <section class="wrap space screen-lead">
-    <a href={`/entertainment/${lead.slug}`} tabindex="-1" aria-hidden="true">
-      <ScreenArt note={lead} />
-    </a>
+    <ScreenPoster note={lead} eager />
     <div>
       <span class="eyebrow">
         {lead.kind} · {lead.title}
@@ -32,6 +30,16 @@ const senna = articles.find((article) =>
       <a class="text-link" href={`/entertainment/${lead.slug}`}>
         Read the reflection ↗
       </a>
+      <p class="screen-title-link">
+        <a
+          class="text-link"
+          href={lead.officialUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {lead.linkLabel} ↗
+        </a>
+      </p>
       <p class="screen-note-date">From my notes · {formatDate(lead.date)}</p>
     </div>
   </section>
@@ -59,13 +67,7 @@ const senna = articles.find((article) =>
           data-screen-note
           data-kind={note.kind}
         >
-          <a
-            href={`/entertainment/${note.slug}`}
-            tabindex="-1"
-            aria-hidden="true"
-          >
-            <ScreenArt note={note} />
-          </a>
+          <ScreenPoster note={note} />
           <div class="screen-card-copy">
             <span class="eyebrow">
               {note.kind} · {note.title}
@@ -77,6 +79,16 @@ const senna = articles.find((article) =>
             <p class="screen-card-lesson">
               <span>WHAT STAYED WITH ME</span>
               {note.lesson}
+            </p>
+            <p class="screen-title-link">
+              <a
+                class="text-link"
+                href={note.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {note.linkLabel} ↗
+              </a>
             </p>
             <div class="screen-card-footer">
               <time datetime={note.date}>{formatDate(note.date)}</time>
