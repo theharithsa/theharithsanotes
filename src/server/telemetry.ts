@@ -233,7 +233,7 @@ export async function firebaseOperation<T>(
       "db.system.name":
         model === "authentication"
           ? "gcp.firebase_auth"
-          : model === "media" && ["upload", "download"].includes(operation)
+          : model === "media" && ["upload", "download", "copy"].includes(operation)
             ? "gcp.cloud_storage"
             : "gcp.firestore",
       "db.operation.name": operation,
