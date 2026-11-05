@@ -95,8 +95,8 @@ test("Goodreads journal preserves all 50 personal ratings and original reviews",
   );
   assert.equal(
     books.length,
-    55,
-    "Preserve five non-overlapping Notion shelf books",
+    50,
+    "Only the confirmed read collection belongs on this shelf",
   );
   const archive = await readPage("books/index.html");
   const sitemap = await readPage("sitemap.xml");
@@ -209,6 +209,7 @@ test("every internal page link and local asset resolves in the built site", asyn
     "notes/index.html",
     "blogs/index.html",
     "books/index.html",
+    "gogs/index.html",
     "podcasts/index.html",
     "podcasts/created/index.html",
     ...listening.map((note) => `podcasts/listening/${note.slug}/index.html`),
@@ -508,7 +509,7 @@ test("podcast listening journeys preserve notes and resources while Created stay
   assert.ok(!/<(?:audio|iframe)\b/.test(created));
 });
 
-test("section menus use full-label disclosure buttons and six local portrait illustrations", async () => {
+test("section menus use full-label disclosure buttons and seven local portrait illustrations", async () => {
   const home = await readPage("index.html");
   const header = home
     .split('<header class="site-header">')[1]
@@ -516,8 +517,8 @@ test("section menus use full-label disclosure buttons and six local portrait ill
   assert.ok(!/[⌄↗]/.test(header));
   assert.match(header, />\s*Blog\s*<\/button>/);
   assert.ok(!/>\s*Blogs\s*<\/button>/.test(header));
-  assert.equal((header.match(/class="nav-disclosure"/g) ?? []).length, 6);
-  assert.equal((header.match(/class="menu-illustration"/g) ?? []).length, 6);
+  assert.equal((header.match(/class="nav-disclosure"/g) ?? []).length, 7);
+  assert.equal((header.match(/class="menu-illustration"/g) ?? []).length, 7);
   for (const slug of [
     "blogs",
     "books",
@@ -525,6 +526,7 @@ test("section menus use full-label disclosure buttons and six local portrait ill
     "projects",
     "entertainment",
     "meet-vish",
+    "gogs",
   ]) {
     assert.ok(header.includes(`${slug}-portrait-v1`));
     const master = await readFile(

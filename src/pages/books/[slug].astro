@@ -18,6 +18,29 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
 <Base
   title={book.title}
   description={`My reading journal for ${book.title} by ${book.author}. Rated ${entry.rating} out of 5.`}
+  structuredData={{
+    "@type": "Book",
+    name: book.title,
+    author: {
+      "@type": book.author.startsWith("Harvard Business")
+        ? "Organization"
+        : "Person",
+      name: book.author,
+    },
+    genre: book.genres,
+    sameAs: entry.goodreadsUrl,
+    review: {
+      "@type": "Review",
+      author: { "@id": "https://theharithsa.com/meet-vish#person" },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: entry.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      ...(entry.review ? { reviewBody: entry.review } : {}),
+    },
+  }}
 >
   <article class="book-journal wrap">
     <a

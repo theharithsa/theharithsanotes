@@ -1,5 +1,7 @@
 # Books journal provenance
 
+Issue #21 / 1.10.0: only the 50 confirmed read books are now displayed. Five unfinished Notion entries and status controls are removed. Eight editorial genres replace shelf filtering, combining with search and the personal-rating selector. Reviews, dates, links and detail routes remain. See [browsing and themes](browsing-and-themes.md). The capture history below describes the earlier 1.8.0 mixed shelf.
+
 Issue #17 / application version 1.8.0. The owner requested importing their Goodreads books and personal ratings, then clarified that only the 50 entries on the Read shelf should be included. Source: https://www.goodreads.com/review/list/107015673-vishruth-harithsa?shelf=read&per_page=100, read through the signed-in Chrome UI on 5 November 2026.
 
 `src/data/goodreads-books.json` contains the 50 title/author entries, personal rating values, original written reviews, recorded date-read strings and original book/review links. All 50 have ratings (19 five-star, 31 four-star); 46 have written reviews. Blank review fields remain blank. Community average ratings, private notes, drafts, account settings and unrelated shelves were not imported. No Goodreads account changes were performed.

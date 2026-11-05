@@ -9,33 +9,114 @@ import EditorialImage from "../components/EditorialImage.astro";
 import Wordmark from "../components/Wordmark.astro";
 import { site } from "../data/site";
 import { navigation } from "../data/navigation";
+import { canonicalPath, pageMeta } from "../lib/page-meta";
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   article?: boolean;
+  publishedDate?: string;
+  structuredData?: Record<string, unknown>;
 }
 const {
   title,
-  description = site.description,
+  description: providedDescription,
   image = "/images/forest.jpg",
+  imageAlt,
   article = false,
+  publishedDate,
+  structuredData,
 } = Astro.props;
+const palette = pageMeta(Astro.url.pathname, article);
+const description = providedDescription ?? palette.description;
 const pageTitle = title
   ? `${title} | ${site.title}`
   : `${site.title} — A curious mind. An open notebook.`;
-const canonical = new URL(Astro.url.pathname, site.url);
+const canonical = new URL(canonicalPath(Astro.url.pathname), site.url);
 const current = Astro.url.pathname;
+const noindex = current === "/404" || current === "/404.html";
+const author = {
+  "@type": "Person",
+  "@id": `${site.url}/meet-vish#person`,
+  name: site.author,
+  url: `${site.url}/meet-vish`,
+  sameAs: [site.github, site.linkedin],
+};
+const graph = [
+  {
+    ...author,
+    jobTitle: "Senior Customer Success Engineer",
+    homeLocation: { "@type": "Place", name: "Bengaluru, India" },
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.title,
+    publisher: { "@id": author["@id"] },
+  },
+  {
+    "@type": "WebPage",
+    "@id": `${canonical}#webpage`,
+    url: canonical.href,
+    name: pageTitle,
+    description,
+    isPartOf: { "@id": `${site.url}/#website` },
+  },
+  ...(article && publishedDate
+    ? [
+        {
+          "@type": "BlogPosting",
+          headline: title,
+          description,
+          image: [new URL(image, site.url).href],
+          datePublished: publishedDate,
+          author: { "@id": author["@id"] },
+          publisher: { "@id": author["@id"] },
+          mainEntityOfPage: { "@id": `${canonical}#webpage` },
+        },
+      ]
+    : []),
+  ...(structuredData ? [structuredData] : []),
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang="en"
+  style={`--page-chrome-light: ${palette.light}; --page-chrome-dark: ${palette.dark}`}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f7f7f2" />
+    <meta
+      name="theme-color"
+      content={palette.light}
+      data-light={palette.light}
+      data-dark={palette.dark}
+    />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem("harithsa.theme.v1");
+        } catch {}
+        if (theme !== "light" && theme !== "dark")
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        const chrome = document.querySelector('meta[name="theme-color"]');
+        if (chrome)
+          chrome.setAttribute("content", chrome.getAttribute(`data-${theme}`));
+      })();
+    </script>
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
@@ -49,20 +130,27 @@ const current = Astro.url.pathname;
     <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site.url)} />
+    {(imageAlt || image === "/images/forest.jpg") && (
+      <meta property="og:image:alt" content={imageAlt ?? "Forest scenery"} />
+    )}
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:locale" content="en_IN" />
+    {publishedDate && (
+      <meta property="article:published_time" content={publishedDate} />
+    )}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site.url)} />
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
-        "@type": "Person",
-        name: site.author,
-        url: site.url,
-        sameAs: [site.github, site.linkedin],
-        jobTitle: "Senior Customer Success Engineer",
-        homeLocation: { "@type": "Place", name: "Bengaluru, India" },
+        "@graph": graph,
       }).replace(/</g, "\u003c")}
     />
     <script src="../scripts/telemetry.ts"></script>
+    <script src="../scripts/theme.ts"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">
@@ -114,6 +202,21 @@ const current = Astro.url.pathname;
         ))}
       </nav>
       <div class="header-actions">
+        <button
+          class="theme-toggle"
+          data-theme-toggle
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          title="Change colour mode"
+          hidden
+        >
+          <span class="theme-orbit" aria-hidden="true">
+            <span class="theme-sun"></span>
+            <span class="theme-moon"></span>
+            <span class="theme-star theme-star-one"></span>
+            <span class="theme-star theme-star-two"></span>
+          </span>
+        </button>
         <a
           class="search-link"
           href="/blogs#search"

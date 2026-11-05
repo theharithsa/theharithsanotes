@@ -1,5 +1,7 @@
 # Production launch — issue #12
 
+Verified baseline after 1.9.0: both custom domains report HOST_ACTIVE, OWNERSHIP_ACTIVE and CERT_ACTIVE. All 172 non-404 HTML documents on theharithsa.com matched the tested artifact; missing route returned 404; www redirects to the apex with 301. Immutable version 1588549d63a02e96, release 1793904916376000; PR #20 merge 6548dd8f1668417b9f095c2be1ede911c83831ee. Issue #12 is complete. Earlier sign-in/DNS/certificate holds below are historical and superseded; later release receipts belong to their own issues.
+
 The owner authorized deployment to theharithsa.com and replacement of conflicting website DNS records on 5 November 2026. This supersedes earlier preview-only release holds. Unrelated mail, verification and subdomain records must be preserved.
 
 ## Source and deployment

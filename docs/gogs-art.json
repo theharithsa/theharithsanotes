@@ -1,0 +1,8 @@
+{
+  "issue": 21,
+  "path": "public/images/navigation/gogs-portrait-v1.png",
+  "reference": "public/images/gallery/portrait-close.webp",
+  "prompt": "Create one original editorial menu illustration for Games and Gadget (GoGs), landscape 3:2. Use the reference photo to preserve Vishruth Harithsa's recognizable face, dark hair, glasses and warm smile. A sophisticated hand-drawn ink-and-gouache collage on warm ivory paper, muted cobalt, ochre and terracotta accents. Vishruth at a cozy desk, holding a simple game controller, surrounded by a handheld console, a camera, headphones and an abstract orbit of playful geometric sparks. Scene conveys curiosity, play and everyday technology. Conceptual illustration, not a photograph or claim about specific products he owns. Warm, welcoming, classic editorial quality, fine crosshatched ink contours and restrained flat colour, spacious balanced composition. No lettering, titles, logos, text, watermarks, flowers, glossy 3D or photorealistic UI. Keep face and objects in central 80% for responsive cropping.",
+  "mode": "built-in image_gen",
+  "note": "Owner-authorized portrait reference; conceptual devices imply no ownership or experience claim."
+}

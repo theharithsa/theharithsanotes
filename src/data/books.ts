@@ -1,4 +1,17 @@
 import importedBooks from "./goodreads-books.json" with { type: "json" };
+import bookGenres from "./book-genres.json" with { type: "json" };
+
+export const genres = [
+  "Science & nature",
+  "Personal growth",
+  "Mindfulness & spirituality",
+  "Business & leadership",
+  "Creativity",
+  "Biography",
+  "Fiction",
+  "Communication",
+];
+const genresByReview: Record<string, string[]> = bookGenres;
 
 export interface GoodreadsEntry {
   sourceReviewId: string;
@@ -14,7 +27,8 @@ export interface GoodreadsEntry {
 export interface Book {
   title: string;
   author: string;
-  status: "Reading" | "Read" | "To read";
+  status: "Read";
+  genres: string[];
   colour: string;
   slug?: string;
   goodreads?: GoodreadsEntry;
@@ -30,6 +44,7 @@ export const completedBooks: Book[] = importedBooks.map((entry, index) => ({
         .join(" ")
     : entry.author,
   status: "Read",
+  genres: genresByReview[entry.sourceReviewId] ?? [],
   colour: colours[index % colours.length]!,
   slug:
     entry.goodreadsUrl
@@ -41,32 +56,4 @@ export const completedBooks: Book[] = importedBooks.map((entry, index) => ({
       .replace(/^-|-$/g, "") || entry.sourceReviewId,
   goodreads: entry,
 }));
-// Preserve the remaining Notion shelf without duplicating completed Goodreads books.
-export const books: Book[] = [
-  ...completedBooks,
-  {
-    title: "DevOps for Dummies",
-    author: "Emily Freeman",
-    status: "Reading",
-    colour: "blue",
-  },
-  {
-    title: "The Rules of Work",
-    author: "Richard Templar",
-    status: "Reading",
-    colour: "sage",
-  },
-  { title: "Adiyogi", author: "Sadhguru", status: "Reading", colour: "ochre" },
-  {
-    title: "The Decision Book",
-    author: "Mikael Krogerus & Roman Tschäppeler",
-    status: "To read",
-    colour: "sage",
-  },
-  {
-    title: "The Question Book",
-    author: "Mikael Krogerus & Roman Tschäppeler",
-    status: "To read",
-    colour: "peach",
-  },
-];
+export const books = completedBooks;

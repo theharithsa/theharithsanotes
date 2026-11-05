@@ -1,5 +1,7 @@
 # Website observability
 
+1.10.0 adds browser-local genre/topic filters and a functional theme preference. No filter values, reading interests, theme choice or GoGs interactions are exported through custom telemetry. Analytics consent remains unchanged. Theme-colour metadata and presentation state are not monitoring-ingestion evidence.
+
 Service: `the-harithsa-notes-web`; namespace `theharithsa`; source version 1.1.0. This is a static site. There is no application server, database, worker, or durable business transaction to instrument. Backend OTel exporters, canonical business events, and RUM-to-server trace linkage are inapplicable until a real backend exists.
 
 The 1.1.0 photo gallery is entirely browser-local. Opening a photo is a view, not a server-confirmed business event. No filenames, captions, search text, photo contents, or identifiable gallery participants are added to custom analytics payloads. Existing consent behavior is preserved. Fonts are served locally and photo metadata is omitted from delivery derivatives.

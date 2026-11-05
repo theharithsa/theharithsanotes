@@ -26,6 +26,8 @@ python -m unittest discover -s tests -v
 
 ## Content and structure
 
+Books shows the 50 confirmed read titles with editorial genre/search/rating filters. Projects filters by topic. Games and Gadget (GoGs) is ready for future experiences. The header day/night toggle follows the system until a reader chooses a mode; it saves a browser-local preference. Section-specific browser colours, canonical/social metadata and article/book structured data are shared by the static layouts. See [browsing and themes](docs/browsing-and-themes.md).
+
 - `src/data/articles.json`: locally stored article text, dates, categories, original source URLs, and image references. Edit this file to publish or revise notes; rebuilding creates every static route.
 - `src/data/medium-articles.json`: 75 Medium articles with original dates and source links; `medium-sources.json` links eight duplicate publications, and `blog-art.json` owns the display covers for all 88 articles.
 - `src/pages`: home, archive, About, projects, privacy, 404, generated article routes, RSS and sitemap.
