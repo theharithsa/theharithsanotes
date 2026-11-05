@@ -1,0 +1,16 @@
+---
+interface Props {
+  rating: number;
+}
+const { rating } = Astro.props;
+---
+
+<span class="book-rating" aria-label={`My rating: ${rating} out of 5 stars`}>
+  <span class="book-stars" aria-hidden="true">
+    {"★".repeat(rating)}
+    <span class="book-stars-empty">{"☆".repeat(5 - rating)}</span>
+  </span>
+  <span aria-hidden="true">
+    {rating}/5 <span class="book-rating-label">· My rating</span>
+  </span>
+</span>

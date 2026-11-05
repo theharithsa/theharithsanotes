@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.8.0] — 2026-11-05
+
+- Imported the owner-confirmed 50-book Goodreads Read shelf with 50 personal ratings and 46 original reviews; preserved five non-overlapping books from the existing shelf.
+- Added individual reading journal pages, original Goodreads links, recorded completion dates, accessible ratings, title/author search and combined shelf/rating filters.
+- Preserved the typographic book-jacket design and adapted long titles for mobile screens.
+
 ## [1.7.1] — 2026-11-05
 
 - Restored the original section-specific header menu colours and matching hover/open button highlights after the illustrated menu refinement unintentionally made all panels off-white.

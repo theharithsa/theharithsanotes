@@ -1,0 +1,23 @@
+---
+import type { Book } from "../data/books";
+interface Props {
+  book: Book;
+  index: number;
+}
+const { book, index } = Astro.props;
+---
+
+<div
+  class:list={[
+    "book-cover",
+    `tone-${book.colour}`,
+    { "book-cover-long": book.title.length > 70 },
+  ]}
+>
+  <span class="book-cover-series">
+    FROM VISH’S SHELF / {String(index + 1).padStart(2, "0")}
+  </span>
+  <h3>{book.title}</h3>
+  <span class="book-author">{book.author}</span>
+  <span class="book-cover-rule" />
+</div>

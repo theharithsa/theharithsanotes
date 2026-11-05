@@ -201,23 +201,40 @@ const shelfFilters = document.querySelectorAll<HTMLButtonElement>(
   "[data-shelf-filter]",
 );
 const bookCards = document.querySelectorAll<HTMLElement>("[data-book]");
+const bookSearch = document.querySelector<HTMLInputElement>("#book-search");
+const bookRatingFilter = document.querySelector<HTMLSelectElement>(
+  "#book-rating-filter",
+);
+let selectedShelf = "All books";
+function filterBooks(): void {
+  const query = (bookSearch?.value ?? "").trim().toLocaleLowerCase();
+  const rating = bookRatingFilter?.value ?? "all";
+  let count = 0;
+  bookCards.forEach((book) => {
+    book.hidden =
+      (selectedShelf !== "All books" &&
+        book.dataset.status !== selectedShelf) ||
+      (rating !== "all" && book.dataset.rating !== rating) ||
+      !(book.dataset.bookSearch ?? "").toLocaleLowerCase().includes(query);
+    if (!book.hidden) count++;
+  });
+  const countLabel = document.querySelector("#shelf-count");
+  if (countLabel)
+    countLabel.textContent = `${count} ${count === 1 ? "book" : "books"}`;
+  const empty = document.querySelector<HTMLElement>("#book-empty");
+  if (empty) empty.hidden = count > 0;
+}
 shelfFilters.forEach((button) =>
   button.addEventListener("click", () => {
-    let count = 0;
-    bookCards.forEach((book) => {
-      book.hidden =
-        button.dataset.shelfFilter !== "All books" &&
-        book.dataset.status !== button.dataset.shelfFilter;
-      if (!book.hidden) count++;
-    });
+    selectedShelf = button.dataset.shelfFilter ?? "All books";
     shelfFilters.forEach((filter) =>
       filter.setAttribute("aria-pressed", String(filter === button)),
     );
-    const countLabel = document.querySelector("#shelf-count");
-    if (countLabel)
-      countLabel.textContent = `${count} ${count === 1 ? "book" : "books"}`;
+    filterBooks();
   }),
 );
+bookSearch?.addEventListener("input", filterBooks);
+bookRatingFilter?.addEventListener("change", filterBooks);
 
 const photoDialog =
   document.querySelector<HTMLDialogElement>(".photo-lightbox");
