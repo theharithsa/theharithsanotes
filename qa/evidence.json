@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "f20e92334bf091933a5128a5966a09dbe565b16a",
-  "release": "1.5.1 review preview",
+  "revision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+  "release": "1.6.0 editorial mosaic review preview",
   "checks": [
     {
       "id": "typescript",
@@ -400,6 +400,33 @@
       "observedAt": "2026-11-05T08:44:32.857127+00:00",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
+    },
+    {
+      "id": "mosaic-type-build-tests",
+      "status": "passed",
+      "command": "npm run check; npm run build; npm test: zero diagnostics, 42 pages, 11 passed",
+      "revision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+      "observedAt": "2026-11-05T09:10:41.738879+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "mosaic-responsive-browser",
+      "status": "passed",
+      "command": "cua_repl desktop/tablet/mobile geometry, no overlaps/overflow, keyboard local detail, new paper palette and resource links",
+      "revision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+      "observedAt": "2026-11-05T09:10:41.738879+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "mosaic-preview-http",
+      "status": "passed",
+      "command": "13 project HTML routes and 48 responsive WebP variants: HTTP 200 and byte equality",
+      "revision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+      "observedAt": "2026-11-05T09:10:41.738879+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
     }
   ],
   "limits": [
@@ -410,13 +437,13 @@
     "Domain DNS and production cutover not performed."
   ],
   "lifecycle": {
-    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/9",
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/10",
     "pullRequestUrl": "https://github.com/theharithsa/theharithsanotes/pull/2",
-    "checkedHeadSha": "f20e92334bf091933a5128a5966a09dbe565b16a",
+    "checkedHeadSha": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 61d5d98647795c2c",
-    "artifactDigest": "b8a49c052f3a94e8a5cfaf19e8adc928b8cf902c013f63a5fdd040e014efae8c",
+    "deploymentId": "Firebase review version b7e0d36376a63193",
+    "artifactDigest": "ce079f2062ab2906570a79dc800f85452443734e7de6ad1bcce4bc2c7809569d",
     "sdlcEvidence": [
       {
         "authority": "firebase-cli",
@@ -607,6 +634,32 @@
         "sourceRevision": "f20e92334bf091933a5128a5966a09dbe565b16a",
         "status": "Project index and FinVision detail returned 200 and matched tested build; supplied GitHub link present and missing-source fallback absent.",
         "observedAt": "2026-11-05T08:44:32.857127+00:00"
+      },
+      {
+        "authority": "github-api",
+        "stage": "checks-passed",
+        "sourceRevision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+        "checks": [
+          "foundation",
+          "website",
+          "GitGuardian Security Checks"
+        ],
+        "observedAt": "2026-11-05T09:10:41.738879+00:00"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "sourceRevision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+        "version": "b7e0d36376a63193",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-05T09:10:41.738879+00:00"
+      },
+      {
+        "authority": "http-artifact-comparison",
+        "stage": "preview-verified",
+        "sourceRevision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+        "status": "13 project HTML routes and 48 responsive editorial image variants matched local build. Browser confirmed warm-white mosaic, loaded new illustrations, split detail hero and source link with no old sidebar.",
+        "observedAt": "2026-11-05T09:10:41.738879+00:00"
       }
     ]
   }

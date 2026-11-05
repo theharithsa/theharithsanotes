@@ -25,3 +25,6 @@ Observed 1.5.0 review deployment: ebda4f918210a33c from b078727cd497ca240521fcb8
 1.5.1 / issue #9 follow-up: owner-confirmed FinVision source URL, researched overview/stack and required source links for all twelve projects. Static content/template/test change only; no dependencies, services, permissions or telemetry changes. Rebuild, run all eleven artifact tests and deploy the existing review channel. Prior review ebda4f918210a33c is the rollback reference.
 
 1.6.0 / issue #10 replaces project artwork/index/detail composition and scoped styles; responsive image widths and test expectations updated. No dependency, database, monitoring or permissions change. Preserve all public detail routes and project anchors, build/test before review deployment, verify index/details and 48 responsive image variants. Prior review 61d5d98647795c2c is the rollback reference. No merge/production/domain change.
+
+
+Observed 1.6.0 review: b7e0d36376a63193 from d75dd131945e458ce844fb19d7a8dc80ad09fa3c, HTTP/browser verified as recorded in qa/evidence.json. Production, merge and domain remain unchanged.
