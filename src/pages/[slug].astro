@@ -63,6 +63,11 @@ const headings = [
           <a href={article.source}>Read the original ↗</a>
         </p>
       )}
+      {article.alternateSources?.map((source) => (
+        <p class="article-source">
+          Also published on <a href={source.href}>{source.label} ↗</a>
+        </p>
+      ))}
     </header>
     <figure class="article-cover wrap">
       <ArticleArt article={article} eager />

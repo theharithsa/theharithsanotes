@@ -75,7 +75,11 @@ const current = Astro.url.pathname;
           Home
         </a>
         {navigation.map((item, index) => (
-          <div class="nav-section" data-nav-section style={`--menu-tone: var(--${item.tone})`}>
+          <div
+            class="nav-section"
+            data-nav-section
+            style={`--menu-tone: var(--${item.tone})`}
+          >
             <div class="nav-label">
               <button
                 class="nav-disclosure"
@@ -110,7 +114,11 @@ const current = Astro.url.pathname;
         ))}
       </nav>
       <div class="header-actions">
-        <a class="search-link" href="/blogs#search" aria-label="Search blogs">
+        <a
+          class="search-link"
+          href="/blogs#search"
+          aria-label="Search articles"
+        >
           <svg
             width="20"
             height="20"

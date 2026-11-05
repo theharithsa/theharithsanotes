@@ -2,7 +2,7 @@
 
 Template version: **1.9.0**.
 
-Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Gates Notes-inspired editorial design with classic locally served typography, original illustrations, twelve projects, a personal photo gallery, and 13 notes including 12 migrated articles at their original URLs. See the [design and media provenance](docs/editorial-design.md).
+Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Gates Notes-inspired editorial design with classic locally served typography, original illustrations, twelve projects, a personal photo gallery, and 88 articles, including 75 imported from Medium and 12 migrated at their original URLs. See the [design and media provenance](docs/editorial-design.md) and [Medium migration](docs/medium-journal.md).
 
 ## Run locally
 
@@ -27,6 +27,7 @@ python -m unittest discover -s tests -v
 ## Content and structure
 
 - `src/data/articles.json`: locally stored article text, dates, categories, original source URLs, and image references. Edit this file to publish or revise notes; rebuilding creates every static route.
+- `src/data/medium-articles.json`: 75 Medium articles with original dates and source links; `medium-sources.json` links eight duplicate publications, and `blog-art.json` owns the display covers for all 88 articles.
 - `src/pages`: home, archive, About, projects, privacy, 404, generated article routes, RSS and sitemap.
 - `src/layouts` and `src/components`: shared shell and cards.
 - `src/scripts`: browser navigation/search and consent-aware monitoring.

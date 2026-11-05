@@ -1,0 +1,699 @@
+{
+  "issue": 19,
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "index": 0,
+      "title": "Understanding Enterprise Cloud & Its Attributes",
+      "source": "https://medium.com/@theharithsa/understanding-enterprise-cloud-its-attributes-1fd7d1dede9b",
+      "subject": "Five abstract cloud modules joined by fine branching lines beneath a single magnifying lens; multi-cloud, automation, containers, delivery and user experience.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Understanding Enterprise Cloud & Its Attributes. Subject: Five abstract cloud modules joined by fine branching lines beneath a single magnifying lens; multi-cloud, automation, containers, delivery and user experience.",
+      "path": "public/images/blog/medium-1fd7d1dede9b-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 1,
+      "title": "”Sometimes” I Wonder: The Comedy of Consistency",
+      "source": "https://medium.com/projectpwg/sometimes-i-wonder-the-comedy-of-consistency-1736082f56d4",
+      "subject": "A neat sequence of small circles becomes a gently wavering line and a free pencil brushstroke; consistency and permission to be imperfect.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: ”Sometimes” I Wonder: The Comedy of Consistency. Subject: A neat sequence of small circles becomes a gently wavering line and a free pencil brushstroke; consistency and permission to be imperfect.",
+      "path": "public/images/blog/medium-1736082f56d4-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 2,
+      "title": "Three Steps to Simplify Life and Combat Overthinking",
+      "source": "https://medium.com/projectpwg/-81fae468b2e4",
+      "subject": "One tangled ink thread opens into three simple clear loops, ending in a small musical wave; letting go of digital overthinking.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Three Steps to Simplify Life and Combat Overthinking. Subject: One tangled ink thread opens into three simple clear loops, ending in a small musical wave; letting go of digital overthinking.",
+      "path": "public/images/blog/medium-81fae468b2e4-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 5,
+      "title": "A Technologist’s Journey: Exploring Boundaries with ChatGPT",
+      "source": "https://medium.com/@theharithsa/a-technologists-journey-exploring-boundaries-with-chatgpt-d5b7ebe7af8b",
+      "subject": "An engineer's unmarked compass beside a speech-bubble outline that opens into a path of modular code blocks; exploring with conversational AI.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: A Technologist’s Journey: Exploring Boundaries with ChatGPT. Subject: An engineer's unmarked compass beside a speech-bubble outline that opens into a path of modular code blocks; exploring with conversational AI.",
+      "path": "public/images/blog/medium-d5b7ebe7af8b-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 9,
+      "title": "Learn the history — The Path to Observability",
+      "source": "https://medium.com/the-next-team/learn-the-history-the-path-to-observability-a677f49fd4af",
+      "subject": "An antique telescope gradually gives way to a modern magnifying lens around a clean telemetry pulse; the historical path to observability.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Learn the history — The Path to Observability. Subject: An antique telescope gradually gives way to a modern magnifying lens around a clean telemetry pulse; the historical path to observability.",
+      "path": "public/images/blog/evolution-of-observability-cover-v1.png",
+      "status": "reuse-existing"
+    },
+    {
+      "index": 10,
+      "title": "AIOps and DevOps — What’s the big deal about them?",
+      "source": "https://medium.com/the-next-team/aiops-and-devops-whats-the-big-deal-about-them-d64db0273cf0",
+      "subject": "Two interlocking infinity loops, one around small gears and one around a constellation of data dots; DevOps meets AIOps.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: AIOps and DevOps — What’s the big deal about them?. Subject: Two interlocking infinity loops, one around small gears and one around a constellation of data dots; DevOps meets AIOps.",
+      "path": "public/images/blog/medium-d64db0273cf0-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 12,
+      "title": "Top 5 JavaScript Frameworks and Why We Need Them",
+      "source": "https://medium.com/codex/top-5-javascript-frameworks-and-why-we-need-them-55cededeec06",
+      "subject": "Five distinct geometric building blocks forming one elegant software bridge, with fine circuit-like ink connections; JavaScript frameworks.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Top 5 JavaScript Frameworks and Why We Need Them. Subject: Five distinct geometric building blocks forming one elegant software bridge, with fine circuit-like ink connections; JavaScript frameworks.",
+      "path": "public/images/blog/medium-55cededeec06-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 13,
+      "title": "Adrenaline for Happiness",
+      "source": "https://medium.com/@theharithsa/adrenaline-for-happiness-e86ebf720e14",
+      "subject": "A balanced arrangement of three stones beside two open hands releasing a small coin and a paper mistake; mistakes, people and money as lessons for happiness.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Adrenaline for Happiness. Subject: A balanced arrangement of three stones beside two open hands releasing a small coin and a paper mistake; mistakes, people and money as lessons for happiness.",
+      "path": "public/images/blog/medium-e86ebf720e14-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 14,
+      "title": "Apps That Works For Me Everyday",
+      "source": "https://medium.com/the-next-team/apps-that-works-for-me-everyday-d828fd396dae",
+      "subject": "A quiet desk tray holding four abstract app-shaped cards, a notebook and a tiny calendar; useful everyday digital tools, with no UI text.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Apps That Works For Me Everyday. Subject: A quiet desk tray holding four abstract app-shaped cards, a notebook and a tiny calendar; useful everyday digital tools, with no UI text.",
+      "path": "public/images/blog/medium-d828fd396dae-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 15,
+      "title": "Time Management Techniques At Work",
+      "source": "https://medium.com/the-next-team/time-management-techniques-at-work-9ca1e0679b5b",
+      "subject": "A small hourglass beside a stack of envelopes becoming a calm, ordered path; managing time and an overflowing inbox.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Time Management Techniques At Work. Subject: A small hourglass beside a stack of envelopes becoming a calm, ordered path; managing time and an overflowing inbox.",
+      "path": "public/images/blog/medium-9ca1e0679b5b-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 16,
+      "title": "#010921 — Sanely September",
+      "source": "https://medium.com/the-next-team/010921-sanely-september-3e46eb66d8",
+      "subject": "An unlettered September calendar page, headphones and a telescope connected by one fine wandering line; a curiosity newsletter about technology and life.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: #010921 — Sanely September. Subject: An unlettered September calendar page, headphones and a telescope connected by one fine wandering line; a curiosity newsletter about technology and life.",
+      "path": "public/images/blog/medium-3e46eb66d8-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 17,
+      "title": "#220821 — Newsletter",
+      "source": "https://medium.com/the-next-team/220821-newsletter-4cf220d75251",
+      "subject": "A folded newsletter becomes a small paper telescope pointing at an orbit and a light bulb; technology and the universe.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: #220821 — Newsletter. Subject: A folded newsletter becomes a small paper telescope pointing at an orbit and a light bulb; technology and the universe.",
+      "path": "public/images/blog/medium-4cf220d75251-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 18,
+      "title": "Getting Started With The Basics of Dynatrace",
+      "source": "https://medium.com/the-next-team/getting-started-with-the-basics-of-dynatrace-8d05aa37954d",
+      "subject": "An open engineer's toolbox with a magnifying lens revealing a simple connected service topology and one clear pulse; learning application monitoring.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Getting Started With The Basics of Dynatrace. Subject: An open engineer's toolbox with a magnifying lens revealing a simple connected service topology and one clear pulse; learning application monitoring.",
+      "path": "public/images/blog/medium-8d05aa37954d-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 19,
+      "title": "Internet Communication — How Browsers Sends HTTP Requests?",
+      "source": "https://medium.com/the-next-team/internet-communication-how-browsers-sends-http-requests-27f56c6bf9e5",
+      "subject": "An envelope travels from a simple browser-window frame to a server block and returns along one sweeping ink route; HTTP requests.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Internet Communication — How Browsers Sends HTTP Requests?. Subject: An envelope travels from a simple browser-window frame to a server block and returns along one sweeping ink route; HTTP requests.",
+      "path": "public/images/blog/medium-27f56c6bf9e5-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 20,
+      "title": "Internet Communication — How Browsers Render Webpages?",
+      "source": "https://medium.com/the-next-team/internet-communication-how-browsers-render-webpages-4563786653e4",
+      "subject": "Three transparent paper layers of structure, style and light assembling into a single browser-window frame; rendering a webpage.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Internet Communication — How Browsers Render Webpages?. Subject: Three transparent paper layers of structure, style and light assembling into a single browser-window frame; rendering a webpage.",
+      "path": "public/images/blog/medium-4563786653e4-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 21,
+      "title": "Five Questions That People Are Asking About Career",
+      "source": "https://medium.com/@theharithsa/five-questions-that-people-are-asking-about-career-1c329239825f",
+      "subject": "Five open doorways along a rising staircase with a small compass at its foot; questions, pressure, continuous learning and a career.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Five Questions That People Are Asking About Career. Subject: Five open doorways along a rising staircase with a small compass at its foot; questions, pressure, continuous learning and a career.",
+      "path": "public/images/blog/medium-1c329239825f-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 22,
+      "title": "Adding TLS Certificate to Dynatrace Cluster Nodes",
+      "source": "https://medium.com/@theharithsa/adding-tls-certificate-to-dynatrace-cluster-nodes-d6fa6a26eb02",
+      "subject": "A certificate seal and protective shield connecting securely to three small server towers by fine ink lines; TLS certificates for cluster nodes.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Adding TLS Certificate to Dynatrace Cluster Nodes. Subject: A certificate seal and protective shield connecting securely to three small server towers by fine ink lines; TLS certificates for cluster nodes.",
+      "path": "public/images/blog/medium-d6fa6a26eb02-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 23,
+      "title": "A Spiritual Book That Talks About Science of Life",
+      "source": "https://medium.com/@theharithsa/a-spiritual-book-that-talks-about-science-of-life-fc65858c6818",
+      "subject": "Threads of action weave into a simple wheel around one seed, with a quiet open book; a reflective reading of karma and responsibility.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: A Spiritual Book That Talks About Science of Life. Subject: Threads of action weave into a simple wheel around one seed, with a quiet open book; a reflective reading of karma and responsibility.",
+      "path": "public/images/blog/medium-fc65858c6818-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 24,
+      "title": "Getting Started with Azure (AZ-900 Exam)",
+      "source": "https://medium.com/@theharithsa/getting-started-with-azure-az-900-exam-91d29200ba39",
+      "subject": "A small cloud balanced on three strong foundation blocks, with a short staircase and an unmarked study notebook; learning Azure fundamentals.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Getting Started with Azure (AZ-900 Exam). Subject: A small cloud balanced on three strong foundation blocks, with a short staircase and an unmarked study notebook; learning Azure fundamentals.",
+      "path": "public/images/blog/medium-91d29200ba39-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 25,
+      "title": "Procrastination of Deep Thoughts: Point of Being Happy in Life",
+      "source": "https://medium.com/@theharithsa/procrastination-of-deep-thoughts-point-of-being-happy-in-life-4103f45cfee6",
+      "subject": "A pebble settles into still water and its tangled reflections become calm concentric ripples under a soft sun; finding happiness beyond overthinking.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Procrastination of Deep Thoughts: Point of Being Happy in Life. Subject: A pebble settles into still water and its tangled reflections become calm concentric ripples under a soft sun; finding happiness beyond overthinking.",
+      "path": "public/images/blog/medium-4103f45cfee6-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 26,
+      "title": "Inner DNA of Teams That Win Greatness & Teams That Pursue Revenue Target Model",
+      "source": "https://medium.com/the-next-team/inner-dna-of-teams-that-win-greatness-teams-that-pursue-revenue-target-model-873d342a0038",
+      "subject": "Two diverging team paths: one circles a stack of coins, the other links small human figures into a growing branching structure; revenue targets versus meaningful growth.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Inner DNA of Teams That Win Greatness & Teams That Pursue Revenue Target Model. Subject: Two diverging team paths: one circles a stack of coins, the other links small human figures into a growing branching structure; revenue targets versus meaningful growth.",
+      "path": "public/images/blog/medium-873d342a0038-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 27,
+      "title": "Procrastination of Deep Thoughts",
+      "source": "https://medium.com/@theharithsa/procrastination-of-deep-thoughts-9c159009f0d3",
+      "subject": "A looping ink knot above an open notebook slowly unwinds into one clear question-shaped path toward a horizon; deep thoughts and uncertainty.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Procrastination of Deep Thoughts. Subject: A looping ink knot above an open notebook slowly unwinds into one clear question-shaped path toward a horizon; deep thoughts and uncertainty.",
+      "path": "public/images/blog/medium-9c159009f0d3-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 28,
+      "title": "Wire-Free World For One Year",
+      "source": "https://medium.com/the-next-team/wire-free-world-for-one-year-3fc02b402fbd",
+      "subject": "An unplugged cable rests in an open circle beside an open window with a blue horizon; choosing a year away from digital updates.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Wire-Free World For One Year. Subject: An unplugged cable rests in an open circle beside an open window with a blue horizon; choosing a year away from digital updates.",
+      "path": "public/images/blog/medium-3fc02b402fbd-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 29,
+      "title": "Decluttering From Work and Personal Life to Being A Minimalistic",
+      "source": "https://medium.com/@theharithsa/decluttering-from-work-and-personal-life-to-being-a-minimalistic-4f089c9f8a03",
+      "subject": "A crowded desk outline dissolves into one notebook, one pencil and generous clear space; decluttering work and personal life.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Decluttering From Work and Personal Life to Being A Minimalistic. Subject: A crowded desk outline dissolves into one notebook, one pencil and generous clear space; decluttering work and personal life.",
+      "path": "public/images/blog/medium-4f089c9f8a03-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 30,
+      "title": "Introduction to GIT Basics — Part Two",
+      "source": "https://medium.com/the-next-team/introduction-to-git-basics-part-two-3fffcc940bad",
+      "subject": "Two elegant branching ink paths with small commit-like dots rejoin into one strong line beside a pencil; collaboration and Git branching.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Introduction to GIT Basics — Part Two. Subject: Two elegant branching ink paths with small commit-like dots rejoin into one strong line beside a pencil; collaboration and Git branching.",
+      "path": "public/images/blog/medium-3fffcc940bad-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 31,
+      "title": "Three Practices to Learn Better in Life",
+      "source": "https://medium.com/@theharithsa/three-practices-to-learn-better-in-life-6b7ab691bc0e",
+      "subject": "Three open books on stepping stones connected to a pencil, a listening curve and a small light; unconventional practices for learning.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Three Practices to Learn Better in Life. Subject: Three open books on stepping stones connected to a pencil, a listening curve and a small light; unconventional practices for learning.",
+      "path": "public/images/blog/medium-6b7ab691bc0e-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 32,
+      "title": "How to Analyze an Application Performance?",
+      "source": "https://medium.com/the-next-team/how-to-analyze-an-application-performance-a5cc971149d0",
+      "subject": "A stethoscope and magnifying lens reveal a simple pulse through modular software blocks; diagnosing application performance.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How to Analyze an Application Performance?. Subject: A stethoscope and magnifying lens reveal a simple pulse through modular software blocks; diagnosing application performance.",
+      "path": "public/images/blog/medium-a5cc971149d0-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 33,
+      "title": "A Journey Of Kindness — Innocence of Adaptation",
+      "source": "https://medium.com/@theharithsa/a-journey-of-kindness-innocence-of-adoption-b65929b234b6",
+      "subject": "Two small hands shelter a resilient sapling beside a winding path; a person's kindness and emotional strength.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: A Journey Of Kindness — Innocence of Adaptation. Subject: Two small hands shelter a resilient sapling beside a winding path; a person's kindness and emotional strength.",
+      "path": "public/images/blog/medium-b65929b234b6-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 34,
+      "title": "13 Steps for a Better Life",
+      "source": "https://medium.com/@theharithsa/13-steps-for-a-better-life-64d4ec391f50",
+      "subject": "Thirteen simple stepping stones curve toward a modest sunrise, with one open notebook at the beginning; practical steps for a better life.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: 13 Steps for a Better Life. Subject: Thirteen simple stepping stones curve toward a modest sunrise, with one open notebook at the beginning; practical steps for a better life.",
+      "path": "public/images/blog/medium-64d4ec391f50-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 35,
+      "title": "How I Created The Mission Statement Of My Life",
+      "source": "https://medium.com/@theharithsa/how-i-created-the-mission-statement-of-my-life-bf7695ca3111",
+      "subject": "An open notebook holds an unmarked compass whose needle becomes a single path toward a distant lighthouse; a personal mission statement.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How I Created The Mission Statement Of My Life. Subject: An open notebook holds an unmarked compass whose needle becomes a single path toward a distant lighthouse; a personal mission statement.",
+      "path": "public/images/blog/medium-bf7695ca3111-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 36,
+      "title": "Betrayal Doesn’t Exist",
+      "source": "https://medium.com/projectpwg/betrayal-doesnt-exist-91c8de1361c9",
+      "subject": "A cracked ceramic cup repaired with one warm golden seam sits beside a small open hand; trust, disappointment and reframing betrayal.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Betrayal Doesn’t Exist. Subject: A cracked ceramic cup repaired with one warm golden seam sits beside a small open hand; trust, disappointment and reframing betrayal.",
+      "path": "public/images/blog/medium-91c8de1361c9-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 37,
+      "title": "How Mission and Vision Could Get You on OMG! Insider",
+      "source": "https://medium.com/@theharithsa/how-mission-and-vision-could-get-you-on-omg-insider-b7435a7fb0de",
+      "subject": "A lighthouse and an unmarked map joined by a winding route with three milestone stones; translating mission and vision into goals.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How Mission and Vision Could Get You on OMG! Insider. Subject: A lighthouse and an unmarked map joined by a winding route with three milestone stones; translating mission and vision into goals.",
+      "path": "public/images/blog/medium-b7435a7fb0de-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 38,
+      "title": "Kindness is Ingenious",
+      "source": "https://medium.com/projectpwg/kindness-is-ingenious-fd6e873b5859",
+      "subject": "A pair of open hands pass a small paper bird through a circle of warm light; kindness and reinvention.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Kindness is Ingenious. Subject: A pair of open hands pass a small paper bird through a circle of warm light; kindness and reinvention.",
+      "path": "public/images/blog/medium-fd6e873b5859-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 39,
+      "title": "The First Day at My Work",
+      "source": "https://medium.com/@theharithsa/the-first-day-at-my-work-7c7a5be03b8b",
+      "subject": "A simple briefcase beside an open doorway, with a fine railway line leading to a distant city; the first day of professional life in a new place.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: The First Day at My Work. Subject: A simple briefcase beside an open doorway, with a fine railway line leading to a distant city; the first day of professional life in a new place.",
+      "path": "public/images/blog/medium-7c7a5be03b8b-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 40,
+      "title": "Likings of Karma",
+      "source": "https://medium.com/@theharithsa/likings-of-karma-780f30ddad23",
+      "subject": "A small seed drops into water and its ripples connect to a second growing seed; the consequences of everyday actions.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Likings of Karma. Subject: A small seed drops into water and its ripples connect to a second growing seed; the consequences of everyday actions.",
+      "path": "public/images/blog/medium-780f30ddad23-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 41,
+      "title": "Memories — No More Titles Required",
+      "source": "https://medium.com/projectpwg/memories-no-more-titles-required-d50f81e79e83",
+      "subject": "An open photo album with blank soft-colour frames and a tiny paper boat on its page; memories moving through life's crests and troughs.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Memories — No More Titles Required. Subject: An open photo album with blank soft-colour frames and a tiny paper boat on its page; memories moving through life's crests and troughs.",
+      "path": "public/images/blog/medium-d50f81e79e83-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 42,
+      "title": "Being an Idiot is not an Irresponsible Thing",
+      "source": "https://medium.com/projectpwg/being-an-idiot-is-not-an-irresponsible-thing-c42548fa8b10",
+      "subject": "An upside-down light bulb on a small ladder, with a playful inquisitive ink path reaching an unexpected star; curiosity and the freedom to look foolish.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Being an Idiot is not an Irresponsible Thing. Subject: An upside-down light bulb on a small ladder, with a playful inquisitive ink path reaching an unexpected star; curiosity and the freedom to look foolish.",
+      "path": "public/images/blog/medium-c42548fa8b10-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 43,
+      "title": "What Happened After Crushing My Dream?",
+      "source": "https://medium.com/@theharithsa/what-happened-after-crushing-my-dream-580237fdd30",
+      "subject": "A cracked compass rests beside a fresh branching path and a sunrise; rebuilding direction after a cherished dream is lost.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: What Happened After Crushing My Dream?. Subject: A cracked compass rests beside a fresh branching path and a sunrise; rebuilding direction after a cherished dream is lost.",
+      "path": "public/images/blog/medium-580237fdd30-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 44,
+      "title": "The Power of Little Finger and Legs",
+      "source": "https://medium.com/@theharithsa/the-power-of-little-finger-and-legs-abccbb8cc9b",
+      "subject": "One tiny stone forms the essential keystone of a large elegant arch; overlooked parts becoming sources of strength and significance.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: The Power of Little Finger and Legs. Subject: One tiny stone forms the essential keystone of a large elegant arch; overlooked parts becoming sources of strength and significance.",
+      "path": "public/images/blog/medium-abccbb8cc9b-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 45,
+      "title": "An Acoustic Mind — The Song of Art",
+      "source": "https://medium.com/projectpwg/an-acoustic-mind-the-song-of-art-e597c7ad544d",
+      "subject": "A violin outline becomes a flowing ink brushstroke across an artist's blank canvas; the artistic mind and music.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: An Acoustic Mind — The Song of Art. Subject: A violin outline becomes a flowing ink brushstroke across an artist's blank canvas; the artistic mind and music.",
+      "path": "public/images/blog/medium-e597c7ad544d-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 46,
+      "title": "Tune in to Your Habits",
+      "source": "https://medium.com/@theharithsa/tune-in-to-your-habits-5f4ab1847386",
+      "subject": "Small repeated footprints follow a circular groove and gradually form a strong gear; turning goals into daily habits.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Tune in to Your Habits. Subject: Small repeated footprints follow a circular groove and gradually form a strong gear; turning goals into daily habits.",
+      "path": "public/images/blog/medium-5f4ab1847386-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 47,
+      "title": "The Power of Subconscious Mind",
+      "source": "https://medium.com/@theharithsa/the-power-of-subconscious-mind-466280d4aff6",
+      "subject": "A small visible iceberg above calm water reveals a much larger geometric form below, with a gentle orbit; the unseen subconscious mind.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: The Power of Subconscious Mind. Subject: A small visible iceberg above calm water reveals a much larger geometric form below, with a gentle orbit; the unseen subconscious mind.",
+      "path": "public/images/blog/medium-466280d4aff6-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 48,
+      "title": "The Power of 20 Minutes — Goldilocks Duration",
+      "source": "https://medium.com/@theharithsa/the-power-of-20-minutes-goldilocks-duration-9fcc72827067",
+      "subject": "A small hourglass inside a simple circular arc of morning light, beside a pencil and one finished geometric block; focused intervals and the Goldilocks duration.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: The Power of 20 Minutes — Goldilocks Duration. Subject: A small hourglass inside a simple circular arc of morning light, beside a pencil and one finished geometric block; focused intervals and the Goldilocks duration.",
+      "path": "public/images/blog/medium-9fcc72827067-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 49,
+      "title": "Workarounds That Can Be Applied Out of the Box — Dynatrace",
+      "source": "https://medium.com/the-next-team/workarounds-that-can-be-applied-out-of-the-box-dynatrace-22163ba2dd5f",
+      "subject": "An ordinary paperclip becomes a clever bridge between two separated software blocks; inventive monitoring workarounds.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Workarounds That Can Be Applied Out of the Box — Dynatrace. Subject: An ordinary paperclip becomes a clever bridge between two separated software blocks; inventive monitoring workarounds.",
+      "path": "public/images/blog/medium-22163ba2dd5f-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 50,
+      "title": "2020 Will be the Legacy of 2019",
+      "source": "https://medium.com/@theharithsa/2020-will-be-the-legacy-of-2019-3d7d30a8fb03",
+      "subject": "Two unlettered calendar pages fold into a bridge with a seedling growing from the previous page; carrying lessons from 2019 into 2020.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: 2020 Will be the Legacy of 2019. Subject: Two unlettered calendar pages fold into a bridge with a seedling growing from the previous page; carrying lessons from 2019 into 2020.",
+      "path": "public/images/blog/medium-3d7d30a8fb03-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 51,
+      "title": "The List of Best Articles I Have Read in 2019",
+      "source": "https://medium.com/@theharithsa/here-is-the-list-of-best-articles-i-have-read-in-2019-1480140ee70",
+      "subject": "An open magazine with several distinct coloured bookmarks and a magnifying lens; articles that changed a reader's perspective.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: The List of Best Articles I Have Read in 2019. Subject: An open magazine with several distinct coloured bookmarks and a magnifying lens; articles that changed a reader's perspective.",
+      "path": "public/images/blog/medium-1480140ee70-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 52,
+      "title": "List of Books that Changed My Views in 2019",
+      "source": "https://medium.com/@theharithsa/list-of-books-that-changed-my-views-in-2019-ec15334e3822",
+      "subject": "A short stack of unlettered books forms steps to an open window with a wide horizon; books that changed perspectives.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: List of Books that Changed My Views in 2019. Subject: A short stack of unlettered books forms steps to an open window with a wide horizon; books that changed perspectives.",
+      "path": "public/images/blog/medium-ec15334e3822-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 53,
+      "title": "Thoughts of 5 Elements that are Responsible for Effective Thinking",
+      "source": "https://medium.com/@theharithsa/thoughts-of-5-elements-that-are-responsible-for-effective-thinking-e7e4a2526dea",
+      "subject": "Five simple elements—water ripple, warm flame, stone, air swirl and a small geometric star—gather around an open notebook; effective thinking.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Thoughts of 5 Elements that are Responsible for Effective Thinking. Subject: Five simple elements—water ripple, warm flame, stone, air swirl and a small geometric star—gather around an open notebook; effective thinking.",
+      "path": "public/images/blog/medium-e7e4a2526dea-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 54,
+      "title": "Few of the Biggest Questions About the Universe and Mankind",
+      "source": "https://medium.com/@theharithsa/few-of-the-biggest-questions-of-universe-and-mankind-332459a47ec5",
+      "subject": "A small telescope aims through a giant open orbit toward a few distant stars; humanity's biggest cosmic questions.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Few of the Biggest Questions About the Universe and Mankind. Subject: A small telescope aims through a giant open orbit toward a few distant stars; humanity's biggest cosmic questions.",
+      "path": "public/images/blog/medium-332459a47ec5-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 55,
+      "title": "How Do We Define the Purpose of Life?",
+      "source": "https://medium.com/projectpwg/how-do-we-define-the-purpose-of-life-9ac6f9347c7e",
+      "subject": "A compass with a subtle heart-like centre and a single path through a generous open horizon; discovering purpose after starting again.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How Do We Define the Purpose of Life?. Subject: A compass with a subtle heart-like centre and a single path through a generous open horizon; discovering purpose after starting again.",
+      "path": "public/images/blog/medium-9ac6f9347c7e-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 56,
+      "title": "Physics and Cosmos",
+      "source": "https://medium.com/projectpwg/physics-and-cosmos-bd8fbd623402",
+      "subject": "A fine spiral galaxy seen through two overlapping telescope lenses above a simple horizon; physics and the cosmos.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Physics and Cosmos. Subject: A fine spiral galaxy seen through two overlapping telescope lenses above a simple horizon; physics and the cosmos.",
+      "path": "public/images/blog/medium-bd8fbd623402-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 57,
+      "title": "How to Overcome Disappointment?",
+      "source": "https://medium.com/projectpwg/how-to-overcome-disappointment-13e345d43e48",
+      "subject": "A dropped paper boat is gently lifted back onto a calm stream, with a small repaired crease; recovering from disappointment.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How to Overcome Disappointment?. Subject: A dropped paper boat is gently lifted back onto a calm stream, with a small repaired crease; recovering from disappointment.",
+      "path": "public/images/blog/medium-13e345d43e48-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 58,
+      "title": "Power is Self-Attractive",
+      "source": "https://medium.com/projectpwg/power-is-self-attractive-a05a183bf530",
+      "subject": "A simple horseshoe magnet draws small abstract geometric figures into an orbit around a tall stone; the attraction and responsibility of power.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Power is Self-Attractive. Subject: A simple horseshoe magnet draws small abstract geometric figures into an orbit around a tall stone; the attraction and responsibility of power.",
+      "path": "public/images/blog/medium-a05a183bf530-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 59,
+      "title": "Science and Religion",
+      "source": "https://medium.com/projectpwg/science-and-religion-8bd0de3d4a48",
+      "subject": "A telescope and a small lamp illuminate opposite ends of one graceful bridge; science, faith and curiosity meeting without literal religious symbols.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Science and Religion. Subject: A telescope and a small lamp illuminate opposite ends of one graceful bridge; science, faith and curiosity meeting without literal religious symbols.",
+      "path": "public/images/blog/medium-8bd0de3d4a48-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 60,
+      "title": "Be Fearless Before Making Decisions",
+      "source": "https://medium.com/projectpwg/be-fearless-before-making-decisions-718933f6088c",
+      "subject": "A bold set of footprints crosses an uncertain fork in an unmarked map toward a warm sunrise; courage in decision-making.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Be Fearless Before Making Decisions. Subject: A bold set of footprints crosses an uncertain fork in an unmarked map toward a warm sunrise; courage in decision-making.",
+      "path": "public/images/blog/medium-718933f6088c-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 61,
+      "title": "Here’s What Everyone Can Learn from the 80/20 Principle",
+      "source": "https://medium.com/@theharithsa/heres-what-everyone-can-learn-from-the-80-20-principle-78fcd861f960",
+      "subject": "A small golden section of a circle balances a much larger pale grey section on a fine seesaw; the 80/20 principle.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Here’s What Everyone Can Learn from the 80/20 Principle. Subject: A small golden section of a circle balances a much larger pale grey section on a fine seesaw; the 80/20 principle.",
+      "path": "public/images/blog/medium-78fcd861f960-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 62,
+      "title": "“Essentialism” — Not About Set of Principles",
+      "source": "https://medium.com/@theharithsa/essentialism-not-about-set-of-principles-f6c402721868",
+      "subject": "Many faint branching paths fade away, leaving one strong ink path and a single clear destination stone; choosing the essential.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: “Essentialism” — Not About Set of Principles. Subject: Many faint branching paths fade away, leaving one strong ink path and a single clear destination stone; choosing the essential.",
+      "path": "public/images/blog/medium-f6c402721868-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 63,
+      "title": "Be Determined to Hit the Bullseye",
+      "source": "https://medium.com/projectpwg/be-determined-to-hit-the-bullseye-51e06ca7ae98",
+      "subject": "A simple archery target receives one precise arrow, with an unmarked compass nearby; focused determination.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Be Determined to Hit the Bullseye. Subject: A simple archery target receives one precise arrow, with an unmarked compass nearby; focused determination.",
+      "path": "public/images/blog/medium-51e06ca7ae98-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 64,
+      "title": "Having Hope is Like Telling Life Not to Give Up!",
+      "source": "https://medium.com/projectpwg/having-hope-is-like-telling-life-not-to-give-up-b5117a3e154c",
+      "subject": "A tiny warm flame shelters beneath a curved hand while fine rain lines fall around it; keeping hope alive.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Having Hope is Like Telling Life Not to Give Up!. Subject: A tiny warm flame shelters beneath a curved hand while fine rain lines fall around it; keeping hope alive.",
+      "path": "public/images/blog/medium-b5117a3e154c-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 65,
+      "title": "Love is the Positive Disintegration",
+      "source": "https://medium.com/projectpwg/love-is-the-positive-disintegration-aa70b9903b9a",
+      "subject": "Separate fragments of a heart-shaped stone gently reassemble into a stronger open mosaic; love and positive disintegration.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Love is the Positive Disintegration. Subject: Separate fragments of a heart-shaped stone gently reassemble into a stronger open mosaic; love and positive disintegration.",
+      "path": "public/images/blog/medium-aa70b9903b9a-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 66,
+      "title": "Think & Trust",
+      "source": "https://medium.com/projectpwg/think-trust-241d272603c4",
+      "subject": "Two hands on opposite banks connect through one delicate but strong rope bridge; thinking and trusting again.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Think & Trust. Subject: Two hands on opposite banks connect through one delicate but strong rope bridge; thinking and trusting again.",
+      "path": "public/images/blog/medium-241d272603c4-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 67,
+      "title": "Will-Power and Commitment",
+      "source": "https://medium.com/projectpwg/will-power-and-commitment-387303fce056",
+      "subject": "A carefully tied rope knot anchors a climbing line to a mountain summit; willpower and commitment.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Will-Power and Commitment. Subject: A carefully tied rope knot anchors a climbing line to a mountain summit; willpower and commitment.",
+      "path": "public/images/blog/medium-387303fce056-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 68,
+      "title": "What is Programming?",
+      "source": "https://medium.com/the-next-team/what-is-programming-f1d5c38c6e45",
+      "subject": "A pencil line becomes a staircase of small precise pixel blocks leading into a simple machine frame; the act of programming.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: What is Programming?. Subject: A pencil line becomes a staircase of small precise pixel blocks leading into a simple machine frame; the act of programming.",
+      "path": "public/images/blog/medium-f1d5c38c6e45-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 69,
+      "title": "How to Bargain with Attitude?",
+      "source": "https://medium.com/projectpwg/how-to-bargain-with-attitude-5c8b01e6470e",
+      "subject": "An adjustable balance and a small mirror reflect different angles of a single stone; consciously working with attitude.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: How to Bargain with Attitude?. Subject: An adjustable balance and a small mirror reflect different angles of a single stone; consciously working with attitude.",
+      "path": "public/images/blog/medium-5c8b01e6470e-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 70,
+      "title": "Definition of Photography",
+      "source": "https://medium.com/projectpwg/definition-of-photography-343718853625",
+      "subject": "A minimal camera viewfinder frames light falling across a mountain and its reflection; the art of seeing through photography.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Definition of Photography. Subject: A minimal camera viewfinder frames light falling across a mountain and its reflection; the art of seeing through photography.",
+      "path": "public/images/blog/medium-343718853625-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 71,
+      "title": "A Story of Happy and the Pappy",
+      "source": "https://medium.com/projectpwg/a-story-of-happy-and-the-pappy-d77991312ae9",
+      "subject": "One person-shaped silhouette casts two different shadows, one tangled and one open toward a bright window; a fable of happiness and reinvention.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: A Story of Happy and the Pappy. Subject: One person-shaped silhouette casts two different shadows, one tangled and one open toward a bright window; a fable of happiness and reinvention.",
+      "path": "public/images/blog/medium-d77991312ae9-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 72,
+      "title": "Guide to an Adventurous Lifestyle",
+      "source": "https://medium.com/projectpwg/guide-to-an-adventurous-lifestyle-d5f5b4740f2e",
+      "subject": "A paper boat with an unmarked compass rests on a simple folded map whose route curls into a distant horizon; choosing adventure.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Guide to an Adventurous Lifestyle. Subject: A paper boat with an unmarked compass rests on a simple folded map whose route curls into a distant horizon; choosing adventure.",
+      "path": "public/images/blog/medium-d5f5b4740f2e-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 73,
+      "title": "Sky — The boundary of limit",
+      "source": "https://medium.com/projectpwg/sky-the-boundary-of-limit-342625eeef87",
+      "subject": "A small bird outline leaves an open circular boundary and flies into an expansive pale blue sky; limits and possibility.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Sky — The boundary of limit. Subject: A small bird outline leaves an open circular boundary and flies into an expansive pale blue sky; limits and possibility.",
+      "path": "public/images/blog/medium-342625eeef87-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 74,
+      "title": "What Do We Know About Sleep?",
+      "source": "https://medium.com/projectpwg/what-do-we-know-about-sleep-ddf8599d57ee",
+      "subject": "A crescent moon above a gently curved hammock and calm wave lines, with a few small stars; sleep and rest.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: What Do We Know About Sleep?. Subject: A crescent moon above a gently curved hammock and calm wave lines, with a few small stars; sleep and rest.",
+      "path": "public/images/blog/medium-ddf8599d57ee-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 75,
+      "title": "Music — Inheritance of Love",
+      "source": "https://medium.com/projectpwg/music-inheritance-of-love-722b04013202",
+      "subject": "A vinyl record's groove turns into a warm flowing musical wave with a subtle heart-shaped loop; music and love.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Music — Inheritance of Love. Subject: A vinyl record's groove turns into a warm flowing musical wave with a subtle heart-shaped loop; music and love.",
+      "path": "public/images/blog/medium-722b04013202-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 76,
+      "title": "Fun — A tale of Mr. Chocolate",
+      "source": "https://medium.com/projectpwg/fun-a-tale-of-mr-chocolate-94bd6a24ca26",
+      "subject": "A small chocolate square becomes a playful kite with a gently curling tail; light-hearted fun and Mr Chocolate.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Fun — A tale of Mr. Chocolate. Subject: A small chocolate square becomes a playful kite with a gently curling tail; light-hearted fun and Mr Chocolate.",
+      "path": "public/images/blog/medium-94bd6a24ca26-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 77,
+      "title": "Freedom",
+      "source": "https://medium.com/projectpwg/freedom-d8fd95e43a7d",
+      "subject": "An open birdcage dissolves into one clear line across an expansive sky; freedom and inner belief.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Freedom. Subject: An open birdcage dissolves into one clear line across an expansive sky; freedom and inner belief.",
+      "path": "public/images/blog/medium-d8fd95e43a7d-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 78,
+      "title": "Knowledge",
+      "source": "https://medium.com/projectpwg/knowledge-d3dde645d7be",
+      "subject": "An open unlettered notebook sends a precise beam of light through a magnifying lens into small geometric stars; knowledge and observation.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Knowledge. Subject: An open unlettered notebook sends a precise beam of light through a magnifying lens into small geometric stars; knowledge and observation.",
+      "path": "public/images/blog/medium-d3dde645d7be-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 79,
+      "title": "Oxygen",
+      "source": "https://medium.com/projectpwg/oxygen-584570c5d3d",
+      "subject": "A single breath-like ink wave passes through a simple leaf and around two open curves suggesting lungs; oxygen and survival.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Oxygen. Subject: A single breath-like ink wave passes through a simple leaf and around two open curves suggesting lungs; oxygen and survival.",
+      "path": "public/images/blog/medium-584570c5d3d-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 80,
+      "title": "Human Emotions",
+      "source": "https://medium.com/@theharithsa/human-emotions-46491a12cd2c",
+      "subject": "A single calm human outline is surrounded by five distinct gentle ripples in muted colours; the range of human emotions.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Human Emotions. Subject: A single calm human outline is surrounded by five distinct gentle ripples in muted colours; the range of human emotions.",
+      "path": "public/images/blog/medium-46491a12cd2c-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 81,
+      "title": "Epic Friendships Exist!",
+      "source": "https://medium.com/@theharithsa/epic-friendships-exist-d9420f67ccd2",
+      "subject": "Two small figures on opposite ends of a bridge hold the same strong knot of rope; enduring friendship and care.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: Epic Friendships Exist!. Subject: Two small figures on opposite ends of a bridge hold the same strong knot of rope; enduring friendship and care.",
+      "path": "public/images/blog/medium-d9420f67ccd2-cover-v1.png",
+      "status": "generated"
+    },
+    {
+      "index": 82,
+      "title": "A Poem of Family",
+      "source": "https://medium.com/@theharithsa/a-poem-of-family-5b661663972b",
+      "subject": "Several interlinked circles shelter beneath the outline of a simple house roof, with a warm light in the centre; family, devotion and belonging.",
+      "prompt": "Create ONE original editorial cover, wide 3:2 landscape. Calm, sparse conceptual editorial illustration, fine charcoal ink contour lines, elegant geometry, a few flat muted pastel accents on lightly textured warm ivory matte paper, generous intentional negative space. One clear metaphor readable in a small blog tile, central 75% safe for cropping. Match a sophisticated personal journal's established minimal ink-and-paper covers. No text, lettering, labels, logos, watermarks, glossy 3D, stock photos, generic robots, flowers, dense collage or filler. Standalone finished cover, never a grid or contact sheet. Article: A Poem of Family. Subject: Several interlinked circles shelter beneath the outline of a simple house roof, with a warm light in the centre; family, devotion and belonging.",
+      "path": "public/images/blog/medium-5b661663972b-cover-v1.png",
+      "status": "generated"
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # Website and foundation checks
 
+## 1.9.0 Medium archive verification
+
+All 83 Medium stories were opened and read in Chrome. Offline comparison found every captured non-figure body block in the 75 imported articles. Sixteen artifact tests passed, including 83-source accounting, 75 body hashes/original dates, eight duplicate publication links, all 151 copied media hashes, all 88 unique responsive covers, internal links/anchors and existing journal/consent regressions. Astro builds 173 pages; type checking reports zero errors/warnings and two deprecated parser-helper hints. Dependency audit found zero vulnerabilities. Foundation/Markdown checks passed; Python suite: 20 passed, one POSIX-only Windows skip. The shell entrypoint is unavailable locally; its three equivalent Python commands ran directly, with UTF-8 mode for Windows Markdown decoding.
+
+Browser checks: archive shows 88 entries; JavaScript search returns one imported article; unmatched search shows the empty state and keyboard reset restores 88. Blog disclosure opens with the preserved blue surface and portrait. The JavaScript frameworks article contains ten code blocks, real heading destinations, Medium attribution and the original figure credit; JetBrains Mono confirmed. At 390px, wide code scrolls inside its block without document overflow. A Poem of Family retains 17 line breaks and Source Serif 4. Desktop/mobile pages had no overflow; loaded archive images had no failures. Browser/artifact/deployment evidence are distinct; monitoring ingestion is not claimed.
+
 ## 1.2.0 integrated verification
 
 `npm run check`: 31 files, zero diagnostics. Static build: 25 pages. Nine Node tests passed, including all new routes and section-anchor destinations, original article/list preservation, consent isolation and duplicate home heading regression. `npm audit --audit-level=high`: zero vulnerabilities. Foundation ready gate and Markdown links passed; Python suite: 21 discovered, 20 passed, one POSIX case skipped on Windows.
