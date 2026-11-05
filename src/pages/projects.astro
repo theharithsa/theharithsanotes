@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ProjectArt from "../components/ProjectArt.astro";
 import { projects } from "../data/projects";
+const projectTopics = [...new Set(projects.map((project) => project.category))];
 ---
 
 <Base
@@ -39,9 +40,37 @@ import { projects } from "../data/projects";
         <h2 id="projects-heading">Projects</h2>
         <span>Explore the story behind the code ↓</span>
       </div>
-      <div class="workbench-grid project-mosaic">
+      <div
+        class="filters project-filters"
+        aria-label="Filter projects by topic"
+      >
+        {["All projects", ...projectTopics].map((topic, index) => (
+          <button
+            data-project-filter={topic}
+            aria-pressed={index === 0}
+            aria-controls="project-results"
+          >
+            {topic}
+            <span class="filter-count">
+              {index === 0
+                ? projects.length
+                : projects.filter((project) => project.category === topic)
+                    .length}
+            </span>
+          </button>
+        ))}
+      </div>
+      <p id="project-count" class="result-count" aria-live="polite">
+        {projects.length} projects
+      </p>
+      <div class="workbench-grid project-mosaic" id="project-results">
         {projects.map((project, index) => (
-          <article class="workbench-card" id={project.slug}>
+          <article
+            class="workbench-card"
+            id={project.slug}
+            data-project
+            data-topic={project.category}
+          >
             <a
               class="workbench-cover"
               href={`/projects/${project.slug}`}

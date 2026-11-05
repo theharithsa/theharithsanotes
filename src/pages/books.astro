@@ -1,7 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import { books } from "../data/interests";
-import { completedBooks } from "../data/books";
+import { completedBooks, genres } from "../data/books";
 import BookJacket from "../components/BookJacket.astro";
 import BookRating from "../components/BookRating.astro";
 ---
@@ -18,7 +18,7 @@ import BookRating from "../components/BookRating.astro";
         </h1>
         <p>
           Fifty books read, and plenty of ideas still unfolding. My ratings,
-          notes from the margins, and a few books waiting for their turn.
+          notes from the margins, and new perspectives to return to.
         </p>
         <a href="#bookshelf" class="text-link">
           Browse the shelf ↓
@@ -70,26 +70,37 @@ import BookRating from "../components/BookRating.astro";
           <option value="all">All ratings</option>
           <option value="5">5 stars</option>
           <option value="4">4 stars</option>
-          <option value="unrated">Not rated</option>
         </select>
       </div>
     </div>
-    <div class="filters shelf-filters" aria-label="Filter bookshelf">
-      {["All books", "Reading", "Read", "To read"].map((status, index) => (
-        <button data-shelf-filter={status} aria-pressed={index === 0}>
-          {status}
+    <div
+      class="filters shelf-filters genre-filters"
+      aria-label="Filter by book genre"
+    >
+      {["All genres", ...genres].map((genre, index) => (
+        <button
+          data-genre-filter={genre}
+          aria-pressed={index === 0}
+          aria-controls="book-results"
+        >
+          {genre}
+          <span class="filter-count">
+            {index === 0
+              ? books.length
+              : books.filter((book) => book.genres.includes(genre)).length}
+          </span>
         </button>
       ))}
     </div>
     <p id="shelf-count" class="result-count" aria-live="polite">
       {books.length} books
     </p>
-    <div class="books-grid">
+    <div class="books-grid" id="book-results">
       {books.map((book, index) => (
         <article
           class="book-card"
           data-book
-          data-status={book.status}
+          data-genres={JSON.stringify(book.genres)}
           data-rating={book.goodreads?.rating ?? "unrated"}
           data-book-search={`${book.title} ${book.author}`}
           id={
@@ -108,7 +119,7 @@ import BookRating from "../components/BookRating.astro";
             <BookJacket book={book} index={index} />
           )}
           <div class="book-caption">
-            <span class="status-label">{book.status}</span>
+            <span class="status-label">{book.genres.join(" · ")}</span>
             {book.goodreads && <BookRating rating={book.goodreads.rating} />}
             {book.slug && (
               <a class="book-journal-link" href={`/books/${book.slug}`}>
@@ -121,7 +132,7 @@ import BookRating from "../components/BookRating.astro";
       ))}
     </div>
     <p id="book-empty" class="book-empty" hidden>
-      No books match. Try another title, author or rating.
+      No books match. Try another genre, title, author or rating.
     </p>
     <p class="editorial-caption">
       {completedBooks.length} completed books from my Goodreads shelf, with my

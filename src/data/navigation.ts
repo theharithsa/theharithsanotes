@@ -91,4 +91,18 @@ export const navigation = [
       { label: "Let’s connect ↗", href: "https://topmate.io/theharithsa" },
     ],
   },
+  {
+    label: "GoGs",
+    href: "/gogs",
+    tone: "blue",
+    title: "A little play. A little everyday wonder.",
+    description:
+      "Games and Gadget — a space for the games I play, the things I use, and the experiences in between.",
+    image: "/images/navigation/gogs-portrait-v1.png",
+    links: [
+      { label: "Explore GoGs", href: "/gogs" },
+      { label: "Games", href: "/gogs#games" },
+      { label: "Gadgets", href: "/gogs#gadgets" },
+    ],
+  },
 ] as const;

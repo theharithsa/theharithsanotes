@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.0] — 2026-11-06
+
+- Simplified Books to the 50 confirmed read titles and eight genre groups, preserving original ratings/reviews and combined search/rating browsing.
+- Added four Projects topic filters with adaptive layouts and live counts.
+- Added Games and Gadget (GoGs), a seventh illustrated header disclosure and an empty future journal.
+- Added an animated accessible dark-mode toggle, system defaults, local persistence and page-specific light/dark browser colours.
+- Improved section descriptions, social previews, canonical aliases, sitemap/404 indexing and accurate article/book structured data.
+
 ## [1.9.0] — 2026-11-05
 
 - Added 75 original Medium articles, preserving original dates, writing, code, poetry, captions and 151 body images; linked eight duplicate publications to existing canonical articles.

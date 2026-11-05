@@ -197,23 +197,25 @@ document.querySelector("[data-reset-search]")?.addEventListener("click", () => {
 });
 if (notes.length && filters.length) filterNotes();
 
-const shelfFilters = document.querySelectorAll<HTMLButtonElement>(
-  "[data-shelf-filter]",
+const genreFilters = document.querySelectorAll<HTMLButtonElement>(
+  "[data-genre-filter]",
 );
 const bookCards = document.querySelectorAll<HTMLElement>("[data-book]");
 const bookSearch = document.querySelector<HTMLInputElement>("#book-search");
 const bookRatingFilter = document.querySelector<HTMLSelectElement>(
   "#book-rating-filter",
 );
-let selectedShelf = "All books";
+let selectedGenre = "All genres";
 function filterBooks(): void {
   const query = (bookSearch?.value ?? "").trim().toLocaleLowerCase();
   const rating = bookRatingFilter?.value ?? "all";
   let count = 0;
   bookCards.forEach((book) => {
     book.hidden =
-      (selectedShelf !== "All books" &&
-        book.dataset.status !== selectedShelf) ||
+      (selectedGenre !== "All genres" &&
+        !(JSON.parse(book.dataset.genres ?? "[]") as string[]).includes(
+          selectedGenre,
+        )) ||
       (rating !== "all" && book.dataset.rating !== rating) ||
       !(book.dataset.bookSearch ?? "").toLocaleLowerCase().includes(query);
     if (!book.hidden) count++;
@@ -224,10 +226,10 @@ function filterBooks(): void {
   const empty = document.querySelector<HTMLElement>("#book-empty");
   if (empty) empty.hidden = count > 0;
 }
-shelfFilters.forEach((button) =>
+genreFilters.forEach((button) =>
   button.addEventListener("click", () => {
-    selectedShelf = button.dataset.shelfFilter ?? "All books";
-    shelfFilters.forEach((filter) =>
+    selectedGenre = button.dataset.genreFilter ?? "All genres";
+    genreFilters.forEach((filter) =>
       filter.setAttribute("aria-pressed", String(filter === button)),
     );
     filterBooks();
@@ -235,6 +237,40 @@ shelfFilters.forEach((button) =>
 );
 bookSearch?.addEventListener("input", filterBooks);
 bookRatingFilter?.addEventListener("change", filterBooks);
+
+const projectFilters = document.querySelectorAll<HTMLButtonElement>(
+  "[data-project-filter]",
+);
+const projectCards = document.querySelectorAll<HTMLElement>("[data-project]");
+const projectGrid = document.querySelector<HTMLElement>("#project-results");
+function filterProjects(topic: string): void {
+  let count = 0;
+  projectCards.forEach((card) => {
+    card.hidden = topic !== "All projects" && card.dataset.topic !== topic;
+    card.classList.remove("filter-lead");
+    if (!card.hidden) count++;
+  });
+  projectFilters.forEach((button) =>
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.projectFilter === topic),
+    ),
+  );
+  if (projectGrid)
+    projectGrid.dataset.filtered = String(topic !== "All projects");
+  if (topic !== "All projects" && count >= 3)
+    [...projectCards]
+      .find((card) => !card.hidden)
+      ?.classList.add("filter-lead");
+  const label = document.querySelector("#project-count");
+  if (label)
+    label.textContent = `${count} ${count === 1 ? "project" : "projects"}`;
+}
+projectFilters.forEach((button) =>
+  button.addEventListener("click", () =>
+    filterProjects(button.dataset.projectFilter ?? "All projects"),
+  ),
+);
 
 const photoDialog =
   document.querySelector<HTMLDialogElement>(".photo-lightbox");
