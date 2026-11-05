@@ -1,4 +1,5 @@
 ---
+import ArticleArt from "../components/ArticleArt.astro";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
 import { articles, formatDate, type Article } from "../lib/content";
@@ -64,13 +65,7 @@ const headings = [
       )}
     </header>
     <figure class="article-cover wrap">
-      <img
-        src={article.image}
-        alt={article.imageAlt}
-        width="1400"
-        height="800"
-        fetchpriority="high"
-      />
+      <ArticleArt article={article} eager />
       <figcaption>
         {article.imageCredit ??
           `A note from the archive · Originally published ${formatDate(article.date)}`}

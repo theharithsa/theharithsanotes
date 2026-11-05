@@ -218,9 +218,6 @@ figure {
   padding: 7px 2px;
   font-size: 12px;
 }
-.nav-disclosure[aria-expanded="true"] {
-  transform: rotate(180deg);
-}
 .header-actions {
   display: flex;
   align-items: center;
@@ -277,9 +274,6 @@ figure {
   height: 230px;
   object-fit: cover;
   border-radius: 3px;
-}
-.mega-menu.tone-peach img[src*="portrait"] {
-  object-position: center 30%;
 }
 #mobile-menu {
   position: absolute;
@@ -3475,4 +3469,270 @@ figure {
     width: 144px;
     flex-basis: 144px;
   }
+}
+
+/* Illustrated navigation: full-label controls, no decorative arrows. */
+.desktop-nav {
+  gap: 6px;
+}
+.desktop-nav > a,
+.nav-disclosure {
+  padding: 13px 12px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  white-space: nowrap;
+  transition:
+    background-color 0.18s,
+    border-color 0.18s;
+}
+.desktop-nav [aria-current="page"] {
+  border: 1px solid #d9d0c5;
+}
+.nav-label {
+  gap: 0;
+}
+.nav-disclosure[aria-expanded="true"],
+.nav-disclosure:hover,
+.desktop-nav > a:hover {
+  background: #f2ede6;
+  border-color: #d9d0c5;
+  transform: none;
+}
+.nav-disclosure:focus-visible {
+  outline: 2px solid #aa5036;
+  outline-offset: 3px;
+}
+.mega-menu {
+  background: #fffdfa;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  gap: 40px;
+  border-top: 1px solid #e5dcd1;
+  box-shadow: 0 18px 28px #30251b14;
+}
+.mega-menu img {
+  height: 245px;
+  object-fit: cover;
+  border-radius: 0;
+}
+.mega-links a {
+  text-decoration: none;
+  transition:
+    padding 0.18s,
+    background-color 0.18s;
+}
+.mega-links a:hover,
+.mega-links a:focus-visible {
+  background: #f2ede6;
+  padding-left: 12px;
+}
+.menu-toggle {
+  padding: 10px 14px;
+  border: 1px solid #ddd5cb;
+  border-radius: 2px;
+}
+.technical-article .article-header {
+  background-image: none;
+  border-top-color: #d1bcaa;
+}
+.technical-article .article-header > .eyebrow,
+.technical-article .article-header > .eyebrow::before {
+  color: #925337;
+}
+.technical-card h3 a:hover,
+.technical-card h3 a:focus-visible {
+  color: #925337;
+  text-decoration-color: #bc805d;
+}
+.home-project-illustrated {
+  background: #f5f0e8;
+}
+.home-project-illustrated h3 {
+  font-family: var(--mono);
+  font-size: 27px;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+}
+.home-project-illustrated p {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.9;
+}
+.project-glimpse .home-project-illustrated > .project-concept {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+/* Listening follows the project collection/detail journey, keeping vinyl artwork. */
+.podcast-room {
+  --project-ink: #292826;
+  --project-muted: #6b6560;
+  --project-rule: #ddd5ca;
+  --project-accent: #ae4c30;
+}
+.podcast-tabs {
+  display: flex;
+  gap: 7px;
+  padding-bottom: 25px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid #ddd5ca;
+}
+.podcast-tabs a {
+  padding: 11px 20px;
+  border: 1px solid #ddd5ca;
+  text-decoration: none;
+  font-size: 13px;
+}
+.podcast-tabs a[aria-current="page"] {
+  background: #292826;
+  color: #fffdfa;
+  border-color: #292826;
+}
+.podcast-collection .section-heading > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.podcast-collection .workbench-card h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  letter-spacing: -0.03em;
+}
+.podcast-collection .workbench-card:first-child h3 {
+  font-size: 35px;
+}
+.podcast-collection .workbench-card:nth-child(2) h3,
+.podcast-collection .workbench-card:nth-child(3) h3 {
+  font-size: 24px;
+}
+.podcast-collection
+  .workbench-card:nth-child(2)
+  .workbench-card-copy
+  > p:not(.show-name),
+.podcast-collection
+  .workbench-card:nth-child(3)
+  .workbench-card-copy
+  > p:not(.show-name) {
+  display: none;
+}
+.podcast-collection .show-name {
+  font-size: 11px;
+}
+.podcast-record-art {
+  position: relative;
+  height: 100%;
+  min-height: 180px;
+  aspect-ratio: auto;
+  overflow: hidden;
+  padding: 30px;
+}
+.podcast-record-art .record {
+  width: min(75%, 360px);
+}
+.podcast-record-art .record span {
+  padding: 15px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.record-edition {
+  position: absolute;
+  bottom: 14px;
+  left: 20px;
+  font: 10px var(--mono);
+  letter-spacing: 0.08em;
+}
+.podcast-detail {
+  background: #fffdfa;
+  padding-bottom: 55px;
+}
+.podcast-detail .project-story-hero > .podcast-record-art {
+  min-height: 420px;
+}
+.podcast-detail .project-story-intro h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.5vw, 48px);
+  letter-spacing: -0.03em;
+  overflow-wrap: normal;
+}
+.podcast-detail .project-story-deck {
+  max-width: 510px;
+}
+.podcast-detail-footer {
+  border-top: 1px solid #ddd5ca;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.created-room {
+  min-height: 70vh;
+}
+.created-room h1 {
+  font-size: clamp(48px, 6vw, 80px);
+  margin: 25px 0;
+}
+.created-room > p {
+  font-size: 19px;
+  max-width: 450px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.created-empty {
+  min-height: 190px;
+}
+@media (max-width: 1000px) {
+  .podcast-cover .podcast-record-art {
+    height: 260px;
+  }
+  .podcast-mosaic .workbench-card:first-child .podcast-record-art {
+    height: 360px;
+  }
+}
+@media (max-width: 640px) {
+  .podcast-detail .project-story-hero > .podcast-record-art {
+    min-height: 300px;
+  }
+  .podcast-detail-footer {
+    flex-direction: column;
+  }
+  .podcast-record-art .record span {
+    font-size: 10px;
+  }
+  .podcast-collection .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-disclosure,
+  .desktop-nav > a,
+  .mega-links a {
+    transition: none;
+  }
+}
+
+.podcast-cover .podcast-record-art .record {
+  width: auto;
+  height: 100%;
+  max-height: 360px;
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+.podcast-mosaic .workbench-card:nth-child(2) .podcast-record-art,
+.podcast-mosaic .workbench-card:nth-child(3) .podcast-record-art {
+  min-height: 0;
+  padding: 12px;
+}
+.podcast-mosaic .workbench-card:nth-child(2) .record-edition,
+.podcast-mosaic .workbench-card:nth-child(3) .record-edition {
+  display: none;
+}
+
+.podcast-detail .project-visit {
+  width: fit-content;
 }

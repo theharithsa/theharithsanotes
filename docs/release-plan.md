@@ -1,6 +1,6 @@
 # Release impact and verification plan
 
-Version: 1.6.0. Scope: issue #10 (editorial mosaic and illustrated details), issue #9 (uniform technical project grid, local details and generated covers), issue #5 (seven-section rebuild), plus [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1) and [editorial refinement #3](https://github.com/theharithsa/theharithsanotes/issues/3). Source: feature branch `feat/1-personal-website`, reviewed through PR #2. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94, then requested article formatting, classic typography, more projects, and selected Downloads photographs.
+Version: 1.7.0. Scope: issue #11 (site artwork, portrait menus and listening journeys), issue #10 (editorial mosaic and illustrated details), issue #9 (uniform technical project grid, local details and generated covers), issue #5 (seven-section rebuild), plus [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1) and [editorial refinement #3](https://github.com/theharithsa/theharithsanotes/issues/3). Source: feature branch `feat/1-personal-website`, reviewed through PR #2. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94, then requested article formatting, classic typography, more projects, and selected Downloads photographs.
 
 Refinement: locally served font packages/notices, original illustrations, article contents/formatting, eleven project entries and gallery/About photography. No article path changes, database writes, tenant changes, or production DNS cutover. Rebuild all static pages/assets and redeploy only the existing Firebase review channel. Code and preview acceptance remain separate from a production launch.
 
@@ -26,5 +26,6 @@ Observed 1.5.0 review deployment: ebda4f918210a33c from b078727cd497ca240521fcb8
 
 1.6.0 / issue #10 replaces project artwork/index/detail composition and scoped styles; responsive image widths and test expectations updated. No dependency, database, monitoring or permissions change. Preserve all public detail routes and project anchors, build/test before review deployment, verify index/details and 48 responsive image variants. Prior review 61d5d98647795c2c is the rollback reference. No merge/production/domain change.
 
-
 Observed 1.6.0 review: b7e0d36376a63193 from d75dd131945e458ce844fb19d7a8dc80ad09fa3c, HTTP/browser verified as recorded in qa/evidence.json. Production, merge and domain remain unchanged.
+
+1.7.0 / issue #11 adds six static podcast routes, nineteen original image masters, display-only blog artwork metadata, shared responsive art components and menu interaction/style changes. No dependency, backend, database, permission or instrumentation changes. Preserve Books and Entertainment; validate article bodies/routes and podcast state/resource links plus menu keyboard/mobile behavior. Build/check/fourteen tests and foundation gates before existing review deployment; verify selected routes, all new image variants and live menu/listening behavior. Prior review b7e0d36376a63193 is the rollback reference. No production/domain/merge change.

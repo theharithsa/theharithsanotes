@@ -1,8 +1,13 @@
 ---
+import ArticleArt from "../components/ArticleArt.astro";
+import ProjectArt from "../components/ProjectArt.astro";
+import { projects } from "../data/projects";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
 import { articles } from "../lib/content";
 const lead = articles[0];
+const aroha = projects.find((project) => project.slug === "aroha-retreat")!;
+const copilot = projects.find((project) => project.slug === "copilot-otel")!;
 const selection = articles
   .filter((a) => a.slug !== lead.slug && !a.slug.includes("ayrton-senna"))
   .slice(0, 2);
@@ -47,13 +52,7 @@ const selection = articles
     </div>
     <div class="story-composition">
       <a href={`/${lead.slug}`} class="lead-story">
-        <img
-          src={lead.image}
-          alt={lead.imageAlt}
-          width="1200"
-          height="800"
-          loading="lazy"
-        />
+        <ArticleArt article={lead} />
         <div class="floating-story">
           <span class="eyebrow">OBSERVABILITY · {lead.minutes} MIN READ</span>
           <h3>{lead.title}</h3>
@@ -106,28 +105,17 @@ const selection = articles
       </a>
     </div>
     <div class="project-glimpse">
-      <a href="/projects/aroha-retreat">
-        <img
-          src="/images/projects/aroha.webp"
-          alt="Green landscape at Aroha Retreat"
-          width="1200"
-          height="750"
-          loading="lazy"
-        />
-        <span class="eyebrow">PEOPLE & PLACES</span>
+      <a class="home-project-illustrated" href="/projects/aroha-retreat">
+        <ProjectArt project={aroha} />
+        <span class="eyebrow">PEOPLE &amp; PLACES</span>
         <h3>A quieter kind of project.</h3>
         <p>Aroha Retreat — a website with room to breathe.</p>
       </a>
-      <a class="project-note tone-sage" href="/projects#open-source">
-        <span class="eyebrow">OPEN SOURCE</span>
-        <span class="code-mark" aria-hidden="true">{`{ ↗ }`}</span>
-        <h3>
-          Tools for the people
-          <br />
-          building what’s next.
-        </h3>
-        <p>Observability, AI agents, and a few useful experiments.</p>
-        <span class="text-link">Explore the workbench ↗</span>
+      <a class="home-project-illustrated" href="/projects/copilot-otel">
+        <ProjectArt project={copilot} />
+        <span class="eyebrow">OBSERVABILITY &amp; AI</span>
+        <h3>Inside the AI agent.</h3>
+        <p>Tracing the model calls, tools and tokens behind a conversation.</p>
       </a>
     </div>
   </section>

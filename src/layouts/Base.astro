@@ -5,6 +5,7 @@ import "@fontsource-variable/source-serif-4/wght-italic.css";
 import "@fontsource-variable/public-sans";
 import "@fontsource/racing-sans-one/latin-400.css";
 import "@fontsource-variable/jetbrains-mono";
+import EditorialImage from "../components/EditorialImage.astro";
 import Wordmark from "../components/Wordmark.astro";
 import { site } from "../data/site";
 import { navigation } from "../data/navigation";
@@ -76,26 +77,17 @@ const current = Astro.url.pathname;
         {navigation.map((item, index) => (
           <div class="nav-section" data-nav-section>
             <div class="nav-label">
-              <a
-                href={item.href}
-                aria-current={current === item.href ? "page" : undefined}
-              >
-                {item.label}
-              </a>
               <button
                 class="nav-disclosure"
                 aria-label={`Explore ${item.label}`}
                 aria-expanded="false"
                 aria-controls={`section-menu-${index}`}
+                aria-current={current === item.href ? "page" : undefined}
               >
-                ⌄
+                {item.label}
               </button>
             </div>
-            <div
-              class={`mega-menu tone-${item.tone}`}
-              id={`section-menu-${index}`}
-              hidden
-            >
+            <div class="mega-menu" id={`section-menu-${index}`} hidden>
               <div class="mega-intro">
                 <span class="eyebrow">{item.label}</span>
                 <h2>{item.title}</h2>
@@ -103,18 +95,15 @@ const current = Astro.url.pathname;
               </div>
               <nav aria-label={`${item.label} sections`} class="mega-links">
                 {item.links.map((link) => (
-                  <a href={link.href}>
-                    {link.label}
-                    <span aria-hidden="true">↗</span>
-                  </a>
+                  <a href={link.href}>{link.label.replace(/\s*↗/g, "")}</a>
                 ))}
               </nav>
-              <img
+              <EditorialImage
                 src={item.image}
                 alt=""
-                width="560"
-                height="380"
-                loading="lazy"
+                widths={[400, 600, 900]}
+                sizes="33vw"
+                class="menu-illustration"
               />
             </div>
           </div>
@@ -140,16 +129,13 @@ const current = Astro.url.pathname;
           aria-controls="mobile-menu"
           aria-label="Open navigation"
         >
-          Menu +
+          Menu
         </button>
       </div>
       <nav id="mobile-menu" aria-label="Mobile navigation" hidden>
         <a href="/">Home</a>
         {navigation.map((item) => (
-          <a href={item.href}>
-            {item.label}
-            <span aria-hidden="true">↗</span>
-          </a>
+          <a href={item.href}>{item.label}</a>
         ))}
       </nav>
     </header>

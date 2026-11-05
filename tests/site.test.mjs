@@ -5,13 +5,21 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import ts from "typescript";
+import { listening } from "../src/data/interests.ts";
 import { projects } from "../src/data/projects.ts";
 import { screenNotes } from "../src/data/screen-notes.ts";
 
 const root = new URL("../", import.meta.url);
-const articles = JSON.parse(
+const sourceArticles = JSON.parse(
   await readFile(new URL("src/data/articles.json", root), "utf8"),
 );
+const blogArt = JSON.parse(
+  await readFile(new URL("src/data/blog-art.json", root), "utf8"),
+);
+const articles = sourceArticles.map((article) => ({
+  ...article,
+  ...blogArt.find((art) => art.slug === article.slug),
+}));
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
 
 test("screen reflections have reading pages, lessons and discoverable canonical links", async () => {
@@ -86,6 +94,8 @@ test("every internal page link and local asset resolves in the built site", asyn
     "blogs/index.html",
     "books/index.html",
     "podcasts/index.html",
+    "podcasts/created/index.html",
+    ...listening.map((note) => `podcasts/listening/${note.slug}/index.html`),
     "entertainment/index.html",
     "meet-vish/index.html",
     "projects/index.html",
@@ -170,7 +180,9 @@ test("the LinkedIn note is published with attribution and dt-mac-agent is discov
   );
   const page = await readPage(`${note.slug}/index.html`);
   assert.ok(page.includes(note.source));
-  assert.ok(page.includes("Photo by Photos of Korea on Unsplash"));
+  assert.ok(
+    page.includes("Original illustration created for The Harithsa Notes."),
+  );
   assert.ok(page.includes("The signal is there. Every time."));
   assert.ok(!page.includes("Recommended by LinkedIn"));
   for (const route of ["index.html", "notes/index.html"]) {
@@ -329,4 +341,79 @@ test("every project opens a researched detail page with a distinct cover and ver
       1,
     );
   }
+});
+
+test("all blog articles use unique responsive editorial covers without changing source bodies", async () => {
+  assert.equal(blogArt.length, articles.length);
+  assert.equal(new Set(blogArt.map((art) => art.image)).size, articles.length);
+  const archive = await readPage("blogs/index.html");
+  for (const art of blogArt) {
+    const page = await readPage(`${art.slug}/index.html`);
+    assert.ok(page.includes(`${art.slug}-cover-v1`));
+    assert.ok(archive.includes(`${art.slug}-cover-v1`));
+    assert.ok(page.includes('class="blog-editorial-art"'));
+    assert.ok(page.includes(art.imageCredit));
+    const master = await readFile(new URL(`public${art.image}`, root));
+    assert.equal(master.subarray(1, 4).toString(), "PNG");
+    assert.equal(master.readUInt32BE(16), 1536);
+    assert.equal(master.readUInt32BE(20), 1024);
+    const cover = [...page.matchAll(/<img\b[^>]*>/g)]
+      .map((match) => match[0])
+      .find((tag) => tag.includes('class="blog-editorial-art"'));
+    assert.ok(cover.includes("srcset="));
+    assert.ok(cover.includes(".webp"));
+  }
+});
+
+test("podcast listening journeys preserve notes and resources while Created stays empty", async () => {
+  const index = await readPage("podcasts/index.html");
+  const created = await readPage("podcasts/created/index.html");
+  const sitemap = await readPage("sitemap.xml");
+  assert.equal(
+    (index.match(/class="workbench-card"/g) ?? []).length,
+    listening.length,
+  );
+  assert.equal(
+    new Set(listening.map((note) => note.slug)).size,
+    listening.length,
+  );
+  for (const note of listening) {
+    const route = `/podcasts/listening/${note.slug}`;
+    const page = await readPage(`podcasts/listening/${note.slug}/index.html`);
+    assert.ok(index.includes(`href="${route}"`));
+    assert.ok(page.includes(`href="${note.href}"`));
+    assert.ok(page.includes(note.note));
+    assert.ok(page.includes(note.status));
+    assert.ok(page.includes(`href="/podcasts#${note.slug}"`));
+    assert.ok(sitemap.includes(`<loc>https://theharithsa.com${route}</loc>`));
+  }
+  assert.ok(created.includes('aria-label="No created episodes yet"'));
+  assert.ok(!created.includes('class="workbench-card"'));
+  assert.ok(!/<(?:audio|iframe)\b/.test(created));
+});
+
+test("section menus use full-label disclosure buttons and six local portrait illustrations", async () => {
+  const home = await readPage("index.html");
+  const header = home
+    .split('<header class="site-header">')[1]
+    .split("</header>")[0];
+  assert.ok(!/[⌄↗]/.test(header));
+  assert.equal((header.match(/class="nav-disclosure"/g) ?? []).length, 6);
+  assert.equal((header.match(/class="menu-illustration"/g) ?? []).length, 6);
+  for (const slug of [
+    "blogs",
+    "books",
+    "podcasts",
+    "projects",
+    "entertainment",
+    "meet-vish",
+  ]) {
+    assert.ok(header.includes(`${slug}-portrait-v1`));
+    const master = await readFile(
+      new URL(`public/images/navigation/${slug}-portrait-v1.png`, root),
+    );
+    assert.equal(master.subarray(1, 4).toString(), "PNG");
+  }
+  assert.ok(home.includes('href="/projects/copilot-otel"'));
+  assert.ok(home.includes("aroha-retreat-editorial-v2"));
 });

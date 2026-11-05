@@ -2,32 +2,82 @@ const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
 const navSections = [
   ...document.querySelectorAll<HTMLElement>("[data-nav-section]"),
 ];
+const menuAnimations = new WeakMap<HTMLElement, Animation>();
 let menuCloseTimer: ReturnType<typeof setTimeout> | undefined;
-function closeSectionMenus(): void {
+function animatePanel(panel: HTMLElement, opening: boolean): void {
+  menuAnimations.get(panel)?.cancel();
+  panel.inert = !opening;
+  panel.dataset.closing = String(!opening);
+  if (opening) panel.hidden = false;
+  if (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    typeof panel.animate !== "function"
+  ) {
+    panel.hidden = !opening;
+    return;
+  }
+  const animation = panel.animate(
+    opening
+      ? [
+          { opacity: 0, transform: "translateY(-10px)" },
+          { opacity: 1, transform: "translateY(0)" },
+        ]
+      : [
+          { opacity: 1, transform: "translateY(0)" },
+          { opacity: 0, transform: "translateY(-8px)" },
+        ],
+    { duration: opening ? 200 : 140, easing: "cubic-bezier(.2,.7,.2,1)" },
+  );
+  menuAnimations.set(panel, animation);
+  void animation.finished.then(
+    () => {
+      if (!opening && panel.dataset.closing === "true") panel.hidden = true;
+    },
+    () => undefined,
+  );
+}
+function closeSectionMenus(except?: HTMLElement, immediate = false): void {
   navSections.forEach((section) => {
+    if (section === except) return;
     section.querySelector("button")?.setAttribute("aria-expanded", "false");
+    delete section.dataset.openMethod;
     const panel = section.querySelector<HTMLElement>(".mega-menu");
-    if (panel) panel.hidden = true;
+    if (
+      !panel ||
+      panel.hidden ||
+      (panel.dataset.closing === "true" && !immediate)
+    )
+      return;
+    if (immediate) {
+      menuAnimations.get(panel)?.cancel();
+      panel.hidden = true;
+      panel.inert = true;
+    } else animatePanel(panel, false);
   });
 }
-function openSectionMenu(section: HTMLElement): void {
+function openSectionMenu(
+  section: HTMLElement,
+  method: "hover" | "click" | "keyboard" = "hover",
+): void {
   if (!window.matchMedia("(min-width: 981px)").matches) return;
   clearTimeout(menuCloseTimer);
-  closeSectionMenus();
-  section.querySelector("button")?.setAttribute("aria-expanded", "true");
+  closeSectionMenus(section, true);
   const panel = section.querySelector<HTMLElement>(".mega-menu");
-  if (panel) panel.hidden = false;
+  const wasOpen = !panel?.hidden && panel?.dataset.closing !== "true";
+  section.querySelector("button")?.setAttribute("aria-expanded", "true");
+  if (method !== "hover" || !section.dataset.openMethod)
+    section.dataset.openMethod = method;
+  if (panel && !wasOpen) animatePanel(panel, true);
 }
 navSections.forEach((section) => {
   section.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "mouse") openSectionMenu(section);
   });
   section.addEventListener("pointerleave", () => {
-    menuCloseTimer = setTimeout(closeSectionMenus, 160);
+    if (section.contains(document.activeElement)) return;
+    menuCloseTimer = setTimeout(() => closeSectionMenus(), 160);
   });
-  section.addEventListener("focusin", (event) => {
-    if (event.target instanceof HTMLAnchorElement) openSectionMenu(section);
-  });
+  section.addEventListener("focusin", () => clearTimeout(menuCloseTimer));
   section.addEventListener("focusout", (event) => {
     if (
       !(event.relatedTarget instanceof Node) ||
@@ -35,10 +85,18 @@ navSections.forEach((section) => {
     )
       closeSectionMenus();
   });
-  section.querySelector("button")?.addEventListener("click", (event) => {
-    const panel = section.querySelector<HTMLElement>(".mega-menu");
-    if (panel?.hidden || event.detail > 0) openSectionMenu(section);
-    else closeSectionMenus();
+  const button = section.querySelector<HTMLButtonElement>(".nav-disclosure");
+  button?.addEventListener("click", (event) => {
+    const open = button.getAttribute("aria-expanded") === "true";
+    if (open && (event.detail === 0 || section.dataset.openMethod !== "hover"))
+      closeSectionMenus();
+    else openSectionMenu(section, event.detail === 0 ? "keyboard" : "click");
+  });
+  button?.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowDown") return;
+    event.preventDefault();
+    openSectionMenu(section, "keyboard");
+    section.querySelector<HTMLAnchorElement>(".mega-links a")?.focus();
   });
 });
 document.addEventListener("click", (event) => {
@@ -50,15 +108,15 @@ document.addEventListener("click", (event) => {
 });
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
-  const activeSection = navSections.find(
-    (section) =>
-      section.querySelector("button")?.getAttribute("aria-expanded") === "true",
+  const section = navSections.find(
+    (item) =>
+      item.querySelector("button")?.getAttribute("aria-expanded") === "true",
   );
-  activeSection?.querySelector("button")?.focus();
+  section?.querySelector("button")?.focus();
   closeSectionMenus();
 });
 window.addEventListener("resize", () => {
-  closeSectionMenus();
+  closeSectionMenus(undefined, true);
   closeMenu();
 });
 const articleContents = document.querySelector<HTMLDetailsElement>(
@@ -72,6 +130,7 @@ function closeMenu(): void {
   toggle.setAttribute("aria-expanded", "false");
   toggle.setAttribute("aria-label", "Open navigation");
   menu.hidden = true;
+  toggle.textContent = "Menu";
 }
 toggle?.addEventListener("click", () => {
   if (!menu) return;
@@ -82,6 +141,7 @@ toggle?.addEventListener("click", () => {
     open ? "Close navigation" : "Open navigation",
   );
   menu.hidden = !open;
+  toggle.textContent = open ? "Close" : "Menu";
 });
 document.addEventListener("keydown", (event) => {
   if (

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0] — 2026-11-05
+
+- Added thirteen original topic-specific blog covers with responsive delivery across articles, archive, related cards and home; source article bodies and prior media provenance remain unchanged.
+- Added six section-specific portrait illustrations from the owner-authorized studio photo. Header menus now use full-label box highlights and animated disclosures without chevrons or decorative arrows.
+- Added a project-style Listening mosaic and five local podcast-note pages, preserving notes/statuses and external episode links. Created has its own intentionally empty page.
+- Reused approved project artwork in home features; Books and Entertainment artwork/treatments remain intact.
+- Added artwork, podcast journey and navigation artifact coverage, plus responsive/keyboard browser verification.
+
 ## [1.6.0] — 2026-11-05
 
 - Redesigned Projects as an asymmetric editorial mosaic: a large lead, stacked companions and alternating wide/narrow project tiles.

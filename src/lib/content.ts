@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import coverArt from "../data/blog-art.json";
 import raw from "../data/articles.json";
 import type { Topic } from "../data/site";
 
@@ -18,8 +19,11 @@ export interface Article {
   imageCredit?: string;
 }
 
+const artworkBySlug = new Map(coverArt.map((art) => [art.slug, art]));
+
 export const articles: Article[] = raw.map((article) => ({
   ...article,
+  ...artworkBySlug.get(article.slug),
   topic: article.topic as Topic,
   html: sanitizeHtml(article.html, {
     allowedTags: [

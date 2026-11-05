@@ -74,6 +74,8 @@ export const books: Book[] = [
   },
 ];
 export interface ListeningNote {
+  slug: string;
+  artLabel: string;
   title: string;
   show: string;
   status: "Listened" | "On my list";
@@ -82,6 +84,8 @@ export interface ListeningNote {
 }
 export const listening: ListeningNote[] = [
   {
+    slug: "strong-friendships",
+    artLabel: "Human connection",
     title: "Why strong friendships matter",
     show: "Simon Sinek · The Diary of a CEO",
     status: "Listened",
@@ -89,6 +93,8 @@ export const listening: ListeningNote[] = [
     note: "Friendships need intention and acts of service to stay alive. A conversation about connection, community, and making room for people.",
   },
   {
+    slug: "vibe-coding-agentic-engineering",
+    artLabel: "Ideas in code",
     title: "From Vibe Coding to Agentic Engineering",
     show: "Andrej Karpathy · Sequoia Capital",
     status: "Listened",
@@ -96,6 +102,8 @@ export const listening: ListeningNote[] = [
     note: "You can outsource thinking, never understanding. A useful distinction as AI takes on more of the work of building software.",
   },
   {
+    slug: "stoic-friendship",
+    artLabel: "A good friend",
     title: "How to Be a Better Friend, According to the Stoics",
     show: "Ryan Holiday · The Daily Stoic",
     status: "Listened",
@@ -103,6 +111,8 @@ export const listening: ListeningNote[] = [
     note: "Fortune and fate do not target us personally. A short reflection on friendship and the way we interpret what happens to us.",
   },
   {
+    slug: "amazon-blue-origin",
+    artLabel: "Long horizons",
     title: "Amazon and Blue Origin",
     show: "Jeff Bezos · Lex Fridman Podcast #405",
     status: "On my list",
@@ -110,6 +120,8 @@ export const listening: ListeningNote[] = [
     note: "Amazon’s origins, space exploration, leadership principles, and thinking about the future of humanity.",
   },
   {
+    slug: "software-fundamentals",
+    artLabel: "Build to understand",
     title: "Software Fundamentals Matter More Than Ever",
     show: "Matt Pocock · YouTube",
     status: "On my list",
