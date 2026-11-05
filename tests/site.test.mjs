@@ -5,12 +5,40 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import ts from "typescript";
+import { screenNotes } from "../src/data/screen-notes.ts";
 
 const root = new URL("../", import.meta.url);
 const articles = JSON.parse(
   await readFile(new URL("src/data/articles.json", root), "utf8"),
 );
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
+
+test("screen reflections have reading pages, lessons and discoverable canonical links", async () => {
+  const archive = await readPage("entertainment/index.html");
+  const sitemap = await readPage("sitemap.xml");
+  assert.equal(
+    new Set(screenNotes.map((note) => note.slug)).size,
+    screenNotes.length,
+  );
+  assert.ok(screenNotes.some((note) => note.kind === "Movie"));
+  assert.ok(screenNotes.some((note) => note.kind === "Series"));
+  for (const note of screenNotes) {
+    const route = `/entertainment/${note.slug}`;
+    const page = await readPage(`entertainment/${note.slug}/index.html`);
+    assert.ok(archive.includes(`href="${route}"`));
+    assert.equal(
+      sitemap.split(`<loc>https://theharithsa.com${route}</loc>`).length - 1,
+      1,
+    );
+    assert.ok(page.includes(`href="https://theharithsa.com${route}"`));
+    assert.ok(page.includes(note.lesson));
+    for (const paragraph of note.paragraphs)
+      assert.ok(page.includes(paragraph), note.slug);
+    assert.ok(
+      !/https?:\/\/(?:app\.)?notion\.(?:com|so)|collection:\/\//i.test(page),
+    );
+  }
+});
 
 test("the original 12 article paths and all published note bodies are preserved", async () => {
   const migrated = articles.filter(
@@ -46,6 +74,7 @@ test("every internal page link and local asset resolves in the built site", asyn
     "projects/index.html",
     "gallery/index.html",
     "privacy/index.html",
+    ...screenNotes.map((note) => `entertainment/${note.slug}/index.html`),
     ...articles.map((article) => `${article.slug}/index.html`),
   ];
   for (const route of routes) {

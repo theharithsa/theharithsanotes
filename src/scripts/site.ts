@@ -161,6 +161,31 @@ shelfFilters.forEach((button) =>
 
 const photoDialog =
   document.querySelector<HTMLDialogElement>(".photo-lightbox");
+
+const screenFilters = document.querySelectorAll<HTMLButtonElement>(
+  "[data-screen-filter]",
+);
+const screenCards =
+  document.querySelectorAll<HTMLElement>("[data-screen-note]");
+screenFilters.forEach((button) =>
+  button.addEventListener("click", () => {
+    let count = 0;
+    screenCards.forEach((card) => {
+      card.hidden =
+        button.dataset.screenFilter !== "All notes" &&
+        card.dataset.kind !==
+          (button.dataset.screenFilter === "Movies" ? "Movie" : "Series");
+      if (!card.hidden) count++;
+    });
+    screenFilters.forEach((filter) =>
+      filter.setAttribute("aria-pressed", String(filter === button)),
+    );
+    const countLabel = document.querySelector("#screen-count");
+    if (countLabel)
+      countLabel.textContent = `${count} ${count === 1 ? "reflection" : "reflections"}`;
+  }),
+);
+
 const photoButtons = [
   ...document.querySelectorAll<HTMLButtonElement>("[data-gallery-open]"),
 ];

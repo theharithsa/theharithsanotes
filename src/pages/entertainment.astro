@@ -1,7 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
-import { articles } from "../lib/content";
-const senna = articles.find((a) => a.slug.includes("ayrton-senna"))!;
+import ScreenArt from "../components/ScreenArt.astro";
+import { screenNotes } from "../data/screen-notes";
+import { articles, formatDate } from "../lib/content";
+const [lead, ...otherNotes] = screenNotes;
+const senna = articles.find((article) =>
+  article.slug.includes("ayrton-senna"),
+)!;
 ---
 
 <Base title="Entertainment">
@@ -12,44 +17,97 @@ const senna = articles.find((a) => a.slug.includes("ayrton-senna"))!;
       <p>The story ends. The thinking doesn’t.</p>
     </div>
   </section>
-  <section class="wrap space entertainment-feature">
-    <div class="cinema-frame">
+  <section class="wrap space screen-lead">
+    <a href={`/entertainment/${lead.slug}`} tabindex="-1" aria-hidden="true">
+      <ScreenArt note={lead} />
+    </a>
+    <div>
+      <span class="eyebrow">
+        {lead.kind} · {lead.title}
+      </span>
+      <h2>
+        <a href={`/entertainment/${lead.slug}`}>{lead.headline}</a>
+      </h2>
+      <p>{lead.description}</p>
+      <a class="text-link" href={`/entertainment/${lead.slug}`}>
+        Read the reflection ↗
+      </a>
+      <p class="screen-note-date">From my notes · {formatDate(lead.date)}</p>
+    </div>
+  </section>
+  <section class="wrap screen-journal" aria-labelledby="screen-journal-heading">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">FROM MY VIEWING NOTES</span>
+        <h2 id="screen-journal-heading">Stories I’m still thinking about.</h2>
+      </div>
+    </div>
+    <div class="filters" aria-label="Filter screen notes">
+      {["All notes", "Movies", "Series"].map((filter, index) => (
+        <button data-screen-filter={filter} aria-pressed={index === 0}>
+          {filter}
+        </button>
+      ))}
+    </div>
+    <p id="screen-count" class="result-count" aria-live="polite">
+      {otherNotes.length} reflections
+    </p>
+    <div class="screen-notes-grid">
+      {otherNotes.map((note) => (
+        <article
+          class="screen-note-card"
+          data-screen-note
+          data-kind={note.kind}
+        >
+          <a
+            href={`/entertainment/${note.slug}`}
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <ScreenArt note={note} />
+          </a>
+          <div class="screen-card-copy">
+            <span class="eyebrow">
+              {note.kind} · {note.title}
+            </span>
+            <h3>
+              <a href={`/entertainment/${note.slug}`}>{note.headline}</a>
+            </h3>
+            <p>{note.description}</p>
+            <p class="screen-card-lesson">
+              <span>WHAT STAYED WITH ME</span>
+              {note.lesson}
+            </p>
+            <div class="screen-card-footer">
+              <time datetime={note.date}>{formatDate(note.date)}</time>
+              <a href={`/entertainment/${note.slug}`} class="text-link">
+                Read the note ↗
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="wrap screen-archive">
+    <div>
+      <span class="eyebrow">A LONGER READ · FROM THE BLOG</span>
+      <h2>And the story that started this corner.</h2>
+    </div>
+    <a href={`/${senna.slug}`} class="senna-archive">
       <img
         src={senna.image}
         alt={senna.imageAlt}
         width="1200"
         height="800"
-        fetchpriority="high"
+        loading="lazy"
       />
-      <span>THE SCREEN NOTES</span>
-    </div>
-    <div>
-      <span class="eyebrow">SENNA · AMBITION & PERSPECTIVE</span>
-      <h2>
-        <a href={`/${senna.slug}`}>
-          What Ayrton Senna taught me about chasing greatness.
-        </a>
-      </h2>
-      <p>{senna.description}</p>
-      <a href={`/${senna.slug}`} class="text-link">
-        Read my reflection ↗
-      </a>
-    </div>
-  </section>
-  <section class="wrap reflection-band">
-    <span class="eyebrow">MORE THAN A REVIEW</span>
-    <h2>
-      What did this story
-      <br />
-      <em>leave with me?</em>
-    </h2>
-    <p>
-      That’s the question behind this corner of the site: the characters,
-      choices, and moments that connect what I watch to how I live and work.
-    </p>
-    <p class="editorial-caption">
-      The screen journal starts with Senna. More movie and series reflections
-      will join it as I write them.
-    </p>
+      <div>
+        <span class="eyebrow">SENNA · AMBITION & PERSPECTIVE</span>
+        <h3>Chasing greatness, without losing perspective.</h3>
+        <p>{senna.description}</p>
+        <span class="text-link">Read the essay ↗</span>
+      </div>
+    </a>
   </section>
 </Base>

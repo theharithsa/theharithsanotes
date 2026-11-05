@@ -38,3 +38,10 @@ For actual application suites follow the [test contract](../.agents/skills/app-l
 
 
 1.2.0 deployment evidence: implementation 97311f59ca6703f7cc9c1dbc524f4c6d4304f67e; Firebase review version f1ef7989b3531a52. All seven primary pages plus War Room returned 200 and matched local HTML bytes. Unknown path returned 404. Browser verified deployed menu and bookshelf after refresh; first open used a cached older home. Foundation, website and GitGuardian checks passed for implementation SHA. No analytics provider receipt or tenant searchability is asserted.
+
+
+## 1.3.0 screen journal
+
+Astro check: 34 files, zero errors/warnings/hints. Static build: 30 pages. Ten Node tests passed, including all five reflection body/lesson/canonical/sitemap routes and private-source URL exclusion. Internal link/anchor checks include each reading page; existing migration and consent tests remain green. Foundation ready and Markdown links passed.
+
+Browser checked desktop archive, series filtering (one card), movies filtering (three cards), all reset, series detail and visible title-disambiguation note. All five detail pages were inspected at 390px: one h1, four body paragraphs, no horizontal overflow. Featured reflection stays above the filterable archive. Artwork is CSS; no external poster/streaming-player requests are introduced. Preview receipt and current revision checks are recorded separately in qa/evidence.json.

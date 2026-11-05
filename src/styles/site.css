@@ -2251,3 +2251,363 @@ figure {
     grid-column: 1;
   }
 }
+
+/* Screen journal: original abstract artwork, separate reflections and lessons. */
+.screen-note-art {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  aspect-ratio: 1.6;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 3px;
+  isolation: isolate;
+}
+.screen-note-art > span {
+  font: 500 clamp(32px, 3.4vw, 52px)/1.05 var(--serif);
+  letter-spacing: -0.04em;
+  white-space: pre-line;
+  z-index: 1;
+  max-width: 80%;
+}
+.screen-note-art small {
+  font-size: 7px;
+  letter-spacing: 0.16em;
+  margin-top: 24px;
+  z-index: 1;
+}
+.screen-motif {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.65;
+}
+.screen-motif i {
+  position: absolute;
+  display: block;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  right: 9%;
+  top: 12%;
+}
+.motif-orbit .screen-motif i:nth-child(2) {
+  width: 240px;
+  height: 240px;
+  right: 0;
+  top: 0;
+}
+.motif-orbit .screen-motif i:nth-child(3) {
+  width: 20px;
+  height: 20px;
+  background: #718d91;
+  right: 15%;
+  top: 10%;
+  border: 0;
+}
+.motif-sunrise .screen-motif i {
+  border: 0;
+  background: #d1a959;
+  right: 10%;
+  top: 15%;
+}
+.motif-sunrise .screen-motif i:nth-child(2) {
+  width: 110%;
+  height: 120px;
+  top: auto;
+  bottom: -20px;
+  right: -20%;
+  background: #91a484;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-15deg);
+}
+.motif-sunrise .screen-motif i:nth-child(3) {
+  width: 100%;
+  height: 100px;
+  top: auto;
+  bottom: -30px;
+  right: -30%;
+  background: #6f8869;
+  border-radius: 50% 0 0 0;
+}
+.motif-steps .screen-motif i {
+  border: 0;
+  background: #b48d45;
+  border-radius: 0;
+  right: 10%;
+  top: 10%;
+  width: 60px;
+  height: 80%;
+  transform: rotate(25deg);
+}
+.motif-steps .screen-motif i:nth-child(2) {
+  right: 26%;
+  top: 30%;
+}
+.motif-steps .screen-motif i:nth-child(3) {
+  right: 42%;
+  top: 50%;
+}
+.motif-balance .screen-motif i {
+  border-radius: 0;
+  width: 2px;
+  height: 90%;
+  right: 26%;
+  top: 5%;
+  background: #6e657e;
+  border: 0;
+  transform: rotate(12deg);
+}
+.motif-balance .screen-motif i:nth-child(2) {
+  border-radius: 50%;
+  width: 130px;
+  height: 130px;
+  right: 8%;
+  top: 8%;
+  background: #b1a5c2;
+}
+.motif-balance .screen-motif i:nth-child(3) {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  right: 38%;
+  top: 28%;
+  background: #9b90ad;
+}
+.motif-conversation .screen-motif i {
+  border-radius: 45% 45% 0 45%;
+  border: 0;
+  background: #bb8b72;
+  right: 7%;
+  top: 12%;
+  width: 160px;
+  height: 125px;
+}
+.motif-conversation .screen-motif i:nth-child(2) {
+  right: 21%;
+  top: 29%;
+  background: #d7b49b;
+  transform: rotate(180deg);
+}
+.motif-conversation .screen-motif i:nth-child(3) {
+  display: none;
+}
+.screen-lead {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.screen-lead .screen-note-art {
+  min-height: 450px;
+  aspect-ratio: 1.25;
+}
+.screen-lead h2 {
+  font-size: 42px;
+}
+.screen-note-date {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 22px 0 0;
+}
+.screen-note-date a {
+  text-decoration: underline;
+}
+.screen-journal {
+  padding-bottom: 70px;
+}
+.screen-notes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px 40px;
+}
+.screen-card-copy {
+  padding-top: 25px;
+}
+.screen-card-copy > .eyebrow {
+  font-size: 10px;
+}
+.screen-card-copy h3 {
+  font-size: 32px;
+}
+.screen-card-copy > p {
+  font-size: 15px;
+}
+.screen-card-lesson {
+  border-left: 2px solid #b5bea7;
+  padding-left: 17px;
+  font-family: var(--serif);
+  font-size: 18px !important;
+}
+.screen-card-lesson > span {
+  font: 600 8px/1.5 var(--sans);
+  letter-spacing: 0.12em;
+  display: block;
+  margin-bottom: 9px;
+}
+.screen-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.screen-card-footer time {
+  font-size: 11px;
+  color: var(--muted);
+}
+.screen-card-footer a {
+  font-size: 12px;
+}
+.screen-archive {
+  border-top: 1px solid var(--line);
+  padding-block: 65px 85px;
+}
+.screen-archive > div {
+  max-width: 650px;
+  margin-bottom: 35px;
+}
+.senna-archive {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+  align-items: center;
+}
+.senna-archive img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.senna-archive h3 {
+  font-size: 35px;
+}
+.screen-note-header {
+  max-width: 850px;
+  padding-top: 55px;
+}
+.screen-note-header h1 {
+  font-size: clamp(38px, 4.6vw, 64px);
+}
+.screen-note-visual {
+  max-width: 1050px;
+  margin-block: 40px;
+}
+.screen-note-visual .screen-note-art {
+  aspect-ratio: 2.2;
+  min-height: 350px;
+}
+.screen-note-visual .screen-note-art > span {
+  font-size: 72px;
+}
+.screen-note-reading {
+  max-width: 720px;
+}
+.screen-note-reading > .editorial-caption {
+  margin-block: 25px;
+}
+.screen-takeaway {
+  padding: 30px;
+  margin-block: 35px;
+}
+.screen-takeaway .eyebrow {
+  font-size: 9px;
+  margin-bottom: 15px;
+}
+.screen-takeaway p {
+  font: 500 27px/1.4 var(--serif);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.screen-note-next {
+  border-top: 1px solid var(--line);
+  padding-block: 35px 70px;
+  margin-top: 45px;
+}
+.screen-note-next h2 {
+  font-size: 35px;
+}
+@media (max-width: 980px) {
+  .screen-lead {
+    gap: 35px;
+  }
+  .screen-lead h2 {
+    font-size: 36px;
+  }
+  .screen-lead .screen-note-art {
+    min-height: 370px;
+  }
+  .screen-note-art {
+    padding: 30px;
+    min-height: 250px;
+  }
+  .screen-note-art > span {
+    font-size: 36px;
+  }
+}
+@media (max-width: 640px) {
+  .screen-lead,
+  .screen-notes-grid,
+  .senna-archive {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .screen-lead .screen-note-art {
+    min-height: 300px;
+    aspect-ratio: 1.2;
+  }
+  .screen-lead h2 {
+    font-size: 34px;
+  }
+  .screen-notes-grid {
+    gap: 45px;
+  }
+  .screen-note-art {
+    min-height: 230px;
+    padding: 28px;
+  }
+  .screen-note-art > span {
+    font-size: 39px;
+  }
+  .screen-journal {
+    padding-bottom: 45px;
+  }
+  .screen-card-copy h3 {
+    font-size: 29px;
+  }
+  .screen-archive {
+    padding-block: 40px 55px;
+  }
+  .screen-archive h2 {
+    font-size: 32px;
+  }
+  .senna-archive img {
+    height: 240px;
+  }
+  .senna-archive h3 {
+    font-size: 29px;
+  }
+  .screen-note-header {
+    padding-top: 30px;
+  }
+  .screen-note-visual .screen-note-art {
+    min-height: 280px;
+    aspect-ratio: 1.2;
+  }
+  .screen-note-visual .screen-note-art > span {
+    font-size: 47px;
+  }
+  .screen-note-visual {
+    margin-block: 30px;
+  }
+  .screen-takeaway {
+    padding: 25px;
+  }
+  .screen-takeaway p {
+    font-size: 24px;
+  }
+  .screen-note-next h2 {
+    font-size: 29px;
+  }
+}

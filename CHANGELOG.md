@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.0] — 2026-11-05
+
+- Expanded Entertainment with five edited Notion-sourced screen reflections: Subservience, Made in Korea, War Machine, The Taj Story, and Oh My Ghost Clients.
+- Added individual reading pages, lesson callouts, original abstract artwork, movie/series filters, menu links and sitemap entries. Kept the longer Senna essay.
+- Preserved the shortened series title in a visible editorial note and linked the broadcaster synopsis used to identify it. Unrelated journal details and private Notion URLs are excluded.
+
 ## [1.2.0] — 2026-11-05
 
 - Rebuilt Home, Blogs, Books, Podcasts, Projects, Entertainment and Meet Vish around a Gates Notes browser reference study.

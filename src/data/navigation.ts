@@ -63,6 +63,12 @@ export const navigation = [
     image: "/images/note-0.jpg",
     links: [
       { label: "Screen notes", href: "/entertainment" },
+      { label: "Subservience", href: "/entertainment/subservience" },
+      { label: "Made in Korea", href: "/entertainment/made-in-korea" },
+      {
+        label: "Oh My Ghost Clients",
+        href: "/entertainment/oh-my-ghost-clients",
+      },
       {
         label: "Lessons from Senna",
         href: "/chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life",

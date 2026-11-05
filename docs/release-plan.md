@@ -11,3 +11,6 @@ Predeploy: `npm run check`, `npm run build`, `npm test`, `npm audit --audit-leve
 Launch: verify Firebase preview first. Production deployment and domain cutover are separate from a preview. Keep the current domain publication until the new release is accepted. Firebase supplies exact DNS values; do not invent or overwrite records. Roll back with the prior Hosting release and prior DNS if changed. No state migration is required.
 
 Postdeploy: HTTP pages/assets, canonical URLs and preserved article slugs; correct 404; consent/no-consent script and beacon behavior; GA Realtime and exact Dynatrace application session. Tenant searchability remains unverified until observed. No backend native linkage exists for this static site. GitHub source facts and CI results are evidence; no SDLC tenant exporter is configured. See [observability](observability.md) and [execution evidence](../qa/evidence.json).
+
+
+1.3.0 / issue #6: five static screen-note routes, revised Entertainment archive and client filter, navigation/sitemap updates. No database, dependency, monitoring or permissions changes. Deploy the validated dist to the existing Firebase review channel; compare archive/detail HTML to local build and verify browser filtering. Rollback is the preceding review version f1ef7989b3531a52. Production/domain/merge remain separate.

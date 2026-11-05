@@ -1,0 +1,69 @@
+---
+import Base from "../../layouts/Base.astro";
+import ScreenArt from "../../components/ScreenArt.astro";
+import { screenNotes, type ScreenNote } from "../../data/screen-notes";
+import { formatDate } from "../../lib/content";
+export function getStaticPaths() {
+  return screenNotes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+interface Props {
+  note: ScreenNote;
+}
+const { note } = Astro.props;
+const next =
+  screenNotes[
+    (screenNotes.findIndex((item) => item.slug === note.slug) + 1) %
+      screenNotes.length
+  ];
+---
+
+<Base title={`${note.title}: ${note.headline}`} description={note.description}>
+  <article class="screen-note-page">
+    <header class="wrap screen-note-header">
+      <a href="/entertainment" class="back-link">
+        ← All screen notes
+      </a>
+      <span class="eyebrow">
+        {note.kind} · {note.title}
+      </span>
+      <h1>{note.headline}</h1>
+      <p class="article-deck">{note.description}</p>
+      <p class="screen-note-date">
+        By <a href="/meet-vish">Vishruth Harithsa</a> · Reflection recorded{" "}
+        <time datetime={note.date}>{formatDate(note.date)}</time>
+      </p>
+    </header>
+    <div class="wrap screen-note-visual">
+      <ScreenArt note={note} />
+    </div>
+    <div class="wrap screen-note-reading">
+      <p class="editorial-caption">
+        Edited from my personal viewing notes. Contains story details.
+      </p>
+      <div class="article-body">
+        {note.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+      <aside class={`screen-takeaway tone-${note.tone}`}>
+        <span class="eyebrow">WHAT I TOOK WITH ME</span>
+        <p>{note.lesson}</p>
+      </aside>
+      {note.titleNote && (
+        <p class="editorial-caption">
+          {note.titleNote} <a href={note.officialUrl}>About the series ↗</a>
+        </p>
+      )}
+      <div class="screen-note-next">
+        <span class="eyebrow">ANOTHER STORY, ANOTHER PERSPECTIVE</span>
+        <a href={`/entertainment/${next.slug}`}>
+          <h2>{next.title} ↗</h2>
+          <p>{next.description}</p>
+        </a>
+      </div>
+    </div>
+  </article>
+</Base>
