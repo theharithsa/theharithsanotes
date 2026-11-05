@@ -18,22 +18,42 @@ const { project } = Astro.props;
   image={project.image}
 >
   <article class="projects-technical project-details">
-    <header class="workbench-header">
-      <div class="wrap">
-        <a class="workbench-back" href={`/projects#${project.slug}`}>
-          ← All projects
-        </a>
-        <span class="eyebrow">&gt;_ {project.category}</span>
+    <div class="wrap project-detail-top">
+      <a class="workbench-back" href={`/projects#${project.slug}`}>
+        ← All projects
+      </a>
+      <span class="workbench-meta">{project.category} / PROJECT NOTES</span>
+    </div>
+    <header class="wrap project-story-hero">
+      <figure class="project-detail-cover">
+        <ProjectArt project={project} detail />
+        <figcaption>Original illustration / {project.title}</figcaption>
+      </figure>
+      <div class="project-story-intro">
+        <span class="eyebrow">FROM THE WORKBENCH</span>
         <h1>{project.title}</h1>
-        <p>{project.description}</p>
+        <p class="project-story-deck">{project.description}</p>
+        <div class="project-story-actions">
+          <a class="project-visit" href={project.href}>
+            {project.linkLabel}
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="project-source" href={project.source}>
+            GitHub repository ↗
+          </a>
+        </div>
+        <div class="project-stack">
+          <h2>Built with</h2>
+          <ul>
+            {project.stack.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </header>
     <div class="wrap project-detail-layout">
       <div class="project-detail-story">
-        <figure class="project-detail-cover">
-          <ProjectArt project={project} detail />
-          <figcaption>Concept illustration / {project.title}</figcaption>
-        </figure>
         <section aria-labelledby="overview-heading">
           <span class="workbench-meta">01 / THE IDEA</span>
           <h2 id="overview-heading">What it does</h2>
@@ -57,27 +77,6 @@ const { project } = Astro.props;
           </div>
         </section>
       </div>
-      <aside class="project-detail-sidebar" aria-label="Project resources">
-        <span class="workbench-meta">PROJECT FILE</span>
-        <h2>Explore it</h2>
-        <a class="project-visit" href={project.href}>
-          {project.linkLabel} <span aria-hidden="true">↗</span>
-        </a>
-        <a class="project-source" href={project.source}>
-          GitHub repository ↗
-        </a>
-        <div class="project-stack">
-          <h3>Built with</h3>
-          <ul>
-            {project.stack.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <a class="workbench-back" href={`/projects#${project.slug}`}>
-          ← Back to the workbench
-        </a>
-      </aside>
     </div>
   </article>
 </Base>

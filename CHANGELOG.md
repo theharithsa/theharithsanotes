@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0] — 2026-11-05
+
+- Redesigned Projects as an asymmetric editorial mosaic: a large lead, stacked companions and alternating wide/narrow project tiles.
+- Replaced green graph-paper surfaces and the detail sidebar with warm paper, ink, coral accents and split illustration/introduction layouts.
+- Generated twelve original ink-and-paper editorial scenes, with human stories and project-specific subjects; kept responsive WebP delivery and exact prompts.
+- Preserved technical mono typography, all twelve researched detail routes, project anchors and confirmed live/source links.
+
 ## [1.5.1] — 2026-11-05
 
 - Added the owner-supplied spmsuhas/finvision-ai repository to FinVision’s detail page and updated its overview/stack from the repository README.

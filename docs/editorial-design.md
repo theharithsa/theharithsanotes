@@ -101,3 +101,13 @@ Project media delivery uses Astro’s bundled image pipeline to emit responsive 
 ### FinVision source resolved — 1.5.1
 
 The owner supplied [spmsuhas/finvision-ai](https://github.com/spmsuhas/finvision-ai). The README was reviewed and its blob identity recorded in project-research.json. FinVision’s detail page now links that repository and describes the deterministic calculation engine, Gemini integration and actual stack, while retaining repository ownership in the overview. All twelve Project.source values are required. The previous unconfirmed-source note above is historical.
+
+## Editorial mosaic — 1.6.0 / issue #10
+
+The owner’s latest direction replaces equal-sized project cards with a mosaic and rejects the green graph-paper/boxed detail treatment. A fresh browser study of Gates Notes’ home and Books surfaces informed the generous white space, image-led stories and readable captions. No reference assets, text or proprietary font were copied. Projects keeps JetBrains Mono as requested, on warm near-white (#fffdfa), charcoal ink (#292826), coral accents (#ae4c30), with quiet neutral/lilac/ochre/clay caption surfaces.
+
+Desktop uses twelve grid tracks: an eight-track lead spanning eight row units, two four-track companions spanning four row units, then alternating five/seven-track pairs and a smaller three-story row. DOM and keyboard order remain the data order; no dense packing, script masonry or absolute-positioned cards. Tablet uses a full-width lead and two columns, while phone uses a single sequence with alternating artwork proportions. Each project retains its anchor and local detail journey.
+
+Details pair a complete illustration with title, deck, live/docs link, GitHub and stack in one split hero; a centered overview and two-column capability section follow. The green grid masthead, faux status dot and resource sidebar are removed. Mobile stacks the hero and keeps both external resources available. Restrained image hover and native link focus respect reduced motion.
+
+[Editorial prompt manifest](project-editorial-prompts.json) records twelve separate built-in image_gen calls and final `public/images/projects/*-editorial-v2.png` paths. Original unmodified PNGs are preserved; Astro emits 400/600/900/1200px WebP variants. Ink contours, cut-paper composition and grain replace the earlier glossy objects. People are imagined illustrations, not claimed actual users or portraits. Aroha is an imagined hospitality scene, not documentation of its property. Art and alt text describe each actual project topic; original site art in other sections remains unchanged. Earlier prompt files describe historical variants.

@@ -22,9 +22,9 @@ export const projects: Project[] = [
       "A sales workspace that carries the story behind every enquiry—from the first conversation to the next follow-up. Built with React, Firebase, and Gemini.",
     href: "https://sales-drone-avinya.firebaseapp.com",
     source: "https://github.com/theharithsa/SalesDrone",
-    image: "/images/projects/salesdrone-concept-v1.png",
+    image: "/images/projects/salesdrone-editorial-v2.png",
     imageAlt:
-      "Connected lead cards, conversation timeline and follow-up calendar",
+      "An illustrated conversation flows from a phone call to a follow-up calendar",
     colour: "blue",
     overview: [
       "SalesDrone keeps the context behind an enquiry together: who you spoke to, what they said, where the lead stands and what needs to happen next. It is a sales workspace for founders and small teams who need more continuity than a spreadsheet can offer.",
@@ -63,9 +63,9 @@ export const projects: Project[] = [
       "A living, photographic website for a retreat, with a nature-led experience and a host studio for content and bookings.",
     href: "https://aroha-retreat.web.app",
     source: "https://github.com/ArohaRetreat/website",
-    image: "/images/projects/aroha-retreat-concept-v1.png",
+    image: "/images/projects/aroha-retreat-editorial-v2.png",
     imageAlt:
-      "Conceptual retreat website, guest cabin, booking calendar and key",
+      "An imagined guesthouse through an open doorway, with a booking calendar and key",
     colour: "sage",
     overview: [
       "Aroha Retreat brings the experience of a place and the work of hosting into one website. The public journey introduces the retreat through photographs and visit information; the authenticated Host Studio gives hosts a place to manage content and bookings.",
@@ -109,8 +109,9 @@ export const projects: Project[] = [
       "A financial planning tool for modern India: explore wealth projections, tax planning, and the life goals you’re working towards.",
     href: "https://finvision-ai.web.app/",
     source: "https://github.com/spmsuhas/finvision-ai",
-    image: "/images/projects/finvision-ai-concept-v1.png",
-    imageAlt: "Financial projection curves, rupee coin and planning milestones",
+    image: "/images/projects/finvision-ai-editorial-v2.png",
+    imageAlt:
+      "A reader studies a financial map with alternative paths and goal markers",
     colour: "ochre",
     overview: [
       "FinVision AI is a visual financial-planning workspace. Instead of looking at investments, liabilities, expenses and goals in isolation, it brings them into a plan that can be explored over time.",
@@ -156,8 +157,9 @@ export const projects: Project[] = [
       "Making everyday money easier to understand. Expense tracking, budgets, shared spending, and a KautilyaAI assistant in one personal finance app.",
     href: "https://myfinbuddy.in",
     source: "https://github.com/theharithsa/budget-buddy",
-    image: "/images/projects/budget-buddy-concept-v1.png",
-    imageAlt: "Spending categories, receipts and budget envelopes",
+    image: "/images/projects/budget-buddy-editorial-v2.png",
+    imageAlt:
+      "A hand sorts rupee coins into budget envelopes beside a receipt and spending chart",
     colour: "terracotta",
     overview: [
       "Budget Buddy grew into FinBuddy: a personal finance app for understanding everyday spending, setting budgets and keeping shared expenses in view. The focus is the relationship between small transactions and the bigger monthly picture.",
@@ -195,8 +197,9 @@ export const projects: Project[] = [
       "Lightweight macOS monitoring built with Bash and system tools. Collects CPU, memory, disk, network, battery, processes, and running apps, and sends health signals to Dynatrace.",
     href: "https://github.com/theharithsa/dt-mac-agent/blob/main/README.md",
     colour: "blue",
-    image: "/images/projects/dt-mac-agent-concept-v1.png",
-    imageAlt: "Laptop connected to resource metrics and telemetry",
+    image: "/images/projects/dt-mac-agent-editorial-v2.png",
+    imageAlt:
+      "A laptop observatory connects a CPU, disk and battery to monitoring signals",
     overview: [
       "dt-mac-agent brings macOS health signals into Dynatrace using Bash and tools already available on the machine. It collects CPU, memory, disk, network, battery, process and application information without adding a heavyweight runtime.",
       "A launchd daemon performs collection, while a separate watchdog checks that the agent is alive. The repository also includes a MacOS Health Center dashboard and command-line controls for inspecting the local agent.",
@@ -236,8 +239,9 @@ export const projects: Project[] = [
     href: "https://theharithsa.github.io/chaicart-cloud-workshop/",
     source: "https://github.com/theharithsa/chaicart-cloud-workshop",
     colour: "ochre",
-    image: "/images/projects/chaicart-concept-v1.png",
-    imageAlt: "Chai cart connected to cloud infrastructure and outage signals",
+    image: "/images/projects/chaicart-editorial-v2.png",
+    imageAlt:
+      "A chai stall and its customers connected to cloud servers and an outage warning",
     overview: [
       "ChaiCart turns cloud computing into something you can run, break and understand. In this two-day workshop, engineering students become founders of a fictional ten-minute chai delivery startup.",
       "The first day is about building in the cloud. The second introduces outages, cost surprises and an observability murder mystery. Slides, printable activities and a companion demo make the technical ideas tangible.",
@@ -276,8 +280,8 @@ export const projects: Project[] = [
     href: "https://inspiredlearning-vh.web.app",
     source: "https://github.com/theharithsa/inspiredlearning",
     colour: "blue",
-    image: "/images/projects/inspiredlearning-concept-v1.png",
-    imageAlt: "Learning steps, quiz tiles and a certificate",
+    image: "/images/projects/inspiredlearning-editorial-v2.png",
+    imageAlt: "A learner follows workshop and quiz steps towards a certificate",
     overview: [
       "InspiredLearning gives workshop participation a lasting home. A learner can return to their account to see reviewed results, personal quiz outcomes, learning credits and issued certificates after the workshop ends.",
       "The portal separates a learner’s record from the staff workflow that verifies attendance and publishes completion. Certificate verification is optional and public only when the learner enables it.",
@@ -315,8 +319,9 @@ export const projects: Project[] = [
       "Reusable instrumentation that helps developers see the model calls, tool execution, token usage, and latency inside Copilot SDK agents.",
     href: "https://www.npmjs.com/package/@theharithsa/github_copilot_otel",
     colour: "sage",
-    image: "/images/projects/copilot-otel-concept-v1.png",
-    imageAlt: "Agent execution trace, token chips and latency gauge",
+    image: "/images/projects/copilot-otel-editorial-v2.png",
+    imageAlt:
+      "A magnifying glass reveals agent traces, tools, tokens and latency",
     overview: [
       "Copilot, meet OpenTelemetry is reusable instrumentation for applications built with the GitHub Copilot SDK. It makes the work inside an AI agent visible: model calls, tool executions, token usage and response time.",
       "The package subscribes to SDK session events and turns them into OpenTelemetry spans and metrics. A session-level span connects the model and tool activity, with OTLP export to Dynatrace.",
@@ -354,9 +359,8 @@ export const projects: Project[] = [
       "A scoped, read-only bridge between a sales workspace and compatible AI assistants, built on the same permission-aware SalesDrone API.",
     href: "https://www.npmjs.com/package/@theharithsa/salesdrone-mcp",
     colour: "terracotta",
-    image: "/images/projects/salesdrone-mcp-concept-v1.png",
-    imageAlt:
-      "Sales records connected to an assistant through a permission lock",
+    image: "/images/projects/salesdrone-mcp-editorial-v2.png",
+    imageAlt: "Sales records cross a locked read-only bridge to an assistant",
     overview: [
       "SalesDrone MCP lets compatible local AI assistants read the current sales workspace through a scoped API. It is a separate package from the SalesDrone app, connected over the Model Context Protocol.",
       "Its tools read leads, tasks, recorded activity and permitted workspace information. The API enforces token scopes and current membership; the adapter does not offer arbitrary requests or writes to business records.",
@@ -396,8 +400,8 @@ export const projects: Project[] = [
     href: "https://manahsmriti-books.web.app",
     source: "https://github.com/theharithsa/manahsmriti",
     colour: "sage",
-    image: "/images/projects/manahsmriti-concept-v1.png",
-    imageAlt: "Books, catalog cards and a shelf location map",
+    image: "/images/projects/manahsmriti-editorial-v2.png",
+    imageAlt: "A hand finds a book through a catalog and shelf-location cards",
     overview: [
       "Manahsmriti Books is a home for keeping track of a real book collection. It combines a searchable shared catalog with a separate private library for each signed-in reader.",
       "The practical details matter here: shelf locations, verification status, search, sorting and a wardrobe map help connect the catalog to physical books. Firestore synchronizes changes across devices.",
@@ -435,9 +439,9 @@ export const projects: Project[] = [
       "An application foundation that makes decisions, delivery evidence, and observability part of building from the very beginning.",
     href: "https://github.com/theharithsa/app-launchpad-template/blob/main/README.md",
     colour: "blue",
-    image: "/images/projects/app-launchpad-concept-v1.png",
+    image: "/images/projects/app-launchpad-editorial-v2.png",
     imageAlt:
-      "Application building blocks, delivery checklist and release pipeline",
+      "People assemble an application from code, discovery and testing sheets",
     overview: [
       "App Launchpad is a reusable foundation for building and enhancing applications with deliberate decisions, service context and delivery evidence. It starts with how a project is understood and maintained, before prescribing a product stack.",
       "The template is stack-neutral and opinionated about Dynatrace observability. Agent instructions, service skills, discovery checks and issue-linked delivery make the project easier to continue across people and sessions.",
@@ -481,9 +485,9 @@ export const projects: Project[] = [
       "Open-source contributions connecting AI assistants with observability context, including work on the Dynatrace MCP server.",
     href: "https://github.com/dynatrace-oss/dynatrace-mcp/blob/main/README.md",
     colour: "blue",
-    image: "/images/projects/dynatrace-mcp-concept-v1.png",
+    image: "/images/projects/dynatrace-mcp-editorial-v2.png",
     imageAlt:
-      "Assistant connected to an observability topology and trace signals",
+      "Collaborators connect an assistant to service nodes, traces and logs",
     overview: [
       "This open-source work connects AI assistants with Dynatrace observability context through the Model Context Protocol. It sits alongside my wider interest in instrumentation, investigation and bringing useful operational context into developer tools.",
       "The local server exposes tools for querying data, finding entities and investigating problems. This is a shared dynatrace-oss project, rather than an app I claim to have built alone.",

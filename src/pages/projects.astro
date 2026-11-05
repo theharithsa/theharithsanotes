@@ -6,22 +6,28 @@ import { projects } from "../data/projects";
 
 <Base
   title="Projects"
+  image={projects[0].image}
   description="The workbench: products, experiments and open-source tools by Vishruth Harithsa."
 >
   <div class="projects-technical">
-    <header class="workbench-header">
-      <div class="wrap">
-        <span class="eyebrow">&gt;_ THE WORKBENCH</span>
-        <h1>Ideas, built.</h1>
-        <p>
-          Useful things for everyday life.
+    <header class="workbench-header wrap">
+      <div class="workbench-intro-title">
+        <span class="eyebrow">PROJECTS / THE WORKBENCH</span>
+        <h1>
+          A few ideas.
           <br />
-          Tools for people who build.
+          <span>Out in the world.</span>
+        </h1>
+      </div>
+      <div class="workbench-intro-note">
+        <p>
+          Some start with a problem. Others with a little curiosity. These are
+          the products, tools and experiments I keep coming back to.
         </p>
-        <div class="workbench-status">
-          <span aria-hidden="true"></span>
-          {projects.length} projects / always learning
-        </div>
+        <span class="workbench-count">
+          {String(projects.length).padStart(2, "0")} projects &amp; counting{" "}
+          <span aria-hidden="true">↘</span>
+        </span>
       </div>
     </header>
     <section
@@ -33,7 +39,7 @@ import { projects } from "../data/projects";
         <h2 id="projects-heading">Projects</h2>
         <span>Explore the story behind the code ↓</span>
       </div>
-      <div class="workbench-grid">
+      <div class="workbench-grid project-mosaic">
         {projects.map((project, index) => (
           <article class="workbench-card" id={project.slug}>
             <a

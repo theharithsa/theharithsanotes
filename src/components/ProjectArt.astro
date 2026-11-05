@@ -8,7 +8,7 @@ interface Props {
 }
 const { project, detail = false } = Astro.props;
 const covers = import.meta.glob<{ default: ImageMetadata }>(
-  "../../public/images/projects/*-concept-v1.png",
+  "../../public/images/projects/*-editorial-v2.png",
   { eager: true },
 );
 const cover = covers[`../../public${project.image}`]?.default;
@@ -19,12 +19,12 @@ if (!cover) throw new Error(`Missing project cover: ${project.slug}`);
   class="project-concept"
   src={cover}
   alt={project.imageAlt}
-  width={detail ? 1200 : 800}
-  widths={detail ? [600, 900, 1200] : [400, 600, 800]}
+  width={1200}
+  widths={[400, 600, 900, 1200]}
   sizes={
     detail
-      ? "(max-width: 760px) 92vw, (max-width: 1000px) 60vw, 900px"
-      : "(max-width: 600px) 92vw, (max-width: 1000px) 45vw, 400px"
+      ? "(max-width: 760px) 92vw, 60vw"
+      : "(max-width: 600px) 92vw, (max-width: 1000px) 48vw, 67vw"
   }
   format="webp"
   quality={82}
