@@ -83,7 +83,7 @@ class ContractTests(unittest.TestCase):
         env={**os.environ,'PATH':str(bin_dir)+os.pathsep+os.environ['PATH'],'CHECK_CALLS':str(calls)}
         good=subprocess.run(['sh',str(ROOT/'scripts/check.sh')],env=env,capture_output=True)
         self.assertEqual(good.returncode,0)
-        self.assertEqual(calls.read_text().splitlines(),['scripts/check_foundation.py','scripts/check_links.py','-m unittest discover -s tests -v'])
+            self.assertEqual(calls.read_text().splitlines(),['scripts/check_foundation.py','scripts/check_links.py','scripts/run_foundation_tests.py'])
         calls.write_text('');env['CHECK_LINK_EXIT']='3'
         bad=subprocess.run(['sh',str(ROOT/'scripts/check.sh')],env=env,capture_output=True)
         self.assertEqual(bad.returncode,3)
