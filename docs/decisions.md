@@ -1,17 +1,33 @@
 # Decisions and unresolved questions
 
+## Dynamic publishing proposal — 6 November 2026
+
+The [CMS plan](cms-plan.md) for [issue #23](https://github.com/theharithsa/theharithsanotes/issues/23) supersedes the original no-backend assumption for the next implementation. Production is still static until a separately verified cutover.
+
+| Area               | Status and decision                                                                                  | Authority / remaining dependency                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Editorial workflow | Approved: private drafts plus explicit Publish; tables per section                                   | Owner answers in this chat; own Notion-style editor, Firebase source of truth                     |
+| Admin identity     | Approved: Google sign-in for verified theharithsa@gmail.com only                                     | Owner request; server verification and UID pinning required                                       |
+| Region             | Approved: us-east1, colocated with existing bucket                                                   | Owner answer after inventory confirmed US-EAST1 storage                                           |
+| Cost planning      | Approved: pay-as-you-go plan, ₹500 monthly alert threshold at 50/80/100%                             | Owner answers; billing status/access, account currency and alert delivery still need verification |
+| Rendering          | Proposed: Astro Node on Cloud Run behind existing Firebase Hosting                                   | Preserve SEO and permit new content without code releases; adapter/runtime verification pending   |
+| Data model         | Proposed: Firestore Standard Native collections, immutable published revisions, private drafts       | API currently disabled; repeat database/edition inventory before creation                         |
+| Observability      | Proposed: dt-obs request/dependency signals, committed publish outbox and source-owned SDLC evidence | Preserve existing consent; backend ingestion destination, scopes and secret access unverified     |
+
+No cloud resources or production content were changed during planning. See the plan for migration, rollback, module ownership, timeline/carousel interaction and acceptance criteria.
+
 ## The Harithsa Notes — 5 November 2026
 
-| Area | Decision | Authority / consequence |
-| --- | --- | --- |
-| Product/design | Personal journal inspired by Gates Notes; original Harithsa branding, green/cream palette, forest feature, serif headlines | User request; retain 12 owned articles and their original slugs |
-| Stack | Astro 7.4.5, TypeScript 5.9.3, static generation | Implementation choice for article SEO and simple hosting; no backend needed |
-| Repository | theharithsa/theharithsanotes, private, generated from App Launchpad 1.9.0 | Explicit user answer; source revision in project.json |
-| Hosting | Firebase Hosting project the-harithsa-notes-94, eventual domain theharithsa.com | Explicit user choice; preview first, existing domain intact until cutover |
-| Privacy | Supplied Firebase GA4/Dynatrace RUM behind opt-in, ads denied, no identity/replay, local export off | Conservative implementation within requested analytics; tenant receipts pending |
-| Data/auth | Local article JSON; no account, database, newsletter storage or forms | No requested durable writes; external profiles own transactions |
-| License | Inherited MIT notice preserved; no additional source license granted | Private source requested |
-| Release | Feature branch and issue-linked PR; preview before production cutover | No direct main push, merge or DNS change performed |
+| Area           | Decision                                                                                                                   | Authority / consequence                                                         |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Product/design | Personal journal inspired by Gates Notes; original Harithsa branding, green/cream palette, forest feature, serif headlines | User request; retain 12 owned articles and their original slugs                 |
+| Stack          | Astro 7.4.5, TypeScript 5.9.3, static generation                                                                           | Implementation choice for article SEO and simple hosting; no backend needed     |
+| Repository     | theharithsa/theharithsanotes, private, generated from App Launchpad 1.9.0                                                  | Explicit user answer; source revision in project.json                           |
+| Hosting        | Firebase Hosting project the-harithsa-notes-94, eventual domain theharithsa.com                                            | Explicit user choice; preview first, existing domain intact until cutover       |
+| Privacy        | Supplied Firebase GA4/Dynatrace RUM behind opt-in, ads denied, no identity/replay, local export off                        | Conservative implementation within requested analytics; tenant receipts pending |
+| Data/auth      | Local article JSON; no account, database, newsletter storage or forms                                                      | No requested durable writes; external profiles own transactions                 |
+| License        | Inherited MIT notice preserved; no additional source license granted                                                       | Private source requested                                                        |
+| Release        | Feature branch and issue-linked PR; preview before production cutover                                                      | No direct main push, merge or DNS change performed                              |
 
 Windows adoption exposed inherited lock-cleanup and rooted-path loop bugs. Registration now closes its handle before deleting the lock, and the path guard rejects Unix/Windows anchors. Inherited tests create unconfigured synthetic fixtures independently of the actual app. The POSIX-shell entrypoint case runs in Linux CI and is skipped locally on Windows.
 
@@ -23,12 +39,11 @@ None are pre-approved by this template. Ask the user directly when the answer is
 
 ## Template maintenance decisions — not consumer defaults
 
-| Question | Decision/status | Alternatives and reason | Approval source | Consequence |
-| --- | --- | --- | --- | --- |
-| Template license | MIT / approved | Apache-2.0 considered; owner explicitly selected MIT | Human answer in this chat, 2026-10-29; issue #14 | Root LICENSE covers inherited template material; each generated application's license stays needs-user-input |
-| Template version | 1.9.0 / approved | Replace custom 1.09.0 with valid SemVer for interoperable tooling | Issue #18 and human authorization to resolve all issues | No leading-zero numeric identifiers; tag v1.9.0 matches metadata |
-| Partial bootstrap | Remove / approved implementation choice | Synchronizing partial assets still leaves missing catalog/tool references; full GitHub template is the default | Issue #17 alternative and human authorization to resolve all issues | No bundled asset duplicates; unavailable GitHub means adoption pending |
-| Main protection | PR + foundation check; no force-push/deletion / approved | Sole-owner workflow uses zero mandatory approvals; actual checks remain required | Issue #13 and human authorization to resolve all issues | Apply opt-in settings procedure; no bypass actors |
-
+| Question          | Decision/status                                          | Alternatives and reason                                                                                        | Approval source                                                     | Consequence                                                                                                  |
+| ----------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Template license  | MIT / approved                                           | Apache-2.0 considered; owner explicitly selected MIT                                                           | Human answer in this chat, 2026-10-29; issue #14                    | Root LICENSE covers inherited template material; each generated application's license stays needs-user-input |
+| Template version  | 1.9.0 / approved                                         | Replace custom 1.09.0 with valid SemVer for interoperable tooling                                              | Issue #18 and human authorization to resolve all issues             | No leading-zero numeric identifiers; tag v1.9.0 matches metadata                                             |
+| Partial bootstrap | Remove / approved implementation choice                  | Synchronizing partial assets still leaves missing catalog/tool references; full GitHub template is the default | Issue #17 alternative and human authorization to resolve all issues | No bundled asset duplicates; unavailable GitHub means adoption pending                                       |
+| Main protection   | PR + foundation check; no force-push/deletion / approved | Sole-owner workflow uses zero mandatory approvals; actual checks remain required                               | Issue #13 and human authorization to resolve all issues             | Apply opt-in settings procedure; no bypass actors                                                            |
 
 Seven-section information architecture and Gates Notes reference direction approved by the owner in the 5 November 2026 chat. Owner subsequently authorized Notion discovery for personal details. Import scope is selected book/podcast interests only, preserving statuses and keeping private-source URLs out of the public build. No new hosted service or credential is required. Old article URLs remain stable.
