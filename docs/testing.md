@@ -45,3 +45,6 @@ For actual application suites follow the [test contract](../.agents/skills/app-l
 Astro check: 34 files, zero errors/warnings/hints. Static build: 30 pages. Ten Node tests passed, including all five reflection body/lesson/canonical/sitemap routes and private-source URL exclusion. Internal link/anchor checks include each reading page; existing migration and consent tests remain green. Foundation ready and Markdown links passed.
 
 Browser checked desktop archive, series filtering (one card), movies filtering (three cards), all reset, series detail and visible title-disambiguation note. All five detail pages were inspected at 390px: one h1, four body paragraphs, no horizontal overflow. Featured reflection stays above the filterable archive. Artwork is CSS; no external poster/streaming-player requests are introduced. Preview receipt and current revision checks are recorded separately in qa/evidence.json.
+
+
+1.3.0 preview: fc050dd9395f0644 from implementation 842acb64b851432d7164c3dae449e41003326904. Archive and all five reading pages matched local HTML bytes over HTTP 200. Deployed series filter and detail lesson were verified in-browser. Implementation CI foundation/website/GitGuardian passed. Documentation-only follow-up head is checked separately.
