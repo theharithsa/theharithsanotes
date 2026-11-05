@@ -13,6 +13,7 @@ Owner decisions in this chat:
 - Article content and metadata in Firestore; media in Cloud Storage.
 - US East (`us-east1`), alongside the existing image bucket.
 - Pay-as-you-go planning with a ₹500 monthly alert budget: ₹250, ₹400 and ₹500 thresholds. This is an alert threshold, not an estimated bill or a spending cap.
+- Blaze is already enabled, confirmed by the owner after inventory; Cloud Storage is already enabled and its bucket was independently verified. No plan upgrade is needed.
 - Blog date navigation and tags; photo carousel and date navigation.
 
 ## Verified starting point
@@ -25,7 +26,7 @@ Read-only checks on 6 November 2026 found:
 | Firestore      | Listing returned 403: API disabled or never used                           | Database existence and edition are not established; enable API and repeat inventory before creating anything |
 | Storage        | `the-harithsa-notes-94.firebasestorage.app` exists, `US-EAST1`, regional   | Retain bucket; inspect its existing objects, permissions and rules before changing them                      |
 | Authentication | Authorized domains include Firebase/preview hosts, not the custom apex/www | Add custom domains during auth setup; Google provider enablement remains unverified                          |
-| Billing        | Billing-info request returned 403                                          | Existing login cannot establish billing status or create verified budget alerts from this check              |
+| Billing        | Owner confirms Blaze is active; billing-info request returned 403          | Plan status is owner-confirmed; billing account/currency and alert setup remain to be verified               |
 | Gallery        | Six curated entries have no capture-date fields                            | Show an Undated group until trustworthy dates are supplied; never infer dates from filenames                 |
 
 Project: `the-harithsa-notes-94`. No API enablement, database creation, billing change, auth change, bucket rule change or deployment occurred during this planning inventory. Local captures under ignored `qa/local` are diagnostic evidence, not public configuration.
@@ -130,7 +131,7 @@ Switch public reads only after reconciliation and security checks. Retain the ch
 
 ## Cost and setup dependencies
 
-Use the existing project and bucket. Confirm the billing account and currency with an account that can read billing before provisioning; the current read-only lookup was denied. Configure a project-scoped monthly ₹500-equivalent alert budget at 50%, 80% and 100%, with delivery to the owner's selected billing notification channel. Confirm recipient delivery and account-currency conversion rather than labelling an unverified setting ₹500.
+Use the existing Blaze project and enabled bucket; no billing upgrade or replacement bucket is required. The owner confirmed the plan after the billing-info lookup returned 403. Verify the billing account and currency for alert configuration; that API result is not evidence that billing is disabled. Configure a project-scoped monthly ₹500-equivalent alert budget at 50%, 80% and 100%, with delivery to the owner's selected billing notification channel. Confirm recipient delivery and account-currency conversion rather than labelling an unverified setting ₹500.
 
 Alerts do not enforce a spending cap; [Google's budget documentation](https://docs.cloud.google.com/billing/docs/how-to/budgets) distinguishes alerts from service-specific spend-cap budgets. Keep Cloud Run minimum instances at zero, initially at most two web instances and one audit job task, bounded request sizes and image variants, narrow indexes, limited telemetry volume and no visitor listeners. These controls reduce exposure but do not guarantee a ₹500 bill. Account for storage/downloads, Firestore operations, compute, Scheduler, build artifacts, telemetry and optional backups; price the actual region and measured inventory before enabling paid options.
 

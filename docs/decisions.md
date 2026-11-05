@@ -4,15 +4,15 @@
 
 The [CMS plan](cms-plan.md) for [issue #23](https://github.com/theharithsa/theharithsanotes/issues/23) supersedes the original no-backend assumption for the next implementation. Production is still static until a separately verified cutover.
 
-| Area               | Status and decision                                                                                  | Authority / remaining dependency                                                                  |
-| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Editorial workflow | Approved: private drafts plus explicit Publish; tables per section                                   | Owner answers in this chat; own Notion-style editor, Firebase source of truth                     |
-| Admin identity     | Approved: Google sign-in for verified theharithsa@gmail.com only                                     | Owner request; server verification and UID pinning required                                       |
-| Region             | Approved: us-east1, colocated with existing bucket                                                   | Owner answer after inventory confirmed US-EAST1 storage                                           |
-| Cost planning      | Approved: pay-as-you-go plan, ₹500 monthly alert threshold at 50/80/100%                             | Owner answers; billing status/access, account currency and alert delivery still need verification |
-| Rendering          | Proposed: Astro Node on Cloud Run behind existing Firebase Hosting                                   | Preserve SEO and permit new content without code releases; adapter/runtime verification pending   |
-| Data model         | Proposed: Firestore Standard Native collections, immutable published revisions, private drafts       | API currently disabled; repeat database/edition inventory before creation                         |
-| Observability      | Proposed: dt-obs request/dependency signals, committed publish outbox and source-owned SDLC evidence | Preserve existing consent; backend ingestion destination, scopes and secret access unverified     |
+| Area               | Status and decision                                                                                  | Authority / remaining dependency                                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Editorial workflow | Approved: private drafts plus explicit Publish; tables per section                                   | Owner answers in this chat; own Notion-style editor, Firebase source of truth                                     |
+| Admin identity     | Approved: Google sign-in for verified theharithsa@gmail.com only                                     | Owner request; server verification and UID pinning required                                                       |
+| Region             | Approved: us-east1, colocated with existing bucket                                                   | Owner answer after inventory confirmed US-EAST1 storage                                                           |
+| Cost planning      | Approved: existing Blaze plan, ₹500 monthly alert threshold at 50/80/100%                            | Owner confirms Blaze and Storage are enabled; billing account/currency and alert delivery still need verification |
+| Rendering          | Proposed: Astro Node on Cloud Run behind existing Firebase Hosting                                   | Preserve SEO and permit new content without code releases; adapter/runtime verification pending                   |
+| Data model         | Proposed: Firestore Standard Native collections, immutable published revisions, private drafts       | API currently disabled; repeat database/edition inventory before creation                                         |
+| Observability      | Proposed: dt-obs request/dependency signals, committed publish outbox and source-owned SDLC evidence | Preserve existing consent; backend ingestion destination, scopes and secret access unverified                     |
 
 No cloud resources or production content were changed during planning. See the plan for migration, rollback, module ownership, timeline/carousel interaction and acceptance criteria.
 
