@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
-  "release": "1.6.0 editorial mosaic review preview",
+  "revision": "43c386cf7717849945e6a1887cf9440af98be79e",
+  "release": "1.7.0 site artwork and podcast journeys review preview",
   "checks": [
     {
       "id": "typescript",
@@ -427,6 +427,33 @@
       "observedAt": "2026-11-05T09:10:41.738879+00:00",
       "environment": "local Windows / Firebase review channel",
       "artifact": null
+    },
+    {
+      "id": "site-art-type-build-tests",
+      "status": "passed",
+      "command": "npm run check; npm run build; npm test: 42 files zero diagnostics, 48-page build, 14 passed",
+      "revision": "43c386cf7717849945e6a1887cf9440af98be79e",
+      "observedAt": "2026-11-05T09:59:08.486186+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "site-art-menus-podcasts-browser",
+      "status": "passed",
+      "command": "cua_repl first/second click, keyboard ArrowDown/Escape/focus, portrait menu, five listening notes, empty Created, mobile navigation and overflow",
+      "revision": "43c386cf7717849945e6a1887cf9440af98be79e",
+      "observedAt": "2026-11-05T09:59:08.486186+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
+    },
+    {
+      "id": "site-art-preview-http",
+      "status": "passed",
+      "command": "47 HTML documents and 57 new responsive WebP variants: HTTP 200 and byte equality",
+      "revision": "43c386cf7717849945e6a1887cf9440af98be79e",
+      "observedAt": "2026-11-05T09:59:08.486186+00:00",
+      "environment": "local Windows / Firebase review channel",
+      "artifact": null
     }
   ],
   "limits": [
@@ -437,13 +464,13 @@
     "Domain DNS and production cutover not performed."
   ],
   "lifecycle": {
-    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/10",
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/11",
     "pullRequestUrl": "https://github.com/theharithsa/theharithsanotes/pull/2",
-    "checkedHeadSha": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
+    "checkedHeadSha": "43c386cf7717849945e6a1887cf9440af98be79e",
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version b7e0d36376a63193",
-    "artifactDigest": "ce079f2062ab2906570a79dc800f85452443734e7de6ad1bcce4bc2c7809569d",
+    "deploymentId": "Firebase review version 3c655055dc9ec2fa",
+    "artifactDigest": "8883a8cb372bdb625b2fe8c9a8d4f2bd4e1052a412ce247b4084f1d0fd74b4c4",
     "sdlcEvidence": [
       {
         "authority": "firebase-cli",
@@ -660,6 +687,32 @@
         "sourceRevision": "d75dd131945e458ce844fb19d7a8dc80ad09fa3c",
         "status": "13 project HTML routes and 48 responsive editorial image variants matched local build. Browser confirmed warm-white mosaic, loaded new illustrations, split detail hero and source link with no old sidebar.",
         "observedAt": "2026-11-05T09:10:41.738879+00:00"
+      },
+      {
+        "authority": "github-api",
+        "stage": "checks-passed",
+        "sourceRevision": "43c386cf7717849945e6a1887cf9440af98be79e",
+        "checks": [
+          "foundation",
+          "website",
+          "GitGuardian Security Checks"
+        ],
+        "observedAt": "2026-11-05T09:59:08.486186+00:00"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "sourceRevision": "43c386cf7717849945e6a1887cf9440af98be79e",
+        "version": "3c655055dc9ec2fa",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-05T09:59:08.486186+00:00"
+      },
+      {
+        "authority": "http-artifact-comparison",
+        "stage": "preview-verified",
+        "sourceRevision": "43c386cf7717849945e6a1887cf9440af98be79e",
+        "status": "47 HTML documents and 57 new responsive WebP variants returned 200 and matched tested build. Browser confirmed open portrait menu, no header arrows/overflow, five podcast notes and zero Created cards.",
+        "observedAt": "2026-11-05T09:59:08.486186+00:00"
       }
     ]
   }

@@ -29,3 +29,6 @@ Observed 1.5.0 review deployment: ebda4f918210a33c from b078727cd497ca240521fcb8
 Observed 1.6.0 review: b7e0d36376a63193 from d75dd131945e458ce844fb19d7a8dc80ad09fa3c, HTTP/browser verified as recorded in qa/evidence.json. Production, merge and domain remain unchanged.
 
 1.7.0 / issue #11 adds six static podcast routes, nineteen original image masters, display-only blog artwork metadata, shared responsive art components and menu interaction/style changes. No dependency, backend, database, permission or instrumentation changes. Preserve Books and Entertainment; validate article bodies/routes and podcast state/resource links plus menu keyboard/mobile behavior. Build/check/fourteen tests and foundation gates before existing review deployment; verify selected routes, all new image variants and live menu/listening behavior. Prior review b7e0d36376a63193 is the rollback reference. No production/domain/merge change.
+
+
+Observed 1.7.0 review: 3c655055dc9ec2fa from 43c386cf7717849945e6a1887cf9440af98be79e, HTTP/browser verified in qa/evidence.json. No merge/production/domain transition.
