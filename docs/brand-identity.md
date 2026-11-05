@@ -1,6 +1,6 @@
 # The Harithsa Notes identity exploration
 
-[Issue #25](https://github.com/theharithsa/theharithsanotes/issues/25). The owner prioritizes freezing a better logo and a coordinated favicon/icon family before the dynamic CMS. Two original directions are presented for selection; neither is approved or installed on the live site.
+[Issue #25](https://github.com/theharithsa/theharithsanotes/issues/25). The owner selected **01 — The Margin** on 6 November 2026 and requested the complete logo/icon family. The original exploration is retained below; [the frozen production system](brand-system.md) owns final exports and integration.
 
 ## 01 — The Margin
 
@@ -34,4 +34,4 @@ The browser fragments are illustrative mockups, not screenshots or favicon test 
 4. Replace the current Wordmark component and favicon in one issue-linked implementation PR. Check header height, menu positioning, home link accessibility, light/dark contrast and narrow mobile layouts.
 5. Inspect actual 16/32-pixel browser tabs and installed-icon previews, and verify icon URLs/content types/caching on the preview before production release. Record approved asset hashes and retire superseded references only after that verification.
 
-Selection is pending. Current production logo/favicon remain intact; CMS planning remains separately tracked in issue #23 and PR #24.
+The Margin is selected. Implementation and deployment evidence are tracked in PR #26; selection alone does not establish deployment. CMS planning remains separately tracked in issue #23 and PR #24.

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.11.0] — 2026-11-06
+
+- Freeze the owner-selected Margin identity with original bookmark h and outlined editorial lettering; replace header/footer wordmarks in both themes.
+- Add full/vertical/monochrome logos, profile images, optical favicons, app/maskable/Apple icons, a social card, manifest and downloadable brand kit.
+- Preserve reproducible vector sources, font licensing and asset hashes; remove Racing Sans One.
+
 ## [1.10.0] — 2026-11-06
 
 - Simplified Books to the 50 confirmed read titles and eight genre groups, preserving original ratings/reviews and combined search/rating browsing.

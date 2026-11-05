@@ -1,8 +1,15 @@
 ---
+import logo from "../../public/brand/v1/logo-horizontal-ink.svg?raw";
 interface Props {
   homeLabel?: boolean;
 }
 const { homeLabel = false } = Astro.props;
+const artwork = logo
+  .replace('color="#242321"', "")
+  .replace(
+    'role="img" aria-label="The Harithsa Notes"',
+    'aria-hidden="true" focusable="false"',
+  );
 ---
 
 <a
@@ -10,11 +17,5 @@ const { homeLabel = false } = Astro.props;
   href="/"
   aria-label={homeLabel ? "The Harithsa Notes home" : "The Harithsa Notes"}
 >
-  <span class="brand-line">
-    <span class="brand-the">the</span>
-    <span class="brand-name">harithsa</span>
-  </span>
-  <span class="brand-notes">
-    notes<span class="brand-dot">.</span>
-  </span>
+  <span class="wordmark-art" set:html={artwork} />
 </a>

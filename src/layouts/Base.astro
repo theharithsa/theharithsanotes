@@ -3,7 +3,6 @@ import "../styles/site.css";
 import "@fontsource-variable/source-serif-4";
 import "@fontsource-variable/source-serif-4/wght-italic.css";
 import "@fontsource-variable/public-sans";
-import "@fontsource/racing-sans-one/latin-400.css";
 import "@fontsource-variable/jetbrains-mono";
 import EditorialImage from "../components/EditorialImage.astro";
 import Wordmark from "../components/Wordmark.astro";
@@ -22,7 +21,7 @@ interface Props {
 const {
   title,
   description: providedDescription,
-  image = "/images/forest.jpg",
+  image = "/brand/v1/social-card.png",
   imageAlt,
   article = false,
   publishedDate,
@@ -120,6 +119,26 @@ const graph = [
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
+      rel="icon"
+      type="image/x-icon"
+      href="/favicon.ico"
+      sizes="16x16 32x32 48x48"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/brand/v1/favicon-32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/brand/v1/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="application-name" content="The Harithsa Notes" />
+    <meta name="apple-mobile-web-app-title" content="Harithsa Notes" />
+    <link
       rel="alternate"
       type="application/rss+xml"
       title={site.title}
@@ -130,8 +149,13 @@ const graph = [
     <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site.url)} />
-    {(imageAlt || image === "/images/forest.jpg") && (
-      <meta property="og:image:alt" content={imageAlt ?? "Forest scenery"} />
+    {(imageAlt || image === "/brand/v1/social-card.png") && (
+      <meta
+        property="og:image:alt"
+        content={
+          imageAlt ?? "The Harithsa Notes editorial wordmark with bookmark h"
+        }
+      />
     )}
     <meta property="og:site_name" content={site.title} />
     <meta property="og:locale" content="en_IN" />
