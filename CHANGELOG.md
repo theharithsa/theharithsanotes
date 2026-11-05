@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.1] — 2026-11-05
+
+- Restored the original section-specific header menu colours and matching hover/open button highlights after the illustrated menu refinement unintentionally made all panels off-white.
+
 ## [1.7.0] — 2026-11-05
 
 - Added thirteen original topic-specific blog covers with responsive delivery across articles, archive, related cards and home; source article bodies and prior media provenance remain unchanged.
