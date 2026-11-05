@@ -28,7 +28,7 @@ test("brand exports are complete, self-contained and connected to the public doc
   }
   const home = await readFile(new URL("index.html", root), "utf8");
   for (const reference of [
-    "/favicon.svg",
+    "/brand/v1/favicon.svg",
     "/favicon.ico",
     "/site.webmanifest",
     "/brand/v1/apple-touch-icon.png",
