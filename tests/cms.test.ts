@@ -44,6 +44,41 @@ test("content validation rejects scripts, unsafe links, excessive nesting and re
   });
   assert.ok(!JSON.stringify(summary).includes("PRIVATE_DRAFT"));
   assert.equal(summary["payload.fields"], "secret,html");
+  assert.throws(
+    () =>
+      validateData(
+        "photos",
+        {
+          title: "Photo",
+          src: "",
+          alt: "",
+          caption: "",
+          width: 40,
+          height: 30,
+          shape: "wide",
+        },
+        true,
+      ),
+    CmsError,
+  );
+  assert.throws(
+    () =>
+      validateData(
+        "blogs",
+        {
+          ...blog("too-many-images"),
+          html:
+            "<p>Story</p>" +
+            Array.from(
+              { length: 101 },
+              (_, index) =>
+                `<img src="/media/${index.toString(16).padStart(64, "0")}/1600.webp" alt="Illustration"/>`,
+            ).join(""),
+        },
+        true,
+      ),
+    CmsError,
+  );
 });
 function blog(slug: string) {
   return {

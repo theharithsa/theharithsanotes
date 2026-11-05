@@ -280,6 +280,34 @@ export function validateData(
         .join("; "),
     );
   const data = result.data as EntryData;
+  if (
+    publish &&
+    new Set(
+      [...serialized.matchAll(/\/media\/([a-f0-9]{64})\//g)].map(
+        (match) => match[1],
+      ),
+    ).size > 100
+  )
+    throw new CmsError(
+      "INVALID_CONTENT",
+      413,
+      "Use at most 100 uploaded images in one entry",
+    );
+  if (publish && section === "photos" && (!data.src || !data.alt))
+    throw new CmsError(
+      "INVALID_CONTENT",
+      400,
+      "Add a photograph and descriptive alternative text",
+    );
+  if (publish && section === "entertainment") {
+    const poster = data.poster as EntryData;
+    if (!poster.src || !poster.alt)
+      throw new CmsError(
+        "INVALID_CONTENT",
+        400,
+        "Add the real poster and its alternative text before publishing",
+      );
+  }
   if (section === "pages" && !["home", "meet-vish"].includes(String(data.slug)))
     throw new CmsError("INVALID_CONTENT", 400, "Choose an existing core page");
   if (typeof data.html === "string") data.html = cleanHtml(data.html);
