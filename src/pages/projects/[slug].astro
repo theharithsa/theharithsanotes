@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import ProjectArt from "../../components/ProjectArt.astro";
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/projects";
 export const getStaticPaths = (() =>
@@ -30,13 +31,7 @@ const { project } = Astro.props;
     <div class="wrap project-detail-layout">
       <div class="project-detail-story">
         <figure class="project-detail-cover">
-          <img
-            src={project.image}
-            alt={project.imageAlt}
-            width="1536"
-            height="1024"
-            fetchpriority="high"
-          />
+          <ProjectArt project={project} detail />
           <figcaption>Concept illustration / {project.title}</figcaption>
         </figure>
         <section aria-labelledby="overview-heading">

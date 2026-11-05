@@ -1,16 +1,33 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import type { Project } from "../data/projects";
 interface Props {
   project: Project;
+  detail?: boolean;
 }
-const { project } = Astro.props;
+const { project, detail = false } = Astro.props;
+const covers = import.meta.glob<{ default: ImageMetadata }>(
+  "../../public/images/projects/*-concept-v1.png",
+  { eager: true },
+);
+const cover = covers[`../../public${project.image}`]?.default;
+if (!cover) throw new Error(`Missing project cover: ${project.slug}`);
 ---
 
-<img
+<Image
   class="project-concept"
-  src={project.image}
+  src={cover}
   alt={project.imageAlt}
-  loading="lazy"
-  width="1536"
-  height="1024"
+  width={detail ? 1200 : 800}
+  widths={detail ? [600, 900, 1200] : [400, 600, 800]}
+  sizes={
+    detail
+      ? "(max-width: 760px) 92vw, (max-width: 1000px) 60vw, 900px"
+      : "(max-width: 600px) 92vw, (max-width: 1000px) 45vw, 400px"
+  }
+  format="webp"
+  quality={82}
+  loading={detail ? "eager" : "lazy"}
+  fetchpriority={detail ? "high" : "auto"}
 />

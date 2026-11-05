@@ -312,7 +312,18 @@ test("every project opens a researched detail page with a distinct cover and ver
     assert.ok(project.overview.join(" ").length > 300);
     assert.equal(project.features.length, 4);
     assert.ok(page.includes("Concept illustration"));
-    assert.ok(page.includes(`src="${project.image}"`));
+    const renderedImage = [...page.matchAll(/<img\b[^>]*>/g)]
+      .map((match) => match[0])
+      .find((tag) => tag.includes('class="project-concept"'));
+    assert.ok(renderedImage?.includes("srcset="));
+    assert.ok(renderedImage?.includes(`${project.slug}-concept-v1`));
+    assert.ok(renderedImage?.includes(".webp"));
+    const imagePath = renderedImage.match(/src="([^"]+)"/)[1];
+    const optimizedImage = await readFile(new URL(`dist${imagePath}`, root));
+    assert.ok(
+      optimizedImage.length < 100000,
+      `Oversized project image: ${project.slug}`,
+    );
     const image = await readFile(new URL(`public${project.image}`, root));
     assert.equal(image.subarray(1, 4).toString(), "PNG");
     assert.equal(image.readUInt32BE(16), 1536);

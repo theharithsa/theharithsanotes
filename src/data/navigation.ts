@@ -44,7 +44,7 @@ export const navigation = [
     title: "From a question to something useful.",
     description:
       "Small experiments, open-source tools, and products for everyday life.",
-    image: "/images/projects/app-launchpad-concept-v1.png",
+    image: "/images/projects/aroha.webp",
     links: [
       { label: "All projects", href: "/projects" },
       { label: "SalesDrone", href: "/projects/salesdrone" },
