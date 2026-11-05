@@ -17,3 +17,6 @@ Postdeploy: HTTP pages/assets, canonical URLs and preserved article slugs; corre
 
 
 1.3.1 / issue #7: five local promotional posters, shared poster component, official links and media metadata; no dependency, database, monitoring or permissions changes. Review version 7c95643d040ce258 verified against artifact bytes; previous review version fc050dd9395f0644 is the rollback source. No production/domain transition.
+
+
+1.4.0 / issue #8 corrects archive/detail poster placement, changes the shared wordmark and technical typography, and adds two pinned self-hosted font packages with notices. Review version 9cf264c03c868b32 verified against tested artifact bytes; rollback source is 7c95643d040ce258. No data, auth, monitoring or hosted-service changes; production/domain/merge remain separate.

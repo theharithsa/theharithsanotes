@@ -2,8 +2,8 @@
   "$schema": "../schemas/evidence.schema.json",
   "schemaVersion": 1,
   "application": "The Harithsa Notes",
-  "revision": "eae5cc13e0f0e3c46b479b6646b541d057e048aa",
-  "release": "1.3.1 review preview",
+  "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+  "release": "1.4.0 review preview",
   "checks": [
     {
       "id": "typescript",
@@ -292,6 +292,51 @@
       "observedAt": "2026-11-05T03:38:54.012166+00:00",
       "environment": "local Windows",
       "artifact": null
+    },
+    {
+      "id": "design-types-36-files",
+      "status": "passed",
+      "command": "npm run check",
+      "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+      "observedAt": "2026-11-05T03:52:01.794708+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "design-build-30-pages",
+      "status": "passed",
+      "command": "npm run build",
+      "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+      "observedAt": "2026-11-05T03:52:01.794708+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "design-site-tests-10",
+      "status": "passed",
+      "command": "npm test",
+      "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+      "observedAt": "2026-11-05T03:52:01.794708+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "design-foundation-ready",
+      "status": "passed",
+      "command": "python scripts/check_foundation.py --ready --json",
+      "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+      "observedAt": "2026-11-05T03:52:01.794708+00:00",
+      "environment": "local Windows",
+      "artifact": null
+    },
+    {
+      "id": "design-markdown-links",
+      "status": "passed",
+      "command": "python scripts/check_links.py",
+      "revision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+      "observedAt": "2026-11-05T03:52:01.794708+00:00",
+      "environment": "local Windows",
+      "artifact": null
     }
   ],
   "limits": [
@@ -302,13 +347,13 @@
     "Domain DNS and production cutover not performed."
   ],
   "lifecycle": {
-    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/7",
+    "issueUrl": "https://github.com/theharithsa/theharithsanotes/issues/8",
     "pullRequestUrl": "https://github.com/theharithsa/theharithsanotes/pull/2",
-    "checkedHeadSha": "eae5cc13e0f0e3c46b479b6646b541d057e048aa",
+    "checkedHeadSha": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
     "mergeSha": null,
     "issueResolution": null,
-    "deploymentId": "Firebase review version 7c95643d040ce258",
-    "artifactDigest": "a52ec881604cb73efbf69017603542e3fd1d0caf6b1fc83a2dcef07da387bbb1",
+    "deploymentId": "Firebase review version 9cf264c03c868b32",
+    "artifactDigest": "bf8e772acc63f6b1341dd5a86f6db65be06d4d25139cc6d4fe640251d1439728",
     "sdlcEvidence": [
       {
         "authority": "firebase-cli",
@@ -421,6 +466,32 @@
         "sourceRevision": "eae5cc13e0f0e3c46b479b6646b541d057e048aa",
         "status": "six HTML routes and five poster images returned 200 and matched tested artifact bytes",
         "observedAt": "2026-11-05T03:38:54.012166+00:00"
+      },
+      {
+        "authority": "github-api",
+        "stage": "checks-passed",
+        "sourceRevision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+        "checks": [
+          "foundation",
+          "website",
+          "GitGuardian Security Checks"
+        ],
+        "observedAt": "2026-11-05T03:52:01.794708+00:00"
+      },
+      {
+        "authority": "firebase-cli",
+        "stage": "preview-deployed",
+        "sourceRevision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+        "version": "9cf264c03c868b32",
+        "url": "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",
+        "observedAt": "2026-11-05T03:52:01.794708+00:00"
+      },
+      {
+        "authority": "http-artifact-comparison",
+        "stage": "preview-verified",
+        "sourceRevision": "d9f7972c2e04c5078a98bc8ee99dd2e7f3935561",
+        "status": "home, Entertainment, screen detail, technical article and Projects returned 200 and matched tested artifact bytes",
+        "observedAt": "2026-11-05T03:52:01.794708+00:00"
       }
     ]
   }
