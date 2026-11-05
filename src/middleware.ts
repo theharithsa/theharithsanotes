@@ -5,6 +5,7 @@ import {
   propagation,
   trace,
   SpanStatusCode,
+  SpanKind,
 } from "@opentelemetry/api";
 import { authorize } from "./server/auth.ts";
 import { firestoreEnabled } from "./server/config.ts";
@@ -173,6 +174,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
             );
           return response;
         },
+        [],
+        SpanKind.SERVER,
       );
       if (globalThis.__harithsaTelemetry)
         await Promise.race([

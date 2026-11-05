@@ -4,6 +4,7 @@ import {
   trace,
   metrics,
   SpanStatusCode,
+  SpanKind,
   type Attributes,
   type Link,
 } from "@opentelemetry/api";
@@ -205,19 +206,24 @@ export async function observe<T>(
   attributes: Attributes,
   operation: () => Promise<T>,
   links: Link[] = [],
+  kind: SpanKind = SpanKind.INTERNAL,
 ): Promise<T> {
-  return tracer.startActiveSpan(name, { attributes, links }, async (span) => {
-    try {
-      return await operation();
-    } catch (error) {
-      span.setAttribute("error.type", errorCode(error));
-      span.setStatus({ code: SpanStatusCode.ERROR });
-      operationalLog("operation.failed", attributes, error);
-      throw error;
-    } finally {
-      span.end();
-    }
-  });
+  return tracer.startActiveSpan(
+    name,
+    { attributes, links, kind },
+    async (span) => {
+      try {
+        return await operation();
+      } catch (error) {
+        span.setAttribute("error.type", errorCode(error));
+        span.setStatus({ code: SpanStatusCode.ERROR });
+        operationalLog("operation.failed", attributes, error);
+        throw error;
+      } finally {
+        span.end();
+      }
+    },
+  );
 }
 export async function firebaseOperation<T>(
   operation: string,
@@ -233,7 +239,8 @@ export async function firebaseOperation<T>(
       "db.system.name":
         model === "authentication"
           ? "gcp.firebase_auth"
-          : model === "media" && ["upload", "download", "copy"].includes(operation)
+          : model === "media" &&
+              ["upload", "download", "copy"].includes(operation)
             ? "gcp.cloud_storage"
             : "gcp.firestore",
       "db.operation.name": operation,

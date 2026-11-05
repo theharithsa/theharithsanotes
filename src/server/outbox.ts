@@ -13,7 +13,7 @@ import {
   workerOutcomes,
   workerLag,
 } from "./telemetry.ts";
-import { trace, SpanStatusCode } from "@opentelemetry/api";
+import { trace, SpanStatusCode, SpanKind } from "@opentelemetry/api";
 
 export async function drainAudit(
   limit = 100,
@@ -138,6 +138,7 @@ export async function drainAudit(
                   await response.arrayBuffer();
                 },
                 producerLinks(event),
+                SpanKind.CLIENT,
               );
             } catch {
               status = 0;

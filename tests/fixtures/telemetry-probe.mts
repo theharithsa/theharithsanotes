@@ -8,6 +8,7 @@ import {
   producerLinks,
 } from "../../src/server/telemetry.ts";
 import type { AuditEvent } from "../../src/server/models.ts";
+import { SpanKind } from "@opentelemetry/api";
 let produced: AuditEvent | undefined;
 await Promise.all(
   ["alpha", "beta"].map((label) =>
@@ -41,5 +42,12 @@ await Promise.all(
   ),
 );
 if (produced)
-  await observe("probe.delivery", {}, async () => {}, producerLinks(produced));
+  await observe(
+    "probe.delivery",
+    {},
+    async () => {},
+    producerLinks(produced),
+    SpanKind.CLIENT,
+  );
+await observe("probe.server", {}, async () => {}, [], SpanKind.SERVER);
 await globalThis.__harithsaTelemetry?.shutdown();

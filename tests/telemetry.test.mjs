@@ -126,6 +126,18 @@ test("binary OTLP preserves concurrent parentage, correlated logs, delta metrics
       spans.find((span) => string(span, 5) === `probe.${label}`),
     );
     assert.ok(roots.every(Boolean));
+    const serverSpan = spans.find((span) => string(span, 5) === "probe.server");
+    assert.equal(Number(serverSpan.get(6)[0]), 2);
+    const delivered = spans.find(
+      (span) => string(span, 5) === "probe.delivery",
+    );
+    assert.equal(Number(delivered.get(6)[0]), 3);
+    const linked = messages(delivered, 13)[0];
+    const producer = spans.find(
+      (span) => string(span, 5) === "probe.alpha.child",
+    );
+    assert.deepEqual(linked.get(1)[0], producer.get(1)[0]);
+    assert.deepEqual(linked.get(2)[0], producer.get(2)[0]);
     assert.notEqual(
       roots[0].get(1)[0].toString("hex"),
       roots[1].get(1)[0].toString("hex"),
