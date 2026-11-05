@@ -1,0 +1,207 @@
+{
+  "identity": "The Margin",
+  "version": "1.0.0",
+  "ownerApproved": "2026-11-06",
+  "palette": {
+    "ink": "#242321",
+    "paper": "#FAF7F0",
+    "accent": "#C75C3A"
+  },
+  "font": {
+    "family": "Bodoni Moda",
+    "license": "SIL OFL 1.1",
+    "sourceGitBlob": "c5d582f8003ae692761dd8e9ce69de23cb9fea53",
+    "sha256": "550f5e34ee0a828d7941b1fe9bc58b34e5260d3f33a61532e6d0a0114e79a5cf",
+    "axes": {
+      "wght": 650,
+      "opsz": 12
+    }
+  },
+  "customGeometry": "Original h, book-spine cutout, bookmark ribbon and optical small mark",
+  "exports": [
+    {
+      "file": "README.txt",
+      "sha256": "a55109bb4b2213aa66f4f8c57e47de0f0d6201d3e472412158c34a1e553affeb"
+    },
+    {
+      "file": "app-icon-192.png",
+      "sha256": "764ddec098845014132aa5c294e8b3cca995be74a51ed362b4d3dbd6fbb239e5"
+    },
+    {
+      "file": "app-icon-512.png",
+      "sha256": "7815a7509965efc77db87854dc04a5a5e81ac414f8f7e119e4866b897261951c"
+    },
+    {
+      "file": "app-icon-maskable-192.png",
+      "sha256": "d7af5bac99a4e678a1b051c2400cddf2166880de95929696c8781b3962289cc0"
+    },
+    {
+      "file": "app-icon-maskable-512.png",
+      "sha256": "fa4d46dcb97a599525492df0e52c6a0ddc7b8eb1f0220c487b11141f3b75b6cc"
+    },
+    {
+      "file": "app-icon-maskable.svg",
+      "sha256": "18da3d66d701f70f1a26fa4a9077dc4da9c3e9abbdc3d28171248eef731b0fbe"
+    },
+    {
+      "file": "app-icon.svg",
+      "sha256": "c59e18bd01a9f8e23f9303d5c55dd95d923e422b49d4311859b99cd389e0fc1e"
+    },
+    {
+      "file": "apple-touch-icon.png",
+      "sha256": "c9909ef6ea447f15498005e2c6bc8e62311ba77504a24296c09c1058c243e6dd"
+    },
+    {
+      "file": "favicon-16.png",
+      "sha256": "ce5eb354ab46fcb2bf4bcf70d0b7235cd872e2036cfa593c6b34ab4deb00e1f8"
+    },
+    {
+      "file": "favicon-32.png",
+      "sha256": "3e998af0a44c38db05ba81e708f2da93ad466b9264eab22cf1d418f21ed2db3e"
+    },
+    {
+      "file": "favicon-48.png",
+      "sha256": "dcbcd9801d80eefa64065cc6cd8634b06b8154a7dfdee7846f51596010011e47"
+    },
+    {
+      "file": "favicon.ico",
+      "sha256": "625ee89436d8d9054781a05018102f4cd3fba4a3505e795f9cb5d098afe55a50"
+    },
+    {
+      "file": "favicon.svg",
+      "sha256": "2e897b4e6ed3f16acc096d514b40fb88fba11f8b977a17e328c5d98c00eab2de"
+    },
+    {
+      "file": "icon-paper-512.png",
+      "sha256": "9482bbc768299798b02ec6e7698597f7661be4e028189849de7beec2a2beb4f6"
+    },
+    {
+      "file": "icon-paper.svg",
+      "sha256": "747142d1b3dc776175f3d22618236aeadc1975d4688d38ffd6f926c7821be098"
+    },
+    {
+      "file": "identity-sheet.png",
+      "sha256": "15aef779521a1fd8da24ba9cd6004decc1209caa864efa66bc1715dbf6ba5bd7"
+    },
+    {
+      "file": "identity-sheet.svg",
+      "sha256": "938beb8dd0028e2cca9ef004fd09c2da2cb83a74a8b8a13064fc37d8f2cf405a"
+    },
+    {
+      "file": "logo-horizontal-black.png",
+      "sha256": "7dd963858ded26fbbe51b96e8df19c5751925758616ff8f1f491427b8184c51b"
+    },
+    {
+      "file": "logo-horizontal-black.svg",
+      "sha256": "06c49dcd5cc2d3f1bdffec8b2d118e936791594cb3e9ae86ec9ed25e00b344ca"
+    },
+    {
+      "file": "logo-horizontal-ink.png",
+      "sha256": "db4c44262eaab1b46b677788d425b5b4cc05a11ffc3b47195a307e713ad33109"
+    },
+    {
+      "file": "logo-horizontal-ink.svg",
+      "sha256": "1c7d53695a7b996896d717e649968ba340a321fa1bad1a1db8dd38895f467655"
+    },
+    {
+      "file": "logo-horizontal-inverse.png",
+      "sha256": "fa40684a65862829bad35fb64b2da64b739aa64af68cccc4c3cbd91932c1b56e"
+    },
+    {
+      "file": "logo-horizontal-inverse.svg",
+      "sha256": "bcdb9a67163779c6b22e705b103e70d72f749cea85ee731b9f445bdfc1774a9f"
+    },
+    {
+      "file": "logo-horizontal-white.png",
+      "sha256": "258566b2cce0096da918484bbb7de4b8f32999eb335c4909ca580146a9288e5c"
+    },
+    {
+      "file": "logo-horizontal-white.svg",
+      "sha256": "e253dc7a4c051d89f91b56e5d8ee5c833b25c3b28e9200b1f983a266d58725fa"
+    },
+    {
+      "file": "logo-vertical-black.png",
+      "sha256": "98f043dc3fdec69df44d26bdfbbc919741778fa32e006b6ef79c113397115fa5"
+    },
+    {
+      "file": "logo-vertical-black.svg",
+      "sha256": "bf5535026ddf61fc94b9629ce0db8974cdb0c2df57a1194cd911f247f6a2fa99"
+    },
+    {
+      "file": "logo-vertical-ink.png",
+      "sha256": "0d6d0ae175392d4dc2593984ea4e4374ac3fc17bce7f695b8d55af529d1bcbdd"
+    },
+    {
+      "file": "logo-vertical-ink.svg",
+      "sha256": "4ce8f41fa2ca89508a60f56055410e9621f2f125bbf23cf0acdc2e8427b7b55d"
+    },
+    {
+      "file": "logo-vertical-inverse.png",
+      "sha256": "123e54578ca86c50e9e200e5737bd223973c98f19fe87169df646e6ea35d5b9b"
+    },
+    {
+      "file": "logo-vertical-inverse.svg",
+      "sha256": "fb40a09ff8371201f7f72ccd00851d7450b2f32690a123e4e7f24cebc3063e54"
+    },
+    {
+      "file": "logo-vertical-white.png",
+      "sha256": "cfc373e6644cda73771cbf54627624cc147870227ab6748aedb881d641d4198b"
+    },
+    {
+      "file": "logo-vertical-white.svg",
+      "sha256": "ca5269754881aa1741669fba303f0a60d0c37a09128f920737f37f8ec8d6dc75"
+    },
+    {
+      "file": "mark-black.png",
+      "sha256": "8bcad2d9b2f37b259f80af021d58ce174927ed3620e68d30f54e6b00f83a0761"
+    },
+    {
+      "file": "mark-black.svg",
+      "sha256": "21ad94e39d37cae5fddfefad36af51370a3b8dcda55fc1d25d56840be28c5617"
+    },
+    {
+      "file": "mark-ink.png",
+      "sha256": "8bdf658210e6f1e081c3c88d62d978e3e08e582da1e1ba71b0e98fd2ea0ae594"
+    },
+    {
+      "file": "mark-ink.svg",
+      "sha256": "600e4e080ed0ac27cfaadb94a9f5fa52d52ceb9e876cfcfbe37a5785e238a954"
+    },
+    {
+      "file": "mark-inverse.png",
+      "sha256": "3461ab36f1937318b241e993ceeae6d6a376b72742b28c858ae068c47dead476"
+    },
+    {
+      "file": "mark-inverse.svg",
+      "sha256": "4cd3a77dbfe6310f0bb337609f4b3fea319af66e8a033dd95f97724944f7cf65"
+    },
+    {
+      "file": "mark-white.png",
+      "sha256": "744d6a927a26a2a636a97d9de02f998fe4a539136bad4f575fbfdbd633b56c77"
+    },
+    {
+      "file": "mark-white.svg",
+      "sha256": "54d8b622646d2caece376fd25e3128e905d17eba02800e46e570b9fa1b1a1f6e"
+    },
+    {
+      "file": "profile-1024.png",
+      "sha256": "504faf25a19eafd76d5a3f02b481f319369e8ece5608a112aaca601cafadbed4"
+    },
+    {
+      "file": "profile-512.png",
+      "sha256": "934f7b485fc3a733cafab14e141f89b8993279bbb70c2b397c14237a7e79aecd"
+    },
+    {
+      "file": "profile.svg",
+      "sha256": "e2eaeb9498a9c9c4bc4ba54398ff657d931ea86be80ce232650e2bd2a1eb78ec"
+    },
+    {
+      "file": "social-card.png",
+      "sha256": "8ca53015cc8bb7fac8967d1112cdbce2107d0ac896b3fce5b4234385ba9b5bdc"
+    },
+    {
+      "file": "social-card.svg",
+      "sha256": "6651abc02b57e18682c3941da2b4234ec0ae8dacc66afa8fa9c9d58c7d0bd519"
+    }
+  ]
+}

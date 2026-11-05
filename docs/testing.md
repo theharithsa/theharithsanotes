@@ -1,5 +1,7 @@
 # Website and foundation checks
 
+Issue #25 / 1.11.0: brand tests check every declared hash, self-contained logo paths, page icon references, manifest sizes, transparent inverse PNGs, all ICO entries and maskable safe circle. Browser checks cover light/dark identity, desktop disclosure, keyboard mobile menu/Escape and 320/390px home layout. Book-decoration overflow and header sizing found at 320px were corrected. PR #26 owns checked-head and deployment receipts. No registrar mutation; the additional domain was cancelled and its newly created pending Firebase resources removed.
+
 ## 1.10.0 browsing and theme coverage
 
 Nineteen Node tests cover the 50 read-only books, editorial genre integrity and real browser-script filtering (Science=6; Hawking=4; five-star Hawking=2), project topic/reset/lead states, theme default/manual/system/cross-tab/storage-failure behavior, metadata/canonical/sitemap/404 rules and accurate original article/book structured fields. Existing source-body/media, reading review, navigation, project, feed, secrets and analytics-consent regressions remain covered. Astro builds 174 pages. Final current-head CI and deployment receipts are recorded separately in issue #21.

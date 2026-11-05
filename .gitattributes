@@ -1,0 +1,5 @@
+# Frozen brand assets are byte-addressed by identity.json on every platform.
+public/brand/** -text
+public/favicon.svg -text
+public/favicon.ico -text
+assets/brand-identity/source/** -text

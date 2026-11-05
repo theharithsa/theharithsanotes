@@ -58,5 +58,4 @@ See [observability](docs/observability.md), [decisions](docs/decisions.md), [tes
 
 The repository was generated from `theharithsa/app-launchpad-template` v1.9.0, revision `f04c042a9e000f606982863518fa7bb9cfbb7d85`. The inherited root LICENSE covers template material. Article content and new application assets remain the author’s; no additional open-source license is granted by this project.
 
-
-Typography: Source Serif 4 and Public Sans for editorial pages, Racing Sans One for the original motorsport-inspired wordmark, and JetBrains Mono for technical content. All are self-hosted; font licenses are retained in LICENSES. Promotional film/series images retain their respective rights-holder ownership; sources are in docs/screen-media.json.
+Typography: Source Serif 4 and Public Sans for editorial pages, and JetBrains Mono for technical content. The approved Margin wordmark uses path artwork derived from Bodoni Moda with an original bookmark h; no logo font download is required. See the [brand system and export kit](docs/brand-system.md). Font licences remain in LICENSES. Promotional film/series images retain their respective rights-holder ownership; sources are in docs/screen-media.json.
