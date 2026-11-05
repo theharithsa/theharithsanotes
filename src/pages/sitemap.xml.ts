@@ -1,12 +1,47 @@
 import type { APIRoute } from "astro";
-import { articles } from "../lib/content";
-import { screenNotes } from "../data/screen-notes";
-import { listening } from "../data/interests";
-import { projects } from "../data/projects";
+import {
+  getArticles,
+  getBooks,
+  getProjects,
+  getListening,
+  getScreenNotes,
+  getGogs,
+} from "../lib/journal";
 import { site } from "../data/site";
-import { completedBooks } from "../data/books";
-export const GET: APIRoute = () =>
-  new Response(
-    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${["", "/blogs", "/books", ...completedBooks.map((book) => `/books/${book.slug}`), "/podcasts", "/podcasts/created", ...listening.map((note) => `/podcasts/listening/${note.slug}`), "/entertainment", "/meet-vish", "/gogs", "/projects", "/gallery", "/privacy", ...projects.map((project) => `/projects/${project.slug}`), ...screenNotes.map((note) => `/entertainment/${note.slug}`), ...articles.map((article) => `/${article.slug}`)].map((path) => `<url><loc>${site.url}${path}</loc></url>`).join("")}</urlset>`,
+export const GET: APIRoute = async () => {
+  const [articles, books, projects, listening, screenNotes, gogs] =
+    await Promise.all([
+      getArticles(),
+      getBooks(),
+      getProjects(),
+      getListening(),
+      getScreenNotes(),
+      getGogs(),
+    ]);
+  const paths = [
+    "",
+    "/blogs",
+    "/books",
+    "/projects",
+    "/podcasts",
+    "/podcasts/created",
+    "/entertainment",
+    "/meet-vish",
+    "/gogs",
+    "/gallery",
+    "/privacy",
+    ...books.map((book) => `/books/${book.slug}`),
+    ...projects.map((project) => `/projects/${project.slug}`),
+    ...listening.map(
+      (note) =>
+        `/podcasts/${note.kind === "created" ? "created" : "listening"}/${note.slug}`,
+    ),
+    ...screenNotes.map((note) => `/entertainment/${note.slug}`),
+    ...articles.map((article) => `/${article.slug}`),
+    ...gogs.map((note) => `/gogs/${note.slug}`),
+  ];
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...new Set(paths)].map((path) => `<url><loc>${site.url}${path}</loc></url>`).join("")}</urlset>`,
     { headers: { "Content-Type": "application/xml; charset=utf-8" } },
   );
+};

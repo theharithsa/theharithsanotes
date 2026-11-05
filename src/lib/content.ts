@@ -6,6 +6,8 @@ import mediumSources from "../data/medium-sources.json";
 import type { Topic } from "../data/site";
 
 export interface Article {
+  dateModified?: string;
+  tags?: string[];
   slug: string;
   title: string;
   description: string;

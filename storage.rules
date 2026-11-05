@@ -1,0 +1,7 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // No direct client URLs or public download tokens. The server checks visibility.
+    match /{object=**} { allow read, write: if false; }
+  }
+}

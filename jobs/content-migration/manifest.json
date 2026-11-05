@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "010921-sanely-september",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "d2030f4557a782fbf1b27ad5325b79ef5b0dc3ae63476d045e5e2e399031edb1"
+  },
+  {
+    "id": "13-steps-for-a-better-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "d87005b03eba0bbb2fc1b09a4efc7d805dfd6c8749429ae9a8c321aadcccbd19"
+  },
+  {
+    "id": "2020-will-be-the-legacy-of-2019",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "cbe20fffc4e807e70cdf958aac5d69661867da451d4c1aec4cf3ec69a04b846b"
+  },
+  {
+    "id": "220821-newsletter",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "e8c976e8dbaff98148fe674abeb0836e5891b83753ec4f59d51e1e8e5d336ae4"
+  },
+  {
+    "id": "a-glimpse-into-hypermodal-ai-and-its-potential-in-indian-markets",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "575ec2019a8cb85c4333d18168585d346ccf3f5b3ca73808978de577a21d933a"
+  },
+  {
+    "id": "a-journey-of-kindness-innocence-of-adaptation",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "31156ce10c0ec5b10c07f4551aee818424ffe4141e0a8a6a8b0166bbdcd8800d"
+  },
+  {
+    "id": "a-poem-of-family",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "64e27ce5275d110873c41f79e3a9b3bb81a5822184ea5846a5cc40c6ea8851d9"
+  },
+  {
+    "id": "a-spiritual-book-that-talks-about-science-of-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "a7d2f8c3344a078b4dc5338edb095ab2e64e7f8e36c6879e1c96965d61408eea"
+  },
+  {
+    "id": "a-story-of-happy-and-the-pappy",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "7fa66bdb1de779c28a0060964d6e3eb32d5d722e646001d978fab46b6b05b495"
+  },
+  {
+    "id": "a-technologist-s-journey-exploring-boundaries-with-chatgpt",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "2ff10171778b6a38bdd28a9f5f3bfc3aa30eebc28f6c2344ff9c7526a451186f"
+  },
+  {
+    "id": "adding-tls-certificate-to-dynatrace-cluster-nodes",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "7008f291084eeae5c24f1f7076a4910a850076ea9b4abded8ddf4573719d5fe2"
+  },
+  {
+    "id": "adrenaline-for-happiness",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "f4bcfa5099cb8284059a8b4d961c1be3f92c6910d04d0d536b03d4a5a6a30c6f"
+  },
+  {
+    "id": "aiops-and-devops-what-s-the-big-deal-about-them",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "d6d6f54efd03f5a847ad91190b559c9a0a915ffad9f06b7efe45aec6333277dc"
+  },
+  {
+    "id": "an-acoustic-mind-the-song-of-art",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "c4c29113c75dc7d83a3ff007c16700457d38bfae7812f373989b9654cc070797"
+  },
+  {
+    "id": "apis-101",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "de16574b3639b02e1072b202b27a375ccb1fcffbe6da5deb39c777c335e8f5d1"
+  },
+  {
+    "id": "apps-that-works-for-me-everyday",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "2a241084170125fff6d8a1ab76ee5a0e6b9d9b7beafbb859b238fcced59d5a87"
+  },
+  {
+    "id": "artificial-intelligence-the-future-is-then-and-now",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0c0e32b9e42cd1ac31a680bfa5770d65a2e17d895befbbbfc3af407b249ad9ac"
+  },
+  {
+    "id": "be-determined-to-hit-the-bullseye",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "be1164739bdb7f402160075d3847277982da5d4669e6cd2f5b010f215d17094b"
+  },
+  {
+    "id": "be-fearless-before-making-decisions",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "83caa555cc1e547f43f27d2c1110d4baed0f9f05931936b4f16ee94288d47f68"
+  },
+  {
+    "id": "being-an-idiot-is-not-an-irresponsible-thing",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "194abe9020a9fdd4188110e3a6c4d255476f1f50a77a8461154a8cdac66ce443"
+  },
+  {
+    "id": "betrayal-doesn-t-exist",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "2cae31b53867041aa2f53c07cef586567190fac77d918d0e65eafd5c104c321d"
+  },
+  {
+    "id": "chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "1d8182bed8e237800f3313494595a76ca18c598560870bb320ecb53c45b27692"
+  },
+  {
+    "id": "decluttering-from-work-and-personal-life-to-being-a-minimalistic",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "17653a4fabf265f2184137cbe5553202f93ee3e116e3ba271eb9cddc5662f64b"
+  },
+  {
+    "id": "definition-of-photography",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "a49efa7fb23f5730906a8ee38f9184c2606087dae26a0435c9c78485613c91ae"
+  },
+  {
+    "id": "entry-of-dynatrace",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "cf94ef2b8fdcdd5dd3b2c3953bf4fd0ea57ecb0a19eaa948d3f28f68f4173295"
+  },
+  {
+    "id": "epic-friendships-exist",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "9a0dc70403813b36274444ca4c905d099edb0c967427b311bb55c42cca9d4fb6"
+  },
+  {
+    "id": "essentialism-not-about-set-of-principles",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "6124eec6694da207855ebfabecd80a7512b9b2c023137b77852e0a00e78ffa35"
+  },
+  {
+    "id": "evolution-of-observability",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "a0d4a8a1be54c25d5c6b15879107832ef762ca811020f0c452a704d2da66cf92"
+  },
+  {
+    "id": "exploring-the-future-with-hypermodal-ai",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "95672cac4a91d4eee66f380e1dc642b7f6fc1d0c05efa48ada61980cf037bfea"
+  },
+  {
+    "id": "few-of-the-biggest-questions-about-the-universe-and-mankind",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "5e76d4ce655e242814336d0e9c8af3890ced0640fd63f9204048e2de1a434e02"
+  },
+  {
+    "id": "five-questions-that-people-are-asking-about-career",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "9c7704e4c7fdda8a9e27ba877cc4335124fd0557573057a218ea30a955f35da3"
+  },
+  {
+    "id": "freedom",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "069497b6fbf17348285125d5bdaa884ee8224d6fbca3c25acec7b3b625952949"
+  },
+  {
+    "id": "fun-a-tale-of-mr-chocolate",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "f5bf8173e180ae02f2ad5d92328176c49da1e22b16c6391dff482acfd85b6e75"
+  },
+  {
+    "id": "getting-started-with-azure-az-900-exam",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "4e81d4a9cba23432a7ada6eb9111c8a0339e5b296526dfddccab428edbc71682"
+  },
+  {
+    "id": "getting-started-with-the-basics-of-dynatrace",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "11ef38e7fbce36e8c5c6af8af9860ffbb08be8689ef62fe813e2f9d8fcba58f0"
+  },
+  {
+    "id": "guide-to-an-adventurous-lifestyle",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "3df6ed0e256356bed92d1a3e60bab2c48aca7d35ee3b001a185542cbc4bdddd9"
+  },
+  {
+    "id": "having-hope-is-like-telling-life-not-to-give-up",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "fdda9ce28a0003b321dc49655e64bcc6c64a2915bc2fe1de8ee6fc500f0f934c"
+  },
+  {
+    "id": "here-s-what-everyone-can-learn-from-the-80-20-principle",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "8f51b26ade056669ffcf8c7f88b986f62788c990b7d772ffdfdc7c7f194f5f84"
+  },
+  {
+    "id": "how-do-we-define-the-purpose-of-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "698b0524bf4a67e7696b5e3dcbcc9eb1ccf3913bd26db5fad61f8c7c1a5a905b"
+  },
+  {
+    "id": "how-i-created-the-mission-statement-of-my-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "38e60f683ecc96e477a97679ea4ab0218c76da6647495f481392ccd5096afbe4"
+  },
+  {
+    "id": "how-mission-and-vision-could-get-you-on-omg-insider",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "6aa3a2e61138d60cc7f8af67b7a2d1c36d6c213e3411fa3b8e727742845e5876"
+  },
+  {
+    "id": "how-to-analyze-an-application-performance",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0b9fab990bc64a0314826bf8f4d9d30bcc1377a4deb3fc34fd0f964a2d9519a5"
+  },
+  {
+    "id": "how-to-bargain-with-attitude",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0b29bccde8defe2b6ed703f3612d24282ac90051a2615f484a765fcd29e3b611"
+  },
+  {
+    "id": "how-to-overcome-disappointment",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "203605edda648c42eaa570b3c21838d565c54ae73b0a598b6b10a75b44762f21"
+  },
+  {
+    "id": "human-emotions",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "3a8c83920b14c97b410219850cc6dab8e34db9a854c45a0ad946a0dd75cf6719"
+  },
+  {
+    "id": "inner-dna-of-teams-that-win-greatness-teams-that-pursue-revenue-target-model",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "8992402c05580c3f4aba0bbe35d48178c4b31200448dfa9a2f9bd96d967f6f1d"
+  },
+  {
+    "id": "internet-communication-how-browsers-render-webpages",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "c23f98f188eb6e783282844138c024e86d660ad83577857113ec1793ce7dfb71"
+  },
+  {
+    "id": "internet-communication-how-browsers-sends-http-requests",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "d681ab540ad30e6246ed60767cc83c1e59c17b13ed9d6a4f13850aba47ebf1cd"
+  },
+  {
+    "id": "introduction-to-git-basics-part-two",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0ab1261f1e6edaa3fbd42d7b464da4e3eaff03f8ad41a0c85958d3fe16e2d856"
+  },
+  {
+    "id": "kindness-is-ingenious",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "fddd616543aa0cc65583aee7c1a15e8ca85b11959365f0eaf4ccf2c720769a63"
+  },
+  {
+    "id": "knowledge",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "898e8762b0bd4cd5d21ea7f5df6d0845f6ba7a8c184b01930fce75446bfa5f68"
+  },
+  {
+    "id": "likings-of-karma",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "05c7ae8c97aa0ee8e88fb1b3de0e38adb1b1b4b957fa9a773c4b6de639434aed"
+  },
+  {
+    "id": "list-of-books-that-changed-my-views-in-2019",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "177be9a08b664e903c084566db8dcac2740b31b3b1742185e9755b8e16411f7f"
+  },
+  {
+    "id": "love-is-the-positive-disintegration",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "92576589acaa26437e178f2b06b8fe3c6b1eef5511fbaa679ca1b4625e3940a1"
+  },
+  {
+    "id": "mcp-server-part-one",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "4245d2f0322544d185bb058edb4e5b46618fe8951417813f3bd0a9a3eb0a90ea"
+  },
+  {
+    "id": "memories-no-more-titles-required",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "5a2987b46676dfc22aa99e7be21a0b8686037291ab02c5a4f6444d282c486810"
+  },
+  {
+    "id": "music-inheritance-of-love",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "9c002238d972ee16db246dd2305e7fa8b759c7de6fc102cb249ad299dc98c6d6"
+  },
+  {
+    "id": "oxygen",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "6c969b44a48c4fff1ce50cfc0e659ef431d747c335866e7bd7c5f2c259af03fa"
+  },
+  {
+    "id": "physics-and-cosmos",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "d8d70355c37bf5acde7b6dbe77d63941ebf82fb6202de3169a025561c483486d"
+  },
+  {
+    "id": "power-is-self-attractive",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "addf500c2a1fdedd5d120330648a92b180e2042fdff799de495d284628b8b249"
+  },
+  {
+    "id": "procrastination-of-deep-thoughts",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "8a16ea4e5836120d6fd78c968e3c3e986caec6d99530d44b0a54899504025cd7"
+  },
+  {
+    "id": "procrastination-of-deep-thoughts-point-of-being-happy-in-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "b26597a40cf736b41f926acaa55ce493bdfea890a267f79595378ec30c336105"
+  },
+  {
+    "id": "science-and-religion",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "237590f135a617b505b484c9fb4e90165e34f0c735677ca9fd367502516f5721"
+  },
+  {
+    "id": "sky-the-boundary-of-limit",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "73263f9e97b8db73d7b61ecfa342f3b45388e6299be79bd5a81083e7dd99c251"
+  },
+  {
+    "id": "sometimes-i-wonder-the-comedy-of-consistency",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "3044ba03d9f48dac90dc10514e0a6f9e730af7531ae8806216e8c8dead8c9cce"
+  },
+  {
+    "id": "the-bat-signal-a-new-era-in-software-bug-detection",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "c419ab7846d2959abba0edbfb2ffebbf9ed0b8100c88117cbe0a9c90271bce3b"
+  },
+  {
+    "id": "the-first-day-at-my-work",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "bbf6a8a8cb27ba913f628f30add359ea1949b5ea8f2046a4c376a530006105c4"
+  },
+  {
+    "id": "the-list-of-best-articles-i-have-read-in-2019",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0856e2b4b22fb66263addbf739e9d7dfa7eaf409c11decc60e6241acf36bb88e"
+  },
+  {
+    "id": "the-power-of-20-minutes-goldilocks-duration",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "2d872b8e4f500ba32bb8719f90398287763ce3832616583fcb695f6ff12d0d16"
+  },
+  {
+    "id": "the-power-of-little-finger-and-legs",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "c99c9386ccab1ae67f6275b0bb00a5bb09d2814c8a613e5357d5290ffab5260d"
+  },
+  {
+    "id": "the-power-of-subconscious-mind",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "79b85b7b05067e9266cb032c050d3a697f2f57cfe45bff4fb9b781afbfc59c36"
+  },
+  {
+    "id": "the-war-room-is-dead",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "56ca570049bfedf0407669cb9822a711ff13cb2e0129432d06097c62e7f5953d"
+  },
+  {
+    "id": "think-trust",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "1da8d3974183608337040a196074a60b85769912a8002476078b69c6ea0b59d6"
+  },
+  {
+    "id": "thoughts-of-5-elements-that-are-responsible-for-effective-thinking",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "69c994514fa6c2b1657d128a6a8c1ffdd5d118d15240cfef2721671872724bf1"
+  },
+  {
+    "id": "three-practices-to-learn-better-in-life",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "11ae73487a6351258e50afca176b949060d699108bdf41ed350aebcd71ee7614"
+  },
+  {
+    "id": "three-steps-to-simplify-life-and-combat-overthinking",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "f4e05a4895db4eece07f9f6e820224b76019bb71cee2478e1bbfacf6b5ca807e"
+  },
+  {
+    "id": "time-management-techniques-at-work",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "453bc7020f1f0ef0dd006d5ffddf0b303e38ee650bd3121523af065fdd4939f8"
+  },
+  {
+    "id": "top-5-javascript-frameworks-and-why-we-need-them",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "e2c6ef683d64ed22ce83c7a3376cc681890ba800867e3b84d081a916c54e006e"
+  },
+  {
+    "id": "tune-in-to-your-habits",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "8ad32832ffe84d3023e49e96aed62a7a6bae71d452738c0ca471dded6c412e11"
+  },
+  {
+    "id": "unmasking-software-bugs-understanding-their-origins-and-impact",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "474a55d66f78c52a8f7b12d420dbcab6327bd77f0f18564e75df4cbbf7fd8490"
+  },
+  {
+    "id": "unravelling-the-components-of-enterprise-cloud",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "dd7ade7e4fe43fcf58e9afcba4f5ecbdc11241257276d0bf7823d5f277e57cce"
+  },
+  {
+    "id": "what-do-we-know-about-sleep",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "ccbba4ea88e0d5f9c2f1ac2c4f262708d9937fea27af820c6ab07ce87ed781e9"
+  },
+  {
+    "id": "what-happened-after-crushing-my-dream",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "44bf399c01b65fff7db24f76558f97ad54da33edf294044168f837b95a17d357"
+  },
+  {
+    "id": "what-is-programming",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "8030078b6b1c5098698a9f32db9ea1c4e53f1eabfc2f48edb244b55361fe53d4"
+  },
+  {
+    "id": "which-is-better-spring-boot-or-nodejs",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "79bb6a3ef649271e9941a5119dc35f0f6545d4650c73ec5e4ebe04fb0f1b5ed8"
+  },
+  {
+    "id": "will-power-and-commitment",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "0daa9f64dade6fc658ac647fc76d61fc63eea7fb37240cd01d01e7b8e0380923"
+  },
+  {
+    "id": "wire-free-world-for-one-year",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "538b0065232e2daf7dbbe3e60ae6196ec5ff6e8153e01e51110e395a3a50f03e"
+  },
+  {
+    "id": "workarounds-that-can-be-applied-out-of-the-box-dynatrace",
+    "section": "blogs",
+    "revision": 1,
+    "sha256": "b7e258403ee9d816695308bafaeeb79201114a7c00b8e142671009217912933f"
+  },
+  {
+    "id": "a-brief-history-of-time",
+    "section": "books",
+    "revision": 1,
+    "sha256": "7aad55cbca6c1f79bc21968acfa0bb524b1b11a4826f9f0dbdaeb5223dc7275f"
+  },
+  {
+    "id": "as-a-man-thinketh",
+    "section": "books",
+    "revision": 1,
+    "sha256": "968e410b743ccea707c9dcacd1c85cff0d1bb3f2aab84c152d0124c65037286e"
+  },
+  {
+    "id": "attitude-is-everything",
+    "section": "books",
+    "revision": 1,
+    "sha256": "95d75e7f092c5425aef65b6c1e5adb43781962a30aa51f6c817edb4fdd4ef2f4"
+  },
+  {
+    "id": "beyond-positive-thinking",
+    "section": "books",
+    "revision": 1,
+    "sha256": "5cdda0408c75280f1ad62ba586d0e2ab7c4b28ab05c96fea7475f5687505d3cf"
+  },
+  {
+    "id": "black-holes-and-baby-universes-and-other-essays",
+    "section": "books",
+    "revision": 1,
+    "sha256": "c0db9c51b6935f610fb56ade98c2901d59830c766ed586074406bce9a851339b"
+  },
+  {
+    "id": "black-holes-the-reith-lectures",
+    "section": "books",
+    "revision": 1,
+    "sha256": "079182e54196521c96bb708759995fa260ab09ccce77bf2d6b900bf419ec68de"
+  },
+  {
+    "id": "brief-answers-to-the-big-questions",
+    "section": "books",
+    "revision": 1,
+    "sha256": "bf87e26bdd00bdba2a1717ffb93f0eabd32311b09c6d45dc663efebd71e7f8c6"
+  },
+  {
+    "id": "crush-it",
+    "section": "books",
+    "revision": 1,
+    "sha256": "abf0a4d35c0f9e44023759e3826eb53dfcb43c1141d0ab4ead95874315b41949"
+  },
+  {
+    "id": "daily-inspiration-from-the-monk-who-sold-his-ferrari",
+    "section": "books",
+    "revision": 1,
+    "sha256": "b2e536d175912cff0e50136a69f8a1f29817c2bae313d462f9750db0239eb18f"
+  },
+  {
+    "id": "death",
+    "section": "books",
+    "revision": 1,
+    "sha256": "4efbc4763ddc439465c2952e5def12c91c59978704da34062a7525f222e44c93"
+  },
+  {
+    "id": "deep-work",
+    "section": "books",
+    "revision": 1,
+    "sha256": "5cea8787bccf07f08f9c0f5e0c0b4a605f097069355246c135b063a0cccbdbcd"
+  },
+  {
+    "id": "delegating-work",
+    "section": "books",
+    "revision": 1,
+    "sha256": "b0cd64a559dc53d07eab4208dbf1e0b4231b1649246cf0631cb0d7e687fcaf13"
+  },
+  {
+    "id": "digital-minimalism",
+    "section": "books",
+    "revision": 1,
+    "sha256": "704c067b6a99888d1f02e247ca43bd8c942fc8302da8803c44155cddf274a724"
+  },
+  {
+    "id": "eat-that-frog-21-great-ways-to-stop-procrastinating-and-get-more-done-in-less-time",
+    "section": "books",
+    "revision": 1,
+    "sha256": "8599b52dd6347dd33b7928cb285d0a94d9cab2b278f55aa035090e69d23f1d8b"
+  },
+  {
+    "id": "elon-musk",
+    "section": "books",
+    "revision": 1,
+    "sha256": "826b228ffeee00a073723a895fa808fe3f57da3fda253bcf46eaf0221b84492e"
+  },
+  {
+    "id": "fear-not-be-strong-vivekanada-s-message-of-strength-and-fearlessness",
+    "section": "books",
+    "revision": 1,
+    "sha256": "aeec3e8d21eb752c25b30ccf75234d682c8fc1066c68836a4b26e8d6948bc695"
+  },
+  {
+    "id": "freedom-from-the-known",
+    "section": "books",
+    "revision": 1,
+    "sha256": "44a0db4c60fc3bab6eaf7c642ec0aa104f3246e2378fc01a1f113282db19f19a"
+  },
+  {
+    "id": "harry-potter-and-the-cursed-child",
+    "section": "books",
+    "revision": 1,
+    "sha256": "58dcf895465fe4070f77b011bfee3ffb957c85e6fdd2c2c4fa0a471827ab1d15"
+  },
+  {
+    "id": "how-to-avoid-a-climate-disaster",
+    "section": "books",
+    "revision": 1,
+    "sha256": "9fdb1357df75d24f7d7b09782d82cf9b64cdf3c855edf22a3821edf5807c7c5c"
+  },
+  {
+    "id": "how-to-develop-self-confidence-influence-people-by-public-speaking",
+    "section": "books",
+    "revision": 1,
+    "sha256": "ff0300f014dce286d05561217031e66fbc56a85fa42c39b04a501eebcde1aa11"
+  },
+  {
+    "id": "how-to-win-friends-influence-people",
+    "section": "books",
+    "revision": 1,
+    "sha256": "e6ae432d09c98d3e1fd8ef4c7ffe4a45134227b0c1fe2b243c9ee61d85365214"
+  },
+  {
+    "id": "inner-management",
+    "section": "books",
+    "revision": 1,
+    "sha256": "7fe3e77fcbbcd076071406e46e8fa9983f89b100620bbfb7141847aa0968a9c2"
+  },
+  {
+    "id": "innovative-teams",
+    "section": "books",
+    "revision": 1,
+    "sha256": "4047f71ffb997df60038e9b43ab1a5e44ed781e0727bd48fd8ec5d31286db221"
+  },
+  {
+    "id": "karma",
+    "section": "books",
+    "revision": 1,
+    "sha256": "80fdfd40c6e709215d055ae0602e56139a45d6456862d0be2f0528d0e0f00602"
+  },
+  {
+    "id": "keep-going",
+    "section": "books",
+    "revision": 1,
+    "sha256": "0999d482f2ff649bb3402c57d9ee60e6b09318cd0eb0963f2b8fd7366b1453f4"
+  },
+  {
+    "id": "kiss-that-frog",
+    "section": "books",
+    "revision": 1,
+    "sha256": "02b456ee5e1a6589cee6dd76a562fc3d7a876ff5c9765cc0d2252996eb3da37a"
+  },
+  {
+    "id": "little-black-book-for-stunning-success-tools-for-action-mastery",
+    "section": "books",
+    "revision": 1,
+    "sha256": "9ea50b55b43f81d3d5b5d1065469bb113a4387ca7a842c33f4bee8191e2a60c7"
+  },
+  {
+    "id": "managing-oneself",
+    "section": "books",
+    "revision": 1,
+    "sha256": "0b9d4d062f04b1027cd9e164bee79d8fb875f75bc5f6c2bb4987dcebd1dffb85"
+  },
+  {
+    "id": "show-your-work",
+    "section": "books",
+    "revision": 1,
+    "sha256": "022eea14a1a2b2ed90f8152460e6dc0867c430f64eae2fd4e23792f387a7bdbc"
+  },
+  {
+    "id": "steal-like-an-artist",
+    "section": "books",
+    "revision": 1,
+    "sha256": "a19a3a5e260c190b54b99848af9f384aa54d90576d25072d140cc8da7b32e996"
+  },
+  {
+    "id": "steve-jobs",
+    "section": "books",
+    "revision": 1,
+    "sha256": "434d7a82553bfdc2128ff3f1882f83f2cdd62063f1aede500e34a016fa74d484"
+  },
+  {
+    "id": "the-7-habits-of-highly-effective-people",
+    "section": "books",
+    "revision": 1,
+    "sha256": "f870924949462bded3e51657a47ec4eb344dc45e75364187a917570528769ff0"
+  },
+  {
+    "id": "the-alchemist",
+    "section": "books",
+    "revision": 1,
+    "sha256": "fa2a1cd7ffd47bd735cc97dee83f7d77906bd613712649b9a4963dd2828c42d6"
+  },
+  {
+    "id": "the-art-of-clear-thinking",
+    "section": "books",
+    "revision": 1,
+    "sha256": "94767a591c4f93482fb0c245bc7b370f854cc7dd9c8737671d1eaeecc5b27ca1"
+  },
+  {
+    "id": "the-boy-the-mole-the-fox-and-the-horse",
+    "section": "books",
+    "revision": 1,
+    "sha256": "f3fa620f966079acb7023cfce4d87882b6349419ea3669615ae3c844e559953f"
+  },
+  {
+    "id": "the-communication-book",
+    "section": "books",
+    "revision": 1,
+    "sha256": "bccadf33665ea831a6689222867cbefb7f6f4bb241994b8c1f44655dca003c43"
+  },
+  {
+    "id": "the-heart-of-success-exclusive-chapter",
+    "section": "books",
+    "revision": 1,
+    "sha256": "a6c545bd02699eb62b7a803d23cdfc67327da020b66d8899e9bb8efbe9f7d0a7"
+  },
+  {
+    "id": "the-miracles-of-your-mind",
+    "section": "books",
+    "revision": 1,
+    "sha256": "12273d51466a33a6b4d084ebc9f9e88502eeea132ce7714ba90b70813aa5c317"
+  },
+  {
+    "id": "the-power-of-a-positive-attitude",
+    "section": "books",
+    "revision": 1,
+    "sha256": "4d94476e44c8dd61b9b785ab896139d31231edae9f336d039c03c5b509248563"
+  },
+  {
+    "id": "the-power-of-positive-thinking",
+    "section": "books",
+    "revision": 1,
+    "sha256": "2887532e1b1bbb00bbde0a3e943754511fa0be1983c0a1d7ecef91b6f2dbb4e9"
+  },
+  {
+    "id": "the-power-of-your-subconscious-mind",
+    "section": "books",
+    "revision": 1,
+    "sha256": "08ac546096df4e23171a469768fb8c4bb85b2450d8dfd5e6249b204c90d2926a"
+  },
+  {
+    "id": "the-secret-of-karma",
+    "section": "books",
+    "revision": 1,
+    "sha256": "dde049c49505079399ccf64053912d7abea27c4526dc64bf917ab37daae76fd4"
+  },
+  {
+    "id": "the-seven-spiritual-laws-of-success",
+    "section": "books",
+    "revision": 1,
+    "sha256": "df315e3c37c8be72051e73bb2154d5137e5f4df27ccce9e4f2937f19e384488f"
+  },
+  {
+    "id": "the-theory-of-everything",
+    "section": "books",
+    "revision": 1,
+    "sha256": "8b2e56fecd12dd5481135e36cb1ab332ae648fea3ba4b17325e2d66974632a1f"
+  },
+  {
+    "id": "the-winning-attitude",
+    "section": "books",
+    "revision": 1,
+    "sha256": "dffdbc0078f59a63a00e836cb03306acc408c18e4fe8691cb640d55fdf086a93"
+  },
+  {
+    "id": "think-and-grow-rich",
+    "section": "books",
+    "revision": 1,
+    "sha256": "084477636c7c6dadbeeb923a063fc01041f08725ee61fc580b57775dfff6b77e"
+  },
+  {
+    "id": "thoughts-of-power",
+    "section": "books",
+    "revision": 1,
+    "sha256": "5409ef06f15b364c5847975b4b996678fd931b274ff2095efce7fac0b57e79db"
+  },
+  {
+    "id": "unlearn",
+    "section": "books",
+    "revision": 1,
+    "sha256": "8bcea4db180ba02b791f4282c60aeca5bf99c25d3e3155a494b76f131c559269"
+  },
+  {
+    "id": "who-will-cry-when-you-die",
+    "section": "books",
+    "revision": 1,
+    "sha256": "e64cf163fdd7dd6be525645fb0ccff05f39c2d36268c4b48c5665df868e50b1a"
+  },
+  {
+    "id": "zen",
+    "section": "books",
+    "revision": 1,
+    "sha256": "4ae400f99164c6aa2af8ad97a1b3e87a61b2bb143ba672d7055295854986c1cf"
+  },
+  {
+    "id": "made-in-korea",
+    "section": "entertainment",
+    "revision": 1,
+    "sha256": "f0c576bbf5e8952cda5ecc39638dec65191869165b3586033d9b587ed3e39169"
+  },
+  {
+    "id": "oh-my-ghost-clients",
+    "section": "entertainment",
+    "revision": 1,
+    "sha256": "6de5e2cbad81fc6f7457e4b93aee879745f96b5fbd0ce19edd01859be7699616"
+  },
+  {
+    "id": "subservience",
+    "section": "entertainment",
+    "revision": 1,
+    "sha256": "63dfca3468fb5398030c752044fa1a61f4c55f1cee1d410b821c433750b8c80c"
+  },
+  {
+    "id": "the-taj-story",
+    "section": "entertainment",
+    "revision": 1,
+    "sha256": "d80bab8307d09db67151a4644f114bb6f84bb19f2b4a18a22420d092933362be"
+  },
+  {
+    "id": "war-machine",
+    "section": "entertainment",
+    "revision": 1,
+    "sha256": "b28d84fd8a5dacb2c853f04e902a5f4336a1c15aab60da82635bb2c2eaabd57d"
+  },
+  {
+    "id": "home",
+    "section": "pages",
+    "revision": 1,
+    "sha256": "40ff8575f866d0c16c610e1446eb1143bce588b0ff9a1d4842f967d887077efc"
+  },
+  {
+    "id": "meet-vish",
+    "section": "pages",
+    "revision": 1,
+    "sha256": "1fb507f2dc0a49ca81afad9599117f1fe1eda4d2144b4d4c5ccaea178c872504"
+  },
+  {
+    "id": "photo-1",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "484890e2f0b4c769ad3391734909ead5682061bb2dc233ccb4749accdb18630e"
+  },
+  {
+    "id": "photo-2",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "399427a34232f2f26716aec5583d9ecff2cdafaac359463514333b9becfc4790"
+  },
+  {
+    "id": "photo-3",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "b3bb07c085f72e81fc991ef078752ac4d2aadcca2c763b8aaa758684dc70e7e9"
+  },
+  {
+    "id": "photo-4",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "f61080f8d35298ba2191c9a0fdd227ecf953dcd8860df89f77e8d29bfd7fcd7b"
+  },
+  {
+    "id": "photo-5",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "e276dd79080241d58adf4de38a952febdc8a007d1d609b1b986a7638eb85d741"
+  },
+  {
+    "id": "photo-6",
+    "section": "photos",
+    "revision": 1,
+    "sha256": "bcd25e25453ffcb88e919c59e37798be7fc505dd0d6093237511da08e94226c2"
+  },
+  {
+    "id": "amazon-blue-origin",
+    "section": "podcasts",
+    "revision": 1,
+    "sha256": "6ad31d2a05d0bef28aaff78005712498097b2d5eadb62d393722f6cb7a336a7e"
+  },
+  {
+    "id": "software-fundamentals",
+    "section": "podcasts",
+    "revision": 1,
+    "sha256": "3add3ce0d2fefde8d1ace1ccdf8e98e846071943d63a2839916f06b8faa91418"
+  },
+  {
+    "id": "stoic-friendship",
+    "section": "podcasts",
+    "revision": 1,
+    "sha256": "663f4a71aa94601edeb47cc424ad2b18ade11b2c12c6e82d31c7a9fffca5f5c5"
+  },
+  {
+    "id": "strong-friendships",
+    "section": "podcasts",
+    "revision": 1,
+    "sha256": "24c9b5e368f0a2bf9dfb9f906f73a8dcdfc67c72d1a444f66d03d6a9d496b8ad"
+  },
+  {
+    "id": "vibe-coding-agentic-engineering",
+    "section": "podcasts",
+    "revision": 1,
+    "sha256": "fd4d2fea92889048132123d7ee15157a530ce0d9f3ac99f3a0a89309caa50ea2"
+  },
+  {
+    "id": "app-launchpad",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "dbc74819569f7842d984bc07bc574867fc7df9fd0972ca7849b7fa5237ca634b"
+  },
+  {
+    "id": "aroha-retreat",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "55ffc4229fa40a6d4d14ab02376ffa27380f943774ef9927ea430005fb5aad37"
+  },
+  {
+    "id": "budget-buddy",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "2b5449cbaeca3b7fe90d3546f2b86e2c990af9bc1b622571c180f73850613305"
+  },
+  {
+    "id": "chaicart",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "4ebed5ff38a36271d5c7b354e4b2b9eda0a34b3655bdc11803712b4e238474b9"
+  },
+  {
+    "id": "copilot-otel",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "18026f2114cf6be1bff8c806762bcebedd93d9f8c9cbf89dc2d1c7bf4fa3535b"
+  },
+  {
+    "id": "dt-mac-agent",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "546ba251fbd05216bd6d7e00729feb5840e205c4df9fdfd9d1cab82f42dec72f"
+  },
+  {
+    "id": "dynatrace-mcp",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "36b865ab6dccd0fa51154a36da4163f2388ebdf9d75b1dbd3e3d102b73e5048e"
+  },
+  {
+    "id": "finvision-ai",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "6c85bbf7a6ac4a4078ede60d6878e716d82cec9976c38c483d06d48afc0dac9e"
+  },
+  {
+    "id": "inspiredlearning",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "ee718498e29f6f302c627cafc871320fc52d9805c9554f621216bcd8f4ff9b4a"
+  },
+  {
+    "id": "manahsmriti",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "9efd89f23b67738030e6b3abca34eb0d30df9062542d1d453caa382071b8edbd"
+  },
+  {
+    "id": "salesdrone",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "c8f8dbb24f6506af6b6cce38ca848f414e6b1267b647cf0b7e1062722f87e9f7"
+  },
+  {
+    "id": "salesdrone-mcp",
+    "section": "projects",
+    "revision": 1,
+    "sha256": "114133165bedd489324330ca8c4cb3ad98e682e0b7d875ff1d767f5fcc1c53b4"
+  }
+]

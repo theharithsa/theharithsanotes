@@ -1,13 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import ProjectArt from "../components/ProjectArt.astro";
-import { projects } from "../data/projects";
+import { getProjects } from "../lib/journal";
+const projects = await getProjects();
 const projectTopics = [...new Set(projects.map((project) => project.category))];
 ---
 
 <Base
   title="Projects"
-  image={projects[0].image}
+  image={projects[0]?.image}
   description="The workbench: products, experiments and open-source tools by Vishruth Harithsa."
 >
   <div class="projects-technical">

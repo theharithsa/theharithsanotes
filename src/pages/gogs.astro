@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import EditorialImage from "../components/EditorialImage.astro";
+import { getGogs } from "../lib/journal";
+const notes = await getGogs();
 ---
 
 <Base
@@ -30,6 +32,21 @@ import EditorialImage from "../components/EditorialImage.astro";
       sizes="(max-width: 760px) 92vw, 50vw"
     />
   </section>
+  {notes.length > 0 && (
+    <section
+      class="wrap space notes-grid"
+      aria-label="Games and gadget experiences"
+    >
+      {notes.map((note) => (
+        <a class="note-card" href={`/gogs/${note.slug}`}>
+          <EditorialImage src={note.image} alt={note.imageAlt} />
+          <span class="eyebrow">{note.kind}</span>
+          <h2>{note.title}</h2>
+          <p>{note.description}</p>
+        </a>
+      ))}
+    </section>
+  )}
   <section class="gogs-notebook wrap" aria-label="Future GoGs journals">
     <div id="games">
       <span class="eyebrow">01 / GAMES</span>

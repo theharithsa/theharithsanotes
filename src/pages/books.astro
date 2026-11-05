@@ -1,7 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
-import { books } from "../data/interests";
-import { completedBooks, genres } from "../data/books";
+import { getBooks } from "../lib/journal";
+import { genres as originalGenres } from "../data/books";
+const books = await getBooks();
+const completedBooks = books;
+const genres = [
+  ...new Set([...originalGenres, ...books.flatMap((book) => book.genres)]),
+];
 import BookJacket from "../components/BookJacket.astro";
 import BookRating from "../components/BookRating.astro";
 ---
@@ -17,8 +22,8 @@ import BookRating from "../components/BookRating.astro";
           <em>One page away.</em>
         </h1>
         <p>
-          Fifty books read, and plenty of ideas still unfolding. My ratings,
-          notes from the margins, and new perspectives to return to.
+          {books.length} books read, and plenty of ideas still unfolding. My
+          ratings, notes from the margins, and new perspectives to return to.
         </p>
         <a href="#bookshelf" class="text-link">
           Browse the shelf ↓
@@ -68,8 +73,15 @@ import BookRating from "../components/BookRating.astro";
         <label for="book-rating-filter">My rating</label>
         <select id="book-rating-filter">
           <option value="all">All ratings</option>
-          <option value="5">5 stars</option>
-          <option value="4">4 stars</option>
+          {[5, 4, 3, 2, 1, 0]
+            .filter((rating) =>
+              books.some((book) => (book.goodreads?.rating ?? 0) === rating),
+            )
+            .map((rating) => (
+              <option value={rating}>
+                {rating ? `${rating} stars` : "Not rated"}
+              </option>
+            ))}
         </select>
       </div>
     </div>

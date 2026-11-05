@@ -346,7 +346,13 @@ const client = ts
     },
   )
   .outputText.replace(/export \{\};?\s*$/, "");
-function telemetryHarness(hostname, stored, blocked = false) {
+function telemetryHarness(
+  hostname,
+  stored,
+  blocked = false,
+  pathname = "/",
+  search = "",
+) {
   const handlers = new Map();
   const controls = new Map();
   const requests = [];
@@ -359,11 +365,13 @@ function telemetryHarness(hostname, stored, blocked = false) {
         (controls.get(consent).click = handler),
     });
   const context = vm.createContext({
+    URLSearchParams,
     window: { addEventListener: () => {} },
     location: {
       hostname,
       origin: `https://${hostname}`,
-      pathname: "/",
+      pathname,
+      search,
       reload: () => {},
     },
     localStorage: {
@@ -402,6 +410,23 @@ test("first visit and denied consent do not request monitoring scripts", () => {
     telemetryHarness("theharithsa.com", "denied").banner.hidden,
     true,
   );
+});
+
+test("private workspace and draft previews never load browser analytics", () => {
+  for (const [path, query] of [
+    ["/admin", ""],
+    ["/the-war-room-is-dead", "?preview=blogs:draft"],
+  ]) {
+    const view = telemetryHarness(
+      "theharithsa.com",
+      "granted",
+      false,
+      path,
+      query,
+    );
+    assert.equal(view.requests.length, 0);
+    assert.equal(view.banner.hidden, true);
+  }
 });
 
 test("local preview stays isolated from production even when consent is granted", () => {

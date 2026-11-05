@@ -8,14 +8,26 @@ const { note, index = 0 } = Astro.props;
 const tones = ["peach", "lilac", "blue", "ochre", "peach"];
 ---
 
-<div
-  class={`record-art podcast-record-art tone-${tones[index % tones.length]}`}
-  aria-hidden="true"
->
-  <div class="record">
-    <span>{note.artLabel}</span>
+{note.image ? (
+  <img
+    class="record-art podcast-record-art"
+    src={note.image}
+    alt={note.artLabel}
+    width="1200"
+    height="1000"
+    loading="lazy"
+  />
+) : (
+  <div
+    class={`record-art podcast-record-art tone-${tones[index % tones.length]}`}
+    aria-hidden="true"
+  >
+    <div class="record">
+      <span>{note.artLabel}</span>
+    </div>
+    <span class="record-edition">
+      {note.kind === "created" ? "CREATED" : "LISTENING"} /{" "}
+      {String(index + 1).padStart(2, "0")}
+    </span>
   </div>
-  <span class="record-edition">
-    LISTENING / {String(index + 1).padStart(2, "0")}
-  </span>
-</div>
+)}

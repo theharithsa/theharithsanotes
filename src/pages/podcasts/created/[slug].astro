@@ -1,0 +1,45 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PodcastArt from "../../../components/PodcastArt.astro";
+import { detail } from "../../../lib/journal";
+import type { ListeningNote } from "../../../data/interests";
+export function getStaticPaths(): Array<{ params: { slug: string } }> {
+  return [];
+}
+const loaded = await detail<ListeningNote>(
+  "podcasts",
+  Astro.params.slug ?? "",
+  [],
+);
+if (!loaded) return Astro.rewrite("/404");
+if (loaded.data.kind !== "created")
+  return Astro.redirect(`/podcasts/listening/${loaded.canonical}`, 301);
+if (loaded.canonical !== Astro.params.slug)
+  return Astro.redirect(`/podcasts/created/${loaded.canonical}`, 301);
+const note = loaded.data;
+---
+
+<Base title={note.title} description={note.note}>
+  <article class="podcast-room podcast-detail">
+    <div class="wrap project-detail-top">
+      <a class="workbench-back" href="/podcasts/created">
+        ← Created conversations
+      </a>
+      <span class="workbench-meta">CREATED / MY CONVERSATIONS</span>
+    </div>
+    <header class="wrap project-story-hero">
+      <PodcastArt note={note} />
+      <div class="project-story-intro">
+        <span class="eyebrow">ON THE RECORD</span>
+        <h1>{note.title}</h1>
+        <p class="show-name">{note.show}</p>
+        <p class="project-story-deck">{note.note}</p>
+        {note.href && (
+          <a class="project-visit" href={note.href}>
+            Open the episode ↗
+          </a>
+        )}
+      </div>
+    </header>
+  </article>
+</Base>

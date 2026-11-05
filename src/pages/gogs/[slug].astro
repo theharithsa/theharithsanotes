@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import EditorialImage from "../../components/EditorialImage.astro";
+import { detail, type GogNote } from "../../lib/journal";
+import { formatDate } from "../../lib/content";
+export function getStaticPaths(): Array<{ params: { slug: string } }> {
+  return [];
+}
+const loaded = await detail<GogNote>("gogs", Astro.params.slug ?? "", []);
+if (!loaded) return Astro.rewrite("/404");
+if (loaded.canonical !== Astro.params.slug)
+  return Astro.redirect(`/gogs/${loaded.canonical}`, 301);
+const note = loaded.data;
+---
+
+<Base
+  title={note.title}
+  description={note.description}
+  image={note.image}
+  imageAlt={note.imageAlt}
+  article
+  publishedDate={note.date}
+>
+  <article class="article-page">
+    <header class="article-header wrap">
+      <a class="back-link" href="/gogs">
+        ← All GoGs
+      </a>
+      <span class="eyebrow">
+        {note.kind} · {formatDate(note.date)}
+      </span>
+      <h1>{note.title}</h1>
+      <p class="article-deck">{note.description}</p>
+    </header>
+    <figure class="article-cover wrap">
+      <EditorialImage src={note.image} alt={note.imageAlt} eager />
+    </figure>
+    <div class="prose wrap" set:html={note.html} />
+  </article>
+</Base>

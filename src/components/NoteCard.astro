@@ -15,7 +15,9 @@ const { article } = Astro.props;
   ]}
   data-note
   data-topic={article.topic}
-  data-search={`${article.title} ${article.description} ${article.topic}`.toLowerCase()}
+  data-tags={JSON.stringify(article.tags ?? [article.topic])}
+  data-date={article.date}
+  data-search={`${article.title} ${article.description} ${article.topic} ${(article.tags ?? []).join(" ")}`.toLowerCase()}
 >
   <a
     href={`/${article.slug}`}

@@ -22,18 +22,40 @@ const assets = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const asset = assets[`../../public${src}`]?.default;
-if (!asset) throw new Error(`Missing editorial asset: ${src}`);
 ---
 
-<Image
-  src={asset}
-  alt={alt}
-  width={Math.max(...widths)}
-  widths={widths}
-  sizes={sizes}
-  format="webp"
-  quality={80}
-  loading={eager ? "eager" : "lazy"}
-  fetchpriority={eager ? "high" : "auto"}
-  class={className}
-/>
+{asset ? (
+  <Image
+    src={asset}
+    alt={alt}
+    width={Math.max(...widths)}
+    widths={widths}
+    sizes={sizes}
+    format="webp"
+    quality={80}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    class={className}
+  />
+) : (
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+    width="1600"
+    height="1067"
+    srcset={
+      src.startsWith("/media/")
+        ? [400, 800, 1600]
+            .map(
+              (width) => `${src.replace(/[^/]+$/, `${width}.webp`)} ${width}w`,
+            )
+            .join(", ")
+        : undefined
+    }
+    sizes={sizes}
+  />
+)}

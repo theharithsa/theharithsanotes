@@ -18,6 +18,14 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
-          python-version: '3.12'
+          python-version: "3.12"
       - name: Check foundation, links and tests
         run: sh scripts/check.sh
+      - name: Preserve actual test reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: journal-test-results-${{ github.run_attempt }}
+          path: artifacts/foundation-tests.xml
+          retention-days: 7
+          if-no-files-found: ignore

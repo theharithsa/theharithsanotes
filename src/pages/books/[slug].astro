@@ -3,21 +3,39 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import Base from "../../layouts/Base.astro";
 import BookJacket from "../../components/BookJacket.astro";
 import BookRating from "../../components/BookRating.astro";
-import { completedBooks } from "../../data/books";
+import { completedBooks as snapshotBooks, type Book } from "../../data/books";
+import { detail } from "../../lib/journal";
 export const getStaticPaths = (() =>
-  completedBooks.map((book, index) => ({
+  snapshotBooks.map((book, index) => ({
     params: { slug: book.slug },
     props: { book, index },
   }))) satisfies GetStaticPaths;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { book, index } = Astro.props;
-const entry = book.goodreads!;
+const loaded = Astro.props.book
+  ? { data: Astro.props.book, canonical: Astro.props.book.slug }
+  : await detail<Book>("books", Astro.params.slug ?? "", snapshotBooks);
+if (!loaded) return Astro.rewrite("/404");
+if (loaded.canonical !== Astro.params.slug)
+  return Astro.redirect(`/books/${loaded.canonical}`, 301);
+const book = loaded.data;
+const index = Astro.props.index ?? 0;
+const entry = book.goodreads ?? {
+  sourceReviewId: book.slug ?? "",
+  title: book.title,
+  author: book.author,
+  rating: 0,
+  shelves: ["read"],
+  review: "",
+  dateRead: [],
+  goodreadsUrl: "",
+  reviewUrl: "",
+};
 const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
 ---
 
 <Base
   title={book.title}
-  description={`My reading journal for ${book.title} by ${book.author}. Rated ${entry.rating} out of 5.`}
+  description={`My reading journal for ${book.title} by ${book.author}.${entry.rating > 0 ? ` Rated ${entry.rating} out of 5.` : ""}`}
   structuredData={{
     "@type": "Book",
     name: book.title,
@@ -29,17 +47,21 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
     },
     genre: book.genres,
     sameAs: entry.goodreadsUrl,
-    review: {
-      "@type": "Review",
-      author: { "@id": "https://theharithsa.com/meet-vish#person" },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: entry.rating,
-        bestRating: 5,
-        worstRating: 1,
-      },
-      ...(entry.review ? { reviewBody: entry.review } : {}),
-    },
+    ...(entry.rating > 0
+      ? {
+          review: {
+            "@type": "Review",
+            author: { "@id": "https://theharithsa.com/meet-vish#person" },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: entry.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+            ...(entry.review ? { reviewBody: entry.review } : {}),
+          },
+        }
+      : {}),
   }}
 >
   <article class="book-journal wrap">
@@ -54,9 +76,11 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
         <div aria-hidden="true">
           <BookJacket book={book} index={index} />
         </div>
-        <a class="text-link" href={entry.goodreadsUrl}>
-          Book on Goodreads ↗
-        </a>
+        {entry.goodreadsUrl && (
+          <a class="text-link" href={entry.goodreadsUrl}>
+            Book on Goodreads ↗
+          </a>
+        )}
       </aside>
       <div class="book-journal-reading">
         <header>

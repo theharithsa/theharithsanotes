@@ -13,17 +13,33 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      ASTRO_TELEMETRY_DISABLED: '1'
+      ASTRO_TELEMETRY_DISABLED: "1"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: '24'
+          node-version: "24"
           cache: npm
       - run: npm ci
       - run: npm run check
       - run: npm run build
       - run: npm test
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - run: npm run test:cms
+      - name: Preserve actual test reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: journal-test-results-${{ github.run_attempt }}
+          path: |
+            artifacts/site-tests.xml
+            artifacts/cms-tests.xml
+          retention-days: 7
+          if-no-files-found: ignore
+      - run: npm run build:server
       - run: npm audit --audit-level=high

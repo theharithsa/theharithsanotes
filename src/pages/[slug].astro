@@ -2,10 +2,15 @@
 import ArticleArt from "../components/ArticleArt.astro";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
-import { articles, formatDate, type Article } from "../lib/content";
+import {
+  articles as snapshotArticles,
+  formatDate,
+  type Article,
+} from "../lib/content";
+import { getArticles, detail } from "../lib/journal";
 import { avatar } from "../data/gallery";
 export function getStaticPaths() {
-  return articles.map((article) => ({
+  return snapshotArticles.map((article) => ({
     params: { slug: article.slug },
     props: { article },
   }));
@@ -13,7 +18,14 @@ export function getStaticPaths() {
 interface Props {
   article: Article;
 }
-const { article } = Astro.props;
+const loaded = Astro.props.article
+  ? { data: Astro.props.article, canonical: Astro.props.article.slug }
+  : await detail<Article>("blogs", Astro.params.slug ?? "", snapshotArticles);
+if (!loaded) return Astro.rewrite("/404");
+if (loaded.canonical !== Astro.params.slug)
+  return Astro.redirect(`/${loaded.canonical}`, 301);
+const article = loaded.data;
+const articles = await getArticles();
 const related = articles
   .filter((note) => note.slug !== article.slug && note.topic === article.topic)
   .slice(0, 2);
@@ -33,6 +45,7 @@ const headings = [
   imageAlt={article.imageAlt}
   article
   publishedDate={article.date}
+  modifiedDate={article.dateModified ?? article.date}
 >
   <article
     class:list={[

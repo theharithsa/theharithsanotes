@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0] — 2026-11-06
+
+- Add the owner-only Notion-style CMS with collection tables, rich editing, private autosave, publication, revision history, preview and metadata-stripped media uploads.
+- Move public content reads to Firestore and private Cloud Storage behind Cloud Run/Firebase Hosting; preserve canonical URLs, original bodies, book ratings/reviews and Margin identity.
+- Add blog date navigation/tag filtering and a dated, accessible photo carousel.
+- Add server OpenTelemetry, transactional publication BizEvents, a scheduled durable audit outbox, safe Firebase payload summaries and trusted OIDC workflow/test reporting.
+- Keep browser analytics disabled in the private workspace and previews; add INR500 budget alerts at 50/80/100%.
+
 ## [1.11.0] — 2026-11-06
 
 - Freeze the owner-selected Margin identity with original bookmark h and outlined editorial lettering; replace header/footer wordmarks in both themes.

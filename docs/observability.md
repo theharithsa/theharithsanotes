@@ -1,20 +1,22 @@
 # Website observability
 
+Current application 1.12.0 has a real Cloud Run/Firebase CMS backend. [CMS and delivery observability](cms-observability.md) owns current server, BizEvent, worker and trusted CI coverage. Public browser consent behavior below is retained; the former static-only runtime description is historical. The private workspace and draft previews disable browser analytics.
+
 1.10.0 adds browser-local genre/topic filters and a functional theme preference. No filter values, reading interests, theme choice or GoGs interactions are exported through custom telemetry. Analytics consent remains unchanged. Theme-colour metadata and presentation state are not monitoring-ingestion evidence.
 
-Service: `the-harithsa-notes-web`; namespace `theharithsa`; source version 1.1.0. This is a static site. There is no application server, database, worker, or durable business transaction to instrument. Backend OTel exporters, canonical business events, and RUM-to-server trace linkage are inapplicable until a real backend exists.
+Historical 1.1.0 baseline: the site was static, without application server, database, worker or durable business transactions. Current server identities and evidence are recorded in the CMS observability document linked above.
 
 The 1.1.0 photo gallery is entirely browser-local. Opening a photo is a view, not a server-confirmed business event. No filenames, captions, search text, photo contents, or identifiable gallery participants are added to custom analytics payloads. Existing consent behavior is preserved. Fonts are served locally and photo metadata is omitted from delivery derivatives.
 
 ## Browser coverage
 
-| Journey | Actor/outcome | Signals | Evidence |
-| --- | --- | --- | --- |
-| Read a note or navigate | Anonymous reader; static page response | Approved Dynatrace agent, performance/error auto-capture; GA page_view | Local pages and navigation verified; tenant receipt pending |
-| Search/filter | Anonymous reader; locally filtered cards | Local interaction only; search text never exported by custom code | Search, empty state, reset, topic filter checked in browser |
-| Consent | Anonymous reader; stored preference or page-only fallback | No analytics request before choice; default-denied advertising | Automated first-visit/denial/local isolation tests |
-| Runtime failure | Browser; bounded error class | Feature-detected dtrum.reportCustomError | No raw exception text or input included; tenant record pending |
-| Outbound mentoring/project link | Browser navigation to external service | Normal link; no booking or project-use success claimed | External services own their results |
+| Journey                         | Actor/outcome                                             | Signals                                                                | Evidence                                                       |
+| ------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Read a note or navigate         | Anonymous reader; static page response                    | Approved Dynatrace agent, performance/error auto-capture; GA page_view | Local pages and navigation verified; tenant receipt pending    |
+| Search/filter                   | Anonymous reader; locally filtered cards                  | Local interaction only; search text never exported by custom code      | Search, empty state, reset, topic filter checked in browser    |
+| Consent                         | Anonymous reader; stored preference or page-only fallback | No analytics request before choice; default-denied advertising         | Automated first-visit/denial/local isolation tests             |
+| Runtime failure                 | Browser; bounded error class                              | Feature-detected dtrum.reportCustomError                               | No raw exception text or input included; tenant record pending |
+| Outbound mentoring/project link | Browser navigation to external service                    | Normal link; no booking or project-use success claimed                 | External services own their results                            |
 
 The exact supplied RUM tag is loaded once after consent by the head-loaded `src/scripts/telemetry.ts`. It loads on subsequent pages when a granted choice is restored. Automatic RUM capture is retained; no duplicate manual click actions or custom properties are added. Session Replay is not enabled by code; `disableSessionReplay` is called if the installed agent exposes it. **Keep Replay disabled in the Dynatrace application configuration before launch.** No identifyUser calls, generated persistent identity, fingerprints, or email tagging are introduced.
 

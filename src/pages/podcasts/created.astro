@@ -1,5 +1,10 @@
 ---
 import Base from "../../layouts/Base.astro";
+import PodcastArt from "../../components/PodcastArt.astro";
+import { getListening } from "../../lib/journal";
+const created = (await getListening()).filter(
+  (note) => note.kind === "created",
+);
 ---
 
 <Base
@@ -16,6 +21,18 @@ import Base from "../../layouts/Base.astro";
     <span class="eyebrow">MY CONVERSATIONS</span>
     <h1>Created.</h1>
     <p>A space for conversations of my own, when they’re ready.</p>
-    <div class="created-empty" aria-label="No created episodes yet"></div>
+    {created.length ? (
+      <div class="podcast-mosaic">
+        {created.map((note, index) => (
+          <a class="podcast-card" href={`/podcasts/created/${note.slug}`}>
+            <PodcastArt note={note} index={index} />
+            <h2>{note.title}</h2>
+            <p>{note.note}</p>
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="created-empty" aria-label="No created episodes yet"></div>
+    )}
   </section>
 </Base>

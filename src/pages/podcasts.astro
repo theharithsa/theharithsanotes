@@ -1,7 +1,10 @@
 ---
 import PodcastArt from "../components/PodcastArt.astro";
 import Base from "../layouts/Base.astro";
-import { listening } from "../data/interests";
+import { getListening } from "../lib/journal";
+const listening = (await getListening()).filter(
+  (note) => note.kind !== "created",
+);
 ---
 
 <Base title="Podcasts">
