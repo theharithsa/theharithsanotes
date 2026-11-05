@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import ts from "typescript";
 import { listening } from "../src/data/interests.ts";
+import { books, completedBooks } from "../src/data/books.ts";
 import { projects } from "../src/data/projects.ts";
 import { screenNotes } from "../src/data/screen-notes.ts";
 
@@ -21,6 +22,58 @@ const articles = sourceArticles.map((article) => ({
   ...blogArt.find((art) => art.slug === article.slug),
 }));
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
+
+test("Goodreads journal preserves all 50 personal ratings and original reviews", async () => {
+  assert.equal(completedBooks.length, 50);
+  assert.equal(new Set(completedBooks.map((book) => book.slug)).size, 50);
+  assert.equal(
+    completedBooks.filter((book) => book.goodreads.review).length,
+    46,
+  );
+  assert.equal(
+    books.length,
+    55,
+    "Preserve five non-overlapping Notion shelf books",
+  );
+  const archive = await readPage("books/index.html");
+  const sitemap = await readPage("sitemap.xml");
+  const escape = (text) =>
+    text
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  for (const book of completedBooks) {
+    const entry = book.goodreads;
+    assert.ok(entry.shelves.includes("read"));
+    assert.ok(
+      Number.isInteger(entry.rating) && entry.rating >= 1 && entry.rating <= 5,
+    );
+    const route = `/books/${book.slug}`;
+    const page = await readPage(`books/${book.slug}/index.html`);
+    assert.ok(archive.includes(`href="${route}"`));
+    assert.ok(page.includes(`My rating: ${entry.rating} out of 5 stars`));
+    assert.ok(page.includes(`href="${entry.reviewUrl}"`));
+    assert.ok(page.includes(`href="${entry.goodreadsUrl}"`));
+    assert.ok(sitemap.includes(`<loc>https://theharithsa.com${route}</loc>`));
+    for (const paragraph of entry.review.split(/\n\s*\n/).filter(Boolean)) {
+      assert.ok(
+        page
+          .replace(/\s+/g, " ")
+          .includes(escape(paragraph).replace(/\s+/g, " ")),
+        `Review text changed: ${book.title}`,
+      );
+    }
+    if (!entry.review)
+      assert.ok(
+        !page.includes('id="review-heading"'),
+        "Do not invent a review",
+      );
+  }
+  assert.ok(archive.includes('id="book-search"'));
+  assert.ok(archive.includes('id="book-rating-filter"'));
+});
 
 test("screen reflections have reading pages, lessons and discoverable canonical links", async () => {
   const archive = await readPage("entertainment/index.html");

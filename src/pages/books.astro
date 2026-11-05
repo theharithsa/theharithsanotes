@@ -1,6 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import { books } from "../data/interests";
+import { completedBooks } from "../data/books";
+import BookJacket from "../components/BookJacket.astro";
+import BookRating from "../components/BookRating.astro";
 ---
 
 <Base title="Books">
@@ -14,8 +17,8 @@ import { books } from "../data/interests";
           <em>One page away.</em>
         </h1>
         <p>
-          A few books from my shelf. Some I’m reading, some I’ve finished, and
-          some waiting for their turn.
+          Fifty books read, and plenty of ideas still unfolding. My ratings,
+          notes from the margins, and a few books waiting for their turn.
         </p>
         <a href="#bookshelf" class="text-link">
           Browse the shelf ↓
@@ -51,6 +54,26 @@ import { books } from "../data/interests";
         <h2>Different books. New perspectives.</h2>
       </div>
     </div>
+    <div class="book-journal-tools">
+      <div class="book-search-field">
+        <label for="book-search">Find a book or author</label>
+        <input
+          id="book-search"
+          type="search"
+          placeholder="Search the bookshelf"
+          autocomplete="off"
+        />
+      </div>
+      <div>
+        <label for="book-rating-filter">My rating</label>
+        <select id="book-rating-filter">
+          <option value="all">All ratings</option>
+          <option value="5">5 stars</option>
+          <option value="4">4 stars</option>
+          <option value="unrated">Not rated</option>
+        </select>
+      </div>
+    </div>
     <div class="filters shelf-filters" aria-label="Filter bookshelf">
       {["All books", "Reading", "Read", "To read"].map((status, index) => (
         <button data-shelf-filter={status} aria-pressed={index === 0}>
@@ -63,24 +86,47 @@ import { books } from "../data/interests";
     </p>
     <div class="books-grid">
       {books.map((book, index) => (
-        <article class="book-card" data-book data-status={book.status}>
-          <div class={`book-cover tone-${book.colour}`}>
-            <span class="book-cover-series">
-              FROM VISH’S SHELF / {String(index + 1).padStart(2, "0")}
-            </span>
-            <h3>{book.title}</h3>
-            <span class="book-author">{book.author}</span>
-            <span class="book-cover-rule" />
-          </div>
+        <article
+          class="book-card"
+          data-book
+          data-status={book.status}
+          data-rating={book.goodreads?.rating ?? "unrated"}
+          data-book-search={`${book.title} ${book.author}`}
+          id={
+            book.goodreads ? `book-${book.goodreads.sourceReviewId}` : undefined
+          }
+        >
+          {book.slug ? (
+            <a
+              class="book-jacket-link"
+              href={`/books/${book.slug}`}
+              aria-label={`Open ${book.title}`}
+            >
+              <BookJacket book={book} index={index} />
+            </a>
+          ) : (
+            <BookJacket book={book} index={index} />
+          )}
           <div class="book-caption">
             <span class="status-label">{book.status}</span>
+            {book.goodreads && <BookRating rating={book.goodreads.rating} />}
+            {book.slug && (
+              <a class="book-journal-link" href={`/books/${book.slug}`}>
+                {book.goodreads?.review ? "Read my notes" : "Open journal"}{" "}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
         </article>
       ))}
     </div>
+    <p id="book-empty" class="book-empty" hidden>
+      No books match. Try another title, author or rating.
+    </p>
     <p class="editorial-caption">
-      A reading log, rather than a ranking. These typographic jackets are my own
-      shelf labels, not the publishers’ covers.
+      {completedBooks.length} completed books from my Goodreads shelf, with my
+      own ratings and original notes. These typographic jackets are my shelf
+      labels, not the publishers’ covers.
     </p>
   </section>
   <section class="library-band tone-sage">

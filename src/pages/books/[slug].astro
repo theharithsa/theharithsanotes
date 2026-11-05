@@ -1,0 +1,68 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import Base from "../../layouts/Base.astro";
+import BookJacket from "../../components/BookJacket.astro";
+import BookRating from "../../components/BookRating.astro";
+import { completedBooks } from "../../data/books";
+export const getStaticPaths = (() =>
+  completedBooks.map((book, index) => ({
+    params: { slug: book.slug },
+    props: { book, index },
+  }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { book, index } = Astro.props;
+const entry = book.goodreads!;
+const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
+---
+
+<Base
+  title={book.title}
+  description={`My reading journal for ${book.title} by ${book.author}. Rated ${entry.rating} out of 5.`}
+>
+  <article class="book-journal wrap">
+    <a
+      class="text-link book-journal-back"
+      href={`/books#book-${entry.sourceReviewId}`}
+    >
+      ← Back to the bookshelf
+    </a>
+    <div class="book-journal-layout">
+      <aside class="book-journal-jacket" aria-label="Book details">
+        <div aria-hidden="true">
+          <BookJacket book={book} index={index} />
+        </div>
+        <a class="text-link" href={entry.goodreadsUrl}>
+          Book on Goodreads ↗
+        </a>
+      </aside>
+      <div class="book-journal-reading">
+        <header>
+          <span class="eyebrow">THE READING JOURNAL · READ</span>
+          <h1>{book.title}</h1>
+          <p class="book-journal-author">{book.author}</p>
+          <BookRating rating={entry.rating} />
+          {entry.dateRead.length > 0 && (
+            <p class="book-read-date">Finished {entry.dateRead.join(" · ")}</p>
+          )}
+        </header>
+        {paragraphs.length > 0 && (
+          <section class="book-review" aria-labelledby="review-heading">
+            <h2 id="review-heading">My notes from the book.</h2>
+            {paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+        )}
+        <footer class="book-review-source">
+          <p>
+            My rating{entry.review ? " and original review" : ""}, first shared
+            on Goodreads.
+          </p>
+          <a class="text-link" href={entry.reviewUrl}>
+            View my Goodreads entry ↗
+          </a>
+        </footer>
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,5 +1,7 @@
 # Release impact and verification plan
 
+1.8.0 / issue #17 imports the owner-confirmed 50-book Read shelf, 50 personal ratings and 46 original reviews, preserving five other existing shelf entries. Adds fifty static journal routes, book components, sitemap entries and combined search/shelf/rating filters. No dependency, backend, monitoring, permissions or DNS changes. Run type/build/fifteen artifact tests, foundation and browser desktop/mobile checks before delivery. Compare all 97 non-404 HTML documents with the tested build after deployment. Prior production Hosting version d3a478ca4f739a9a is the rollback source. Review provenance is in docs/books-journal.md.
+
 1.7.1 / issue #15 restores the existing blue, peach, lilac, sage and ochre navigation palette using a section-scoped CSS property. Only the shared header markup/styles and package version change; no data, dependency, monitoring, DNS or interaction changes. Type/build/fourteen artifact tests and all six menu colours verified locally. Prior production Hosting version 3c655055dc9ec2fa is the rollback source. Deploy the tested build after current-head delivery checks.
 
 Current production authorization and actual launch status are recorded in [production launch](production-launch.md). The owner explicitly approved production/domain cutover on 5 November 2026, superseding the historical preview-only holds below. The tested 1.7.0 artifact is now on Firebase's live channel; custom-domain DNS is pending GoDaddy sign-in.
