@@ -14,3 +14,6 @@ Postdeploy: HTTP pages/assets, canonical URLs and preserved article slugs; corre
 
 
 1.3.0 / issue #6: five static screen-note routes, revised Entertainment archive and client filter, navigation/sitemap updates. No database, dependency, monitoring or permissions changes. Deploy the validated dist to the existing Firebase review channel; compare archive/detail HTML to local build and verify browser filtering. Rollback is the preceding review version f1ef7989b3531a52. Production/domain/merge remain separate.
+
+
+1.3.1 / issue #7: five local promotional posters, shared poster component, official links and media metadata; no dependency, database, monitoring or permissions changes. Review version 7c95643d040ce258 verified against artifact bytes; previous review version fc050dd9395f0644 is the rollback source. No production/domain transition.

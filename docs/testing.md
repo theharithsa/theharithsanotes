@@ -53,3 +53,6 @@ Browser checked desktop archive, series filtering (one card), movies filtering (
 ## 1.3.1 poster verification
 
 Astro check: 35 files, zero diagnostics. Build: 30 pages. Ten Node tests cover unchanged reflection bodies and now require actual JPEG poster bytes, local poster references and official/source links on the collection and each detail. All five promotional images were visually inspected against their titles. Browser archive: five loaded poster images, object-fit:contain, no horizontal overflow. Mobile Made in Korea detail: loaded poster, official Netflix title link and no overflow; Series filter still returns one card. Source metadata and full original dimensions are in docs/screen-media.json. Provider title-page content is verified; streaming availability by region is not asserted.
+
+
+1.3.1 preview version 7c95643d040ce258 from eae5cc13e0f0e3c46b479b6646b541d057e048aa: six pages and five poster images returned 200 with exact artifact bytes. Deployed browser loaded all five posters and official links after refresh. Implementation CI foundation/website/GitGuardian passed; documentation-only follow-up head is checked separately.
