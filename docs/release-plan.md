@@ -1,6 +1,6 @@
 # Release impact and verification plan
 
-Current production authorization and actual launch status are recorded in [production launch](production-launch.md). The owner explicitly approved production/domain cutover on 5 November 2026, superseding the historical preview-only holds below. The tested 1.7.0 artifact is now on Firebase's live channel; custom-domain DNS is pending GoDaddy sign-in.
+Current production authorization and actual launch status are recorded in [production launch](production-launch.md). The owner explicitly approved production/domain cutover on 5 November 2026, superseding the historical preview-only holds below. The tested 1.7.0 artifact is now on Firebase's live channel; GoDaddy DNS has been updated and certificate provisioning is pending.
 
 Version: 1.7.0. Scope: issue #11 (site artwork, portrait menus and listening journeys), issue #10 (editorial mosaic and illustrated details), issue #9 (uniform technical project grid, local details and generated covers), issue #5 (seven-section rebuild), plus [issue #1](https://github.com/theharithsa/theharithsanotes/issues/1) and [editorial refinement #3](https://github.com/theharithsa/theharithsanotes/issues/3). Source: feature branch `feat/1-personal-website`, reviewed through PR #2. The user approved a private repository and Firebase Hosting project the-harithsa-notes-94, then requested article formatting, classic typography, more projects, and selected Downloads photographs.
 
