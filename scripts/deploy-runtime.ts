@@ -2,6 +2,7 @@ import { applicationDefault } from "firebase-admin/app";
 import { writeFile, mkdir } from "node:fs/promises";
 import { namespace } from "../src/server/config.ts";
 import { auditAudience } from "../src/server/scheduler.ts";
+import { trafficForRelease } from "./run-traffic.mjs";
 import {
   auditEvent,
   enqueueAudit,
@@ -81,7 +82,16 @@ async function upsert(
 ) {
   const path = `/v2/${parent}/${kind}/${id}`;
   try {
-    await api("run.googleapis.com", path);
+    const current = await api<{
+      traffic?: Array<{
+        type?: string;
+        revision?: string;
+        percent?: number;
+        tag?: string;
+      }>;
+    }>("run.googleapis.com", path);
+    if (kind === "services")
+      body = { ...body, traffic: trafficForRelease(current.traffic ?? []) };
     return complete(
       await api<Operation>("run.googleapis.com", path, "PATCH", {
         ...body,
