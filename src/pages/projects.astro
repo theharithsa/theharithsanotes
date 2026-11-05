@@ -4,72 +4,65 @@ import ProjectArt from "../components/ProjectArt.astro";
 import { projects } from "../data/projects";
 ---
 
-<Base title="Projects">
-  <section class="section-masthead tone-sage">
-    <div class="wrap">
-      <span class="eyebrow">THE WORKBENCH</span>
-      <h1>Projects</h1>
-      <p>
-        Products for everyday life. Tools for people who build. A few ideas that
-        escaped the notebook.
-      </p>
-    </div>
-  </section>
-  <section class="project-grid wrap expanded-projects" aria-label="Projects">
-    {projects.slice(0, 4).map((project, index) => (
-      <article class="project-card" id={project.slug}>
-        <a
-          href={project.href}
-          class="project-image-link"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <ProjectArt project={project} />
-        </a>
-        <div class="project-copy">
-          <span class="eyebrow">
-            {String(index + 1).padStart(2, "0")} / {project.category}
-          </span>
-          <h2>
-            <a href={project.href}>{project.title}</a>
-          </h2>
-          <p>{project.description}</p>
-          <div class="project-links">
-            <a class="underlined-link" href={project.href}>
-              Explore the project ↗
+<Base
+  title="Projects"
+  description="The workbench: products, experiments and open-source tools by Vishruth Harithsa."
+>
+  <div class="projects-technical">
+    <header class="workbench-header">
+      <div class="wrap">
+        <span class="eyebrow">&gt;_ THE WORKBENCH</span>
+        <h1>Ideas, built.</h1>
+        <p>
+          Useful things for everyday life.
+          <br />
+          Tools for people who build.
+        </p>
+        <div class="workbench-status">
+          <span aria-hidden="true"></span>
+          {projects.length} projects / always learning
+        </div>
+      </div>
+    </header>
+    <section
+      class="wrap workbench-section"
+      aria-labelledby="projects-heading"
+      id="open-source"
+    >
+      <div class="workbench-section-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <span>Explore the story behind the code ↓</span>
+      </div>
+      <div class="workbench-grid">
+        {projects.map((project, index) => (
+          <article class="workbench-card" id={project.slug}>
+            <a
+              class="workbench-cover"
+              href={`/projects/${project.slug}`}
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <ProjectArt project={project} />
             </a>
-            {project.source && project.source !== project.href && (
-              <a href={project.source} class="source-link">
-                Source on GitHub ↗
+            <div class="workbench-card-copy">
+              <span class="workbench-meta">
+                {String(index + 1).padStart(2, "0")} / {project.category}
+              </span>
+              <h3>
+                <a href={`/projects/${project.slug}`}>{project.title}</a>
+              </h3>
+              <p>{project.description}</p>
+              <a
+                class="workbench-read"
+                href={`/projects/${project.slug}`}
+                aria-label={`Read about ${project.title}`}
+              >
+                Project notes <span aria-hidden="true">↗</span>
               </a>
-            )}
-          </div>
-        </div>
-      </article>
-    ))}
-  </section>
-  <section class="project-index wrap technical-workbench" id="open-source">
-    <span class="section-kicker">MORE FROM THE WORKBENCH</span>
-    {projects.slice(4).map((project, index) => (
-      <article id={project.slug}>
-        <span class="project-index-number">
-          {String(index + 5).padStart(2, "0")}
-        </span>
-        <div>
-          <span class="eyebrow">{project.category}</span>
-          <h2>
-            <a href={project.href}>{project.title}</a>
-          </h2>
-          <p>{project.description}</p>
-        </div>
-        <a
-          href={project.href}
-          class="project-index-arrow"
-          aria-label={`Explore ${project.title}`}
-        >
-          ↗
-        </a>
-      </article>
-    ))}
-  </section>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
 </Base>

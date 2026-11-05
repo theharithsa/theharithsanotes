@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0] — 2026-11-05
+
+- Rebuilt Projects as one uniform twelve-card grid, with the technical journal’s JetBrains Mono typography, grid header and restrained hover treatment.
+- Added twelve local project detail routes with researched overviews, four capabilities, stack labels, project/documentation links and confirmed repositories. FinVision’s source repository remains unconfirmed; its live site is linked.
+- Generated twelve separate, subject-specific conceptual covers using the built-in image tool; preserved prompts and source research metadata.
+- Updated navigation, sitemap and project journey regression coverage; preserved existing project anchors and all article paths.
+
 ## [1.4.0] — 2026-11-05
 
 - Restored illustrated Entertainment covers; real posters remain inside opened reflections, with official links retained.

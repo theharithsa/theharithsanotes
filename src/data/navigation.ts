@@ -44,13 +44,13 @@ export const navigation = [
     title: "From a question to something useful.",
     description:
       "Small experiments, open-source tools, and products for everyday life.",
-    image: "/images/projects/aroha.webp",
+    image: "/images/projects/app-launchpad-concept-v1.png",
     links: [
       { label: "All projects", href: "/projects" },
-      { label: "SalesDrone", href: "/projects#salesdrone" },
-      { label: "Aroha Retreat", href: "/projects#aroha-retreat" },
-      { label: "FinVision AI", href: "/projects#finvision-ai" },
-      { label: "Budget Buddy", href: "/projects#budget-buddy" },
+      { label: "SalesDrone", href: "/projects/salesdrone" },
+      { label: "Aroha Retreat", href: "/projects/aroha-retreat" },
+      { label: "FinVision AI", href: "/projects/finvision-ai" },
+      { label: "Budget Buddy", href: "/projects/budget-buddy" },
       { label: "Open source", href: "/projects#open-source" },
     ],
   },

@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import ts from "typescript";
+import { projects } from "../src/data/projects.ts";
 import { screenNotes } from "../src/data/screen-notes.ts";
 
 const root = new URL("../", import.meta.url);
@@ -90,6 +91,7 @@ test("every internal page link and local asset resolves in the built site", asyn
     "projects/index.html",
     "gallery/index.html",
     "privacy/index.html",
+    ...projects.map((project) => `projects/${project.slug}/index.html`),
     ...screenNotes.map((note) => `entertainment/${note.slug}/index.html`),
     ...articles.map((article) => `${article.slug}/index.html`),
   ];
@@ -175,7 +177,7 @@ test("the LinkedIn note is published with attribution and dt-mac-agent is discov
     assert.ok((await readPage(route)).includes(`href="/${note.slug}"`));
   }
   assert.ok(
-    (await readPage("projects/index.html")).includes(
+    (await readPage("projects/dt-mac-agent/index.html")).includes(
       'href="https://github.com/theharithsa/dt-mac-agent"',
     ),
   );
@@ -279,4 +281,45 @@ test("local preview stays isolated from production even when consent is granted"
   const blocked = telemetryHarness("localhost", undefined, true);
   assert.doesNotThrow(() => blocked.controls.get("granted").click());
   assert.deepEqual(blocked.requests, []);
+});
+
+test("every project opens a researched detail page with a distinct cover and verified resources", async () => {
+  const archive = await readPage("projects/index.html");
+  const sitemap = await readPage("sitemap.xml");
+  assert.equal(projects.length, 12);
+  assert.equal(
+    new Set(projects.map((project) => project.image)).size,
+    projects.length,
+  );
+  assert.equal(
+    (archive.match(/class="workbench-card"/g) ?? []).length,
+    projects.length,
+  );
+  for (const project of projects) {
+    const route = `/projects/${project.slug}`;
+    const page = await readPage(`projects/${project.slug}/index.html`);
+    assert.ok(archive.includes(`id="${project.slug}"`));
+    assert.ok(archive.includes(`href="${route}"`));
+    assert.ok(page.includes(`href="${project.href}"`));
+    assert.ok(page.includes(`href="/projects#${project.slug}"`));
+    if (project.source) assert.ok(page.includes(`href="${project.source}"`));
+    else
+      assert.equal(
+        project.slug,
+        "finvision-ai",
+        "Only FinVision has an unconfirmed repository",
+      );
+    assert.ok(project.overview.join(" ").length > 300);
+    assert.equal(project.features.length, 4);
+    assert.ok(page.includes("Concept illustration"));
+    assert.ok(page.includes(`src="${project.image}"`));
+    const image = await readFile(new URL(`public${project.image}`, root));
+    assert.equal(image.subarray(1, 4).toString(), "PNG");
+    assert.equal(image.readUInt32BE(16), 1536);
+    assert.equal(image.readUInt32BE(20), 1024);
+    assert.equal(
+      sitemap.split(`<loc>https://theharithsa.com${route}</loc>`).length - 1,
+      1,
+    );
+  }
 });
