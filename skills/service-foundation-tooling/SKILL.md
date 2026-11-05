@@ -20,6 +20,7 @@ Owner: theharithsa. Scope: Python standard-library repository tooling; no applic
 ## Registration and recovery
 
 - Generator preflight rejects unsafe paths, duplicate identities, symlinks and existing output. Exclusive catalog lock coordinates generators; final replacement is atomic; failed generation removes only its newly created directory.
+- Reject Unix and Windows path anchors on every host. Close the exclusive file handle before unlinking the lock so Windows registration can finish. Unit fixtures represent an unconfigured synthetic template rather than inheriting the application’s active services and approved decisions.
 - Avoid concurrent manual catalog edits. After process interruption, inspect active processes, catalog and generated files before removing a stale `.catalog.lock` or `.catalog.next`; never discard external work blindly.
 - Planned source directories may be absent. Active-service schema/domain checks require owner, real source/entrypoint paths and test commands. CI cannot infer undeclared services or semantic freshness.
 

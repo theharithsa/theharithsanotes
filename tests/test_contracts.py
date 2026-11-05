@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 import unittest
+import shutil
 from unittest.mock import patch
 import test_foundation as fixtures
 from contracts import *
@@ -65,6 +66,7 @@ class ContractTests(unittest.TestCase):
         (root/'missing.md').write_text('resolved')
         self.assertEqual(check_links(root),[])
 
+    @unittest.skipUnless(shutil.which('sh'), 'POSIX shell required; exercised in Linux CI')
     def test_ci_and_catalog_share_the_check_entrypoint(self):
         data=json.loads((ROOT/'skills/catalog.json').read_text())
         service=next(s for s in data['services'] if s['id']=='foundation-tooling')

@@ -1,5 +1,9 @@
 # Non-negotiables
 
+## Project context
+
+Owner: Vishruth Harithsa, Senior Customer Success Engineer at Dynatrace, Bengaluru. TypeScript first; explicit types, async/await, proper error handling, no production console.log, no privileged browser credentials. Pin exact package versions. Never print secrets or copy environment values into source. This project is the personal site at theharithsa.com, using the specifically supplied RUM tag and Firebase project; do not substitute demo tenants. For future DQL always use an explicit time range, suppress duplicate Davis problems, and use ACTIVE/CLOSED with event.name/event.status/event.category.
+
 - Follow current human instructions and [authorization boundaries](.agents/skills/app-launchpad/references/safety.md).
 - Resolve consequential unknowns through [discovery](.agents/skills/app-launchpad/references/discovery.md).
 - Preserve existing work under [safety](.agents/skills/app-launchpad/references/safety.md).

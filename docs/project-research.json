@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "salesdrone",
+    "url": "https://github.com/theharithsa/SalesDrone/blob/main/README.md",
+    "readmeSha": "b6f4daad4917dc27c49418b7d6df773046b35afb",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "aroha-retreat",
+    "url": "https://github.com/ArohaRetreat/website/blob/main/README.md",
+    "readmeSha": "555f36514c6d4f537a6ae28e9440c671219a5e2d",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "finvision-ai",
+    "url": "https://github.com/spmsuhas/finvision-ai/blob/main/README.md",
+    "readmeSha": "6f33f99986fe77a6389e055be5b6b19ee7b9be70",
+    "reviewedOn": "2026-11-05",
+    "scope": "Owner supplied repository URL; README confirms vanilla ES modules, Vite, Tailwind, Chart.js, Firebase and Gemini. Repository ownership is retained; no sole-authorship or production-readiness claim is inferred."
+  },
+  {
+    "slug": "budget-buddy",
+    "url": "https://github.com/theharithsa/budget-buddy/blob/main/README.md",
+    "readmeSha": "4e1de54b93e5100b88f469d810ad5a0ed0afc7bc",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "dt-mac-agent",
+    "url": "https://github.com/theharithsa/dt-mac-agent/blob/main/README.md",
+    "readmeSha": "134d63cddc2fca8a05b6ed3f4ff1c7d84264d05a",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "chaicart",
+    "url": "https://github.com/theharithsa/chaicart-cloud-workshop/blob/main/README.md",
+    "readmeSha": "e2c4911a74bd1d6d936a2be185e165e50dd920f8",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "inspiredlearning",
+    "url": "https://github.com/theharithsa/inspiredlearning/blob/main/README.md",
+    "readmeSha": "46c5a7dd76fab7f20521cdd49933643ed69ba35f",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "copilot-otel",
+    "url": "https://github.com/theharithsa/github_copilot_otel/blob/main/README.md",
+    "readmeSha": "8b2535bac8125d573d757fc88cf1d62aabd4057b",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "salesdrone-mcp",
+    "url": "https://github.com/theharithsa/salesdrone-mcp/blob/main/README.md",
+    "readmeSha": "abe9ecd498e878014461a56c279203969d2dbba7",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "manahsmriti",
+    "url": "https://github.com/theharithsa/manahsmriti/blob/main/README.md",
+    "readmeSha": "a3fff949f2a73e530ea8fd68f1188597e3efba9c",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "app-launchpad",
+    "url": "https://github.com/theharithsa/app-launchpad-template/blob/main/README.md",
+    "readmeSha": "c8866adee6f4f2c743d1eeb35da3d37651694f64",
+    "reviewedOn": "2026-11-05",
+    "scope": "Repository README; descriptive capabilities, no deployment or performance certification."
+  },
+  {
+    "slug": "dynatrace-mcp",
+    "url": "https://github.com/dynatrace-oss/dynatrace-mcp/blob/main/README.md",
+    "readmeSha": null,
+    "reviewedOn": "2026-11-05",
+    "scope": "Public raw README fallback; GitHub connector blocked by organization SSO. Deprecation disclosed."
+  }
+]

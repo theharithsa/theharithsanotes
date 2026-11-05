@@ -1,0 +1,42 @@
+---
+import type { ScreenNote } from "../data/screen-notes";
+interface Props {
+  note: ScreenNote;
+  eager?: boolean;
+}
+const { note, eager = false } = Astro.props;
+---
+
+<figure class="screen-poster">
+  <a
+    class={`poster-frame tone-${note.tone}`}
+    href={note.officialUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${note.title}: ${note.linkLabel} (opens in a new tab)`}
+  >
+    <img
+      src={note.poster.src}
+      alt={note.poster.alt}
+      width={note.poster.width}
+      height={note.poster.height}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : "auto"}
+      decoding="async"
+      data-poster-image
+    />
+    <span class="poster-fallback" data-poster-fallback hidden>
+      {note.title}
+      <small>Poster unavailable · Open the title page ↗</small>
+    </span>
+    <span class="poster-open" aria-hidden="true">
+      ↗
+    </span>
+  </a>
+  <figcaption>
+    Promotional artwork ·{" "}
+    <a href={note.poster.source} target="_blank" rel="noopener noreferrer">
+      {note.poster.credit} ↗
+    </a>
+  </figcaption>
+</figure>

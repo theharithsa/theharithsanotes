@@ -1,0 +1,99 @@
+---
+import Base from "../layouts/Base.astro";
+import { books } from "../data/interests";
+---
+
+<Base title="Books">
+  <section class="reading-hero tone-peach">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">THE READING ROOM</span>
+        <h1>
+          A whole world.
+          <br />
+          <em>One page away.</em>
+        </h1>
+        <p>
+          A few books from my shelf. Some I’m reading, some I’ve finished, and
+          some waiting for their turn.
+        </p>
+        <a href="#bookshelf" class="text-link">
+          Browse the shelf ↓
+        </a>
+      </div>
+      <div class="book-installation" aria-hidden="true">
+        <span>
+          KEEP
+          <br />
+          AN OPEN
+          <br />
+          <em>MIND.</em>
+        </span>
+        <span>
+          ONE MORE
+          <br />
+          <em>page.</em>
+        </span>
+        <span>
+          BETWEEN
+          <br />
+          THE
+          <br />
+          <em>LINES</em>
+        </span>
+      </div>
+    </div>
+  </section>
+  <section class="wrap space" id="bookshelf">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">MY BOOKSHELF</span>
+        <h2>Different books. New perspectives.</h2>
+      </div>
+    </div>
+    <div class="filters shelf-filters" aria-label="Filter bookshelf">
+      {["All books", "Reading", "Read", "To read"].map((status, index) => (
+        <button data-shelf-filter={status} aria-pressed={index === 0}>
+          {status}
+        </button>
+      ))}
+    </div>
+    <p id="shelf-count" class="result-count" aria-live="polite">
+      {books.length} books
+    </p>
+    <div class="books-grid">
+      {books.map((book, index) => (
+        <article class="book-card" data-book data-status={book.status}>
+          <div class={`book-cover tone-${book.colour}`}>
+            <span class="book-cover-series">
+              FROM VISH’S SHELF / {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3>{book.title}</h3>
+            <span class="book-author">{book.author}</span>
+            <span class="book-cover-rule" />
+          </div>
+          <div class="book-caption">
+            <span class="status-label">{book.status}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="editorial-caption">
+      A reading log, rather than a ranking. These typographic jackets are my own
+      shelf labels, not the publishers’ covers.
+    </p>
+  </section>
+  <section class="library-band tone-sage">
+    <div class="wrap">
+      <span class="eyebrow">A PROJECT FOR BOOK PEOPLE</span>
+      <h2>Meet Manahsmriti Books.</h2>
+      <p>
+        I also built a place to browse a shared catalog and keep a personal
+        library.
+      </p>
+      <a class="text-link" href="https://manahsmriti-books.web.app">
+        Visit the library ↗
+      </a>
+    </div>
+  </section>
+</Base>

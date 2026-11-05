@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import Base from "../../../layouts/Base.astro";
+import PodcastArt from "../../../components/PodcastArt.astro";
+import { listening } from "../../../data/interests";
+export const getStaticPaths = (() =>
+  listening.map((note, index) => ({
+    params: { slug: note.slug },
+    props: { note, index },
+  }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { note, index } = Astro.props;
+---
+
+<Base title={note.title} description={note.note}>
+  <article class="podcast-room podcast-detail">
+    <div class="wrap project-detail-top">
+      <a class="workbench-back" href={`/podcasts#${note.slug}`}>
+        ← Listening notes
+      </a>
+      <span class="workbench-meta">LISTENING / {note.status}</span>
+    </div>
+    <header class="wrap project-story-hero">
+      <PodcastArt note={note} index={index} />
+      <div class="project-story-intro">
+        <span class="eyebrow">THE LISTENING ROOM</span>
+        <h1>{note.title}</h1>
+        <p class="show-name">{note.show}</p>
+        <p class="project-story-deck">{note.note}</p>
+        <a class="project-visit" href={note.href}>
+          Open the episode <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+    <div class="wrap podcast-detail-footer">
+      <a class="text-link" href="/podcasts">
+        More listening notes
+      </a>
+      <a class="text-link" href="/podcasts/created">
+        Created conversations
+      </a>
+    </div>
+  </article>
+</Base>

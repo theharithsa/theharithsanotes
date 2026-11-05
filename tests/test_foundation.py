@@ -29,6 +29,21 @@ class FoundationTests(unittest.TestCase):
         for name in ('scripts', 'skills', '.agents', 'schemas', 'docs'):
             shutil.copytree(ROOT / name, root / name, dirs_exist_ok=True,
                             ignore=shutil.ignore_patterns('__pycache__'))
+        # Unit fixtures model an unconfigured template, independently of this app.
+        catalog_file = root / 'skills/catalog.json'
+        catalog = json.loads(catalog_file.read_text())
+        catalog['skills'] = [skill for skill in catalog['skills'] if skill['id'] != 'service-website']
+        catalog['services'] = [service for service in catalog['services'] if service['id'] != 'website']
+        catalog_file.write_text(json.dumps(catalog))
+        shutil.rmtree(root / 'skills/service-website')
+        (root / 'skills/.catalog.lock').unlink(missing_ok=True)
+        project_file = root / 'project.json'
+        project = json.loads(project_file.read_text())
+        project['name'] = None
+        project['template']['revision'] = None
+        for key in foundation.DECISIONS:
+            project['decisions'][key] = {'status': 'needs-user-input', 'value': None, 'approval': None}
+        project_file.write_text(json.dumps(project))
         return root
 
     def test_discovery_gate_requires_decisions_and_provenance(self):
@@ -88,7 +103,8 @@ class FoundationTests(unittest.TestCase):
             self.assertIsNone(re.fullmatch(SEMVER_PATTERN, bad), bad)
 
     def test_json_output_and_failure_exit_status(self):
-        command = [sys.executable, str(ROOT/'scripts/check_foundation.py'), '--root', str(ROOT), '--json']
+        root = self.fixture()
+        command = [sys.executable, str(ROOT/'scripts/check_foundation.py'), '--root', str(root), '--json']
         result = subprocess.run(command, capture_output=True, text=True)
         payload = json.loads(result.stdout)
         self.assertEqual(result.returncode, 0, result.stdout)

@@ -92,6 +92,18 @@
         "app-launchpad",
         "ian-xiaohei-illustrations"
       ]
+    },
+    {
+      "id": "service-website",
+      "kind": "service",
+      "path": "skills/service-website/SKILL.md",
+      "description": "Maintain the website service; read its implementation and continuation context.",
+      "dependsOn": [
+        "project-implementation",
+        "project-testing",
+        "project-deployment",
+        "project-observability"
+      ]
     }
   ],
   "services": [
@@ -118,7 +130,34 @@
         "sh scripts/check.sh"
       ],
       "continuation": "skills/service-foundation-tooling/continuation.md",
-      "lastReviewedRevision": "953717c787dd37d1500c04767f818f4e0a0faffd"
+      "lastReviewedRevision": "dceb62c9966602c36bcffa35faad858abd21f36b"
+    },
+    {
+      "id": "website",
+      "skillId": "service-website",
+      "sourcePaths": [
+        "src"
+      ],
+      "entrypoints": [
+        "src/pages/index.astro",
+        "src/pages/[slug].astro",
+        "src/scripts/telemetry.ts"
+      ],
+      "owner": "theharithsa",
+      "status": "active",
+      "dependsOn": [],
+      "contracts": [
+        "docs/decisions.md",
+        "docs/observability.md",
+        "firebase.json"
+      ],
+      "testCommands": [
+        "npm run check",
+        "npm run build",
+        "npm test"
+      ],
+      "continuation": "skills/service-website/continuation.md",
+      "lastReviewedRevision": "797913390ed10a26f426489ffd16a32c291c01ab"
     }
   ]
 }

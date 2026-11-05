@@ -1,0 +1,20 @@
+---
+import type { ScreenNote } from "../data/screen-notes";
+interface Props {
+  note: ScreenNote;
+}
+const { note } = Astro.props;
+---
+
+<div
+  class={`screen-note-art tone-${note.tone} motif-${note.motif}`}
+  aria-hidden="true"
+>
+  <div class="screen-motif">
+    <i />
+    <i />
+    <i />
+  </div>
+  <span>{note.artwork}</span>
+  <small>A SCREEN NOTE / VISHRUTH HARITHSA</small>
+</div>

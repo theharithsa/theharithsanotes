@@ -1,0 +1,82 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import ProjectArt from "../../components/ProjectArt.astro";
+import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
+export const getStaticPaths = (() =>
+  projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { project } = Astro.props;
+---
+
+<Base
+  title={project.title}
+  description={project.description}
+  image={project.image}
+>
+  <article class="projects-technical project-details">
+    <div class="wrap project-detail-top">
+      <a class="workbench-back" href={`/projects#${project.slug}`}>
+        ← All projects
+      </a>
+      <span class="workbench-meta">{project.category} / PROJECT NOTES</span>
+    </div>
+    <header class="wrap project-story-hero">
+      <figure class="project-detail-cover">
+        <ProjectArt project={project} detail />
+        <figcaption>Original illustration / {project.title}</figcaption>
+      </figure>
+      <div class="project-story-intro">
+        <span class="eyebrow">FROM THE WORKBENCH</span>
+        <h1>{project.title}</h1>
+        <p class="project-story-deck">{project.description}</p>
+        <div class="project-story-actions">
+          <a class="project-visit" href={project.href}>
+            {project.linkLabel}
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="project-source" href={project.source}>
+            GitHub repository ↗
+          </a>
+        </div>
+        <div class="project-stack">
+          <h2>Built with</h2>
+          <ul>
+            {project.stack.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </header>
+    <div class="wrap project-detail-layout">
+      <div class="project-detail-story">
+        <section aria-labelledby="overview-heading">
+          <span class="workbench-meta">01 / THE IDEA</span>
+          <h2 id="overview-heading">What it does</h2>
+          {project.overview.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </section>
+        <section
+          class="project-capabilities"
+          aria-labelledby="capabilities-heading"
+        >
+          <span class="workbench-meta">02 / INSIDE THE PROJECT</span>
+          <h2 id="capabilities-heading">A closer look</h2>
+          <div class="project-feature-grid">
+            {project.features.map((feature) => (
+              <div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</Base>

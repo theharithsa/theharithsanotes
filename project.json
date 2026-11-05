@@ -1,42 +1,42 @@
 {
   "$schema": "schemas/project.schema.json",
   "schemaVersion": 1,
-  "name": null,
+  "name": "The Harithsa Notes",
   "template": {
     "repository": "theharithsa/app-launchpad-template",
-    "revision": null,
+    "revision": "f04c042a9e000f606982863518fa7bb9cfbb7d85",
     "version": "1.9.0"
   },
   "decisions": {
     "product": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "approved",
+      "value": "Personal editorial website; preserve existing articles and URLs.",
+      "approval": "User requested site inspired by Gates Notes."
     },
     "stack": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "approved",
+      "value": "Astro static generation, TypeScript, Firebase browser Analytics.",
+      "approval": "Implementation choice within requested runnable TypeScript site scope."
     },
     "hosting": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "approved",
+      "value": "Firebase Hosting project the-harithsa-notes-94; domain theharithsa.com.",
+      "approval": "User selected Firebase Hosting in this chat."
     },
     "privacy": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "approved",
+      "value": "Anonymous, opt-in analytics; no custom identity or Session Replay; local export off.",
+      "approval": "Conservative implementation of requested analytics; no expanded data collection."
     },
     "observability": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "approved",
+      "value": "Supplied Dynatrace RUM tag and Firebase measurement ID; no backend.",
+      "approval": "User requested dt-obs, RUM, and Google Analytics."
     },
     "license": {
-      "status": "needs-user-input",
-      "value": null,
-      "approval": null
+      "status": "not-applicable",
+      "value": "Private application repository; no additional source license granted. Template MIT preserved.",
+      "approval": "User approved private repository; no public source distribution requested."
     }
   }
 }

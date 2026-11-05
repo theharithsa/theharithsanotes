@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-05",
+  "note": "Original conceptual project illustrations; not product screenshots or photographs of actual properties. Each was generated separately, inspected and copied unmodified into the site.",
+  "assets": [
+    {
+      "slug": "salesdrone",
+      "path": "public/images/projects/salesdrone-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A precise miniature sales workflow: three connected translucent glass panels showing abstract lead cards, a conversation timeline and a follow-up calendar, with a small headset and a single task checkmark. Blue and mint accents. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "aroha-retreat",
+      "path": "public/images/projects/aroha-retreat-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A precise architectural miniature of a retreat booking website: a modest guest cabin beside a booking calendar tile, room key and photographic thumbnail frame. Warm clay and sage accents. No flowers, ornamental plants or fantasy landscape; emphasize hospitality and reservations, not an invented actual property. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "finvision-ai",
+      "path": "public/images/projects/finvision-ai-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A precise financial-planning instrument: layered transparent projection curves, a rupee coin, calendar milestones and a slider dial on a clean desktop. Teal and amber accents. Show planning scenarios rather than guaranteed returns. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "budget-buddy",
+      "path": "public/images/projects/budget-buddy-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A personal budgeting workspace made physical: segmented spending ring, small grouped coins, receipt strips and three budget envelopes, on an ivory desk. Coral and teal accents. Distinct everyday expenses, not investment projections. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "dt-mac-agent",
+      "path": "public/images/projects/dt-mac-agent-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A silver laptop with a small terminal-like black panel, a CPU chip, battery icon, disk cylinder and a green pulse line flowing toward connected telemetry tiles. Deep navy and emerald accents. No Apple logo. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "chaicart",
+      "path": "public/images/projects/chaicart-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A miniature chai delivery cart with two steaming cups, connected to three cloud-computing blocks and a small outage warning triangle, evoking a playful practical cloud workshop. Warm chai amber and cloud blue accents. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "inspiredlearning",
+      "path": "public/images/projects/inspiredlearning-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A permanent learning journey: small graduation cap, certificate card with abstract embossed seal, quiz answer tiles and a staircase of earned credit tokens connected to a cloud account. Violet and periwinkle accents. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "copilot-otel",
+      "path": "public/images/projects/copilot-otel-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: An AI coding agent observed through telemetry: dark miniature code terminal with abstract code strokes, a branching trace waterfall, token counters represented by small stacked chips, and a latency gauge. Electric blue and emerald accents. No robot mascot. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "salesdrone-mcp",
+      "path": "public/images/projects/salesdrone-mcp-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A read-only sales data bridge: small lead cards and task checklist on one side, an abstract assistant chat panel on the other, linked by a solid connector with a padlock and one directional arrow. Copper and teal accents. No robot or sales drone aircraft. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "manahsmriti",
+      "path": "public/images/projects/manahsmriti-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: A private and shared book catalog made tangible: a five-row shelf miniature with books of different colors, a magnifying glass, catalog index cards and small shelf-location pins, plus one subtle privacy lock. Warm burgundy and muted teal accents. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "app-launchpad",
+      "path": "public/images/projects/app-launchpad-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: An application foundation made tangible: modular code blocks assembled on a blueprint base beside a discovery checklist, a service tile, test checkmarks and a release pipeline of connected stages. Navy and mint accents. No rocket cliché. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    },
+    {
+      "slug": "dynatrace-mcp",
+      "path": "public/images/projects/dynatrace-mcp-concept-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept website project cover. Create one original wide landscape 3:2 premium editorial product illustration. Subject: An AI assistant connecting to observability: an abstract chat tile linked by a connector to a topology of service nodes, a trace waterfall and small signal panels representing logs and metrics. Violet, blue and green accents. No robot mascot, no logos. Style: tactile matte 3D objects, crisp engineering geometry, soft studio shadows on pale warm ivory background, restrained color, generous breathing room, centered subject fully inside middle 80% to survive 16:10 crop. Technical, approachable, highly polished. No text, letters, logos, numbers, watermarks, flowers, botanical decoration, notebook art, generic AI robot, or fake screenshots. This is a conceptual illustration, not an actual product screenshot. No title embedded."
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+---
+import Base from "../layouts/Base.astro";
+import GalleryGrid from "../components/GalleryGrid.astro";
+import { site } from "../data/site";
+---
+
+<Base title="Meet Vish">
+  <section class="meet-hero tone-peach">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">HELLO, I’M VISHRUTH HARITHSA</span>
+        <h1>
+          Call me
+          <br />
+          <em>Vish.</em>
+        </h1>
+        <p>
+          Engineer. Builder.
+          <br />
+          Still a student of the world.
+        </p>
+        <span class="location">BASED IN BENGALURU, INDIA</span>
+      </div>
+      <img
+        src="/images/gallery/portrait-seated.webp"
+        alt="Vishruth seated in a light jacket against a charcoal background"
+        width="1200"
+        height="1800"
+        fetchpriority="high"
+      />
+    </div>
+  </section>
+  <section class="wrap personal-statement space">
+    <span class="eyebrow">A LITTLE CONTEXT</span>
+    <h2>
+      I help people understand complicated systems.
+      <br />
+      <span>And I’m interested in a lot more than systems.</span>
+    </h2>
+    <div class="personal-columns">
+      <p>
+        I’m a Senior Customer Success Engineer at Dynatrace. My work brings
+        together observability, OpenTelemetry, and AI tooling—helping engineers
+        make sense of what’s happening inside their software.
+      </p>
+      <p>
+        Outside that, you’ll find me building side projects, reading, listening
+        to long conversations, or writing down a thought before it disappears.
+        These pages bring those parts of my life together.
+      </p>
+    </div>
+  </section>
+  <section class="interest-links wrap">
+    <a href="/projects">
+      <span>01 / MAKING</span>
+      <h3>The workbench</h3>
+      <p>Ideas turned into things people can use.</p>
+      <b aria-hidden="true">↗</b>
+    </a>
+    <a href="/books">
+      <span>02 / LEARNING</span>
+      <h3>The bookshelf</h3>
+      <p>Different authors. Different ways to see.</p>
+      <b aria-hidden="true">↗</b>
+    </a>
+    <a href="/entertainment">
+      <span>03 / UNWINDING</span>
+      <h3>Beyond work</h3>
+      <p>Good stories and what they leave behind.</p>
+      <b aria-hidden="true">↗</b>
+    </a>
+  </section>
+  <section class="wrap space">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">LIFE IN BETWEEN</span>
+        <h2>People, places, little moments.</h2>
+      </div>
+      <a href="/gallery" class="text-link">
+        The photo journal ↗
+      </a>
+    </div>
+    <GalleryGrid limit={3} />
+  </section>
+  <section class="connection-band tone-sage">
+    <div class="wrap">
+      <h2>
+        Good things often start
+        <br />
+        with a conversation.
+      </h2>
+      <div>
+        <a href={site.mentoring} class="text-link">
+          Let’s connect on Topmate ↗
+        </a>
+        <a href={site.linkedin} class="text-link">
+          Find me on LinkedIn ↗
+        </a>
+        <a
+          href="https://community.dynatrace.com/t5/Community-news/Video-interview-with-the-Member-of-the-Month-Vishruth-Harithsa/ba-p/186472"
+          class="text-link"
+        >
+          My Dynatrace Community interview ↗
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

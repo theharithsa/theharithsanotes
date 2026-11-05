@@ -1,0 +1,21 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base
+  title="Created podcasts"
+  description="A space for conversations by Vishruth Harithsa."
+>
+  <section class="wrap podcast-room created-room space">
+    <nav class="podcast-tabs" aria-label="Podcast collections">
+      <a href="/podcasts">Listening</a>
+      <a href="/podcasts/created" aria-current="page">
+        Created
+      </a>
+    </nav>
+    <span class="eyebrow">MY CONVERSATIONS</span>
+    <h1>Created.</h1>
+    <p>A space for conversations of my own, when they’re ready.</p>
+    <div class="created-empty" aria-label="No created episodes yet"></div>
+  </section>
+</Base>

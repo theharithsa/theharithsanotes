@@ -1,0 +1,192 @@
+---
+import "../styles/site.css";
+import "@fontsource-variable/source-serif-4";
+import "@fontsource-variable/source-serif-4/wght-italic.css";
+import "@fontsource-variable/public-sans";
+import "@fontsource/racing-sans-one/latin-400.css";
+import "@fontsource-variable/jetbrains-mono";
+import EditorialImage from "../components/EditorialImage.astro";
+import Wordmark from "../components/Wordmark.astro";
+import { site } from "../data/site";
+import { navigation } from "../data/navigation";
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+}
+const {
+  title,
+  description = site.description,
+  image = "/images/forest.jpg",
+  article = false,
+} = Astro.props;
+const pageTitle = title
+  ? `${title} | ${site.title}`
+  : `${site.title} — A curious mind. An open notebook.`;
+const canonical = new URL(Astro.url.pathname, site.url);
+const current = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f7f7f2" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.title}
+      href="/rss.xml"
+    />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, site.url)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: site.author,
+        url: site.url,
+        sameAs: [site.github, site.linkedin],
+        jobTitle: "Senior Customer Success Engineer",
+        homeLocation: { "@type": "Place", name: "Bengaluru, India" },
+      }).replace(/</g, "\u003c")}
+    />
+    <script src="../scripts/telemetry.ts"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <header class="site-header">
+      <Wordmark homeLabel />
+      <nav aria-label="Main navigation" class="desktop-nav">
+        <a href="/" aria-current={current === "/" ? "page" : undefined}>
+          Home
+        </a>
+        {navigation.map((item, index) => (
+          <div class="nav-section" data-nav-section>
+            <div class="nav-label">
+              <button
+                class="nav-disclosure"
+                aria-label={`Explore ${item.label}`}
+                aria-expanded="false"
+                aria-controls={`section-menu-${index}`}
+                aria-current={current === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </button>
+            </div>
+            <div class="mega-menu" id={`section-menu-${index}`} hidden>
+              <div class="mega-intro">
+                <span class="eyebrow">{item.label}</span>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </div>
+              <nav aria-label={`${item.label} sections`} class="mega-links">
+                {item.links.map((link) => (
+                  <a href={link.href}>{link.label.replace(/\s*↗/g, "")}</a>
+                ))}
+              </nav>
+              <EditorialImage
+                src={item.image}
+                alt=""
+                widths={[400, 600, 900]}
+                sizes="33vw"
+                class="menu-illustration"
+              />
+            </div>
+          </div>
+        ))}
+      </nav>
+      <div class="header-actions">
+        <a class="search-link" href="/blogs#search" aria-label="Search blogs">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 5 5" />
+          </svg>
+        </a>
+        <button
+          class="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open navigation"
+        >
+          Menu
+        </button>
+      </div>
+      <nav id="mobile-menu" aria-label="Mobile navigation" hidden>
+        <a href="/">Home</a>
+        {navigation.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-top">
+        <Wordmark />
+        <p>
+          A few things I’m learning.
+          <br />A little of the life in between.
+        </p>
+        <div class="footer-social">
+          <a href={site.github}>GitHub ↗</a>
+          <a href={site.linkedin}>LinkedIn ↗</a>
+          <a href="/rss.xml">RSS ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© {new Date().getFullYear()} Vishruth Harithsa</span>
+        <span>
+          Made with curiosity in Bengaluru, India{" "}
+          <span class="little-spark">✳</span>
+        </span>
+        <div>
+          <a href="/privacy">Privacy</a>
+          <button class="text-button" data-privacy-settings>
+            Cookie settings
+          </button>
+        </div>
+      </div>
+    </footer>
+    <aside class="consent-banner" aria-label="Analytics preferences" hidden>
+      <div>
+        <strong>A little note on cookies</strong>
+        <p>
+          With your permission, I use Google Analytics and Dynatrace to
+          understand what’s useful and keep this site working well.{" "}
+          <a href="/privacy">Privacy details</a>
+        </p>
+      </div>
+      <div class="consent-actions">
+        <button class="button button-outline" data-consent="denied">
+          Only essential
+        </button>
+        <button class="button" data-consent="granted">
+          Allow analytics
+        </button>
+      </div>
+    </aside>
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

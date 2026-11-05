@@ -1,0 +1,152 @@
+{
+  "date": "2026-11-05",
+  "issue": 11,
+  "note": "Thirteen topic-specific blog covers and six portrait-reference menu illustrations. Each generated separately, inspected and saved unmodified. Existing Books and Entertainment artwork preserved; vinyl podcast covers retained.",
+  "assets": [
+    {
+      "kind": "blog",
+      "slug": "the-war-room-is-dead",
+      "path": "public/images/blog/the-war-room-is-dead-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: An empty circular incident meeting table dissolves into one clear magnifying lens around a telemetry signal; the idea is moving from war-room firefighting to direct answers. Pale blue background, ink navy, terracotta accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life",
+      "path": "public/images/blog/chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: One sweeping racing line curves around a simple track and becomes an upward route toward a small horizon sun. A generic unbranded racing helmet rests beside the line. Ambition, perspective and clarity; no portrait or trademark. Warm ivory background, charcoal, mustard and coral. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "mcp-server-part-one",
+      "path": "public/images/blog/mcp-server-part-one-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: Two distinct islands of abstract data modules connect through a single elegant bridge into a speech-bubble outline. Legacy systems gaining an AI interface. Mist lavender background, deep ink, muted blue accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "unmasking-software-bugs-understanding-their-origins-and-impact",
+      "path": "public/images/blog/unmasking-software-bugs-understanding-their-origins-and-impact-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A large clean magnifying glass reveals a tiny abstract software bug inside nested layers of a code-like square. The layers suggest origins and downstream impact. Pale peach background, charcoal lines, rust accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "the-bat-signal-a-new-era-in-software-bug-detection",
+      "path": "public/images/blog/the-bat-signal-a-new-era-in-software-bug-detection-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: An abstract searchlight projects a simple bug silhouette into a dark-blue geometric night sky, with three small signal dots leading to the light. No Batman logo, characters or other franchise imagery. Muted blue background, ink navy and warm yellow light. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "exploring-the-future-with-hypermodal-ai",
+      "path": "public/images/blog/exploring-the-future-with-hypermodal-ai-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: Three elegant intersecting loops, respectively holding a small forecast curve, a causal branching node and a speech bubble, converge around one central dot. Predictive, causal and generative AI combining. Pale lilac background, deep blue fine lines, a coral accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "a-glimpse-into-hypermodal-ai-and-its-potential-in-indian-markets",
+      "path": "public/images/blog/a-glimpse-into-hypermodal-ai-and-its-potential-in-indian-markets-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A calm atomic arrangement of three intersecting elliptical orbits around a central dot, with a subtle small geometric Indian city skyline below the orbits. AI converging with India's digital businesses. Soft ivory background, charcoal fine lines, muted ochre and blue accents. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "which-is-better-spring-boot-or-nodejs",
+      "path": "public/images/blog/which-is-better-spring-boot-or-nodejs-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: Two balanced architectural shapes connected to one shared foundation: one sturdy layered tower and one branching lightweight network. Different engineering choices rather than a winner. No logos. Pale sand background, slate blue and terracotta. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "artificial-intelligence-the-future-is-then-and-now",
+      "path": "public/images/blog/artificial-intelligence-the-future-is-then-and-now-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A simple circular clock intersects a circuit-line sun; a small human profile watches the overlap between past and future. AI entering everyday life. Pale blue background, ink navy and muted coral. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "entry-of-dynatrace",
+      "path": "public/images/blog/entry-of-dynatrace-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A dense tangle of thin cloud-system lines becomes one clear connected topology under a large lens. Understanding enterprise complexity. No company logos. Light lavender background, ink charcoal, muted blue and ochre. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "apis-101",
+      "path": "public/images/blog/apis-101-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: Two clean open socket shapes fit together across a short bridge, exchanging three tiny geometric message blocks. Software interfaces as a clear shared contract. Soft peach background, navy lines and cobalt accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "unravelling-the-components-of-enterprise-cloud",
+      "path": "public/images/blog/unravelling-the-components-of-enterprise-cloud-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A restrained floating cloud-shaped outline contains nested modular blocks; fine branching paths connect them to a small gear and human outline. Complexity, scale, automation and change. Warm ivory background, charcoal, muted blue and ochre. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "blog",
+      "slug": "evolution-of-observability",
+      "path": "public/images/blog/evolution-of-observability-cover-v1.png",
+      "mode": "built-in image_gen",
+      "prompt": "Use case: stylized-concept editorial blog cover. Create one original wide 3:2 landscape illustration. Subject: A single flowing timeline transforms three dots into a pulse waveform, then a branching trace and finally a connected constellation. Evolution from basic monitoring to observability. Mist blue background, ink navy, a warm coral accent. Style: calm conceptual editorial cover, sparse and sophisticated, fine ink contour lines, elegant geometry, a few flat pastel shapes on a lightly textured matte paper background, large intentional negative space. One clear central visual metaphor, readable in a small article tile. Follow the quiet minimal atomic-orbit concept direction rather than photorealism. Keep important forms in central 75% for flexible cropping. No text, lettering, labels, logos, watermarks, fake dashboards, glossy 3D, dense collage, flowers, generic robot or decorative filler. This is conceptual artwork, not a scientific diagram or product screenshot."
+    },
+    {
+      "kind": "menu",
+      "slug": "blogs",
+      "path": "public/images/navigation/blogs-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: Vishruth writing at a desk with a laptop, scattered handwritten-note shapes and a thoughtful magnifying glass. Editorial writing and technology ideas. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    },
+    {
+      "kind": "menu",
+      "slug": "books",
+      "path": "public/images/navigation/books-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: Vishruth comfortably reading an open book beside a warmly colored stack of books and a small reading lamp. Curiosity and a personal reading room. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    },
+    {
+      "kind": "menu",
+      "slug": "podcasts",
+      "path": "public/images/navigation/podcasts-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: Vishruth wearing over-ear headphones beside a microphone and a large illustrated vinyl record with gently flowing conversation waves. Listening and future conversations. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    },
+    {
+      "kind": "menu",
+      "slug": "projects",
+      "path": "public/images/navigation/projects-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: Vishruth at a creative workbench arranging code-shaped paper modules, a small application window and a testing checklist. Useful software, building and experiments. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    },
+    {
+      "kind": "menu",
+      "slug": "entertainment",
+      "path": "public/images/navigation/entertainment-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: Vishruth in a relaxed cinema-inspired scene with a film strip, a projector light cone and a cup, reflecting on stories after the credits. No actual movie characters or logos. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    },
+    {
+      "kind": "menu",
+      "slug": "meet-vish",
+      "path": "public/images/navigation/meet-vish-portrait-v1.png",
+      "mode": "built-in image_gen",
+      "reference": "public/images/gallery/portrait-close.webp",
+      "referenceUse": "Owner-authorized identity reference only; imagined illustrated scene.",
+      "prompt": "Use case: identity-preserving stylized editorial website menu illustration. Generate a new wide 3:2 landscape scene. Use the attached studio photograph only as the identity reference for Vishruth Harithsa, not as a background to reproduce. Preserve recognizable face, short black hair, rectangular black glasses, neatly trimmed dark facial hair, adult appearance and warm expression; he wears a light cream jacket over a dark shirt as a visual signature. Scene: A welcoming illustrated portrait scene of Vishruth holding a coffee cup, with a very subtle imagined Bengaluru city and cafe collage behind him. Warm, approachable introduction. Style: original sophisticated editorial ink and cut-paper illustration, expressive hand-drawn contours and subtle risograph texture, warm ivory paper, cobalt blue, terracotta and ochre accents. Charming but recognizably the same person, not a generic character. Place face and important objects in central 75 percent, scene fits a wide header panel. No embedded words, logos, watermarks, glossy 3D, photographic collage edges, invented event claims or other identifiable people. This is an imagined illustrated scene, not a documentary photograph."
+    }
+  ]
+}

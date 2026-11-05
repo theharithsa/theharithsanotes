@@ -1,0 +1,75 @@
+---
+import PodcastArt from "../components/PodcastArt.astro";
+import Base from "../layouts/Base.astro";
+import { listening } from "../data/interests";
+---
+
+<Base title="Podcasts">
+  <section class="podcast-hero tone-lilac">
+    <div class="wrap">
+      <span class="eyebrow">THE LISTENING ROOM</span>
+      <h1>
+        Pull up a chair.
+        <br />
+        <em>Stay for a conversation.</em>
+      </h1>
+      <p>
+        Ideas I’ve listened to, a few takeaways, and the episodes on my list.
+      </p>
+      <div class="soundwave" aria-hidden="true">
+        {Array.from({ length: 45 }, (_, i) => (
+          <i style={`--bar:${15 + Math.sin(i * 1.7) ** 2 * 85}%`} />
+        ))}
+      </div>
+    </div>
+  </section>
+  <section
+    class="wrap podcast-room podcast-collection space"
+    aria-labelledby="listening-heading"
+  >
+    <nav class="podcast-tabs" aria-label="Podcast collections">
+      <a href="/podcasts" aria-current="page">
+        Listening
+      </a>
+      <a href="/podcasts/created">Created</a>
+    </nav>
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">EPISODES &amp; IDEAS</span>
+        <h2 id="listening-heading">In the queue &amp; in my notes.</h2>
+      </div>
+      <span>{listening.length} listening notes</span>
+    </div>
+    <div class="workbench-grid podcast-mosaic">
+      {listening.map((note, index) => (
+        <article class="workbench-card" id={note.slug}>
+          <a
+            class="workbench-cover podcast-cover"
+            href={`/podcasts/listening/${note.slug}`}
+            tabindex="-1"
+            aria-hidden="true"
+          >
+            <PodcastArt note={note} index={index} />
+          </a>
+          <div class="workbench-card-copy">
+            <span class="workbench-meta">
+              {note.status} / {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3>
+              <a href={`/podcasts/listening/${note.slug}`}>{note.title}</a>
+            </h3>
+            <p class="show-name">{note.show}</p>
+            <p>{note.note}</p>
+            <a
+              class="workbench-read"
+              href={`/podcasts/listening/${note.slug}`}
+              aria-label={`Read listening note: ${note.title}`}
+            >
+              Open the listening note <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import NoteCard from "../components/NoteCard.astro";
+import { articles } from "../lib/content";
+import { topics } from "../data/site";
+---
+
+<Base title="Blogs">
+  <section class="section-masthead tone-blue">
+    <div class="wrap">
+      <span class="eyebrow">THE WRITTEN WORD</span>
+      <h1>Blogs</h1>
+      <p>
+        Making sense of systems, technology, and the occasional life lesson.
+      </p>
+    </div>
+  </section>
+  <section class="archive wrap space" aria-label="Browse blogs">
+    <div class="archive-tools">
+      <div class="filters" aria-label="Filter by topic">
+        {topics.map((topic) => (
+          <button data-filter={topic} aria-pressed={topic === "All notes"}>
+            {topic === "All notes" ? "All articles" : topic}
+          </button>
+        ))}
+      </div>
+      <div class="search-field">
+        <label for="search">Search articles</label>
+        <input
+          id="search"
+          type="search"
+          placeholder="What’s on your mind?"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <p id="result-count" class="result-count" aria-live="polite">
+      {articles.length} articles
+    </p>
+    <div class="notes-grid">
+      {articles.map((article) => (
+        <NoteCard article={article} />
+      ))}
+    </div>
+    <div id="empty-state" class="empty-state" hidden>
+      <h2>No articles found.</h2>
+      <p>Try a different word or another topic.</p>
+      <button class="button" data-reset-search>
+        Show all articles
+      </button>
+    </div>
+  </section>
+</Base>

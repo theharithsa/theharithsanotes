@@ -1,0 +1,80 @@
+[
+  {
+    "slug": "the-war-room-is-dead",
+    "image": "/images/blog/the-war-room-is-dead-cover-v1.png",
+    "imageAlt": "An empty incident table gives way to a clear telemetry signal under a lens",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life",
+    "image": "/images/blog/chasing-greatness-lessons-from-ayrton-senna-for-navigating-corporate-life-cover-v1.png",
+    "imageAlt": "A racing line and unbranded helmet point towards a brighter horizon",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "mcp-server-part-one",
+    "image": "/images/blog/mcp-server-part-one-cover-v1.png",
+    "imageAlt": "A bridge connects legacy data systems with an AI conversation",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "unmasking-software-bugs-understanding-their-origins-and-impact",
+    "image": "/images/blog/unmasking-software-bugs-understanding-their-origins-and-impact-cover-v1.png",
+    "imageAlt": "A magnifying glass reveals a software bug and its downstream impact",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "the-bat-signal-a-new-era-in-software-bug-detection",
+    "image": "/images/blog/the-bat-signal-a-new-era-in-software-bug-detection-cover-v1.png",
+    "imageAlt": "A searchlight reveals a software bug in the night sky",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "exploring-the-future-with-hypermodal-ai",
+    "image": "/images/blog/exploring-the-future-with-hypermodal-ai-cover-v1.png",
+    "imageAlt": "Predictive, causal and generative AI loops meet at one central signal",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "a-glimpse-into-hypermodal-ai-and-its-potential-in-indian-markets",
+    "image": "/images/blog/a-glimpse-into-hypermodal-ai-and-its-potential-in-indian-markets-cover-v1.png",
+    "imageAlt": "AI orbits connect digital payments, commerce and cloud above an Indian skyline",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "which-is-better-spring-boot-or-nodejs",
+    "image": "/images/blog/which-is-better-spring-boot-or-nodejs-cover-v1.png",
+    "imageAlt": "Two different software architectures rest on a shared foundation",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "artificial-intelligence-the-future-is-then-and-now",
+    "image": "/images/blog/artificial-intelligence-the-future-is-then-and-now-cover-v1.png",
+    "imageAlt": "A clock and circuit intersect above a human observer",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "entry-of-dynatrace",
+    "image": "/images/blog/entry-of-dynatrace-cover-v1.png",
+    "imageAlt": "A lens turns tangled cloud connections into a readable topology",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "apis-101",
+    "image": "/images/blog/apis-101-cover-v1.png",
+    "imageAlt": "Software interfaces exchange messages across a shared contract",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "unravelling-the-components-of-enterprise-cloud",
+    "image": "/images/blog/unravelling-the-components-of-enterprise-cloud-cover-v1.png",
+    "imageAlt": "Cloud modules connect scale, automation, change and people",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  },
+  {
+    "slug": "evolution-of-observability",
+    "image": "/images/blog/evolution-of-observability-cover-v1.png",
+    "imageAlt": "A telemetry timeline grows from basic signals into connected observability",
+    "imageCredit": "Original illustration created for The Harithsa Notes."
+  }
+]

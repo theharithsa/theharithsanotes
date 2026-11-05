@@ -1,0 +1,17 @@
+---
+import EditorialImage from "./EditorialImage.astro";
+import type { Article } from "../lib/content";
+interface Props {
+  article: Article;
+  eager?: boolean;
+  decorative?: boolean;
+}
+const { article, eager = false, decorative = false } = Astro.props;
+---
+
+<EditorialImage
+  src={article.image}
+  alt={decorative ? "" : article.imageAlt}
+  eager={eager}
+  class="blog-editorial-art"
+/>
