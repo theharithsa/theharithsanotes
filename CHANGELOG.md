@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.9.0] — 2026-11-05
+
+- Added 75 original Medium articles, preserving original dates, writing, code, poetry, captions and 151 body images; linked eight duplicate publications to existing canonical articles.
+- Added distinct illustrated covers in the current editorial style, responsive image delivery and migration provenance.
+- Renamed the header and journal title to Blog, retaining existing routes and integrating all articles into search, feeds and sitemap.
+
 ## [1.8.0] — 2026-11-05
 
 - Imported the owner-confirmed 50-book Goodreads Read shelf with 50 personal ratings and 46 original reviews; preserved five non-overlapping books from the existing shelf.

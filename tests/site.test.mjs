@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile, access, readdir } from "node:fs/promises";
-import { join } from "node:path";
+import { join, basename } from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 import ts from "typescript";
@@ -17,11 +18,73 @@ const sourceArticles = JSON.parse(
 const blogArt = JSON.parse(
   await readFile(new URL("src/data/blog-art.json", root), "utf8"),
 );
-const articles = sourceArticles.map((article) => ({
+const mediumArticles = JSON.parse(
+  await readFile(new URL("src/data/medium-articles.json", root), "utf8"),
+);
+const articles = [...sourceArticles, ...mediumArticles].map((article) => ({
   ...article,
   ...blogArt.find((art) => art.slug === article.slug),
 }));
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
+
+test("Medium migration accounts for all 83 stories, original bodies, dates and copied media", async () => {
+  const manifest = JSON.parse(
+    await readFile(new URL("docs/medium-import.json", root), "utf8"),
+  );
+  const media = JSON.parse(
+    await readFile(new URL("docs/medium-media.json", root), "utf8"),
+  );
+  const sources = JSON.parse(
+    await readFile(new URL("src/data/medium-sources.json", root), "utf8"),
+  );
+  const digest = (value) => createHash("sha256").update(value).digest("hex");
+  assert.equal(manifest.articles.length, 83);
+  assert.equal(mediumArticles.length, 75);
+  assert.equal(sources.length, 8);
+  assert.equal(articles.length, 88);
+  assert.equal(
+    new Set(manifest.articles.map((entry) => entry.source)).size,
+    83,
+  );
+  for (const record of manifest.articles) {
+    const page = await readPage(`${record.slug}/index.html`);
+    assert.ok(page.includes(`href="${record.source}"`));
+    if (record.status === "existing-article") {
+      assert.ok(sourceArticles.some((article) => article.slug === record.slug));
+      continue;
+    }
+    const article = mediumArticles.find(
+      (article) => article.slug === record.slug,
+    );
+    assert.ok(article);
+    assert.equal(digest(article.html), record.bodySha256, record.slug);
+    assert.equal(article.sourcePublishedAt, record.originalDate);
+    assert.equal(
+      article.date.slice(0, 10),
+      new Date(`${record.originalDate} 12:00:00 GMT`)
+        .toISOString()
+        .slice(0, 10),
+    );
+    assert.ok(page.includes('class="article-body"'));
+    const renderedBody =
+      page.split('class="article-body">')[1]?.split("</div>")[0] ?? "";
+    for (const tag of ["pre", "br", "figure", "blockquote"]) {
+      const pattern = new RegExp(`<${tag}(?:\\s[^>]*|)>`, "g");
+      assert.equal(
+        (renderedBody.match(pattern) ?? []).length,
+        (article.html.match(pattern) ?? []).length,
+        `${record.slug}: ${tag}`,
+      );
+    }
+  }
+  assert.equal(media.length, 151);
+  for (const image of media) {
+    const buffer = await readFile(new URL(`public${image.path}`, root));
+    assert.equal(buffer.length, image.bytes);
+    assert.equal(digest(buffer), image.sha256);
+    assert.equal(new URL(image.sourceImage).hostname, "miro.medium.com");
+  }
+});
 
 test("Goodreads journal preserves all 50 personal ratings and original reviews", async () => {
   assert.equal(completedBooks.length, 50);
@@ -402,8 +465,8 @@ test("all blog articles use unique responsive editorial covers without changing 
   const archive = await readPage("blogs/index.html");
   for (const art of blogArt) {
     const page = await readPage(`${art.slug}/index.html`);
-    assert.ok(page.includes(`${art.slug}-cover-v1`));
-    assert.ok(archive.includes(`${art.slug}-cover-v1`));
+    assert.ok(page.includes(basename(art.image, ".png")));
+    assert.ok(archive.includes(basename(art.image, ".png")));
     assert.ok(page.includes('class="blog-editorial-art"'));
     assert.ok(page.includes(art.imageCredit));
     const master = await readFile(new URL(`public${art.image}`, root));
@@ -451,6 +514,8 @@ test("section menus use full-label disclosure buttons and six local portrait ill
     .split('<header class="site-header">')[1]
     .split("</header>")[0];
   assert.ok(!/[⌄↗]/.test(header));
+  assert.match(header, />\s*Blog\s*<\/button>/);
+  assert.ok(!/>\s*Blogs\s*<\/button>/.test(header));
   assert.equal((header.match(/class="nav-disclosure"/g) ?? []).length, 6);
   assert.equal((header.match(/class="menu-illustration"/g) ?? []).length, 6);
   for (const slug of [

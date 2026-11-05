@@ -1,6 +1,6 @@
 export const navigation = [
   {
-    label: "Blogs",
+    label: "Blog",
     href: "/blogs",
     tone: "blue",
     title: "Ideas worth a closer look.",
