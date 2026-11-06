@@ -40,7 +40,7 @@ async function api<T>(path: string, method = "GET"): Promise<T> {
     );
   return result as T;
 }
-function clear() {
+function clear(forgetAccess = false) {
   document
     .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
     .forEach((link) => {
@@ -48,7 +48,7 @@ function clear() {
       link.setAttribute("aria-label", "Sign in to the private reading room");
     });
   try {
-    localStorage.removeItem("harithsa.reader-ready");
+    if (forgetAccess) localStorage.removeItem("harithsa.reader-ready");
   } catch {}
   node("reading-posts").replaceChildren();
   node("reading-body").replaceChildren();
@@ -62,6 +62,7 @@ async function load() {
   const own = ++generation;
   clear();
   if (!auth.currentUser) {
+    clear(true);
     message.textContent = "By invitation, with a little room for curiosity.";
     return;
   }
@@ -151,7 +152,7 @@ async function load() {
       ?.setAttribute("aria-current", "page");
   } catch (error) {
     if (own !== generation) return;
-    clear();
+    clear(true);
     message.textContent =
       error instanceof Error ? error.message : "Try signing in again.";
   }
@@ -178,7 +179,7 @@ node("reader-signin").addEventListener("click", async () => {
 });
 node("reader-signout").addEventListener("click", async () => {
   generation++;
-  clear();
+  clear(true);
   try {
     await fetch("/api/reading/session", {
       method: "DELETE",
