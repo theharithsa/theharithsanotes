@@ -2,14 +2,31 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import Base from "../../../layouts/Base.astro";
 import PodcastArt from "../../../components/PodcastArt.astro";
-import { listening } from "../../../data/interests";
+import {
+  listening as snapshotListening,
+  type ListeningNote,
+} from "../../../data/interests";
+import { detail } from "../../../lib/journal";
 export const getStaticPaths = (() =>
-  listening.map((note, index) => ({
+  snapshotListening.map((note, index) => ({
     params: { slug: note.slug },
     props: { note, index },
   }))) satisfies GetStaticPaths;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { note, index } = Astro.props;
+const loaded = Astro.props.note
+  ? { data: Astro.props.note, canonical: Astro.props.note.slug }
+  : await detail<ListeningNote>(
+      "podcasts",
+      Astro.params.slug ?? "",
+      snapshotListening,
+    );
+if (!loaded) return Astro.rewrite("/404");
+if (loaded.data.kind === "created")
+  return Astro.redirect(`/podcasts/created/${loaded.canonical}`, 301);
+if (loaded.canonical !== Astro.params.slug)
+  return Astro.redirect(`/podcasts/listening/${loaded.canonical}`, 301);
+const note = loaded.data;
+const index = Astro.props.index ?? 0;
 ---
 
 <Base title={note.title} description={note.note}>

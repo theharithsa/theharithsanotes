@@ -1,8 +1,37 @@
 ---
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
-import { articles } from "../lib/content";
-import { topics } from "../data/site";
+import { getArticles } from "../lib/journal";
+const articles = await getArticles();
+import { topics as originalTopics } from "../data/site";
+const topics = [
+  ...new Set([...originalTopics, ...articles.map((article) => article.topic)]),
+];
+const tags = [
+  ...new Set(articles.flatMap((article) => article.tags ?? [article.topic])),
+].sort();
+const byMonth = new Map<string, typeof articles>();
+for (const article of articles) {
+  const key = article.date.slice(0, 7);
+  const group = byMonth.get(key) ?? [];
+  group.push(article);
+  byMonth.set(key, group);
+}
+const months = [...byMonth].map(([key, items]) => ({
+  key,
+  items,
+  year: key.slice(0, 4),
+  label: new Intl.DateTimeFormat("en-IN", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${key}-01T00:00:00Z`)),
+  short: new Intl.DateTimeFormat("en-IN", {
+    month: "short",
+    timeZone: "UTC",
+  }).format(new Date(`${key}-01T00:00:00Z`)),
+}));
+const years = [...new Set(months.map((month) => month.year))];
 ---
 
 <Base title="Blog">
@@ -14,6 +43,33 @@ import { topics } from "../data/site";
         Making sense of systems, technology, and the occasional life lesson.
       </p>
     </div>
+    <div class="blog-tag-row filters" aria-label="Filter articles by tag">
+      <button data-blog-tag="" aria-pressed="true">
+        All tags
+      </button>
+      {tags.map((tag) => (
+        <button data-blog-tag={tag} aria-pressed="false">
+          {tag}
+        </button>
+      ))}
+    </div>
+    <label class="date-jump-mobile">
+      Jump through the archive{" "}
+      <select data-blog-date-picker>
+        <option value="">Choose a month or year</option>
+        {years.map((year) => (
+          <optgroup label={year}>
+            {months
+              .filter((month) => month.year === year)
+              .map((month) => (
+                <option value={month.key}>
+                  {month.label} · {month.items.length}
+                </option>
+              ))}
+          </optgroup>
+        ))}
+      </select>
+    </label>
   </section>
   <section class="archive wrap space" aria-label="Browse blog articles">
     <div class="archive-tools">
@@ -37,10 +93,55 @@ import { topics } from "../data/site";
     <p id="result-count" class="result-count" aria-live="polite">
       {articles.length} articles
     </p>
-    <div class="notes-grid">
-      {articles.map((article) => (
-        <NoteCard article={article} />
-      ))}
+    <div class="blog-time-layout">
+      <nav class="journal-timeline" aria-label="Blog archive by date">
+        <span class="timeline-label">THE ARCHIVE</span>
+        {years.map((year) => (
+          <div class="timeline-year" data-year={year}>
+            <button
+              class="timeline-year-button"
+              aria-expanded="false"
+              aria-controls={`months-${year}`}
+              data-year-jump={year}
+            >
+              {year}
+            </button>
+            <div class="timeline-months" id={`months-${year}`} hidden>
+              {months
+                .filter((month) => month.year === year)
+                .map((month) => (
+                  <a
+                    href={`#archive-${month.key}`}
+                    data-month-jump={month.key}
+                    aria-label={`${month.label}, ${month.items.length} articles`}
+                  >
+                    {month.short}
+                    <span>{month.items.length}</span>
+                  </a>
+                ))}
+            </div>
+          </div>
+        ))}
+      </nav>
+      <div class="dated-articles">
+        {months.map((month) => (
+          <section
+            class="blog-month-group"
+            id={`archive-${month.key}`}
+            data-date-group={month.key}
+          >
+            <h2 class="archive-date-heading">
+              <time datetime={month.key}>{month.label}</time>
+              <span aria-hidden="true"></span>
+            </h2>
+            <div class="notes-grid">
+              {month.items.map((article) => (
+                <NoteCard article={article} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
     <div id="empty-state" class="empty-state" hidden>
       <h2>No articles found.</h2>
@@ -50,4 +151,5 @@ import { topics } from "../data/site";
       </button>
     </div>
   </section>
+  <script src="../scripts/blog-timeline.ts"></script>
 </Base>

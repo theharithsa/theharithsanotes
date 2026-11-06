@@ -1,3 +1,17 @@
+# CMS release 1.12.0 / issue #23
+
+Deploy Firestore/Storage deny-all client rules and indexes first. Verify Standard Native us-east1, deletion protection, private bucket IAM and Secret Manager binding. The preview baseline contains 168 entries (88 articles, 50 books, 12 projects, 5 listening notes, 5 screen notes, 6 photos, 2 core pages); Created and GoGs stay empty. Preserve original URLs, bodies, reviews, ratings and Margin brand assets.
+
+Gate type checking, offline snapshot/artifact regressions, actual emulator transactions/security, independently decoded OTel, foundation checks, audit and a server build. Build an immutable committed Git archive with the pinned Cloud Build recipe. Deploy preview web/audit job from one digest and inspect source-owned telemetry. Verify the 168-revision manifest before the one-off live migration. Confirm live counts/media/readiness before changing Hosting.
+
+Production Hosting uses dist/client and pins harithsa-journal; review pins harithsa-journal-preview. They share the tested application image/assets but intentionally use different namespaces/backends. Do not clone preview Hosting configuration into live. Keep the original static Hosting version 58336dbdc5de13be as rollback; do not delete data to roll back. Final release verification must read actual version/SHA/digest, all canonical pages, representative media, denial/no-store behavior, scheduler execution and independent Dynatrace signal/source records.
+
+Windows browser control stopped at the Google account chooser. Interactive owner sign-in/editor/mobile checks are not recorded as passed; emulator/API checks are distinct. Complete all independent release checks and report that browser limitation explicitly if it remains.
+
+No DNS or extra-domain changes are part of this release. The INR500 budget alert replaces the existing journal project's alert amount/thresholds without altering other project budgets. Alerts do not cap spend.
+
+## Earlier release plans
+
 # Release impact and verification plan
 
 1.11.0 / issue #25: freeze Margin branding, full icon/logo kit and manifest; remove Racing Sans One. Check type/build/artifact tests, licence/hash/icon sizes, alpha, mask padding and ICO entries. Browser-review desktop and 320/390px mobile in both themes, menu positioning and actual tiny icons. Preserve section palettes, articles and consent. Promote the tested immutable preview; rollback c5c5ce2aab59acfb. Owner cancelled the extra domain: no registrar edits; remove only the two newly created inactive Firebase domain entries. No CMS or database deployment.

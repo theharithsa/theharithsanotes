@@ -1,0 +1,245 @@
+---
+import Base from "../layouts/Base.astro";
+import Wordmark from "../components/Wordmark.astro";
+import mark from "../../public/brand/v1/mark-ink.svg?raw";
+const loginMark = mark.replace('color="#242321"', "");
+import "../styles/cms.css";
+const tables = [
+  ["blogs", "Blog", "Aa"],
+  ["books", "Books", "▤"],
+  ["projects", "Projects", "{}"],
+  ["podcasts", "Podcasts", "◉"],
+  ["entertainment", "Entertainment", "▣"],
+  ["photos", "Photos", "▧"],
+  ["gogs", "GoGs", "+"],
+  ["pages", "Pages", "□"],
+  ["tags", "Tags", "#"],
+];
+---
+
+<Base
+  title="Workspace"
+  description="The private publishing workspace for The Harithsa Notes."
+>
+  <section class="cms-workspace" aria-label="Private content workspace">
+    <aside class="cms-sidebar">
+      <Wordmark />
+      <div class="cms-space-name">
+        <span class="cms-space-avatar">v</span>
+        <div>
+          The Harithsa Notes<small>Writing &amp; publishing</small>
+        </div>
+      </div>
+      <div class="cms-nav-label">YOUR COLLECTIONS</div>
+      <nav aria-label="Content collections">
+        {tables.map(([id, label, icon]) => (
+          <a href={`#${id}`} data-cms-section={id}>
+            <span class="cms-nav-icon" aria-hidden="true">
+              {icon}
+            </span>
+            {label}
+          </a>
+        ))}
+      </nav>
+      <div class="cms-sidebar-bottom">
+        <a href="/" target="_blank" rel="noopener">
+          View the journal
+        </a>
+        <p>
+          Everything starts as a draft.
+          <br />
+          Publish when it feels ready.
+        </p>
+      </div>
+    </aside>
+    <div class="cms-main">
+      <header class="cms-topbar">
+        <div class="cms-breadcrumb">
+          Your workspace <span>/</span>{" "}
+          <strong id="cms-breadcrumb">Blog</strong>
+        </div>
+        <div class="cms-account" hidden>
+          <span id="cms-environment"></span>
+          <button id="cms-signout" class="cms-quiet-button">
+            Sign out
+          </button>
+        </div>
+        <button
+          id="cms-theme"
+          class="theme-toggle"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          title="Change colour mode"
+        >
+          <span class="theme-orbit" aria-hidden="true">
+            <span class="theme-sun"></span>
+            <span class="theme-moon"></span>
+            <span class="theme-star theme-star-one"></span>
+            <span class="theme-star theme-star-two"></span>
+          </span>
+        </button>
+      </header>
+      <div class="cms-login" id="cms-login">
+        <span class="cms-login-mark" aria-hidden="true" set:html={loginMark} />
+        <span class="cms-overline">THE PRIVATE WRITING ROOM</span>
+        <h1>
+          A little space
+          <br />
+          to make things yours.
+        </h1>
+        <p>
+          Shape a note, save an idea, or add something to the shelf. Your drafts
+          stay here until you choose to publish.
+        </p>
+        <button class="cms-primary" id="cms-signin">
+          Continue with Google
+        </button>
+        <p id="cms-login-message" class="cms-login-message" role="status">
+          Checking your sign-in…
+        </p>
+        <a href="/">Return to the journal</a>
+      </div>
+      <section class="cms-collection" id="cms-collection" hidden>
+        <div class="cms-page-heading">
+          <span class="cms-overline" id="cms-table-kicker">
+            THE WRITTEN WORD
+          </span>
+          <div>
+            <h1 id="cms-table-title">Blog</h1>
+            <button class="cms-primary" id="cms-new">
+              + New entry
+            </button>
+          </div>
+          <p id="cms-table-description">
+            Ideas, essays, and the things you’re making sense of.
+          </p>
+        </div>
+        <div class="cms-table-toolbar">
+          <div class="cms-view-label">
+            <span aria-hidden="true">▤</span> All entries
+          </div>
+          <div class="cms-table-filters">
+            <label>
+              <span class="sr-only">Search entries</span>
+              <input
+                id="cms-search"
+                type="search"
+                placeholder="Find an entry…"
+              />
+            </label>
+            <label>
+              <span class="sr-only">Publication status</span>
+              <select id="cms-status">
+                <option value="all">All statuses</option>
+                <option value="draft">Drafts</option>
+                <option value="published">Published</option>
+                <option value="changes">Draft changes</option>
+                <option value="unpublished">Unpublished</option>
+              </select>
+            </label>
+            <button id="cms-refresh" class="cms-quiet-button">
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div class="cms-table-scroll">
+          <table class="cms-table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Collection</th>
+                <th scope="col">Last edited</th>
+                <th scope="col">Revision</th>
+              </tr>
+            </thead>
+            <tbody id="cms-rows"></tbody>
+          </table>
+        </div>
+        <div class="cms-table-foot">
+          <span id="cms-row-count" aria-live="polite"></span>
+          <button id="cms-more" class="cms-quiet-button" hidden>
+            Load more entries
+          </button>
+        </div>
+        <div class="cms-empty" id="cms-empty" hidden>
+          <h2>A fresh page.</h2>
+          <p>
+            Your first entry can start here. Nothing goes live until you
+            publish.
+          </p>
+        </div>
+        <div class="cms-audit-status">
+          <span id="cms-audit-status">Audit delivery status</span>
+          <button class="cms-quiet-button" id="cms-audit-retry" hidden>
+            Retry queued events
+          </button>
+        </div>
+      </section>
+      <p class="cms-notice" id="cms-notice" role="status" hidden></p>
+    </div>
+    <dialog
+      id="cms-editor-dialog"
+      class="cms-editor-dialog"
+      aria-labelledby="cms-entry-heading"
+    >
+      <header class="cms-editor-top">
+        <div>
+          <span class="cms-editor-collection" id="cms-editor-collection">
+            Blog
+          </span>
+          <span id="cms-save-state" role="status">
+            Saved draft
+          </span>
+        </div>
+        <div class="cms-editor-actions">
+          <button id="cms-history" class="cms-quiet-button">
+            History
+          </button>
+          <button id="cms-preview" class="cms-quiet-button">
+            Preview
+          </button>
+          <button id="cms-save" class="cms-quiet-button">
+            Save draft
+          </button>
+          <button id="cms-publish" class="cms-primary">
+            Publish
+          </button>
+          <button
+            id="cms-close"
+            class="cms-close-button"
+            aria-label="Close editor"
+          >
+            ×
+          </button>
+        </div>
+      </header>
+      <div class="cms-editor-scroll">
+        <div class="cms-editor-heading">
+          <span class="cms-overline">A PAGE FROM YOUR NOTEBOOK</span>
+          <h2 id="cms-entry-heading">Untitled</h2>
+          <p id="cms-entry-message" role="status"></p>
+        </div>
+        <form
+          id="cms-entry-fields"
+          class="cms-entry-fields"
+          autocomplete="off"
+        ></form>
+        <div id="cms-revision-list" class="cms-revision-list" hidden></div>
+        <div class="cms-entry-bottom">
+          <button id="cms-unpublish" class="cms-danger-button">
+            Unpublish this entry
+          </button>
+          <span id="cms-publication-info"></span>
+        </div>
+      </div>
+    </dialog>
+    <input
+      type="file"
+      id="cms-file"
+      accept="image/jpeg,image/png,image/webp"
+      hidden
+    />
+  </section>
+  <script src="../scripts/cms.ts"></script>
+</Base>

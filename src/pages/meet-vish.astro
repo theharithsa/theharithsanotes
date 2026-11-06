@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import GalleryGrid from "../components/GalleryGrid.astro";
 import { site } from "../data/site";
+import { getJournalPage } from "../lib/journal";
+const page = await getJournalPage("meet-vish");
 ---
 
 <Base title="Meet Vish">
@@ -9,20 +11,20 @@ import { site } from "../data/site";
     <div class="wrap">
       <div>
         <span class="eyebrow">HELLO, I’M VISHRUTH HARITHSA</span>
-        <h1>
-          Call me
-          <br />
-          <em>Vish.</em>
-        </h1>
-        <p>
-          Engineer. Builder.
-          <br />
-          Still a student of the world.
-        </p>
+        {page.heading === "Call me Vish." ? (
+          <h1>
+            Call me
+            <br />
+            <em>Vish.</em>
+          </h1>
+        ) : (
+          <h1>{page.heading ?? page.title}</h1>
+        )}
+        <p>{page.description}</p>
         <span class="location">BASED IN BENGALURU, INDIA</span>
       </div>
       <img
-        src="/images/gallery/portrait-seated.webp"
+        src={page.image ?? "/images/gallery/portrait-seated.webp"}
         alt="Vishruth seated in a light jacket against a charcoal background"
         width="1200"
         height="1800"
@@ -38,16 +40,9 @@ import { site } from "../data/site";
       <span>And I’m interested in a lot more than systems.</span>
     </h2>
     <div class="personal-columns">
-      <p>
-        I’m a Senior Customer Success Engineer at Dynatrace. My work brings
-        together observability, OpenTelemetry, and AI tooling—helping engineers
-        make sense of what’s happening inside their software.
-      </p>
-      <p>
-        Outside that, you’ll find me building side projects, reading, listening
-        to long conversations, or writing down a thought before it disappears.
-        These pages bring those parts of my life together.
-      </p>
+      {page.paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
   </section>
   <section class="interest-links wrap">

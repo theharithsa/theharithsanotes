@@ -1,3 +1,15 @@
+# CMS validation — 1.12.0
+
+Run npm ci, npm run check, npm run build, npm test, npm run test:cms, npm run build:server and npm audit --audit-level=high. CMS emulators require JDK21 or newer. npm run test:cms owns an isolated demo-harithsa-cms project and test namespace; it never needs production credentials. Node site/OTLP/JUnit checks and CMS checks write separate JUnit files under ignored artifacts. The foundation runner also preserves measured JUnit outcomes. Trusted CI exports only hashed case identities/status/duration, never failure text.
+
+Working-tree checks: 24 Node tests passed; six real emulator integration tests passed; foundation discovered 21 tests, 20 passed and the POSIX-only case was skipped on Windows. Astro type check has zero errors/warnings and two pre-existing parser deprecation hints. The offline snapshot builds 175 pages; the deployed application is SSR, so those static artifacts are regression fixtures rather than the production output. CI must verify the final committed head independently.
+
+CMS tests cover malicious HTML/URLs/nesting, reserved slugs, payload exclusion, concurrent revision conflicts, draft/public separation, idempotent publication events, old address lookup, restore/unpublish, anonymous/wrong/unverified/expired/provider/origin denial, accepted owner identity, private/public images, duplicate uploads, image type rejection, real outbox retries/leases and direct client rule denials. The independent protobuf receiver validates concurrency/parentage, correlated logs, resource identity, metric units/DELTA and secret exclusion. Snapshot tests preserve original article bodies, book ratings/reviews, brand hashes, routes/media and public consent; private pages never load browser analytics.
+
+Hosted preview health, anonymous denial, private no-store/noindex shell, public SSR archive, responsive media and the image endpoint returned expected responses. Independent tenant DQL found a real preview HTTP root and its Firestore children. Google owner selection could not complete because Windows browser control stopped; this is an explicit UI verification gap, not a passed login test. Final source/production/tenant receipts belong in the release evidence and continuations.
+
+## Earlier validation history
+
 # Website and foundation checks
 
 Issue #25 / 1.11.0: brand tests check every declared hash, self-contained logo paths, page icon references, manifest sizes, transparent inverse PNGs, all ICO entries and maskable safe circle. Browser checks cover light/dark identity, desktop disclosure, keyboard mobile menu/Escape and 320/390px home layout. Book-decoration overflow and header sizing found at 320px were corrected. PR #26 owns checked-head and deployment receipts. No registrar mutation; the additional domain was cancelled and its newly created pending Firebase resources removed.

@@ -14,55 +14,42 @@
       "kind": "workflow",
       "path": "skills/project-design/SKILL.md",
       "description": "Design product journeys, UI and service contracts before changing application behavior.",
-      "dependsOn": [
-        "app-launchpad",
-        "ian-xiaohei-illustrations"
-      ]
+      "dependsOn": ["app-launchpad", "ian-xiaohei-illustrations"]
     },
     {
       "id": "project-implementation",
       "kind": "workflow",
       "path": "skills/project-implementation/SKILL.md",
       "description": "Implement or enhance application code using the affected service skills and verified contracts.",
-      "dependsOn": [
-        "app-launchpad"
-      ]
+      "dependsOn": ["app-launchpad"]
     },
     {
       "id": "project-testing",
       "kind": "workflow",
       "path": "skills/project-testing/SKILL.md",
       "description": "Select and execute meaningful project and service tests, preserving actual results and limitations.",
-      "dependsOn": [
-        "app-launchpad"
-      ]
+      "dependsOn": ["app-launchpad"]
     },
     {
       "id": "project-deployment",
       "kind": "workflow",
       "path": "skills/project-deployment/SKILL.md",
       "description": "Prepare, execute when authorized, and verify project-specific releases, deployments and rollback.",
-      "dependsOn": [
-        "app-launchpad"
-      ]
+      "dependsOn": ["app-launchpad"]
     },
     {
       "id": "project-observability",
       "kind": "workflow",
       "path": "skills/project-observability/SKILL.md",
       "description": "Maintain service runtime and development lifecycle observability with bounded verification evidence.",
-      "dependsOn": [
-        "app-launchpad"
-      ]
+      "dependsOn": ["app-launchpad"]
     },
     {
       "id": "project-handoff",
       "kind": "workflow",
       "path": "skills/project-handoff/SKILL.md",
       "description": "Resume work or leave a verified continuation record for the next AI agent.",
-      "dependsOn": [
-        "app-launchpad"
-      ]
+      "dependsOn": ["app-launchpad"]
     },
     {
       "id": "service-foundation-tooling",
@@ -88,10 +75,7 @@
       "kind": "workflow",
       "path": "skills/project-documentation/SKILL.md",
       "description": "Maintain project and user documentation with accurate examples, useful illustrations and versioned handoff context.",
-      "dependsOn": [
-        "app-launchpad",
-        "ian-xiaohei-illustrations"
-      ]
+      "dependsOn": ["app-launchpad", "ian-xiaohei-illustrations"]
     },
     {
       "id": "service-website",
@@ -104,15 +88,25 @@
         "project-deployment",
         "project-observability"
       ]
+    },
+    {
+      "id": "service-content-audit",
+      "kind": "service",
+      "path": "skills/service-content-audit/SKILL.md",
+      "description": "Maintain the content-audit service; read its implementation and continuation context.",
+      "dependsOn": [
+        "project-implementation",
+        "project-testing",
+        "project-deployment",
+        "project-observability"
+      ]
     }
   ],
   "services": [
     {
       "id": "foundation-tooling",
       "skillId": "service-foundation-tooling",
-      "sourcePaths": [
-        "scripts"
-      ],
+      "sourcePaths": ["scripts"],
       "entrypoints": [
         "scripts/check_foundation.py",
         "scripts/add_service_skill.py"
@@ -126,22 +120,21 @@
         "schemas/evidence.schema.json",
         "docs/policy-map.md"
       ],
-      "testCommands": [
-        "sh scripts/check.sh"
-      ],
+      "testCommands": ["sh scripts/check.sh"],
       "continuation": "skills/service-foundation-tooling/continuation.md",
       "lastReviewedRevision": "dceb62c9966602c36bcffa35faad858abd21f36b"
     },
     {
       "id": "website",
       "skillId": "service-website",
-      "sourcePaths": [
-        "src"
-      ],
+      "sourcePaths": ["src", "jobs/content-migration"],
       "entrypoints": [
         "src/pages/index.astro",
         "src/pages/[slug].astro",
-        "src/scripts/telemetry.ts"
+        "src/scripts/telemetry.ts",
+        "src/pages/admin.astro",
+        "src/pages/api/cms/[...path].ts",
+        "src/middleware.ts"
       ],
       "owner": "theharithsa",
       "status": "active",
@@ -149,15 +142,37 @@
       "contracts": [
         "docs/decisions.md",
         "docs/observability.md",
-        "firebase.json"
+        "firebase.json",
+        "docs/cms-architecture.md",
+        "firestore.rules",
+        "storage.rules",
+        "firestore.indexes.json"
       ],
       "testCommands": [
         "npm run check",
         "npm run build",
-        "npm test"
+        "npm test",
+        "npm run test:cms",
+        "npm run build:server"
       ],
       "continuation": "skills/service-website/continuation.md",
       "lastReviewedRevision": "797913390ed10a26f426489ffd16a32c291c01ab"
+    },
+    {
+      "id": "content-audit",
+      "skillId": "service-content-audit",
+      "sourcePaths": ["jobs/content-audit"],
+      "entrypoints": ["jobs/content-audit/main.mts"],
+      "owner": "theharithsa",
+      "status": "active",
+      "dependsOn": ["website"],
+      "contracts": ["docs/cms-architecture.md", "docs/observability.md"],
+      "testCommands": [
+        "npm run test:cms",
+        "node --test tests/telemetry.test.mjs"
+      ],
+      "continuation": "skills/service-content-audit/continuation.md",
+      "lastReviewedRevision": null
     }
   ]
 }

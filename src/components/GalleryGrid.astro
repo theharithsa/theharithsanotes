@@ -1,7 +1,159 @@
 ---
-import { gallery } from '../data/gallery';
-interface Props { limit?: number }
+import { getGallery } from "../lib/journal";
+interface Props {
+  limit?: number;
+}
+const gallery = await getGallery();
 const { limit = gallery.length } = Astro.props;
+const photos = gallery.slice(0, limit);
+const dateKey = (date?: string) => (date ? date.slice(0, 7) : "undated");
+const label = (key: string) =>
+  key === "undated"
+    ? "Undated"
+    : key.length === 4
+      ? key
+      : new Intl.DateTimeFormat("en-IN", {
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
+        }).format(new Date(`${key}-01T00:00:00Z`));
+const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
+const thumbnail = (src: string) =>
+  src.startsWith("/media/") ? src.replace(/[^/]+$/, "400.webp") : src;
 ---
-<div class="gallery-grid">{gallery.slice(0,limit).map((photo,index) => <figure class={`gallery-photo photo-${photo.shape}`}><button class="gallery-open" data-gallery-open data-src={photo.src} data-title={photo.title} data-caption={photo.caption} data-alt={photo.alt} aria-label={`Enlarge photo: ${photo.title}`}><img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy"/><span class="gallery-enlarge" aria-hidden="true">↗</span></button><figcaption><span class="gallery-number">{String(index+1).padStart(2,'0')}</span><div><h3>{photo.title}</h3><p>{photo.caption}</p></div></figcaption></figure>)}</div>
-<dialog class="photo-lightbox" aria-labelledby="photo-dialog-title"><div class="lightbox-toolbar"><span class="eyebrow">FROM MY CAMERA ROLL</span><button class="lightbox-close" aria-label="Close photograph" autofocus>Close ×</button></div><div class="lightbox-image-frame"><img class="lightbox-image" alt=""/></div><div class="lightbox-bottom"><div><h2 id="photo-dialog-title"></h2><p class="lightbox-caption"></p></div><div class="lightbox-controls"><button data-gallery-prev aria-label="Previous photograph">←</button><span class="lightbox-count" aria-live="polite"></span><button data-gallery-next aria-label="Next photograph">→</button></div></div></dialog>
+
+{photos.length > 0 ? (
+  <div class="photo-journal" data-photo-journal>
+    <nav
+      class="photo-date-rail journal-timeline"
+      aria-label="Photo journal by date"
+    >
+      <span class="timeline-label">LIFE, IN FRAMES</span>
+      {groups.map((group) => (
+        <a
+          href={`#photo-${photos.findIndex((photo) => dateKey(photo.capturedAt) === group)}`}
+          data-photo-date={group}
+        >
+          {label(group)}
+          <span>
+            {
+              photos.filter((photo) => dateKey(photo.capturedAt) === group)
+                .length
+            }
+          </span>
+        </a>
+      ))}
+    </nav>
+    <div class="photo-carousel">
+      <label class="date-jump-mobile">
+        Browse moments{" "}
+        <select data-photo-date-picker>
+          {groups.map((group) => (
+            <option value={group}>{label(group)}</option>
+          ))}
+        </select>
+      </label>
+      <div
+        class="photo-track"
+        tabindex="0"
+        aria-label="Photographs; use left and right keys to browse"
+      >
+        {photos.map((photo, index) => (
+          <figure
+            class="photo-slide"
+            id={`photo-${index}`}
+            data-title={photo.title}
+            data-caption={photo.caption}
+            data-date-group={dateKey(photo.capturedAt)}
+          >
+            <button
+              class="photo-expand"
+              data-photo-expand
+              aria-label={`View photograph: ${photo.title}`}
+            >
+              <img
+                src={photo.src}
+                data-full={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <span class="photo-expand-label">View full size</span>
+            </button>
+            <figcaption>
+              <div>
+                <h3>{photo.title}</h3>
+                <p>{photo.caption}</p>
+              </div>
+              <span class="photo-capture-date">
+                {label(dateKey(photo.capturedAt))}
+              </span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="photo-carousel-tools">
+        <div class="photo-thumbnails" aria-label="Choose a photograph">
+          {photos.map((photo, index) => (
+            <button
+              data-photo-jump={index}
+              aria-label={`Photograph ${index + 1}: ${photo.title}`}
+              aria-current={index === 0 ? "true" : "false"}
+            >
+              <img
+                src={thumbnail(photo.src)}
+                alt=""
+                width="88"
+                height="68"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+        <div class="photo-arrow-controls">
+          <button data-photo-prev aria-label="Previous photograph">
+            ←
+          </button>
+          <span class="photo-position" aria-live="polite">
+            1 / {photos.length}
+          </span>
+          <button data-photo-next aria-label="Next photograph">
+            →
+          </button>
+        </div>
+      </div>
+    </div>
+    <dialog class="photo-lightbox" aria-label="Full photograph">
+      <div class="lightbox-toolbar">
+        <span class="eyebrow">LIFE, IN FRAMES</span>
+        <button data-photo-close autofocus>
+          Close ×
+        </button>
+      </div>
+      <div class="lightbox-image-frame">
+        <img class="lightbox-image" alt="" />
+      </div>
+      <div class="lightbox-bottom">
+        <div>
+          <h2 class="photo-dialog-title"></h2>
+          <p class="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-controls">
+          <button data-photo-prev aria-label="Previous photograph">
+            ←
+          </button>
+          <span class="lightbox-count" aria-live="polite"></span>
+          <button data-photo-next aria-label="Next photograph">
+            →
+          </button>
+        </div>
+      </div>
+    </dialog>
+  </div>
+) : (
+  <p class="empty-state">
+    New moments will appear here when they’re published.
+  </p>
+)}
+<script src="../scripts/photo-carousel.ts"></script>

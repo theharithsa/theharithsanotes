@@ -1,0 +1,92 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "cms_preview_revisions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "id", "order": "ASCENDING" },
+        { "fieldPath": "section", "order": "ASCENDING" },
+        { "fieldPath": "revision", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cms_live_revisions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "id", "order": "ASCENDING" },
+        { "fieldPath": "section", "order": "ASCENDING" },
+        { "fieldPath": "revision", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cms_preview_outbox",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "state", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "cms_live_outbox",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "state", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "cms_preview_outbox",
+      "fieldPath": "event",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_live_outbox",
+      "fieldPath": "event",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_preview_outbox",
+      "fieldPath": "expiresAt",
+      "ttl": true,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_live_outbox",
+      "fieldPath": "expiresAt",
+      "ttl": true,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_preview_revisions",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_live_revisions",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_preview_entries",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_live_entries",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_preview_published",
+      "fieldPath": "data",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "cms_live_published",
+      "fieldPath": "data",
+      "indexes": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "the-harithsa-notes",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "private": true,
   "type": "module",
   "overrides": {
@@ -11,17 +11,41 @@
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
-    "test": "node --test tests/*.test.mjs",
+    "test": "node scripts/run-site-tests.mjs",
     "format": "prettier --write src scripts tests *.json *.mjs docs README.md",
-    "content:import": "node scripts/import-content.mjs"
+    "content:import": "node scripts/import-content.mjs",
+    "test:cms": "node scripts/run-cms-tests.mjs",
+    "build:server": "node scripts/build-server.mjs"
   },
   "dependencies": {
+    "@astrojs/node": "11.1.11",
     "@fontsource-variable/jetbrains-mono": "5.3.0",
     "@fontsource-variable/public-sans": "5.3.0",
     "@fontsource-variable/source-serif-4": "5.3.1",
+    "@opentelemetry/api": "1.9.0",
+    "@opentelemetry/api-logs": "0.223.0",
+    "@opentelemetry/exporter-logs-otlp-proto": "0.223.0",
+    "@opentelemetry/exporter-metrics-otlp-proto": "0.223.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "0.223.0",
+    "@opentelemetry/instrumentation-grpc": "0.223.0",
+    "@opentelemetry/instrumentation-http": "0.223.0",
+    "@opentelemetry/resources": "2.12.0",
+    "@opentelemetry/sdk-logs": "0.223.0",
+    "@opentelemetry/sdk-metrics": "2.12.0",
+    "@opentelemetry/sdk-node": "0.223.0",
+    "@opentelemetry/sdk-trace": "2.12.0",
+    "@tiptap/core": "3.33.0",
+    "@tiptap/extension-image": "3.33.0",
+    "@tiptap/extension-placeholder": "3.33.0",
+    "@tiptap/extension-table": "3.33.0",
+    "@tiptap/starter-kit": "3.33.0",
     "astro": "7.4.5",
     "firebase": "13.2.0",
-    "sanitize-html": "2.18.1"
+    "firebase-admin": "14.5.0",
+    "google-auth-library": "11.3.3",
+    "sanitize-html": "2.18.1",
+    "sharp": "0.35.5",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
@@ -29,7 +53,7 @@
     "fast-xml-parser": "5.12.0",
     "prettier": "3.9.10",
     "prettier-plugin-astro": "1.1.2",
-    "sharp": "0.35.5",
+    "tsx": "4.23.15",
     "typescript": "5.9.3"
   }
 }

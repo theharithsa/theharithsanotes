@@ -1,3 +1,7 @@
+# CMS execution-report maintenance
+
+Issue #23 adds scripts/run_foundation_tests.py to run the existing unittest discovery suite with real JUnit outcomes/durations. check.sh delegates to it; Foundation checks uploads only the bounded XML report. The trusted observer hashes case identities and drops error text. No template version bump: this is application-specific reporting. Existing foundation policy/schema behavior remains covered by the original suite.
+
 # Foundation tooling continuation
 
 ## Website adoption — 5 November 2026

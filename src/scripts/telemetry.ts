@@ -12,7 +12,9 @@ declare global {
 const consentKey = "harithsa.analytics.v1";
 const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
 const enabled =
-  !local || import.meta.env.PUBLIC_ENABLE_LOCAL_TELEMETRY === "true";
+  (!local || import.meta.env.PUBLIC_ENABLE_LOCAL_TELEMETRY === "true") &&
+  !location.pathname.startsWith("/admin") &&
+  !new URLSearchParams(location.search).has("preview");
 let current: Consent | undefined;
 let started = false;
 
@@ -94,7 +96,11 @@ function readConsent(): Consent | undefined {
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.querySelector<HTMLElement>(".consent-banner");
   current = readConsent();
-  if (banner) banner.hidden = current !== undefined;
+  if (banner)
+    banner.hidden =
+      current !== undefined ||
+      location.pathname.startsWith("/admin") ||
+      new URLSearchParams(location.search).has("preview");
   if (current === "granted") void start();
   document
     .querySelectorAll<HTMLButtonElement>("[data-consent]")

@@ -15,8 +15,8 @@
     },
     "stack": {
       "status": "approved",
-      "value": "Astro static generation, TypeScript, Firebase browser Analytics.",
-      "approval": "Implementation choice within requested runnable TypeScript site scope."
+      "value": "Astro 7 Node standalone, TypeScript, Firebase Auth, Firestore Standard Native and private Cloud Storage; Cloud Run us-east1 behind Firebase Hosting.",
+      "approval": "Owner approved a dynamic Notion-style CMS with Google owner login, Drafts + Publish, Firebase databases/media and US East."
     },
     "hosting": {
       "status": "approved",
@@ -30,8 +30,8 @@
     },
     "observability": {
       "status": "approved",
-      "value": "Supplied Dynatrace RUM tag and Firebase measurement ID; no backend.",
-      "approval": "User requested dt-obs, RUM, and Google Analytics."
+      "value": "Supplied consent-gated RUM and GA on public pages; server OpenTelemetry traces/logs/delta metrics, durable BizEvents and trusted GitHub OIDC execution reporting.",
+      "approval": "Owner explicitly requested Dynatrace coverage for deployments, workflows, CMS publications and Firebase request/response boundaries; raw secrets and draft bodies excluded."
     },
     "license": {
       "status": "not-applicable",

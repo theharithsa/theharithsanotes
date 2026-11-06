@@ -29,6 +29,21 @@ import Base from "../layouts/Base.astro";
       not enabled by this application; the owner must also keep it disabled in
       the Dynatrace application configuration.
     </p>
+    <h2>Publishing and operational reliability</h2>
+    <p>
+      The private publishing workspace uses Google sign-in, a secure session
+      cookie and private draft storage. Only the verified owner can edit or
+      preview drafts. Browser analytics is disabled inside that workspace and
+      private previews.
+    </p>
+    <p>
+      The application server sends technical traces, metrics, logs and audit
+      events to Dynatrace to diagnose requests, Firebase operations and
+      publication changes. These contain operation metadata, outcomes, timings
+      and payload sizes or hashes. Raw article bodies, drafts, images,
+      authentication tokens, session cookies and email addresses are not copied
+      into these operational events.
+    </p>
     <h2>Your choice</h2>
     <p>
       Your choice is stored in your browser under{" "}

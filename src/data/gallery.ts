@@ -1,4 +1,7 @@
 export interface GalleryPhoto {
+  capturedAt?: string;
+  slug?: string;
+  order?: number;
   src: string;
   title: string;
   caption: string;

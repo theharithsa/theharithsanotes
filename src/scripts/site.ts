@@ -156,6 +156,13 @@ document.addEventListener("keydown", (event) => {
 const search = document.querySelector<HTMLInputElement>("#search");
 const filters = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
 const notes = document.querySelectorAll<HTMLElement>("[data-note]");
+const tagButtons =
+  document.querySelectorAll<HTMLButtonElement>("[data-blog-tag]");
+let selectedTag = new URLSearchParams(window.location.search).get("tag") ?? "";
+if (![...tagButtons].some((button) => button.dataset.blogTag === selectedTag))
+  selectedTag = "";
+if (search)
+  search.value = new URLSearchParams(window.location.search).get("q") ?? "";
 let selected =
   new URLSearchParams(window.location.search).get("topic") ?? "All notes";
 if (![...filters].some((filter) => filter.dataset.filter === selected))
@@ -166,6 +173,10 @@ function filterNotes(): void {
   notes.forEach((note) => {
     const visible =
       (selected === "All notes" || note.dataset.topic === selected) &&
+      (!selectedTag ||
+        (JSON.parse(note.dataset.tags ?? "[]") as string[]).includes(
+          selectedTag,
+        )) &&
       (note.dataset.search ?? "").includes(query);
     note.hidden = !visible;
     if (visible) count += 1;
@@ -181,7 +192,35 @@ function filterNotes(): void {
     results.textContent = `${count} ${count === 1 ? "article" : "articles"}`;
   const empty = document.querySelector<HTMLElement>("#empty-state");
   if (empty) empty.hidden = count !== 0;
+  tagButtons.forEach((button) =>
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.blogTag === selectedTag),
+    ),
+  );
+  if (notes.length && tagButtons.length) {
+    const url = new URL(location.href);
+    for (const [key, value] of [
+      ["q", search?.value.trim() ?? ""],
+      ["tag", selectedTag],
+      ["topic", selected === "All notes" ? "" : selected],
+    ]) {
+      if (value) url.searchParams.set(key!, value);
+      else url.searchParams.delete(key!);
+    }
+    history.replaceState(null, "", url);
+  }
+  document.dispatchEvent(new CustomEvent("journal:filtered"));
 }
+tagButtons.forEach((button) =>
+  button.addEventListener("click", () => {
+    selectedTag =
+      button.dataset.blogTag === selectedTag
+        ? ""
+        : (button.dataset.blogTag ?? "");
+    filterNotes();
+  }),
+);
 search?.addEventListener("input", filterNotes);
 filters.forEach((filter) =>
   filter.addEventListener("click", () => {
@@ -192,6 +231,7 @@ filters.forEach((filter) =>
 document.querySelector("[data-reset-search]")?.addEventListener("click", () => {
   if (search) search.value = "";
   selected = "All notes";
+  selectedTag = "";
   filterNotes();
   search?.focus();
 });
@@ -272,9 +312,6 @@ projectFilters.forEach((button) =>
   ),
 );
 
-const photoDialog =
-  document.querySelector<HTMLDialogElement>(".photo-lightbox");
-
 const screenFilters = document.querySelectorAll<HTMLButtonElement>(
   "[data-screen-filter]",
 );
@@ -311,69 +348,6 @@ screenFilters.forEach((button) =>
       countLabel.textContent = `${count} ${count === 1 ? "reflection" : "reflections"}`;
   }),
 );
-
-const photoButtons = [
-  ...document.querySelectorAll<HTMLButtonElement>("[data-gallery-open]"),
-];
-let activePhoto = 0;
-let photoOpener: HTMLButtonElement | undefined;
-function showPhoto(index: number): void {
-  if (!photoDialog || !photoButtons.length) return;
-  activePhoto = (index + photoButtons.length) % photoButtons.length;
-  const button = photoButtons[activePhoto];
-  const image = photoDialog.querySelector<HTMLImageElement>(".lightbox-image");
-  const title = photoDialog.querySelector<HTMLElement>("#photo-dialog-title");
-  const caption = photoDialog.querySelector<HTMLElement>(".lightbox-caption");
-  const count = photoDialog.querySelector<HTMLElement>(".lightbox-count");
-  if (image) {
-    image.alt = button.dataset.alt ?? "";
-    image.src = button.dataset.src ?? "";
-  }
-  if (title) title.textContent = button.dataset.title ?? "Photograph";
-  if (caption) caption.textContent = button.dataset.caption ?? "";
-  if (count) count.textContent = `${activePhoto + 1} / ${photoButtons.length}`;
-}
-photoButtons.forEach((button, index) =>
-  button.addEventListener("click", () => {
-    if (!photoDialog) return;
-    photoOpener = button;
-    showPhoto(index);
-    photoDialog.showModal();
-    document.documentElement.classList.add("photo-dialog-open");
-  }),
-);
-photoDialog
-  ?.querySelector(".lightbox-close")
-  ?.addEventListener("click", () => photoDialog.close());
-photoDialog
-  ?.querySelector("[data-gallery-prev]")
-  ?.addEventListener("click", () => showPhoto(activePhoto - 1));
-photoDialog
-  ?.querySelector("[data-gallery-next]")
-  ?.addEventListener("click", () => showPhoto(activePhoto + 1));
-photoDialog?.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowRight") {
-    event.preventDefault();
-    showPhoto(activePhoto + 1);
-  }
-  if (event.key === "ArrowLeft") {
-    event.preventDefault();
-    showPhoto(activePhoto - 1);
-  }
-});
-photoDialog?.addEventListener("click", (event) => {
-  if (event.target === photoDialog) photoDialog.close();
-});
-photoDialog?.addEventListener("close", () => {
-  document.documentElement.classList.remove("photo-dialog-open");
-  photoOpener?.focus();
-});
-photoDialog?.querySelector(".lightbox-image")?.addEventListener("error", () => {
-  const caption = photoDialog.querySelector<HTMLElement>(".lightbox-caption");
-  if (caption)
-    caption.textContent =
-      "This photograph could not load. Please try another or reopen it.";
-});
 
 document
   .querySelector("[data-copy-link]")

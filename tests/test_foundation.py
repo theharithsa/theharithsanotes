@@ -32,10 +32,11 @@ class FoundationTests(unittest.TestCase):
         # Unit fixtures model an unconfigured template, independently of this app.
         catalog_file = root / 'skills/catalog.json'
         catalog = json.loads(catalog_file.read_text())
-        catalog['skills'] = [skill for skill in catalog['skills'] if skill['id'] != 'service-website']
-        catalog['services'] = [service for service in catalog['services'] if service['id'] != 'website']
+        catalog['skills'] = [skill for skill in catalog['skills'] if skill['id'] not in ('service-website', 'service-content-audit')]
+        catalog['services'] = [service for service in catalog['services'] if service['id'] not in ('website', 'content-audit')]
         catalog_file.write_text(json.dumps(catalog))
         shutil.rmtree(root / 'skills/service-website')
+        shutil.rmtree(root / 'skills/service-content-audit')
         (root / 'skills/.catalog.lock').unlink(missing_ok=True)
         project_file = root / 'project.json'
         project = json.loads(project_file.read_text())

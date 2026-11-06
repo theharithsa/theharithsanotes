@@ -1,5 +1,6 @@
 ---
 import "../styles/site.css";
+import "../styles/journal.css";
 import "@fontsource-variable/source-serif-4";
 import "@fontsource-variable/source-serif-4/wght-italic.css";
 import "@fontsource-variable/public-sans";
@@ -16,6 +17,7 @@ interface Props {
   imageAlt?: string;
   article?: boolean;
   publishedDate?: string;
+  modifiedDate?: string;
   structuredData?: Record<string, unknown>;
 }
 const {
@@ -25,6 +27,7 @@ const {
   imageAlt,
   article = false,
   publishedDate,
+  modifiedDate,
   structuredData,
 } = Astro.props;
 const palette = pageMeta(Astro.url.pathname, article);
@@ -34,7 +37,11 @@ const pageTitle = title
   : `${site.title} — A curious mind. An open notebook.`;
 const canonical = new URL(canonicalPath(Astro.url.pathname), site.url);
 const current = Astro.url.pathname;
-const noindex = current === "/404" || current === "/404.html";
+const noindex =
+  current === "/404" ||
+  current === "/404.html" ||
+  current.startsWith("/admin") ||
+  Boolean(Astro.locals.draftPreview);
 const author = {
   "@type": "Person",
   "@id": `${site.url}/meet-vish#person`,
@@ -71,6 +78,7 @@ const graph = [
           description,
           image: [new URL(image, site.url).href],
           datePublished: publishedDate,
+          dateModified: modifiedDate ?? publishedDate,
           author: { "@id": author["@id"] },
           publisher: { "@id": author["@id"] },
           mainEntityOfPage: { "@id": `${canonical}#webpage` },
@@ -162,6 +170,9 @@ const graph = [
     {publishedDate && (
       <meta property="article:published_time" content={publishedDate} />
     )}
+    {modifiedDate && (
+      <meta property="article:modified_time" content={modifiedDate} />
+    )}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
@@ -177,6 +188,12 @@ const graph = [
     <script src="../scripts/theme.ts"></script>
   </head>
   <body>
+    {Astro.locals.draftPreview && (
+      <aside class="draft-preview-banner" role="status">
+        Private draft preview · this version is not public.{" "}
+        <a href="/admin">Back to the workspace</a>
+      </aside>
+    )}
     <a class="skip-link" href="#main">
       Skip to content
     </a>
@@ -298,6 +315,9 @@ const graph = [
         </span>
         <div>
           <a href="/privacy">Privacy</a>
+          <a href="/admin" rel="nofollow">
+            Workspace
+          </a>
           <button class="text-button" data-privacy-settings>
             Cookie settings
           </button>

@@ -1,0 +1,30 @@
+name: Execution observability
+on:
+  workflow_run:
+    workflows: [Website checks, Foundation checks]
+    types: [completed]
+  issues:
+    types: [opened, closed, reopened]
+  pull_request_target:
+    types: [opened, closed, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+      - name: Report actual source outcomes
+        run: node scripts/report-workflow.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

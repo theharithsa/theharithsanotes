@@ -6,7 +6,9 @@ export interface ListeningNote {
   artLabel: string;
   title: string;
   show: string;
-  status: "Listened" | "On my list";
+  status: "Listened" | "On my list" | "Created";
+  kind?: "listening" | "created";
+  image?: string;
   href: string;
   note: string;
 }
