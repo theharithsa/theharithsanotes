@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.2 — 2026-11-06
+
+- Move the signature directly beneath the Meet Vish biography’s closing quote, before the interest links and gallery.
+
 ## 1.19.1 — 2026-11-06
 
 - Add Vish’s processed handwritten signature as a transparent, responsive sign-off at the end of Meet Vish, with dark-mode ink contrast.

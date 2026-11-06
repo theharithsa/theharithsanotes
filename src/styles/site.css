@@ -1150,8 +1150,7 @@ figure {
   max-width: 720px;
 }
 .meet-signoff {
-  max-width: 720px;
-  padding-block: 48px;
+  margin-top: 28px;
 }
 .meet-signoff img {
   display: block;

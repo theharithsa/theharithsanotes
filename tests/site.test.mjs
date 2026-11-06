@@ -590,7 +590,7 @@ test("Home portrait asset is square and matches its uncropped image dimensions",
   assert.equal(metadata.height, 1200);
 });
 
-test("Meet Vish ends with transparent signature ink, without a paper rectangle", async () => {
+test("Meet Vish signs the biography directly below its text with transparent ink", async () => {
   const sharp = (await import("sharp")).default;
   const bytes = await readFile(
     new URL("public/images/vish-signature.webp", root),
@@ -624,11 +624,11 @@ test("Meet Vish ends with transparent signature ink, without a paper rectangle",
   const page = await readPage("meet-vish/index.html");
   assert.match(
     page,
-    /class="wrap meet-signoff"[\s\S]*?vish-signature\.webp[\s\S]*?<\/main>/,
+    /class="meet-signoff"[\s\S]*?vish-signature\.webp[\s\S]*?<\/main>/,
   );
   assert.match(page, /alt="Vishruth Harithsa’s handwritten signature"/);
-  assert.ok(
-    page.lastIndexOf("meet-signoff") > page.lastIndexOf("connection-band"),
-  );
+  assert.ok(page.indexOf("personal-story") < page.indexOf("meet-signoff"));
+  assert.ok(page.indexOf("meet-signoff") < page.indexOf("interest-links"));
+  assert.equal((page.match(/vish-signature\.webp/g) ?? []).length, 1);
   assert.ok(!(await readPage("index.html")).includes("vish-signature.webp"));
 });

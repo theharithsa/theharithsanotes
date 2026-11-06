@@ -54,6 +54,16 @@ const page = await getJournalPage("meet-vish");
         page.paragraphs.map((paragraph) => <p>{paragraph}</p>)
       )}
     </div>
+    <div class="meet-signoff">
+      <img
+        src="/images/vish-signature.webp"
+        alt="Vishruth Harithsa’s handwritten signature"
+        width="1200"
+        height="478"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
   </section>
   <section class="interest-links wrap">
     <a href="/projects">
@@ -110,14 +120,4 @@ const page = await getJournalPage("meet-vish");
       </div>
     </div>
   </section>
-  <div class="wrap meet-signoff">
-    <img
-      src="/images/vish-signature.webp"
-      alt="Vishruth Harithsa’s handwritten signature"
-      width="1200"
-      height="478"
-      loading="lazy"
-      decoding="async"
-    />
-  </div>
 </Base>
