@@ -10,7 +10,11 @@ const listening = (await getListening()).filter(
 );
 ---
 
-<Base title="Podcasts">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="podcast-hero tone-lilac">
     <div class="wrap">
       <span class="eyebrow">THE LISTENING ROOM</span>

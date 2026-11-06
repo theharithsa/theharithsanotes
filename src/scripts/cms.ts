@@ -301,6 +301,12 @@ function updateState() {
     !current ||
     current.publishedRevision === null ||
     current.section === "pages";
+  element<HTMLButtonElement>("cms-preview").disabled =
+    current?.section === "tags";
+  element<HTMLButtonElement>("cms-preview").title =
+    current?.section === "tags"
+      ? "Labels appear in collection filters, not standalone pages"
+      : "Preview the saved draft";
   if (current) {
     element("cms-entry-heading").textContent = String(
       current.data.title ?? "Untitled",
@@ -883,7 +889,12 @@ function fieldsFor(target: Section): Field[] {
           type: "textarea",
         },
         { path: "paragraphs", label: "Page paragraphs", type: "paragraphs" },
-        { path: "image", label: "Page image", type: "image" },
+        {
+          path: "image",
+          label: "Page / social image",
+          type: "image",
+          help: "Home and Meet Vish use this on the page; other sections use it for their social preview.",
+        },
         ...(current?.data.slug === "home"
           ? [
               {

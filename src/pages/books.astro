@@ -14,7 +14,11 @@ import BookJacket from "../components/BookJacket.astro";
 import BookRating from "../components/BookRating.astro";
 ---
 
-<Base title="Books">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="reading-hero tone-peach">
     <div class="wrap">
       <div>

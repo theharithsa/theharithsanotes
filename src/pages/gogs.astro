@@ -9,9 +9,9 @@ const notes = await getGogs();
 ---
 
 <Base
-  title="Games and Gadget (GoGs)"
-  description="GoGs is Vishruth Harithsa’s space for games, gadgets, and everyday experiences. The first personal stories are coming soon."
-  image="/images/navigation/gogs-portrait-v1.png"
+  title={page.title}
+  description={page.description}
+  image={page.image || "/images/navigation/gogs-portrait-v1.png"}
   imageAlt="An illustrated Vishruth enjoying a game, surrounded by everyday technology"
 >
   <section class="gogs-hero wrap">

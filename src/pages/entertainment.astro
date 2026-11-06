@@ -13,7 +13,11 @@ const senna = articles.find((article) =>
 )!;
 ---
 
-<Base title="Entertainment">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="section-masthead tone-ochre">
     <div class="wrap">
       <span class="eyebrow">MOVIES, SERIES & THE LIFE BETWEEN</span>

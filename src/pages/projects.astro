@@ -10,9 +10,9 @@ const projectTopics = [...new Set(projects.map((project) => project.category))];
 ---
 
 <Base
-  title="Projects"
-  image={projects[0]?.image}
-  description="The workbench: products, experiments and open-source tools by Vishruth Harithsa."
+  title={page.title}
+  image={page.image || projects[0]?.image}
+  description={page.description}
 >
   <div class="projects-technical">
     <header class="workbench-header wrap">

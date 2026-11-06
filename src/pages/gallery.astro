@@ -7,7 +7,11 @@ import Base from "../layouts/Base.astro";
 import GalleryGrid from "../components/GalleryGrid.astro";
 ---
 
-<Base title="Life, in frames">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="page-intro wrap gallery-intro">
     <span class="section-kicker">A DIFFERENT KIND OF NOTE</span>
     <h1>

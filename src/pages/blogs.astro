@@ -36,7 +36,11 @@ const months = [...byMonth].map(([key, items]) => ({
 const years = [...new Set(months.map((month) => month.year))];
 ---
 
-<Base title="Blog">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="section-masthead tone-blue">
     <div class="wrap">
       <span class="eyebrow">THE WRITTEN WORD</span>

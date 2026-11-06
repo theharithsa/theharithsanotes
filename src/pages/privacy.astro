@@ -4,7 +4,11 @@ import { getJournalPage } from "../lib/journal";
 const page = await getJournalPage("privacy");
 ---
 
-<Base title="Privacy">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="page-intro wrap">
     <span class="section-kicker">YOUR VISIT, YOUR CHOICE</span>
     <h1>{page.heading ?? page.title}</h1>
