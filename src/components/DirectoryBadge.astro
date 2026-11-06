@@ -1,5 +1,6 @@
 ---
-import badge from "../../assets/smm/wedirectory/we_logo1_orange.svg?url";
+import lightBadge from "../../assets/smm/wedirectory/we_logo1_black.svg?url";
+import darkBadge from "../../assets/smm/wedirectory/we_logo1_white.svg?url";
 ---
 
 <a
@@ -8,5 +9,20 @@ import badge from "../../assets/smm/wedirectory/we_logo1_orange.svg?url";
   rel="me"
   aria-label="Find Vishruth Harithsa on WeDirectory"
 >
-  <img src={badge} width="609" height="185" alt="WeDirectory" loading="lazy" />
+  <img
+    class="directory-badge-light"
+    src={lightBadge}
+    width="609"
+    height="185"
+    alt="WeDirectory"
+    loading="lazy"
+  />
+  <img
+    class="directory-badge-dark"
+    src={darkBadge}
+    width="609"
+    height="185"
+    alt="WeDirectory"
+    loading="lazy"
+  />
 </a>
