@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Reader session restoration 1.14.3 — issue #42
+
+PR #43 fixes the signed-in gate flash using explicit pending/ready/signed-out/denied/error states, parallel session/post requests and stale-response guards. Seven asynchronous client regressions and local Astro checks/build pass; application source e831e3b07ad58ca2beaabbe66d6f632c3293bc8f has passing CI and a successful immutable build. See docs/reader-session-1.14.3.md for the contract and PR #43 for final preview/live/provider/browser/tenant evidence and release status. Invitation checks, no-store, private media, content and brand remain unchanged; rollback must remain private-aware.
+
 ## Homepage margins patch 1.14.2 — issue #40
 
 PR #41 gives homepage project copy responsive 20–36px insets, preserving full-bleed illustrations and the asymmetric grid. Source c58526f0bd01d8b3f727c3fae8287001771a685e is live on both channels; 503 client hashes match per channel, Chrome desktop/mobile checks and current code-head CI passed. See docs/project-card-margins-1.14.2.md for provider/runtime evidence. No content, API, data, invitations, brand or template changes. Preserve private-aware rollback targets.

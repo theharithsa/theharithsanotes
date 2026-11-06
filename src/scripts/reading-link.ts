@@ -3,7 +3,10 @@ const links = document.querySelectorAll<HTMLAnchorElement>(
   ".reading-entry-link",
 );
 try {
-  if (localStorage.getItem("harithsa.reader-ready") === "true") {
+  if (
+    !location.pathname.startsWith("/people-and-journal") &&
+    localStorage.getItem("harithsa.reader-ready") === "true"
+  ) {
     fetch("/api/reading/me", { credentials: "same-origin", cache: "no-store" })
       .then((response) => {
         if (response.ok)
