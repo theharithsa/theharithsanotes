@@ -148,7 +148,7 @@ const invitationSession = new AuthRestoration({
   denied: (error) =>
     error instanceof InvitationError && [401, 403].includes(error.status),
   message: (error) =>
-    error instanceof Error
+    error instanceof InvitationError
       ? error.message
       : "Invitations could not load. Try again.",
 });

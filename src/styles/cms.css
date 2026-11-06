@@ -639,7 +639,7 @@ body:has(#invitations-room) {
 }
 .cms-rich-editor .tiptap {
   outline: none;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 19px;
   line-height: 1.85;
   min-height: 300px;

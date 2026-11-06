@@ -10,7 +10,7 @@ Eight targeted regressions cover pending auth, signed-out state, late completion
 
 ## Typography
 
-Source Sans 3 Variable 5.3.1 is pinned and self-hosted, including true italics. It replaces Public Sans for body/controls and Source Serif for prose paragraphs. Technical prose uses the same sans body (21px desktop, 19px mobile); headings, code/preformatted content, project technical treatments and the frozen Margin logo retain their deliberate serif/monospace identity. No remote font service or consent change.
+Source Sans 3 Variable 5.3.1 is pinned and self-hosted, including true italics. It replaces Public Sans for body/controls and Source Serif for prose paragraphs, including the writing editor. Technical prose uses the same sans body (21px desktop, 19px mobile); headings, code/preformatted content, project technical treatments and the frozen Margin logo retain their deliberate serif/monospace identity. No remote font service or consent change.
 
 ## Photo browsing
 

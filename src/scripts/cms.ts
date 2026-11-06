@@ -1766,6 +1766,7 @@ signout.addEventListener("click", async () => {
   if (!(await flushSave())) return;
   const uid = auth.currentUser?.uid;
   workspaceSession.suspend();
+  workspacePhase("loading", "Signing out…");
   try {
     await Promise.allSettled([...sessionRequests]);
     await api("session", { method: "DELETE" });
@@ -1863,7 +1864,7 @@ const workspaceSession = new AuthRestoration({
   denied: (error) =>
     error instanceof RequestError && [401, 403].includes(error.status),
   message: (error) =>
-    error instanceof Error
+    error instanceof RequestError
       ? error.message
       : "Your workspace could not open. Try again.",
 });
