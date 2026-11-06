@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.18.0 — 2026-11-06
+
+- Preserve Meet Vish links, emphasis and closing quotations through sanitized, CMS-editable rich text.
+- Share a smiling casual portrait illustration between Meet Vish and the home page’s personal section, with editable alt text.
+
 ## [1.17.0] — 2026-11-06
 
 - Move Blog tags out of the masthead into a compact labeled selector beside article browsing (#60).

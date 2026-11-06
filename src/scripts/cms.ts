@@ -978,13 +978,22 @@ function fieldsFor(target: Section): Field[] {
           label: "Welcome / introduction",
           type: "textarea",
         },
-        { path: "paragraphs", label: "Page paragraphs", type: "paragraphs" },
+        ...(current?.data.slug === "meet-vish"
+          ? []
+          : [
+              {
+                path: "paragraphs",
+                label: "Page paragraphs",
+                type: "paragraphs" as const,
+              },
+            ]),
         {
           path: "image",
           label: "Page / social image",
           type: "image",
           help: "Home and Meet Vish use this on the page; other sections use it for their social preview.",
         },
+        { path: "imageAlt", label: "Image description" },
         ...(current?.data.slug === "home"
           ? [
               {
@@ -1258,7 +1267,18 @@ async function createRichEditor(generation: number) {
       Caption,
       Anchors,
     ],
-    content: String(current.data.html ?? ""),
+    content: String(
+      current.data.html ??
+        (current.section === "pages" && Array.isArray(current.data.paragraphs)
+          ? current.data.paragraphs
+              .map((text) => {
+                const paragraph = document.createElement("p");
+                paragraph.textContent = String(text);
+                return paragraph.outerHTML;
+              })
+              .join("")
+          : ""),
+    ),
     editorProps: {
       attributes: {
         "aria-label": "Article content",
@@ -1269,6 +1289,13 @@ async function createRichEditor(generation: number) {
     onUpdate: ({ editor }) => {
       if (current?.id !== editingId) return;
       setValue("html", editor.getHTML());
+      if (current.section === "pages") {
+        const paragraphs: string[] = [];
+        editor.state.doc.forEach((node) => {
+          if (node.textContent.trim()) paragraphs.push(node.textContent);
+        });
+        setValue("paragraphs", paragraphs);
+      }
       if (current.section === "blogs")
         setValue(
           "minutes",
@@ -1401,7 +1428,10 @@ async function renderEditor() {
   element("cms-revision-list").hidden = true;
   fieldsFor(current.section).forEach(createField);
   if (current.section === "projects") createFeatures();
-  if (["blogs", "gogs", "journal", "people"].includes(current.section))
+  if (
+    ["blogs", "gogs", "journal", "people"].includes(current.section) ||
+    (current.section === "pages" && current.data.slug === "meet-vish")
+  )
     await createRichEditor(generation);
   updateState();
 }

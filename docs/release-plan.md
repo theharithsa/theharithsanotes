@@ -1,3 +1,9 @@
+# Profile presentation 1.18.0 / issue #63
+
+Optional bounded pages.html and imageAlt fields preserve existing clients and plain paragraphs. Meet Vish sanitizes rich text on render and on save; its CMS editor keeps plain paragraphs synchronized. Other pages retain their existing paragraph editor. The home personal section reads the same Meet Vish image and alt text; the main home illustration and gallery stay unchanged. New original portrait is derived from the owner-provided photo. No dependencies, indexes, IAM, secret bindings or telemetry contracts change.
+
+Gate type/build, site/CMS sanitizer and revision tests, foundation checks and server build; review desktop/mobile/light/dark rendering. Publish CMS formatting/image only after the compatible consumer is deployed. Roll back image/runtime to the previous private-aware release and restore the saved page revision if necessary; do not delete content. Verify immutable source, provider release, live HTML and version-specific tenant records separately.
+
 # CMS release 1.12.0 / issue #23
 
 Deploy Firestore/Storage deny-all client rules and indexes first. Verify Standard Native us-east1, deletion protection, private bucket IAM and Secret Manager binding. The preview baseline contains 168 entries (88 articles, 50 books, 12 projects, 5 listening notes, 5 screen notes, 6 photos, 2 core pages); Created and GoGs stay empty. Preserve original URLs, bodies, reviews, ratings and Margin brand assets.

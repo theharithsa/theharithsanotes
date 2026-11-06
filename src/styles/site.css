@@ -1167,8 +1167,29 @@ figure {
 .personal-story p {
   margin: 0;
 }
-.personal-story p + p {
+.personal-story > * + * {
   margin-top: 1.4em;
+}
+.personal-story a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.personal-story a:hover {
+  text-decoration-thickness: 2px;
+}
+.personal-story strong {
+  font-weight: 650;
+}
+.personal-story blockquote {
+  margin-right: 0;
+  margin-left: 0;
+  padding: 0.3em 0 0.3em 1.2em;
+  border-left: 3px solid #89917e;
+  font-family: var(--serif);
+  font-size: 1.15em;
+  line-height: 1.65;
 }
 .interest-links {
   display: grid;

@@ -38,6 +38,38 @@ import {
 import { readingApi } from "../src/server/reading.ts";
 import { listPublished } from "../src/server/repository.ts";
 
+test("page stories preserve rich formatting and reject executable markup", () => {
+  const base = {
+    slug: "meet-vish",
+    title: "Meet Vish",
+    description: "Hello",
+    paragraphs: ["A friendship."],
+  };
+  const html =
+    '<p><strong>A friendship.</strong> <em>Still learning.</em> <a href="https://unsplash.com/@sayspoorthi">Spoorthi</a></p><blockquote><p>My own words.</p></blockquote><script>alert(1)</script><a href="javascript:alert(1)" onclick="alert(1)">Unsafe</a>';
+  const saved = validateData("pages", {
+    ...base,
+    html,
+    imageAlt: "A smiling illustration",
+  });
+  assert.match(String(saved.html), /<strong>A friendship\.<\/strong>/);
+  assert.match(String(saved.html), /<em>Still learning\.<\/em>/);
+  assert.match(
+    String(saved.html),
+    /href="https:\/\/unsplash.com\/@sayspoorthi"/,
+  );
+  assert.match(
+    String(saved.html),
+    /<blockquote><p>My own words\.<\/p><\/blockquote>/,
+  );
+  assert.doesNotMatch(String(saved.html), /script|onclick|alert/);
+  assert.deepEqual(validateData("pages", base).paragraphs, base.paragraphs);
+  assert.throws(
+    () => validateData("pages", { ...base, html: "a".repeat(460001) }),
+    CmsError,
+  );
+});
+
 test("content validation rejects scripts, unsafe links, excessive nesting and reserved slugs", () => {
   const data = validateData("blogs", blog("safe"));
   assert.ok(!String(data.html).includes("<script"));

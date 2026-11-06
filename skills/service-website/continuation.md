@@ -1,3 +1,7 @@
+# Profile presentation continuation
+
+Issue #63 / app 1.18.0 adds optional sanitized pages.html and imageAlt. Only Meet Vish exposes the rich editor; edits synchronize legacy paragraphs. Both personal portraits read Meet Vish image/alt. CMS publication remains a separate guarded step after deployment. See docs/profile-illustration.md for provenance.
+
 # Workspace/API continuation
 
 ## Search overlay and Blog controls 1.17.0 — issues #60–61
