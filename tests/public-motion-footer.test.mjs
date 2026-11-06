@@ -153,6 +153,9 @@ test("published footer contains each owner profile and the same badge links from
     ),
   );
   const footer = home.slice(home.indexOf("<footer"), home.indexOf("</footer>"));
+  assert.match(footer, /we_logo1_black/);
+  assert.match(footer, /we_logo1_white/);
+  assert.doesNotMatch(footer, /we_logo1_orange/);
   for (const profile of socialProfiles) {
     assert.ok(footer.includes(`href="${profile.href}"`), profile.name);
     assert.ok(footer.includes(profile.name));

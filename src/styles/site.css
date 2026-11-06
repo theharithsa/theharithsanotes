@@ -4515,27 +4515,48 @@ html[data-theme="dark"] .site-header {
     flex-direction: column;
   }
 }
-/* A small directory of places to keep the conversation going. */
+/* A quiet illustrated colophon, with local artwork showing through brush marks. */
 .site-footer {
-  padding-top: clamp(42px, 6vw, 80px);
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding: 34px 40px 20px;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url("/images/curiosity-editorial.webp") right 55% / 1100px auto
+    no-repeat;
+  mask: url("/images/footer-brush-mask.svg") center / 100% 100% no-repeat;
+  opacity: 0.12;
+  filter: saturate(0.55);
+}
+[data-theme="dark"] .site-footer::before {
+  opacity: 0.09;
+  filter: saturate(0.35) grayscale(0.4);
 }
 .footer-top {
   display: grid;
-  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(30px, 6vw, 90px);
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 80px);
   align-items: start;
+  padding-bottom: 24px;
 }
 .footer-intro {
   display: grid;
   justify-items: start;
-  gap: 22px;
+  gap: 13px;
   min-width: 0;
 }
 .footer-top .footer-intro .wordmark {
-  width: min(100%, 280px);
+  width: min(100%, 230px);
 }
 .footer-top .footer-intro p {
-  font-size: clamp(21px, 2vw, 28px);
+  font-size: 19px;
+  line-height: 1.4;
 }
 .footer-connections {
   min-width: 0;
@@ -4543,66 +4564,85 @@ html[data-theme="dark"] .site-header {
 .footer-connections h2 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(28px, 3vw, 42px);
-  line-height: 1.2;
-  margin: 10px 0 24px;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 7px 0 12px;
+}
+.footer-connections .eyebrow {
+  font-size: 9px;
 }
 .footer-top .footer-social {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 9px;
-  font-size: 15px;
+  gap: 2px 15px;
+  font-size: 13px;
 }
 .footer-social a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 46px;
-  border: 1px solid var(--line);
-  padding: 10px 12px;
-  border-radius: 7px;
+  gap: 8px;
+  min-height: 36px;
+  padding: 4px 0;
+  justify-self: start;
+  border: 0;
+  border-radius: 0;
   transition:
-    background 160ms,
-    color 160ms,
+    opacity 160ms,
     transform 160ms;
 }
 .footer-social a svg {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
+  flex: 0 0 17px;
+  width: 17px;
+  height: 17px;
 }
 .footer-social a:hover,
 .footer-social a:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
-  transform: translateY(-2px);
+  opacity: 0.65;
+  transform: translateX(2px);
+}
+.footer-bottom {
+  padding-top: 16px;
 }
 .directory-badge {
   display: inline-flex;
-  width: 185px;
+  width: 152px;
   max-width: 100%;
-  border-radius: 10px;
-  transition:
-    transform 160ms,
-    box-shadow 160ms;
+  border-radius: 8px;
+  transition: opacity 160ms;
 }
 .directory-badge img {
   display: block;
   width: 100%;
   height: auto;
 }
+.directory-badge .directory-badge-dark {
+  display: none;
+}
+[data-theme="dark"] .directory-badge .directory-badge-light {
+  display: none;
+}
+[data-theme="dark"] .directory-badge .directory-badge-dark {
+  display: block;
+}
 .directory-badge:hover,
 .directory-badge:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 18px #0002;
+  opacity: 0.75;
 }
 .meet-directory {
   margin-top: 25px;
 }
 @media (max-width: 760px) {
+  .site-footer {
+    padding: 28px 22px 20px;
+  }
   .footer-top {
     grid-template-columns: minmax(0, 1fr);
-    gap: 38px;
+    gap: 28px;
+  }
+  .site-footer::before {
+    background-position: 62% center;
+    background-size: auto 100%;
+    opacity: 0.08;
   }
 }
 @media (max-width: 420px) {
@@ -4620,7 +4660,7 @@ html[data-theme="dark"] .site-header {
     transition: none;
   }
   .footer-social a:hover,
-  .directory-badge:hover {
+  .footer-social a:focus-visible {
     transform: none;
   }
 }

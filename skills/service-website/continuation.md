@@ -1,8 +1,8 @@
 # Workspace/API continuation
 
-## Public motion and social footer 1.16.0 — issues #54–55
+## Public motion and social footer 1.16.1 — issues #54–55
 
-Public documents opt into native page fades with a pending shimmer and immediate cancellable filter reveals. Private, preview and mixed search destinations remain excluded from snapshots; reader/workspace motion stays intact. Footer profiles live in src/data/social.ts; DirectoryBadge uses the unchanged owner-provided orange SVG from assets/smm/wedirectory. See docs/site-motion-footer-1.16.0.md and the linked PR for final provider/browser/tenant evidence. Preserve unrelated owner assets/output.
+Public documents opt into native page fades with a pending shimmer and immediate cancellable filter reveals. Private, preview and mixed search destinations remain excluded from snapshots; reader/workspace motion stays intact. Footer profiles live in src/data/social.ts; DirectoryBadge uses the unchanged owner-provided black/white SVGs from assets/smm/wedirectory. See docs/site-motion-footer-1.16.1.md and the linked PR for final provider/browser/tenant evidence. Preserve unrelated owner assets/output.
 
 ## Workspace transitions 1.15.3 — issue #52
 
