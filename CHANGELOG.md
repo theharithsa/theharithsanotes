@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.15.0] — 2026-11-06
+
+- Restore Workspace and Invitations through explicit loading/access/error states, with stale-response guards and draft recovery preserved (#44).
+- Use self-hosted Source Sans 3 for body and prose text, retaining the frozen logo, serif headings and code typography (#45).
+- Replace the gallery slideshow with a dense, natural-proportion photo carousel and variable-width keyboard/scroll navigation (#46).
+
 ## [1.14.3] — 2026-11-06
 
 - Restore People and Journal sessions through a neutral loading state instead of flashing sign-in; load session and posts concurrently and guard navigation/sign-out races (#42).

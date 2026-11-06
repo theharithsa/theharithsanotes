@@ -101,7 +101,24 @@ const tables = [
           </span>
         </button>
       </header>
-      <div class="cms-login" id="cms-login">
+      <div
+        class="cms-restoring"
+        id="cms-restoring"
+        role="status"
+        aria-live="polite"
+      >
+        <span class="cms-overline">THE WRITING ROOM</span>
+        <h1 id="cms-restoring-message">Opening your workspace…</h1>
+        <div class="cms-table-placeholder" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <button id="cms-auth-retry" class="cms-primary" hidden>
+          Try again
+        </button>
+      </div>
+      <div class="cms-login" id="cms-login" hidden>
         <span class="cms-login-mark" aria-hidden="true" set:html={loginMark} />
         <span class="cms-overline">THE PRIVATE WRITING ROOM</span>
         <h1>

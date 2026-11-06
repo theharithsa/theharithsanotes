@@ -5,6 +5,7 @@ const links = document.querySelectorAll<HTMLAnchorElement>(
 try {
   if (
     !location.pathname.startsWith("/people-and-journal") &&
+    !location.pathname.startsWith("/admin") &&
     localStorage.getItem("harithsa.reader-ready") === "true"
   ) {
     fetch("/api/reading/me", { credentials: "same-origin", cache: "no-store" })

@@ -6,7 +6,7 @@
   --paper: #fff;
   --line: #dedfd7;
   --serif: "Source Serif 4 Variable", Georgia, serif;
-  --sans: "Public Sans Variable", Arial, sans-serif;
+  --sans: "Source Sans 3 Variable", Arial, sans-serif;
   --blue: #dfe9ec;
   --peach: #efe1ce;
   --sage: #e1e8d7;
@@ -1469,7 +1469,7 @@ figure {
   text-decoration: underline;
 }
 .article-body {
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 21px;
   line-height: 1.85;
   min-width: 0;
@@ -2993,10 +2993,9 @@ figure {
   line-height: 1.8;
 }
 .technical-article .article-body {
-  font-family: var(--mono);
-  font-size: 17px;
-  line-height: 1.95;
-  letter-spacing: -0.025em;
+  font-family: var(--sans);
+  font-size: 21px;
+  line-height: 1.85;
 }
 .technical-article .article-body h2 {
   font-family: var(--mono);
@@ -3120,8 +3119,8 @@ figure {
     font-size: 14px;
   }
   .technical-article .article-body {
-    font-size: 15px;
-    line-height: 1.95;
+    font-size: 19px;
+    line-height: 1.85;
   }
   .technical-article .article-body h2 {
     font-size: 23px;
