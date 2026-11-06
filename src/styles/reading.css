@@ -67,6 +67,8 @@
 }
 #reading-cover {
   width: 100%;
+  aspect-ratio: 3 / 2;
+  background: var(--blue);
   max-height: 650px;
   object-fit: cover;
   margin-bottom: 45px;

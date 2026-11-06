@@ -1808,7 +1808,7 @@ figure {
   }
   .book-installation > span {
     min-width: 85px;
-    font-size: 18px;
+    font-size: 16px;
     padding-inline: 15px;
   }
   .books-grid {
@@ -2451,6 +2451,8 @@ figure {
 .screen-note-art {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
   min-height: 280px;
   aspect-ratio: 1.6;
   padding: 40px;
@@ -2592,9 +2594,13 @@ figure {
 }
 .screen-lead {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 60px;
   align-items: center;
+}
+.screen-lead > *,
+.screen-note-card {
+  min-width: 0;
 }
 .screen-lead .screen-note-art {
   min-height: 450px;
@@ -2616,7 +2622,7 @@ figure {
 }
 .screen-notes-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 55px 40px;
 }
 .screen-card-copy {
@@ -2745,7 +2751,7 @@ figure {
   .screen-lead,
   .screen-notes-grid,
   .senna-archive {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 30px;
   }
   .screen-lead .screen-note-art {
