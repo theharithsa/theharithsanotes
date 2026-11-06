@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Reader audit patch 1.14.1 — issues #36, #38 and #39
+
+All 51 current Notion journals and 3 People posts remain published. Every post/body/illustration was opened in Chrome; source hashes and anonymous image denials were reconfirmed. The 1.14.1 patch reserves private cover space (measured shift reduced from 223.616px to 0), constrains Entertainment artwork/grids and fits tablet Books labels. The live 30-case responsive sweep passed. Application source is 1c5a7a4ebc4075a29d5ce8d04ff6c9ca95b9eaad; see docs/reader-ui-audit-1.14.1.md and PR #37 for immutable image/provider/UI/tenant evidence. Seven obsolete pre-1.14 zero-traffic tags were retired after verifying both active Hosting channels; current and private-aware rollback routes/revision history were preserved. Never recreate unsupported pre-private routes. Data, invitations, original art and ratings were preserved.
+
 ## Release 1.14.0 — issues #33 and #35
 
 The owner has now explicitly authorized theharithsanotes.com as primary and theharithsa.com redirects. This supersedes the historical no-extra-domain restriction below. Preserve the frozen Margin identity and existing owner content. Journal and People are invitation-only posts; only the owner can whitelist readers. Read docs/people-journal.md before modifying access, media, API scopes or import behavior. Private Notion inputs and all 54 cover assets are outside the repository in the local private import directory; never include them in Git, public build assets or telemetry. Update final provider/runtime evidence after release; implementation, local tests and production verification are separate states.
