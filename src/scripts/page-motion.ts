@@ -55,7 +55,9 @@ if (root.dataset.pageMotion === "public") {
   document.addEventListener("change", (event) => {
     if (
       !(event.target instanceof Element) ||
-      !event.target.matches("#book-rating-filter, #blog-tag-filter")
+      !event.target.matches(
+        "#book-genre-filter, #book-rating-filter, #blog-tag-filter",
+      )
     )
       return;
     const results = document.querySelector<HTMLElement>(

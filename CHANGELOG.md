@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.3 — 2026-11-06
+
+- Replace Books genre cards and the separate rating row with compact labeled dropdowns, aligned together on desktop and stacked on mobile, matching Blog browsing.
+
 ## 1.19.2 — 2026-11-06
 
 - Move the signature directly beneath the Meet Vish biography’s closing quote, before the interest links and gallery.
