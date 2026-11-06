@@ -1,9 +1,9 @@
-# Vish’s watercolor portrait
+# Vish’s casual portrait
 
-Issue #63 / app 1.18.1. Generated with OpenAI imagegen from three owner-selected Google Photos identity references (a natural smiling selfie, casual frontal portrait and side view) and the colorful watercolor style reference supplied in chat on 6 November 2026. The style reference supplies painting technique and palette only; identity comes from the three photographs reviewed with the owner. Private reference photographs are not committed or published.
+Issue #63. Generated with OpenAI imagegen from the existing owner-provided `public/images/gallery/portrait-seated.webp` identity reference, at the owner’s request. The original photograph and gallery remain available.
 
-Original: `assets/profile/vish-watercolor-original.png`. Web delivery: `public/images/vish-watercolor-portrait.webp`, 1024 × 1536, quality 86. Both personal portrait sections use the published Meet Vish image/alt. The earlier calmer illustration remains in source history/assets; the original gallery photo remains unchanged.
+Original: `assets/profile/vish-casual-original.png`. Web delivery: `public/images/vish-casual-illustration.webp`, 1200 × 1800, quality 86. Both Meet Vish and the home page’s personal section use the published Meet Vish image and alt text.
 
-Prompt: Preserve Vishruth’s recognizable broad face, skin tone, age, short textured salt-and-pepper hair, rectangular glasses and fuller beard; relaxed warm smile and casual cream sweatshirt. Head and shoulders, expressive ultramarine/turquoise/emerald/vermilion/ochre/magenta watercolor on textured white paper, loose ink contours, transparent washes, paint blooms and splashes. Preserve facial likeness and white negative space; do not transfer the style reference subject’s identity. No lettering, logos or additional characters.
+Prompt: Preserve Vishruth’s facial likeness, glasses, short black hair, beard, skin tone, age and proportions. Replace the cream blazer with a plain sage-green T-shirt and blue jeans; show a warm relaxed smile and naturally seated pose. Use gouache, colored pencil, fine ink and ivory paper texture with a calm sage wash. No lettering, logos, props or extra characters.
 
-Spoorthi’s linked creative profile is an inspiration named in the biography; she is not credited as the illustrator of this generated asset.
+The artwork is an illustration derived from a photograph, not a photograph of an outfit he wore. Spoorthi’s linked creative profile is an inspiration named in the biography; she is not credited as the illustrator of this asset.

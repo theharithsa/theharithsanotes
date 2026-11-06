@@ -2,8 +2,6 @@
 
 ## 1.18.1 — 2026-11-06
 
-- Update Vish’s portrait to the expressive watercolor direction requested with a new style reference.
-
 - Read core page bodies from the complete published revision so rich biography formatting survives the public summary projection.
 
 ## 1.18.0 — 2026-11-06
