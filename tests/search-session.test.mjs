@@ -93,3 +93,26 @@ test("debounced typing only requests the latest term and a short query clears im
   assert.equal(h.states.at(-1).phase, "idle");
   h.session.reset();
 });
+test("pagination refreshes from the beginning when authorization changes", async () => {
+  const h = setup(),
+    first = h.session.run("note", "");
+  h.calls[0].resolve(response("Invited fixture"));
+  await first;
+  const page = h.session.run("note", "", 20);
+  const publicData = {
+    ...response("Public fixture"),
+    privateAvailable: false,
+    results: [],
+  };
+  h.calls[1].resolve(publicData);
+  await Promise.resolve();
+  await Promise.resolve();
+  assert.equal(h.calls.length, 3);
+  assert.equal(h.calls[2].args[2], 0);
+  assert.deepEqual(h.states.at(-1), { phase: "loading", append: false });
+  h.calls[2].resolve(publicData);
+  await page;
+  assert.equal(h.states.at(-1).append, false);
+  assert.equal(h.states.at(-1).data.privateAvailable, false);
+  h.session.reset();
+});

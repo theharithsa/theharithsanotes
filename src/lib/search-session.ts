@@ -26,6 +26,7 @@ interface SearchHooks {
 /** Request-local results; invalidation also prevents late responses after closing. */
 export class SearchSession {
   private epoch = 0;
+  private access: boolean | undefined;
   private controller?: AbortController;
   private debounce?: ReturnType<typeof setTimeout>;
   private timeout?: ReturnType<typeof setTimeout>;
@@ -42,10 +43,12 @@ export class SearchSession {
   }
   reset(): void {
     this.invalidate();
+    this.access = undefined;
     this.hooks.idle();
   }
   schedule(query: string, section: string): void {
     const own = this.invalidate();
+    this.access = undefined;
     if (query.trim().length < 2) {
       this.hooks.idle();
       return;
@@ -62,6 +65,7 @@ export class SearchSession {
     offset: number | null = null,
   ): Promise<void> {
     const own = this.invalidate();
+    if (offset === null) this.access = undefined;
     if (query.trim().length < 2) {
       this.hooks.idle();
       return;
@@ -92,7 +96,18 @@ export class SearchSession {
         offset,
         controller.signal,
       );
-      if (own === this.epoch) this.hooks.ready(data, append);
+      if (own !== this.epoch) return;
+      if (
+        append &&
+        this.access !== undefined &&
+        this.access !== data.privateAvailable
+      ) {
+        // Refresh the index boundary before any old private rows can survive.
+        await this.run(query, section);
+        return;
+      }
+      this.access = data.privateAvailable;
+      this.hooks.ready(data, append);
     } catch {
       if (own === this.epoch) this.hooks.failed();
     } finally {
