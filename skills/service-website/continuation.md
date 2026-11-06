@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Meet Vish readability 1.16.2 — issue #57
+
+Meet Vish uses one continuous 68ch reading column, consistent paragraph spacing and responsive 17–18px body text. A personal heading replaces the old work-led section heading. Published CMS biography, image, gallery, navigation and access remain unchanged. See docs/meet-vish-readability-1.16.2.md for scope and verification; final release receipts belong on the linked PR.
+
 ## Public motion and social footer 1.16.1 — issues #54–55
 
 Public documents opt into native page fades with a pending shimmer and immediate cancellable filter reveals. Private, preview and mixed search destinations remain excluded from snapshots; reader/workspace motion stays intact. Footer profiles live in src/data/social.ts; DirectoryBadge uses the unchanged owner-provided black/white SVGs from assets/smm/wedirectory. See docs/site-motion-footer-1.16.1.md and the linked PR for final provider/browser/tenant evidence. Preserve unrelated owner assets/output.
