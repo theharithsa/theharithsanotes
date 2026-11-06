@@ -1,4 +1,5 @@
 ---
+import FilterPanel from "../components/FilterPanel.astro";
 import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
 import ScreenArt from "../components/ScreenArt.astro";
@@ -63,13 +64,15 @@ const senna = articles.find((article) =>
         <h2 id="screen-journal-heading">Stories I’m still thinking about.</h2>
       </div>
     </div>
-    <div class="filters" aria-label="Filter screen notes">
-      {["All notes", "Movies", "Series"].map((filter, index) => (
-        <button data-screen-filter={filter} aria-pressed={index === 0}>
-          {filter}
-        </button>
-      ))}
-    </div>
+    <FilterPanel>
+      <div class="filters" aria-label="Filter screen notes">
+        {["All notes", "Movies", "Series"].map((filter, index) => (
+          <button data-screen-filter={filter} aria-pressed={index === 0}>
+            {filter}
+          </button>
+        ))}
+      </div>
+    </FilterPanel>
     <p id="screen-count" class="result-count" aria-live="polite">
       {otherNotes.length} reflections
     </p>

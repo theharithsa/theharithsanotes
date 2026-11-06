@@ -140,7 +140,7 @@
 .reading-categories a {
   display: inline-block;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 10px 22px;
 }
 .reading-categories a[aria-current="page"] {

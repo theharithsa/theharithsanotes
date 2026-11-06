@@ -634,7 +634,7 @@ figure {
 .filters button {
   padding: 8px 15px;
   border: 1px solid var(--line);
-  border-radius: 30px;
+  border-radius: 8px;
   background: white;
   font-size: 12px;
 }
@@ -1135,9 +1135,11 @@ figure {
 }
 .meet-hero h1 {
   font-size: clamp(72px, 10vw, 145px);
+  margin-bottom: 24px;
 }
 .meet-hero p {
   font-size: 22px;
+  margin-bottom: 18px;
 }
 .meet-hero img {
   width: 100%;
@@ -1154,16 +1156,21 @@ figure {
   max-width: 720px;
 }
 .meet-signoff {
-  margin-top: 28px;
+  margin-top: 20px;
 }
 .meet-signoff img {
   display: block;
-  width: min(340px, 100%);
+  width: min(200px, 100%);
   height: auto;
   filter: brightness(0);
 }
 :root[data-theme="dark"] .meet-signoff img {
   filter: brightness(0) invert(0.92);
+}
+.meet-signoff-name {
+  margin: 10px 0 0;
+  font: 400 16px/1.4 var(--sans);
+  color: var(--muted);
 }
 .personal-statement h2 {
   max-width: 24ch;
@@ -1532,6 +1539,15 @@ figure {
 }
 .article-body > p {
   margin-bottom: 1.35em;
+}
+.article-page .article-body > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--serif);
+  font-size: 3.4em;
+  font-weight: 500;
+  line-height: 0.85;
+  margin: 0.12em 0.12em 0 0;
+  color: var(--ink);
 }
 .article-body h2 {
   font-family: var(--serif);
@@ -3799,6 +3815,7 @@ figure {
   border-bottom: 1px solid #ddd5ca;
 }
 .podcast-tabs a {
+  border-radius: 8px;
   padding: 11px 20px;
   border: 1px solid #ddd5ca;
   text-decoration: none;
@@ -3971,7 +3988,7 @@ figure {
   gap: 10px;
 }
 .genre-filters button {
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 12px 15px;
   min-height: 44px;
   text-align: left;
@@ -4671,7 +4688,7 @@ html[data-theme="dark"] .site-header {
   opacity: 0.75;
 }
 .meet-directory {
-  margin-top: 25px;
+  margin-top: 16px;
 }
 @media (max-width: 760px) {
   .site-footer {

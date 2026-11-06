@@ -1,5 +1,6 @@
 ---
 import PageParagraphs from "../components/PageParagraphs.astro";
+import FilterPanel from "../components/FilterPanel.astro";
 import Base from "../layouts/Base.astro";
 import ProjectArt from "../components/ProjectArt.astro";
 import { getProjects, getJournalPage } from "../lib/journal";
@@ -40,26 +41,28 @@ const projectTopics = [...new Set(projects.map((project) => project.category))];
         <h2 id="projects-heading">Projects</h2>
         <span>Explore the story behind the code ↓</span>
       </div>
-      <div
-        class="filters project-filters"
-        aria-label="Filter projects by topic"
-      >
-        {["All projects", ...projectTopics].map((topic, index) => (
-          <button
-            data-project-filter={topic}
-            aria-pressed={index === 0}
-            aria-controls="project-results"
-          >
-            {topic}
-            <span class="filter-count">
-              {index === 0
-                ? projects.length
-                : projects.filter((project) => project.category === topic)
-                    .length}
-            </span>
-          </button>
-        ))}
-      </div>
+      <FilterPanel>
+        <div
+          class="filters project-filters"
+          aria-label="Filter projects by topic"
+        >
+          {["All projects", ...projectTopics].map((topic, index) => (
+            <button
+              data-project-filter={topic}
+              aria-pressed={index === 0}
+              aria-controls="project-results"
+            >
+              {topic}
+              <span class="filter-count">
+                {index === 0
+                  ? projects.length
+                  : projects.filter((project) => project.category === topic)
+                      .length}
+              </span>
+            </button>
+          ))}
+        </div>
+      </FilterPanel>
       <p id="project-count" class="result-count" aria-live="polite">
         {projects.length} projects
       </p>

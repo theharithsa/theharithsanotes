@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.20.0 — 2026-11-06
+
+- Tighten the Meet Vish hero, reduce the signature and add the printed name; remove its Life in between photo teaser.
+- Standardize public browsing controls and collapse mobile filters into one compact disclosure, including Blog archive dates.
+- Give every Blog article an opening prose drop cap while preserving original bodies and technical typography.
+
 ## 1.19.3 — 2026-11-06
 
 - Replace Books genre cards and the separate rating row with compact labeled dropdowns, aligned together on desktop and stacked on mobile, matching Blog browsing.

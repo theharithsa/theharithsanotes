@@ -327,6 +327,7 @@
     margin: 0 0 24px;
   }
   .date-jump-mobile select {
+    border-radius: 8px;
     width: 100%;
     padding: 11px;
     border: 1px solid var(--line);
