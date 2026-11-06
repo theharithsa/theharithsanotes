@@ -12,16 +12,18 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
   description="A private reading room for the people Vish invites."
 >
   <section
-    class:list={["reading-room", { "reading-detail": isDetail }]}
-    id="reading-room"
+    class:list={[
+      "section-masthead tone-blue",
+      { "private-detail-masthead": isDetail },
+    ]}
   >
-    <header class="reading-heading">
-      <span class="reading-eyebrow">THE PRIVATE NOTEBOOK</span>
-      <h1>
-        People <em>&amp; Journal.</em>
-      </h1>
+    <div class="wrap">
+      <span class="eyebrow">THE PERSONAL NOTEBOOK</span>
+      <h1>People &amp; Journal</h1>
       <p>Small moments. Important people. A little more of the story.</p>
-    </header>
+    </div>
+  </section>
+  <section class="wrap space reading-room" id="reading-room">
     <div class="reading-gate" id="reading-gate">
       <span aria-hidden="true" class="reading-seal">
         ✎
@@ -39,12 +41,29 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
       </p>
     </div>
     <div id="reading-content" hidden>
-      <nav class="reading-nav" aria-label="Private collections">
-        <a href="/people-and-journal/journal">Journal</a>
-        <a href="/people-and-journal/people">People</a>
-        <button id="reader-signout">Sign out</button>
-      </nav>
-      <div id="reading-posts" class="reading-mosaic"></div>
+      <div class="reading-toolbar">
+        <nav
+          class="filters reading-categories"
+          aria-label="Choose a collection"
+        >
+          <a
+            href="/people-and-journal/journal"
+            aria-current={Astro.params.path !== "people" ? "page" : undefined}
+          >
+            Journal
+          </a>
+          <a
+            href="/people-and-journal/people"
+            aria-current={Astro.params.path === "people" ? "page" : undefined}
+          >
+            People
+          </a>
+        </nav>
+        <button id="reader-signout" class="text-button">
+          Sign out
+        </button>
+      </div>
+      <div id="reading-posts"></div>
       <article id="reading-post" hidden>
         <a id="reader-back" href="/people-and-journal/journal">
           Back to the notebook

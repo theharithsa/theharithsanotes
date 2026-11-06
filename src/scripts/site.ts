@@ -161,8 +161,7 @@ const tagButtons =
 let selectedTag = new URLSearchParams(window.location.search).get("tag") ?? "";
 if (![...tagButtons].some((button) => button.dataset.blogTag === selectedTag))
   selectedTag = "";
-if (search)
-  search.value = new URLSearchParams(window.location.search).get("q") ?? "";
+
 let selected =
   new URLSearchParams(window.location.search).get("topic") ?? "All notes";
 if (![...filters].some((filter) => filter.dataset.filter === selected))

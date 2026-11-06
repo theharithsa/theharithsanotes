@@ -37,13 +37,16 @@ const rootRoutes = new Set([
   "admin",
   "people-and-journal",
   "account",
+  "search",
   "sitemap.xml",
   "rss.xml",
   "robots.txt",
 ]);
 function routeName(path: string): string {
   const parts = path.split("/").filter(Boolean);
-  if (parts[0] === "api" && parts[1] === "reading") return "/api/reading/:collection/:post";
+  if (parts[0] === "api" && parts[1] === "search") return "/api/search";
+  if (parts[0] === "api" && parts[1] === "reading")
+    return "/api/reading/:collection/:post";
   if (parts[0] === "api")
     return `/api/${parts[1] === "v1" ? "v1" : "cms"}/${["health", "me", "session", "entries", "audit", "media", "ci", "delivery", "keys", "workspace"].includes(parts[2] ?? "") ? parts[2] : "unknown"}${parts.length > 3 ? "/:entry" : ""}`;
   if (parts[0] === "media") return "/media/:image/:variant";
@@ -126,7 +129,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
             context.url.pathname.startsWith("/admin") ||
             context.url.pathname.startsWith("/api/") ||
             context.url.pathname.startsWith("/people-and-journal") ||
-            context.url.pathname.startsWith("/account");
+            context.url.pathname.startsWith("/account") ||
+            context.url.pathname === "/search";
           response.headers.set("X-Request-ID", state.requestId);
           if (privateResponse) {
             response.headers.set("Cache-Control", "private,no-store");

@@ -5,6 +5,17 @@ export const sectionMeta = {
     description:
       "Notes on observability, artificial intelligence, books, projects and the everyday discoveries of Vishruth Harithsa, an engineer and builder in Bengaluru.",
   },
+  search: {
+    light: "#dfe9ec",
+    dark: "#26353c",
+    description: "Search across The Harithsa Notes.",
+  },
+  "people-and-journal": {
+    light: "#dfe9ec",
+    dark: "#26353c",
+    description:
+      "People, moments and personal reflections, shared by invitation.",
+  },
   blogs: {
     light: "#dfe9ec",
     dark: "#26353c",

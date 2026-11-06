@@ -4,7 +4,7 @@ Issue [#21](https://github.com/theharithsa/theharithsanotes/issues/21), applicat
 
 ## Reading and projects
 
-Books contains only the 50 owner-confirmed Goodreads Read entries. Five unfinished Notion entries and status controls are removed. Original ratings, reviews, links and reading routes remain unchanged. `src/data/book-genres.json` assigns editorial browsing genres to stable review IDs; these are site classifications, not Goodreads metadata. Books can belong to several genres. Eight genre chips combine with title/author search and personal-rating filtering; All genres resets the genre. Live results and the empty state are accessible. All 50 books remain server-rendered without JavaScript.
+Books contains only the 50 owner-confirmed Goodreads Read entries. Five unfinished Notion entries and status controls are removed. Original ratings, reviews, links and reading routes remain unchanged. `src/data/book-genres.json` assigns editorial browsing genres to stable review IDs; these are site classifications, not Goodreads metadata. Books can belong to several genres. Eight genre chips combine with personal-rating filtering; All genres resets the genre. Live results and the empty state are accessible. All 50 books remain server-rendered without JavaScript.
 
 Projects uses four existing categories as topics, with pressed states and live counts. The full collection retains its original mosaic. Filtered groups with at least three projects use a lead illustration and companions without gaps from hidden source positions; All projects restores the original mosaic. Existing anchors and detail routes remain stable.
 
@@ -27,3 +27,13 @@ Static routes have titles, descriptions, canonicals, Open Graph and Twitter meta
 Legacy `/notes` and `/about` canonicalize to `/blogs` and `/meet-vish`; only preferred destinations enter the sitemap. The 404 is noindex. Article URLs, RSS and robots discovery remain. Implementation follows Google's [canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) and [article structured-data documentation](https://developers.google.com/search/docs/appearance/structured-data/article). This provides crawlable metadata without claiming indexing, rankings or guaranteed rich results.
 
 No backend, dependency, DNS, secret or monitoring configuration changes. Analytics consent remains independent from presentation preferences.
+
+## Global search and mobile categories (1.14.0, issue #35)
+
+The header magnifier opens `/search`, the only public search field. It searches current published titles, descriptions, tags, authors and display bodies across Blog, Books, Projects, Podcasts, Entertainment, Photos, GoGs and Pages. All query words must match; title matches rank first. Results paginate in groups of 20. Drafts, source URLs and Notion import metadata are excluded.
+
+The browser sends query text in a bounded JSON POST to `/api/search/query`, never in a URL or analytics event. The search page disables optional analytics/RUM and is noindex; responses are private/no-store. Public index data can live in server memory for 15 seconds. Each collection is bounded at 1,000 published entries; exceeding that limit returns an explicit capacity error rather than silently dropping content. A dedicated external search index can replace this bounded implementation if the archive grows beyond that size. Requests are debounced/cancelled, input is limited to 160 characters, bodies to 1KiB, and each instance admits at most 300 valid requests per minute.
+
+People and Journal matches require a current verified, active invitation on every search. Restricted indexes are request-local, never enter the shared public cache, and return display summaries only. Invalid, expired or revoked sessions receive public results only. Search clears its DOM when navigating away and does not persist search terms/results in browser storage.
+
+Below 768px, every existing category control (Blog tags/topics, book genres, project topics, Entertainment types and Podcast collections) becomes a labelled native dropdown. Desktop controls and dropdown selection stay synchronized. Genre/topic counts remain visible in option labels; book ratings remain a separate dropdown. Without JavaScript the original wrapped links/buttons remain available. Blog tags share the masthead's content measure and wrap within it. Workspace table search remains an administrative tool.

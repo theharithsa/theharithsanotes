@@ -115,26 +115,83 @@ async function load() {
       const grid = node("reading-posts");
       grid.hidden = false;
       node("reading-post").hidden = true;
+      const timeline = document.createElement("nav");
+      timeline.className = "journal-timeline private-timeline";
+      timeline.setAttribute("aria-label", "Journal archive by year");
+      const dated = document.createElement("div");
+      const groups = new Map<string, HTMLElement>();
+      const years = new Set<string>();
+      grid.className =
+        section === "journal" ? "blog-time-layout" : "notes-grid";
+      if (section === "journal" && posts.length) grid.append(timeline, dated);
       for (const post of posts) {
-        const link = document.createElement("a");
-        link.className = "reading-card";
-        link.href = `/people-and-journal/${section}/${encodeURIComponent(post.slug)}`;
+        let destination = grid;
+        if (section === "journal") {
+          const month = post.date.slice(0, 7);
+          let monthGrid = groups.get(month);
+          if (!monthGrid) {
+            const group = document.createElement("section");
+            group.className = "blog-month-group";
+            group.id = `private-month-${month}`;
+            const heading = document.createElement("h2");
+            heading.className = "archive-date-heading";
+            heading.textContent = new Intl.DateTimeFormat("en", {
+              month: "long",
+              year: "numeric",
+              timeZone: "UTC",
+            }).format(new Date(`${month}-01T00:00:00Z`));
+            monthGrid = document.createElement("div");
+            monthGrid.className = "notes-grid";
+            group.append(heading, monthGrid);
+            dated.append(group);
+            groups.set(month, monthGrid);
+            const year = month.slice(0, 4);
+            if (!years.has(year)) {
+              const link = document.createElement("a");
+              link.className = "timeline-year-button";
+              link.href = `#${group.id}`;
+              link.textContent = year;
+              timeline.append(link);
+              years.add(year);
+            }
+          }
+          destination = monthGrid;
+        }
+        const card = document.createElement("article");
+        card.className = "note-card";
+        const href = `/people-and-journal/${section}/${encodeURIComponent(post.slug)}`;
+        const cover = document.createElement("a");
+        cover.className = "card-image-link";
+        cover.href = href;
+        cover.tabIndex = -1;
+        cover.setAttribute("aria-hidden", "true");
         const image = document.createElement("img");
         image.src = post.image;
-        image.alt = post.imageAlt;
+        image.alt = "";
         image.loading = "lazy";
         image.width = 1536;
         image.height = 1024;
+        cover.append(image);
         const copy = document.createElement("div");
-        const date = document.createElement("small");
-        date.textContent = formatDate(post.date);
-        const title = document.createElement("h2");
-        title.textContent = post.title;
+        copy.className = "card-copy";
+        const category = document.createElement("span");
+        category.className = "eyebrow";
+        category.textContent =
+          section === "journal" ? "From my journal" : "People in my story";
+        const title = document.createElement("h3");
+        const link = document.createElement("a");
+        link.href = href;
+        link.textContent = post.title;
+        title.append(link);
         const intro = document.createElement("p");
         intro.textContent = post.description;
-        copy.append(date, title, intro);
-        link.append(image, copy);
-        grid.append(link);
+        const date = document.createElement("time");
+        date.className = "note-meta";
+        date.dateTime = post.date;
+        date.textContent = formatDate(post.date);
+        copy.append(category, title, intro, date);
+        card.append(cover, copy);
+        destination.append(card);
       }
       if (!posts.length) {
         const empty = document.createElement("p");
@@ -147,7 +204,7 @@ async function load() {
     node("reading-content").hidden = false;
     document
       .querySelector<HTMLAnchorElement>(
-        `.reading-nav a[href="/people-and-journal/${section}"]`,
+        `.reading-categories a[href="/people-and-journal/${section}"]`,
       )
       ?.setAttribute("aria-current", "page");
   } catch (error) {

@@ -427,6 +427,7 @@ export function validateData(
       "preview",
       "people-and-journal",
       "account",
+      "search",
     ].includes(String(data.slug))
   )
     throw new CmsError(

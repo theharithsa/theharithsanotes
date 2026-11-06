@@ -63,15 +63,6 @@ import BookRating from "../components/BookRating.astro";
       </div>
     </div>
     <div class="book-journal-tools">
-      <div class="book-search-field">
-        <label for="book-search">Find a book or author</label>
-        <input
-          id="book-search"
-          type="search"
-          placeholder="Search the bookshelf"
-          autocomplete="off"
-        />
-      </div>
       <div>
         <label for="book-rating-filter">My rating</label>
         <select id="book-rating-filter">
@@ -147,7 +138,7 @@ import BookRating from "../components/BookRating.astro";
       ))}
     </div>
     <p id="book-empty" class="book-empty" hidden>
-      No books match. Try another genre, title, author or rating.
+      No books match. Try another genre or rating.
     </p>
     <p class="editorial-caption">
       {completedBooks.length} completed books from my Goodreads shelf, with my

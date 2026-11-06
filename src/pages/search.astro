@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Search"
+  description="Find a thought, a book, a project, or a story in The Harithsa Notes."
+>
+  <section class="section-masthead tone-blue">
+    <div class="wrap">
+      <span class="eyebrow">FOLLOW YOUR CURIOSITY</span>
+      <h1>
+        One search.
+        <br />A whole notebook.
+      </h1>
+      <p>Find a thought, a book, a project, or a story.</p>
+    </div>
+  </section>
+  <section class="wrap space global-search" aria-label="Search the whole site">
+    <form id="global-search-form" role="search">
+      <label for="global-query">What are you curious about?</label>
+      <div class="global-search-input">
+        <input
+          id="global-query"
+          name="query"
+          type="search"
+          minlength="2"
+          maxlength="160"
+          placeholder="A title, topic, author, or idea…"
+          autocomplete="off"
+          required
+        />
+        <button class="button" type="submit">
+          Search
+        </button>
+      </div>
+      <label for="global-section">Look in</label>
+      <select id="global-section" name="section">
+        <option value="">All sections</option>
+        <option value="blogs">Blog</option>
+        <option value="books">Books</option>
+        <option value="projects">Projects</option>
+        <option value="podcasts">Podcasts</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="photos">Photos</option>
+        <option value="gogs">GoGs</option>
+        <option value="pages">Pages</option>
+        <option value="journal" data-private-search hidden>
+          Journal
+        </option>
+        <option value="people" data-private-search hidden>
+          People
+        </option>
+      </select>
+    </form>
+    <p id="global-search-status" role="status">
+      Search across the published notebook.
+    </p>
+    <p id="global-private-status" class="editorial-caption">
+      Invited readers can also search People and Journal after{" "}
+      <a href="/people-and-journal">signing in</a>.
+    </p>
+    <div id="global-search-results" aria-busy="false"></div>
+    <button id="global-search-more" class="button button-outline" hidden>
+      Show more results
+    </button>
+    <noscript>
+      Please enable JavaScript to search. You can also browse any section using
+      the menu.
+    </noscript>
+  </section>
+  <script src="../scripts/search.ts"></script>
+</Base>

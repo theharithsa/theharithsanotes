@@ -38,6 +38,7 @@ const pageTitle = title
 const canonical = new URL(canonicalPath(Astro.url.pathname), site.url);
 const current = Astro.url.pathname;
 const noindex =
+  current === "/search" ||
   current === "/404" ||
   current === "/404.html" ||
   current.startsWith("/admin") ||
@@ -270,8 +271,8 @@ const graph = [
         </button>
         <a
           class="search-link"
-          href="/blogs#search"
-          aria-label="Search articles"
+          href="/search"
+          aria-label="Search the whole site"
         >
           <svg
             width="20"
@@ -312,6 +313,7 @@ const graph = [
     <main id="main">
       <script>
         import "../scripts/reading-link";
+        import "../scripts/responsive-filters";
       </script>
       <slot />
     </main>

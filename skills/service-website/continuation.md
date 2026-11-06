@@ -1,6 +1,6 @@
 # Workspace/API continuation
 
-## Active issue #33 — 1.14.0
+## Active issues #33 and #35 — 1.14.0
 
 The owner has now explicitly authorized theharithsanotes.com as primary and theharithsa.com redirects. This supersedes the historical no-extra-domain restriction below. Preserve the frozen Margin identity and existing owner content. Journal and People are invitation-only posts; only the owner can whitelist readers. Read docs/people-journal.md before modifying access, media, API scopes or import behavior. Private Notion inputs and all 54 cover assets are outside the repository in the local private import directory; never include them in Git, public build assets or telemetry. Update final provider/runtime evidence after release; implementation, local tests and production verification are separate states.
 
@@ -13,3 +13,5 @@ Catalog reconciliation succeeded in both namespaces and preserves owner edits: t
 Validated 26 Node tests, nine CMS/schema/emulator checks, current-head/main CI, all 173 production routes, 263 owned images and 500 exact client hashes. A real preview-only job exercised draft/conflict/scopes/upload/private download/revocation and removed its synthetic content/image fixtures. Chrome’s existing owner session loaded Write, Pages, Tags and Developer Settings. No browser key was generated. Native Dynatrace API span, key events and provider/job receipts were verified; raw tokens and bodies are excluded. Preserve dtctl default airtel; query this app explicitly with my-env.
 
 Apply any remaining final patch checks/deployment from its immutable checked artifact. Do not reset drafts, media, revocations or audit records when rolling back. Preserve Margin identity 1.0.0 and theharithsa.com. No DNS work or extra domain is authorized or needed here.
+
+Issue #35 adds contained Blog tags, shared mobile category dropdowns and `/search` backed by `/api/search/query`. Read docs/browsing-and-themes.md before changing search. Restricted indexes are request-local, reauthorize each search, and never enter public caches. The reading room uses Blog masthead/cards/archive/prose. Local Chrome checks verified 320px containment, desktop tag alignment, working category selections and cross-section search. Update final hosted evidence after release.

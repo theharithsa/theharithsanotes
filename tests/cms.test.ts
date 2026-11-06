@@ -30,6 +30,11 @@ import {
   inviteMember,
   revokeMember,
 } from "../src/server/members.ts";
+import { searchApi } from "../src/server/search.ts";
+import {
+  searchDocument,
+  findSearchResults,
+} from "../src/server/search-index.ts";
 import { readingApi } from "../src/server/reading.ts";
 import { listPublished } from "../src/server/repository.ts";
 
@@ -261,7 +266,45 @@ integration(
     await reconcileWorkspace();
     const tags = await listPublished<Record<string, unknown>>("tags");
     assert.ok(!JSON.stringify(tags).includes("PRIVATE_TAG_SENTINEL"));
+    const searchRequest = (jwt?: string, query = "PRIVATE_BODY_SENTINEL") =>
+      new Request("http://localhost:4321/api/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}),
+        },
+        body: JSON.stringify({ query }),
+      });
+    const anonymousSearch = await searchApi(searchRequest());
+    assert.equal(anonymousSearch.status, 200);
+    assert.equal((await anonymousSearch.json()).total, 0);
+    const invitedSearch = await searchApi(
+      searchRequest(token(uid, "invited@example.com")),
+    );
+    assert.match(invitedSearch.headers.get("Cache-Control") ?? "", /no-store/);
+    const searchBody = await invitedSearch.json();
+    assert.equal(searchBody.total, 1);
+    assert.equal(searchBody.results[0].private, true);
+    assert.ok(!JSON.stringify(searchBody).includes("PRIVATE_BODY_SENTINEL"));
+    assert.equal(
+      (
+        await (
+          await searchApi(
+            searchRequest(
+              token(uid, "invited@example.com"),
+              "PRIVATE_SOURCE_SENTINEL",
+            ),
+          )
+        ).json()
+      ).total,
+      0,
+    );
     await revokeMember(invited.id);
+    const revokedSearch = await searchApi(
+      searchRequest(token(uid, "invited@example.com")),
+    );
+    assert.equal((await revokedSearch.json()).total, 0);
+
     assert.equal((await readingApi(request(), "journal")).status, 403);
     await assert.rejects(() =>
       mediaResponse(imageRequest, cover.id, "800.webp"),
@@ -920,3 +963,44 @@ integration(
     );
   },
 );
+
+test("global search ranks titles, searches body text, paginates and excludes non-display metadata", async () => {
+  const docs = Array.from({ length: 25 }, (_, i) =>
+    searchDocument("blogs", `entry-${i}`, {
+      title: i === 24 ? "Observability" : `Entry ${i}`,
+      html: "<p>Observability &amp; learning</p>",
+      notion: { content: "PRIVATE_SOURCE_METADATA" },
+      sourceNotes: "PRIVATE_SOURCE_METADATA",
+    }),
+  );
+  assert.equal(
+    findSearchResults(docs, "observability", "", 0).results[0]!.title,
+    "Observability",
+  );
+  assert.equal(findSearchResults(docs, "observability", "", 0).next, 20);
+  assert.equal(
+    findSearchResults(docs, "observability", "", 20).results.length,
+    5,
+  );
+  assert.equal(
+    findSearchResults(docs, "PRIVATE_SOURCE_METADATA", "", 0).total,
+    0,
+  );
+  assert.equal(findSearchResults(docs, "observability", "books", 0).total, 0);
+  for (const body of [
+    "[]",
+    "null",
+    '{"query":"x"}',
+    '{"query":"ok","section":"admin"}',
+    JSON.stringify({ query: "x".repeat(2000) }),
+  ]) {
+    const response = await searchApi(
+      new Request("http://localhost:4321/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      }),
+    );
+    assert.ok([400, 413].includes(response.status));
+  }
+});

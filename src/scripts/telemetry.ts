@@ -16,6 +16,7 @@ const enabled =
   !location.pathname.startsWith("/admin") &&
   !location.pathname.startsWith("/people-and-journal") &&
   !location.pathname.startsWith("/account") &&
+  location.pathname !== "/search" &&
   !new URLSearchParams(location.search).has("preview");
 let current: Consent | undefined;
 let started = false;
