@@ -4515,3 +4515,112 @@ html[data-theme="dark"] .site-header {
     flex-direction: column;
   }
 }
+/* A small directory of places to keep the conversation going. */
+.site-footer {
+  padding-top: clamp(42px, 6vw, 80px);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(30px, 6vw, 90px);
+  align-items: start;
+}
+.footer-intro {
+  display: grid;
+  justify-items: start;
+  gap: 22px;
+  min-width: 0;
+}
+.footer-top .footer-intro .wordmark {
+  width: min(100%, 280px);
+}
+.footer-top .footer-intro p {
+  font-size: clamp(21px, 2vw, 28px);
+}
+.footer-connections {
+  min-width: 0;
+}
+.footer-connections h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.2;
+  margin: 10px 0 24px;
+}
+.footer-top .footer-social {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  font-size: 15px;
+}
+.footer-social a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  border-radius: 7px;
+  transition:
+    background 160ms,
+    color 160ms,
+    transform 160ms;
+}
+.footer-social a svg {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+}
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+.directory-badge {
+  display: inline-flex;
+  width: 185px;
+  max-width: 100%;
+  border-radius: 10px;
+  transition:
+    transform 160ms,
+    box-shadow 160ms;
+}
+.directory-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.directory-badge:hover,
+.directory-badge:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px #0002;
+}
+.meet-directory {
+  margin-top: 25px;
+}
+@media (max-width: 760px) {
+  .footer-top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+  }
+}
+@media (max-width: 420px) {
+  .footer-top .footer-social {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .footer-bottom > div {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-social a,
+  .directory-badge {
+    transition: none;
+  }
+  .footer-social a:hover,
+  .directory-badge:hover {
+    transform: none;
+  }
+}
