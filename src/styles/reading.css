@@ -3,7 +3,8 @@
   min-height: 45vh;
 }
 .reading-loading {
-  max-width: 900px;
+  --reading-glint: #ffffffb3;
+  animation: reader-loading-in 140ms ease-out;
 }
 .reading-loading > p {
   font-family: var(--serif);
@@ -15,12 +16,87 @@
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
-.reading-placeholder span {
+.reading-skeleton-card {
+  min-width: 0;
+}
+.reading-skeleton-cover,
+.reading-skeleton-line {
   display: block;
-  height: clamp(120px, 22vw, 240px);
+  position: relative;
+  overflow: hidden;
   border-radius: 4px;
   background: var(--blue);
-  opacity: 0.55;
+  isolation: isolate;
+}
+.reading-skeleton-cover {
+  aspect-ratio: 3 / 2;
+}
+.reading-skeleton-copy {
+  padding: 22px 0 0;
+  display: grid;
+  gap: 13px;
+}
+.reading-skeleton-line {
+  height: 11px;
+}
+.reading-skeleton-line.skeleton-kicker {
+  width: 26%;
+  height: 8px;
+}
+.reading-skeleton-line.skeleton-title {
+  width: 73%;
+  height: 20px;
+  margin-bottom: 5px;
+}
+.reading-skeleton-line.skeleton-short {
+  width: 61%;
+}
+.reading-skeleton-cover::after,
+.reading-skeleton-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    var(--reading-glint) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  animation: reader-shimmer 1.65s ease-in-out infinite;
+}
+.reading-skeleton-card:nth-child(2)
+  :is(.reading-skeleton-cover, .reading-skeleton-line)::after {
+  animation-delay: 0.18s;
+}
+[data-theme="dark"] .reading-loading {
+  --reading-glint: #ffffff1f;
+}
+.reading-room[data-state="ready"] #reading-content {
+  animation: reader-reveal 240ms cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+}
+@keyframes reader-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes reader-loading-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes reader-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .reading-loading:has(#reader-retry:not([hidden])) .reading-placeholder {
   display: none;
@@ -109,6 +185,7 @@
 .private-detail-masthead p {
   display: none;
 }
+#reading-toolbar[hidden],
 #reading-loading[hidden],
 #reader-retry[hidden],
 #reading-content[hidden],
@@ -127,5 +204,20 @@
   }
   .reading-toolbar > button {
     flex-shrink: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .reading-placeholder {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-loading,
+  .reading-room[data-state="ready"] #reading-content,
+  .reading-skeleton-cover::after,
+  .reading-skeleton-line::after {
+    animation: none;
   }
 }

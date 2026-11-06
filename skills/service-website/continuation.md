@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Reader transitions 1.15.2 — issue #50
+
+People/Journal use generic animated skeletons and a short reveal, with in-place collection navigation and URL-only history. Every switch reauthorizes data; sign-out and denial clear private content. See docs/reader-transitions-1.15.2.md and the linked PR for final provider, browser and tenant receipts. Preserve invitation checks, private media, natural masonry, fonts and frozen identity/template.
+
 ## Natural masonry gallery 1.15.1 — issue #48
 
 Photos now use a continuous vertical masonry grid, matching the owner’s supplied screenshot. Three/two/one columns preserve natural image heights, with thin frames and soft shadows. Horizontal strip controls/geometry are removed; date jumps and optional accessible full-size viewing remain. See docs/gallery-masonry-1.15.1.md and the linked issue/PR for final build/provider/Chrome/tenant receipts. Source Sans 3, workspace/session behavior, original photos, data and frozen brand/template remain unchanged.

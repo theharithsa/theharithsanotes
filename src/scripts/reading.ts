@@ -17,9 +17,13 @@ let generation = 0;
 let pendingRead: AbortController | undefined;
 let signingOut = false;
 let signOutFailed = false;
+let hasAccess = false;
 const sessions = new Set<Promise<unknown>>();
 type Phase = "loading" | "ready" | "signed-out" | "denied" | "error";
 function phase(value: Phase, detail?: string) {
+  if (value === "ready") hasAccess = true;
+  if (value === "signed-out" || value === "denied") hasAccess = false;
+  node("reading-toolbar").hidden = !hasAccess;
   node("reading-room").dataset.state = value;
   node("reading-room").setAttribute("aria-busy", String(value === "loading"));
   node("reading-loading").hidden = value !== "loading" && value !== "error";
@@ -77,6 +81,7 @@ async function api<T>(
 }
 function clear(forgetAccess = false) {
   if (forgetAccess) {
+    hasAccess = false;
     document
       .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
       .forEach((link) => {
@@ -93,13 +98,49 @@ function clear(forgetAccess = false) {
     node(id).textContent = "";
   node<HTMLImageElement>("reading-cover").removeAttribute("src");
 }
+function syncCollection(section: "journal" | "people") {
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>(".reading-categories a"),
+  ];
+  links.forEach((link) => {
+    if (link.getAttribute("href") === `/people-and-journal/${section}`)
+      link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+  const picker = document.querySelector<HTMLSelectElement>(
+    ".reading-toolbar .mobile-category-filter select",
+  );
+  if (picker)
+    picker.value = String(
+      Math.max(
+        0,
+        links.findIndex((link) => link.getAttribute("aria-current") === "page"),
+      ),
+    );
+}
 async function load() {
   const own = ++generation;
   pendingRead?.abort();
   pendingRead = new AbortController();
   const signal = pendingRead.signal;
+  const segments = location.pathname.split("/").filter(Boolean);
+  const section = segments[1] === "people" ? "people" : "journal";
+  const slug = segments[2];
+  syncCollection(section);
+  document
+    .querySelector(".section-masthead")
+    ?.classList.toggle("private-detail-masthead", Boolean(slug));
   clear();
-  phase("loading");
+  phase(
+    "loading",
+    signingOut
+      ? "Signing out…"
+      : slug
+        ? "Opening your note…"
+        : section === "people"
+          ? "Opening People…"
+          : "Opening Journal…",
+  );
   if (signingOut) return;
   await auth.authStateReady();
   if (own !== generation) return;
@@ -117,9 +158,6 @@ async function load() {
       () => sessions.delete(session),
       () => sessions.delete(session),
     );
-    const segments = location.pathname.split("/").filter(Boolean);
-    const section = segments[1] === "people" ? "people" : "journal";
-    const slug = segments[2];
     if (slug) {
       const preview = new URLSearchParams(location.search).get("preview");
       const [, { post }] = await Promise.all([
@@ -258,11 +296,6 @@ async function load() {
         link.setAttribute("aria-label", "Open People and Journal");
       });
     phase("ready");
-    document
-      .querySelector<HTMLAnchorElement>(
-        `.reading-categories a[href="/people-and-journal/${section}"]`,
-      )
-      ?.setAttribute("aria-current", "page");
   } catch (error) {
     if (own !== generation) return;
     pendingRead?.abort();
@@ -344,3 +377,31 @@ window.addEventListener("pagehide", () => {
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) void load();
 });
+
+// History keeps only the collection URL; every switch reloads authorized data.
+document
+  .querySelectorAll<HTMLAnchorElement>(".reading-categories a")
+  .forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      const target = new URL(link.href, location.origin);
+      if (
+        target.origin !== location.origin ||
+        !/^\/people-and-journal\/(?:people|journal)$/.test(target.pathname)
+      )
+        return;
+      event.preventDefault();
+      if (target.pathname === location.pathname && !location.search) return;
+      history.pushState(null, "", target.pathname);
+      void load();
+    });
+  });
+window.addEventListener("popstate", () => void load());

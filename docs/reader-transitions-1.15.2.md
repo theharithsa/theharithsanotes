@@ -1,0 +1,9 @@
+# Private reader transitions — 1.15.2
+
+Issue #50 replaces static loading blocks with two generic card skeletons, a moving diagonal glint and a 240ms content reveal. Phones use one column; dark mode softens the glint. Reduced-motion CSS disables all three decorative animations. Status remains a live region and the reading room exposes aria-busy while pending. No artificial loading delay is introduced.
+
+Journal/People collection links now update their generic URL in place. The toolbar stays visible after successful access while private content is immediately cleared and freshly authorized data loads. Mobile selection and Back/Forward use the same flow. Modified clicks retain native browser behavior. History stores only null state and collection URLs; no private article snapshots or payload cache is created. Denial and sign-out hide the toolbar and private content. Existing abort and generation guards discard stale responses.
+
+Validation: Astro check has zero errors/warnings (two existing Medium import deprecation hints), the static build succeeds, and all 44 site tests pass, including 11 asynchronous reader session/navigation cases. An initial concurrent build/test invocation raced against files being regenerated; the complete suite was rerun after the build and passed. Local Chrome generic-only fixtures confirm a moving shimmer, two desktop/one mobile columns, dark palette and no overflow. Private notes are excluded from screenshots. Final current-head CI, immutable preview/live provider receipts, hosted reader checks and Dynatrace evidence are recorded on the linked PR.
+
+No API, schema, content, invitation, media, monitoring credential, font, identity or template change. Rollback uses matching private-aware 1.15.1 runtime/client assets while preserving data and audit records.

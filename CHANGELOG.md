@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.15.2] — 2026-11-06
+
+- Add animated card skeletons and a short content reveal to People and Journal, with dark and reduced-motion support (#50).
+- Switch collections in place while retaining navigation, revalidating access and ignoring stale responses.
+
 ## [1.15.1] — 2026-11-06
 
 - Correct Photos to a continuous vertical masonry grid with natural image heights, responsive columns, subtle frames and soft shadows (#48).
