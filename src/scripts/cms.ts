@@ -149,6 +149,7 @@ async function showWorkspace() {
     .setAttribute("aria-current", dev ? "page" : "false");
   if (dev) {
     loadingGeneration++;
+    collectionPhase("idle");
     element("cms-breadcrumb").textContent = "Developer Settings";
     document
       .querySelectorAll("[data-cms-section]")
@@ -503,6 +504,7 @@ function showRecoveryButton() {
   element("cms-entry-message").append(" ", reload);
 }
 function renderRows() {
+  if (element("cms-table-region").dataset.state === "loading") return;
   const body = element<HTMLTableSectionElement>("cms-rows");
   body.replaceChildren();
   const query = search.value.trim().toLowerCase();
@@ -565,6 +567,15 @@ function renderRows() {
   element("cms-empty").hidden = visible.length !== 0;
   element<HTMLButtonElement>("cms-more").hidden = !nextCursor;
 }
+function collectionPhase(
+  state: "idle" | "loading" | "appending" | "ready" | "error",
+) {
+  const pending = state === "loading" || state === "appending";
+  element("cms-table-region").dataset.state = state;
+  element("cms-table-region").setAttribute("aria-busy", String(pending));
+  element("cms-collection-loading").hidden = !pending;
+  element<HTMLButtonElement>("cms-more").disabled = pending;
+}
 async function loadCollection(append = false) {
   if (!workspaceReady) return;
   const generation = ++loadingGeneration;
@@ -583,18 +594,30 @@ async function loadCollection(append = false) {
         link.dataset.cmsSection === target ? "page" : "false",
       ),
     );
-  element("cms-row-count").textContent = "Loading your entries…";
+  if (!append) {
+    rows = [];
+    nextCursor = null;
+    element("cms-rows").replaceChildren();
+    element("cms-empty").hidden = true;
+    element("cms-more").hidden = true;
+  }
+  collectionPhase(append ? "appending" : "loading");
+  element("cms-row-count").textContent = append
+    ? "Loading more entries…"
+    : `Opening ${description.title}…`;
   try {
     const result = await api<{ entries: Entry[]; next: string | null }>(
       `entries/${target}${append && nextCursor ? `?cursor=${encodeURIComponent(nextCursor)}` : ""}`,
     );
-    if (generation !== loadingGeneration) return;
+    if (generation !== loadingGeneration || !workspaceReady) return;
     rows = append ? [...rows, ...result.entries] : result.entries;
     nextCursor = result.next;
+    collectionPhase("ready");
     renderRows();
     notice.hidden = true;
   } catch (error) {
     if (generation !== loadingGeneration || !workspaceReady) return;
+    collectionPhase("error");
     message(error instanceof Error ? error.message : "Entries could not load");
     element("cms-row-count").textContent =
       "Could not load entries. Try Refresh.";
@@ -1806,6 +1829,7 @@ function clearWorkspace() {
   if (current && dirtyVersion !== savedVersion) keepCopy();
   workspaceReady = false;
   loadingGeneration++;
+  collectionPhase("idle");
   editorGeneration++;
   if (saveTimer) clearTimeout(saveTimer);
   developer.clear();

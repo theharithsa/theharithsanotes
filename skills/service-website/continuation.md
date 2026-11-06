@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Workspace transitions 1.15.3 — issue #52
+
+Initial restoration and collection fetches use generic table shimmer; current results reveal smoothly. Non-append fetches clear stale rows; pagination preserves existing rows and shows its skeleton below the table. Generation and owner-ready guards prevent stale/private results from reappearing. See docs/workspace-transitions-1.15.3.md and the linked PR for release evidence. No editor/draft, API, data, access or brand changes.
+
 ## Reader transitions 1.15.2 — issue #50
 
 People/Journal use generic animated skeletons and a short reveal, with in-place collection navigation and URL-only history. Every switch reauthorizes data; sign-out and denial clear private content. See docs/reader-transitions-1.15.2.md and the linked PR for final provider, browser and tenant receipts. Preserve invitation checks, private media, natural masonry, fonts and frozen identity/template.
