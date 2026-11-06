@@ -1,3 +1,9 @@
+# Independent Home portrait 1.19.0 / issue #63
+
+Add optional bounded pages.portraitImage and portraitImageAlt fields, exposed only on the Home CMS editor. The personal section uses these values with the existing Meet Vish image as a legacy fallback. The main Home hero and Meet Vish portrait stay independently editable. Deliver the new square ink-and-wash image at 1200 x 1200 WebP from the 1254-square generated original; aspect-ratio 1 and object-fit contain prevent face cropping on desktop/mobile. No dependencies, indexes, permissions, secrets or telemetry contracts change.
+
+Gate type/build/site checks and emulator publication isolation/schema tests. Publish the guarded Home field update after the compatible runtime/assets are deployed. Roll back by restoring the previous Home revision and the prior private-aware runtime; preserve all media and content. Exact runtime/provider verification remains separate from tenant evidence; the saved dtctl OAuth session expired during the prior release, so no native tenant-query success is claimed.
+
 # Full published page bodies 1.18.1 / issue #63
 
 Core page rendering now reads the immutable published detail instead of the body-free list projection. Preview draft isolation remains handled by publishedDetail; legacy pages still render paragraphs. No migration, republish, dependencies or infrastructure changes. Add an emulator regression covering legacy content, unpublished draft isolation and complete published HTML despite the empty summary HTML. Gate current-head CI and deploy a new immutable artifact. Roll back to the prior compatible runtime if needed; stored revision 5 remains intact.

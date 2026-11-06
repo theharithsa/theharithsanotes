@@ -573,3 +573,19 @@ test("section menus use full-label disclosure buttons and seven local portrait i
   assert.ok(home.includes('href="/projects/copilot-otel"'));
   assert.ok(home.includes("aroha-retreat-editorial-v2"));
 });
+
+test("Home portrait asset is square and matches its uncropped image dimensions", async () => {
+  const sharp = (await import("sharp")).default;
+  const html = await readPage("index.html");
+  const section = html.match(
+    /<section class="wrap meet-glimpse space">([\s\S]*?)<\/section>/,
+  )?.[1];
+  assert.ok(section);
+  assert.match(section, /width="1200" height="1200"/);
+  assert.match(section, /vish-home-ink-wash.webp/);
+  const metadata = await sharp(
+    await readFile(new URL("public/images/vish-home-ink-wash.webp", root)),
+  ).metadata();
+  assert.equal(metadata.width, 1200);
+  assert.equal(metadata.height, 1200);
+});

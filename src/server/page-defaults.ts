@@ -6,6 +6,8 @@ export interface JournalPage {
   html?: string;
   image?: string;
   imageAlt?: string;
+  portraitImage?: string;
+  portraitImageAlt?: string;
   heading?: string;
   featuredProjects?: string[];
 }
@@ -18,6 +20,9 @@ export const pageDefaults: JournalPage[] = [
     paragraphs: ["Welcome to my little corner of the internet."],
     featuredProjects: ["aroha-retreat", "copilot-otel"],
     image: "/images/curiosity-editorial.webp",
+    portraitImage: "/images/vish-home-ink-wash.webp",
+    portraitImageAlt:
+      "Ink-and-wash portrait of Vishruth smiling in black glasses and a sage sweatshirt",
   },
   {
     slug: "meet-vish",

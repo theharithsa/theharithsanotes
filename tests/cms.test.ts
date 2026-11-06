@@ -1077,3 +1077,31 @@ integration(
     assert.equal((await getJournalPage("meet-vish")).html, html);
   },
 );
+
+integration(
+  "Home portrait publication stays independent of Meet Vish and the main hero",
+  async () => {
+    const home = await getEntry("pages", "home");
+    const meet = await getJournalPage("meet-vish");
+    const data = {
+      ...home.data,
+      portraitImage: "/images/vish-home-ink-wash.webp",
+      portraitImageAlt: "An ink-and-wash portrait",
+    };
+    assert.throws(
+      () =>
+        validateData("pages", {
+          ...data,
+          portraitImage: "javascript:alert(1)",
+        }),
+      CmsError,
+    );
+    const saved = await saveEntry("pages", home.id, data, home.draftRevision);
+    await publishEntry("pages", home.id, saved.draftRevision, randomUUID());
+    const publishedHome = await getJournalPage("home");
+    assert.equal(publishedHome.portraitImage, data.portraitImage);
+    assert.equal(publishedHome.portraitImageAlt, data.portraitImageAlt);
+    assert.equal(publishedHome.image, home.data.image);
+    assert.equal((await getJournalPage("meet-vish")).image, meet.image);
+  },
+);

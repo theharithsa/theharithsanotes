@@ -997,6 +997,16 @@ function fieldsFor(target: Section): Field[] {
         ...(current?.data.slug === "home"
           ? [
               {
+                path: "portraitImage",
+                label: "Personal portrait",
+                type: "image" as const,
+                help: "A square image for Home’s Meet Vish section. The full image stays visible on desktop and mobile.",
+              },
+              {
+                path: "portraitImageAlt",
+                label: "Personal portrait description",
+              },
+              {
                 path: "featuredProjects",
                 label: "Featured projects",
                 type: "tags" as const,

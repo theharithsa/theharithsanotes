@@ -598,9 +598,9 @@ figure {
 }
 .meet-glimpse img {
   width: 100%;
-  height: 470px;
-  object-fit: cover;
-  object-position: center 30%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
   border-radius: 4px;
 }
 .meet-glimpse p {
@@ -2071,10 +2071,6 @@ figure {
   .meet-glimpse {
     grid-template-columns: 1fr;
     gap: 30px;
-  }
-  .meet-glimpse img {
-    height: 410px;
-    object-position: center 26%;
   }
   .meet-glimpse h2 {
     font-size: 36px;

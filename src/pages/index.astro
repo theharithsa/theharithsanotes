@@ -167,13 +167,18 @@ const selection = articles
   </section>
   <section class="wrap meet-glimpse space">
     <img
-      src={meetPage.image ?? "/images/vish-casual-illustration.webp"}
+      src={
+        homePage.portraitImage ??
+        meetPage.image ??
+        "/images/vish-casual-illustration.webp"
+      }
       alt={
+        homePage.portraitImageAlt ??
         meetPage.imageAlt ??
         "Illustration of Vishruth smiling in a sage-green T-shirt and jeans"
       }
       width="1200"
-      height="1800"
+      height="1200"
       loading="lazy"
     />
     <div>

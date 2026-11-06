@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.19.0 — 2026-11-06
+
+- Give Home its own editable ink-and-wash portrait, separate from the Meet Vish watercolor.
+- Use an uncropped square portrait frame across desktop and mobile.
+
 ## 1.18.1 — 2026-11-06
 
 - Read core page bodies from the complete published revision so rich biography formatting survives the public summary projection.

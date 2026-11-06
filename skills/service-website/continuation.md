@@ -1,3 +1,7 @@
+# Independent personal portraits
+
+Issue #63 / 1.19.0 adds optional Home portraitImage/portraitImageAlt and a square, uncropped frame. Home falls back to Meet Vish’s image for existing entries. Do not change Home.image to update its personal portrait: that field owns the illustrated main hero. Meet Vish approved watercolor was published at revision 6; its rich biography needs the full-detail loader shipped in 1.18.1.
+
 # Full page body correction
 
 Issue #63 / 1.18.1: public list projections intentionally remove html. getJournalPage must use publishedDetail to read the immutable body; do not return getPages summaries for full page rendering. CMS revision 5 already contains the approved formatted story and portrait; no second publication is needed.
