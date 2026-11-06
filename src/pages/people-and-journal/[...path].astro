@@ -26,6 +26,25 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
     </div>
   </section>
   <section class="wrap space reading-room" id="reading-room">
+    <div class="reading-toolbar" id="reading-toolbar" hidden>
+      <nav class="filters reading-categories" aria-label="Choose a collection">
+        <a
+          href="/people-and-journal/journal"
+          aria-current={selectedCollection === "journal" ? "page" : undefined}
+        >
+          Journal
+        </a>
+        <a
+          href="/people-and-journal/people"
+          aria-current={selectedCollection === "people" ? "page" : undefined}
+        >
+          People
+        </a>
+      </nav>
+      <button id="reader-signout" class="text-button">
+        Sign out
+      </button>
+    </div>
     <div
       class="reading-loading"
       id="reading-loading"
@@ -35,8 +54,17 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
       <span class="eyebrow">THE NOTEBOOK</span>
       <p id="reader-loading-message">Opening your notebook…</p>
       <div class="reading-placeholder" aria-hidden="true">
-        <span></span>
-        <span></span>
+        {[0, 1].map(() => (
+          <div class="reading-skeleton-card">
+            <span class="reading-skeleton-cover"></span>
+            <div class="reading-skeleton-copy">
+              <span class="reading-skeleton-line skeleton-kicker"></span>
+              <span class="reading-skeleton-line skeleton-title"></span>
+              <span class="reading-skeleton-line"></span>
+              <span class="reading-skeleton-line skeleton-short"></span>
+            </div>
+          </div>
+        ))}
       </div>
       <button id="reader-retry" class="reading-button" hidden>
         Try again
@@ -62,28 +90,6 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
       </p>
     </div>
     <div id="reading-content" hidden>
-      <div class="reading-toolbar">
-        <nav
-          class="filters reading-categories"
-          aria-label="Choose a collection"
-        >
-          <a
-            href="/people-and-journal/journal"
-            aria-current={selectedCollection === "journal" ? "page" : undefined}
-          >
-            Journal
-          </a>
-          <a
-            href="/people-and-journal/people"
-            aria-current={selectedCollection === "people" ? "page" : undefined}
-          >
-            People
-          </a>
-        </nav>
-        <button id="reader-signout" class="text-button">
-          Sign out
-        </button>
-      </div>
       <div id="reading-posts"></div>
       <article id="reading-post" hidden>
         <a id="reader-back" href="/people-and-journal/journal">

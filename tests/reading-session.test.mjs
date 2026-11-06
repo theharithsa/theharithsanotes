@@ -30,6 +30,7 @@ function harness() {
   const windowHandlers = new Map();
   const requests = [];
   const states = [];
+  const historyWrites = [];
   let observer;
   const element = () => ({
     hidden: true,
@@ -37,8 +38,16 @@ function harness() {
     children: [],
     handlers: new Map(),
     dataset: {},
-    setAttribute() {},
-    removeAttribute() {},
+    attrs: new Map(),
+    setAttribute(key, value) {
+      this.attrs.set(key, value);
+    },
+    getAttribute(key) {
+      return this.attrs.get(key) ?? null;
+    },
+    removeAttribute(key) {
+      this.attrs.delete(key);
+    },
     replaceChildren() {
       this.children = [];
     },
@@ -68,10 +77,23 @@ function harness() {
     getIdToken: async () => "synthetic-test-token",
   };
   const auth = { currentUser: null, authStateReady: async () => {} };
+  const location = {
+    origin: "https://example.test",
+    pathname: "/people-and-journal/journal",
+    search: "",
+    replace() {},
+  };
+  const links = ["journal", "people"].map((section) => {
+    const link = element();
+    link.href = `${location.origin}/people-and-journal/${section}`;
+    link.setAttribute("href", `/people-and-journal/${section}`);
+    return link;
+  });
   const context = vm.createContext({
     AbortController,
     AbortSignal,
     URLSearchParams,
+    URL,
     Intl,
     Date,
     getApps: () => [{}],
@@ -91,14 +113,18 @@ function harness() {
     },
     document: {
       getElementById: node,
-      querySelectorAll: () => [],
+      querySelectorAll: (selector) =>
+        selector === ".reading-categories a" ? links : [],
       querySelector: () => null,
       createElement: element,
     },
-    location: {
-      pathname: "/people-and-journal/journal",
-      search: "",
-      replace() {},
+    location,
+    history: {
+      pushState: (state, _title, path) => {
+        historyWrites.push({ state, path });
+        location.pathname = path;
+        location.search = "";
+      },
     },
     localStorage: {
       setItem: (k, v) => storage.set(k, v),
@@ -117,6 +143,27 @@ function harness() {
   vm.runInContext(client, context);
   return {
     auth,
+    location,
+    historyWrites,
+    links,
+    async navigate(section, modifiers = {}) {
+      const event = {
+        button: 0,
+        defaultPrevented: false,
+        preventDefault() {
+          this.defaultPrevented = true;
+        },
+        ...modifiers,
+      };
+      links[section === "people" ? 1 : 0].handlers.get("click")(event);
+      await tick();
+      return event.defaultPrevented;
+    },
+    async back(section) {
+      location.pathname = `/people-and-journal/${section}`;
+      windowHandlers.get("popstate")();
+      await tick();
+    },
     node,
     requests,
     states,
@@ -247,4 +294,81 @@ test("Back navigation waits for Firebase initialization instead of treating null
   await tick();
   assert.equal(h.node("reading-content").hidden, false);
   assert.equal(h.states.includes("signed-out"), false);
+});
+
+test("collection switches keep generic navigation visible and clear content while loading", async () => {
+  const h = harness();
+  await h.identity(true);
+  h.reply(0);
+  h.reply(1);
+  await tick();
+  assert.equal(await h.navigate("people"), true);
+  assert.equal(h.location.pathname, "/people-and-journal/people");
+  assert.deepEqual(h.historyWrites, [
+    { state: null, path: "/people-and-journal/people" },
+  ]);
+  assert.equal(h.node("reading-toolbar").hidden, false);
+  assert.equal(h.node("reading-content").hidden, true);
+  assert.equal(h.node("reading-gate").hidden, true);
+  assert.equal(h.requests[3].path, "/api/reading/people");
+  h.reply(2);
+  h.reply(3);
+  await tick();
+  assert.equal(h.node("reading-content").hidden, false);
+  assert.equal(h.links[0].getAttribute("aria-current"), null);
+  assert.equal(h.links[1].getAttribute("aria-current"), "page");
+});
+
+test("rapid collection switches ignore older data and Back revalidates the restored collection", async () => {
+  const h = harness();
+  await h.identity(true);
+  h.reply(0);
+  h.reply(1);
+  await tick();
+  await h.navigate("people");
+  await h.navigate("journal");
+  h.reply(2);
+  h.reply(3);
+  await tick();
+  assert.equal(h.node("reading-content").hidden, true);
+  h.reply(4);
+  h.reply(5);
+  await tick();
+  assert.equal(h.node("reading-content").hidden, false);
+  assert.equal(h.links[0].getAttribute("aria-current"), "page");
+  await h.back("people");
+  assert.equal(h.requests[7].path, "/api/reading/people");
+  assert.equal(h.node("reading-content").hidden, true);
+  h.reply(6);
+  h.reply(7);
+  await tick();
+  assert.equal(h.node("reading-content").hidden, false);
+  assert.equal(h.links[1].getAttribute("aria-current"), "page");
+  assert.equal(h.historyWrites.length, 2);
+});
+
+test("modified collection clicks retain native browser navigation", async () => {
+  const h = harness();
+  await h.identity(true);
+  h.reply(0);
+  h.reply(1);
+  await tick();
+  assert.equal(await h.navigate("people", { ctrlKey: true }), false);
+  assert.equal(h.historyWrites.length, 0);
+  assert.equal(h.requests.length, 2);
+});
+
+test("access revoked during a collection switch hides navigation and all private content", async () => {
+  const h = harness();
+  await h.identity(true);
+  h.reply(0);
+  h.reply(1);
+  await tick();
+  await h.navigate("people");
+  h.reply(2, 403, { error: { message: "Synthetic invitation ended" } });
+  h.reply(3);
+  await tick();
+  assert.equal(h.node("reading-toolbar").hidden, true);
+  assert.equal(h.node("reading-content").hidden, true);
+  assert.equal(h.node("reading-gate").hidden, false);
 });
