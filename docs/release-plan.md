@@ -1,3 +1,9 @@
+# Transparent Meet Vish sign-off 1.19.1 / issue #67
+
+Add a processed, alpha-transparent signature asset and a modest responsive image after the final Meet Vish content section, before the shared footer. Dark mode changes only the ink color through a CSS filter; no backing rectangle is added. Source photo stays private; only the processed cutout is committed. No CMS content, schema, dependencies, infrastructure, secrets or telemetry contracts change.
+
+Verify image alpha/corners/ink occupancy, end-of-page placement and desktop/mobile/light/dark rendering; gate current-head checks and immutable deployment. Roll back to 1.19.0 runtime/Hosting without changing CMS data. Saved dtctl OAuth authentication was already expired; report provider receipts separately from native tenant search evidence.
+
 # Independent Home portrait 1.19.0 / issue #63
 
 Add optional bounded pages.portraitImage and portraitImageAlt fields, exposed only on the Home CMS editor. The personal section uses these values with the existing Meet Vish image as a legacy fallback. The main Home hero and Meet Vish portrait stay independently editable. Deliver the new square ink-and-wash image at 1200 x 1200 WebP from the 1254-square generated original; aspect-ratio 1 and object-fit contain prevent face cropping on desktop/mobile. No dependencies, indexes, permissions, secrets or telemetry contracts change.

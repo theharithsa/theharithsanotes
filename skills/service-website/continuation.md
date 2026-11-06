@@ -1,3 +1,7 @@
+# Meet Vish signature
+
+Issue #67 / 1.19.1 adds the transparent signature below all Meet Vish content, before the shared footer. Original paper photograph is not committed. The 1200 x 478 lossless WebP has genuine alpha, max rendered width 340px, and a dark-mode ink-only filter. No CMS revision changes.
+
 # Independent personal portraits
 
 Issue #63 / 1.19.0 adds optional Home portraitImage/portraitImageAlt and a square, uncropped frame. Home falls back to Meet Vish’s image for existing entries. Do not change Home.image to update its personal portrait: that field owns the illustrated main hero. Meet Vish approved watercolor was published at revision 6; its rich biography needs the full-detail loader shipped in 1.18.1.

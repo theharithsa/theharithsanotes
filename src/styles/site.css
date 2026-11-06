@@ -1149,6 +1149,19 @@ figure {
 .personal-statement {
   max-width: 720px;
 }
+.meet-signoff {
+  max-width: 720px;
+  padding-block: 48px;
+}
+.meet-signoff img {
+  display: block;
+  width: min(340px, 100%);
+  height: auto;
+  filter: brightness(0);
+}
+:root[data-theme="dark"] .meet-signoff img {
+  filter: brightness(0) invert(0.92);
+}
 .personal-statement h2 {
   max-width: 24ch;
   font-size: clamp(32px, 3.4vw, 45px);

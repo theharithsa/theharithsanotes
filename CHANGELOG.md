@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.1 — 2026-11-06
+
+- Add Vish’s processed handwritten signature as a transparent, responsive sign-off at the end of Meet Vish, with dark-mode ink contrast.
+
 ## 1.19.0 — 2026-11-06
 
 - Give Home its own editable ink-and-wash portrait, separate from the Meet Vish watercolor.
