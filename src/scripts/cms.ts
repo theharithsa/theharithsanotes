@@ -17,6 +17,17 @@ const descriptions: Record<
   Section,
   { title: string; kicker: string; description: string }
 > = {
+  journal: {
+    title: "Journal",
+    kicker: "THE PRIVATE NOTEBOOK",
+    description: "Personal notes, shared only with people you invite.",
+  },
+  people: {
+    title: "People",
+    kicker: "THE PEOPLE IN YOUR STORY",
+    description:
+      "People, companions, and the stories you choose to share with invited readers.",
+  },
   blogs: {
     title: "Blog",
     kicker: "THE WRITTEN WORD",
@@ -580,6 +591,19 @@ function defaultData(target: Section): EntryData {
   const slug = `untitled-${crypto.randomUUID().slice(0, 8)}`;
   const base = { title: "Untitled", slug };
   switch (target) {
+    case "journal":
+    case "people":
+      return {
+        ...base,
+        date: today(),
+        description: "",
+        html: "",
+        image: "",
+        imageAlt: "",
+        tags: [],
+        audience: "invited",
+        ...(target === "people" ? { relationship: "", species: "Human" } : {}),
+      };
     case "blogs":
       return {
         ...base,
@@ -716,6 +740,32 @@ function fieldsFor(target: Section): Field[] {
     },
   ];
   switch (target) {
+    case "journal":
+    case "people":
+      return [
+        ...base,
+        { path: "description", label: "Introduction", type: "textarea" },
+        {
+          path: "date",
+          label:
+            target === "people" ? "Known since / entry date" : "Entry date",
+          type: "date",
+        },
+        { path: "tags", label: "Private tags", type: "tags" },
+        { path: "image", label: "Private illustrated cover", type: "image" },
+        { path: "imageAlt", label: "Describe the illustration" },
+        ...(target === "people"
+          ? [
+              { path: "relationship", label: "Relationship" },
+              {
+                path: "species",
+                label: "Companion",
+                type: "select" as const,
+                options: ["Human", "Dog", "Cat", "Other"],
+              },
+            ]
+          : []),
+      ];
     case "blogs":
       return [
         ...base,
@@ -1311,7 +1361,7 @@ async function renderEditor() {
   element("cms-revision-list").hidden = true;
   fieldsFor(current.section).forEach(createField);
   if (current.section === "projects") createFeatures();
-  if (current.section === "blogs" || current.section === "gogs")
+  if (["blogs", "gogs", "journal", "people"].includes(current.section))
     await createRichEditor(generation);
   updateState();
 }
@@ -1369,6 +1419,8 @@ async function refreshAudit() {
 }
 function publicPath(entry: Entry) {
   const slug = String(entry.data.slug ?? entry.id);
+  if (["journal", "people"].includes(entry.section))
+    return `/people-and-journal/${entry.section}/${slug}`;
   return entry.section === "blogs"
     ? `/${slug}`
     : entry.section === "photos"
@@ -1580,6 +1632,7 @@ element<HTMLInputElement>("cms-file").addEventListener(
     try {
       const alt = String(current.data.imageAlt ?? current.data.alt ?? "");
       const data = new FormData();
+      data.set("section", current.section);
       data.set("file", file);
       data.set("title", file.name);
       data.set("alt", alt);

@@ -1,0 +1,86 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/reading.css";
+export function getStaticPaths() {
+  return [undefined, "journal", "people"].map((path) => ({ params: { path } }));
+}
+const selectedCollection =
+  Astro.params.path?.split("/")[0] === "people" ? "people" : "journal";
+const isDetail = Boolean(Astro.params.path?.split("/")[1]);
+---
+
+<Base
+  title="People and Journal"
+  description="A private reading room for the people Vish invites."
+>
+  <section
+    class:list={[
+      "section-masthead tone-blue",
+      { "private-detail-masthead": isDetail },
+    ]}
+  >
+    <div class="wrap">
+      <span class="eyebrow">THE PERSONAL NOTEBOOK</span>
+      <h1>People &amp; Journal</h1>
+      <p>Small moments. Important people. A little more of the story.</p>
+    </div>
+  </section>
+  <section class="wrap space reading-room" id="reading-room">
+    <div class="reading-gate" id="reading-gate">
+      <span aria-hidden="true" class="reading-seal">
+        ✎
+      </span>
+      <h2>A seat at the table.</h2>
+      <p>
+        This part of the notebook is shared by invitation. Continue with the
+        Google account Vish invited.
+      </p>
+      <button id="reader-signin" class="reading-button">
+        Continue with Google
+      </button>
+      <p role="status" id="reader-message">
+        Checking your invitation…
+      </p>
+    </div>
+    <div id="reading-content" hidden>
+      <div class="reading-toolbar">
+        <nav
+          class="filters reading-categories"
+          aria-label="Choose a collection"
+        >
+          <a
+            href="/people-and-journal/journal"
+            aria-current={selectedCollection === "journal" ? "page" : undefined}
+          >
+            Journal
+          </a>
+          <a
+            href="/people-and-journal/people"
+            aria-current={selectedCollection === "people" ? "page" : undefined}
+          >
+            People
+          </a>
+        </nav>
+        <button id="reader-signout" class="text-button">
+          Sign out
+        </button>
+      </div>
+      <div id="reading-posts"></div>
+      <article id="reading-post" hidden>
+        <a id="reader-back" href="/people-and-journal/journal">
+          Back to the notebook
+        </a>
+        <div class="reading-post-heading">
+          <p id="reading-date"></p>
+          <h2 id="reading-title"></h2>
+          <p id="reading-description"></p>
+        </div>
+        <img id="reading-cover" alt="" />
+        <div id="reading-body" class="article-body"></div>
+      </article>
+    </div>
+  </section>
+  <script>
+    import "../../scripts/reading";
+  </script>
+</Base>

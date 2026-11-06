@@ -41,7 +41,7 @@ const options = z
   .object({
     name: z.string().trim().min(1).max(80),
     scopes: z.array(z.enum(apiScopes)).min(1).max(5),
-    sections: z.array(z.enum(sections)).min(1).max(9),
+    sections: z.array(z.enum(sections)).min(1).max(sections.length),
     expiresInDays: z.number().int().min(1).max(365),
   })
   .strict();
@@ -155,7 +155,7 @@ export async function authorizeApiKey(
   request: Request,
   scope: ApiScope,
   section?: Section,
-): Promise<{ uid: string }> {
+): Promise<{ uid: string; sections: Section[] }> {
   const token = request.headers
     .get("authorization")
     ?.match(
@@ -168,7 +168,7 @@ export async function authorizeApiKey(
       "A valid API key for this environment is required",
     );
   const id = token[2]!;
-  await firebaseOperation(
+  const permittedSections = await firebaseOperation(
     "verify",
     "apiKeys",
     { id, scope, section: section ?? null },
@@ -204,10 +204,11 @@ export async function authorizeApiKey(
           Date.parse(row.lastUsedAt) < Date.now() - 3600000
         )
           tx.update(reference, { lastUsedAt: new Date().toISOString() });
+        return row.sections;
       }),
     () => ({ authorized: true }),
   );
   const state = requestContext.getStore();
   if (state) state.actor = `key:${id}`;
-  return { uid: `key:${id}` };
+  return { uid: `key:${id}`, sections: permittedSections };
 }

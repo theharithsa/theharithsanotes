@@ -51,6 +51,21 @@ const page = await getJournalPage("privacy");
       authentication tokens, session cookies and email addresses are not copied
       into these operational events.
     </p>
+    <h2>The invitation-only reading room</h2>
+    <p>
+      People and Journal is shared only with people I invite. Signing in with
+      Google alone does not grant access. I store an invited reader’s email
+      address, verified Google account identifier and invitation expiry to check
+      access. Revoking an invitation ends access to the posts and their images.
+      A secure HttpOnly session cookie supports signed-in reading; browser
+      Analytics and RUM are disabled in this room. Invitations do not subscribe
+      you to email.
+    </p>
+    <p>
+      A local reading-room preference helps display its navigation link after
+      sign-in. It does not grant access and is cleared when you sign out.
+      Private entries are excluded from the public sitemap and feeds.
+    </p>
     <h2>Your choice</h2>
     <p>
       Your choice is stored in your browser under{" "}

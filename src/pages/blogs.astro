@@ -47,7 +47,7 @@ const years = [...new Set(months.map((month) => month.year))];
       <h1>{page.heading ?? page.title}</h1>
       <p>{page.description}</p>
     </div>
-    <div class="blog-tag-row filters" aria-label="Filter articles by tag">
+    <div class="blog-tag-row filters wrap" aria-label="Filter articles by tag">
       <button data-blog-tag="" aria-pressed="true">
         All tags
       </button>
@@ -84,15 +84,6 @@ const years = [...new Set(months.map((month) => month.year))];
             {topic === "All notes" ? "All articles" : topic}
           </button>
         ))}
-      </div>
-      <div class="search-field">
-        <label for="search">Search articles</label>
-        <input
-          id="search"
-          type="search"
-          placeholder="What’s on your mind?"
-          autocomplete="off"
-        />
       </div>
     </div>
     <p id="result-count" class="result-count" aria-live="polite">
@@ -150,7 +141,7 @@ const years = [...new Set(months.map((month) => month.year))];
     </div>
     <div id="empty-state" class="empty-state" hidden>
       <h2>No articles found.</h2>
-      <p>Try a different word or another topic.</p>
+      <p>Try another tag or topic.</p>
       <button class="button" data-reset-search>
         Show all articles
       </button>

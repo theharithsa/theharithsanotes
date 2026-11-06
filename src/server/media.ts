@@ -3,10 +3,12 @@ import sharp from "sharp";
 import { database, mediaBucket } from "./firebase.ts";
 import { collection, namespace } from "./config.ts";
 import { authorize } from "./auth.ts";
-import { CmsError } from "./models.ts";
+import { CmsError, isRestrictedSection } from "./models.ts";
+import { authorizeReader } from "./members.ts";
 import { auditEvent, firebaseOperation, outboxDocument } from "./telemetry.ts";
 
 export interface MediaRecord {
+  section?: "journal" | "people";
   id: string;
   state: "ready";
   published: boolean;
@@ -22,6 +24,7 @@ export async function uploadMedia(
   bytes: Buffer,
   title: string,
   alt: string,
+  section?: "journal" | "people",
 ): Promise<MediaRecord> {
   if (bytes.length > 8 * 1024 * 1024)
     throw new CmsError(
@@ -70,7 +73,7 @@ export async function uploadMedia(
     );
   }
   const id = createHash("sha256")
-    .update("journal-media-v1")
+    .update(section ? `journal-private-${section}-v1` : "journal-media-v1")
     .update(master)
     .digest("hex");
   const existing = await firebaseOperation(
@@ -122,6 +125,7 @@ export async function uploadMedia(
     );
   }
   const row: MediaRecord = {
+    ...(section ? { section } : {}),
     id,
     state: "ready",
     published: false,
@@ -183,7 +187,43 @@ export async function mediaResponse(
   );
   if (!snap.exists) throw new CmsError("NOT_FOUND", 404, "Image not found");
   const row = snap.data() as MediaRecord;
-  if (!row.published && !apiKey) {
+  const restricted = isRestrictedSection(row.section ?? "");
+  if (restricted) {
+    if (apiKey)
+      await (
+        await import("./api-keys.ts")
+      ).authorizeApiKey(request, "media:read", row.section);
+    else {
+      try {
+        await authorize(request, true);
+      } catch {
+        try {
+          await authorizeReader(request);
+          const published = await firebaseOperation(
+            "query",
+            "published",
+            { section: row.section, purpose: "media-access" },
+            () =>
+              database()
+                .collection(collection("published"))
+                .where("section", "==", row.section)
+                .limit(1000)
+                .get(),
+            (value) => ({ count: value.size }),
+          );
+          if (
+            !published.docs.some((doc) =>
+              (doc.get("mediaIds") as string[] | undefined)?.includes(id),
+            )
+          )
+            throw new Error("Not published");
+        } catch {
+          throw new CmsError("NOT_FOUND", 404, "Image not found");
+        }
+      }
+    }
+  }
+  if (!row.published && !apiKey && !restricted) {
     try {
       await authorize(request, true);
     } catch {
@@ -208,10 +248,13 @@ export async function mediaResponse(
       "Content-Type": "image/webp",
       "Content-Length": String(bytes.length),
       "Cache-Control":
-        row.published && !apiKey
+        row.published && !apiKey && !restricted
           ? "public,max-age=31536000,immutable"
           : "private,no-store",
       "X-Content-Type-Options": "nosniff",
+      ...(restricted
+        ? { "X-Robots-Tag": "noindex,nofollow", Vary: "Cookie, Authorization" }
+        : {}),
     },
   });
 }

@@ -38,9 +38,12 @@ const pageTitle = title
 const canonical = new URL(canonicalPath(Astro.url.pathname), site.url);
 const current = Astro.url.pathname;
 const noindex =
+  current === "/search" ||
   current === "/404" ||
   current === "/404.html" ||
   current.startsWith("/admin") ||
+  current.startsWith("/people-and-journal") ||
+  current.startsWith("/account") ||
   Boolean(Astro.locals.draftPreview);
 const author = {
   "@type": "Person",
@@ -243,6 +246,14 @@ const graph = [
         ))}
       </nav>
       <div class="header-actions">
+        <a
+          class="reading-entry-link"
+          href="/people-and-journal"
+          rel="nofollow"
+          aria-label="Sign in to the private reading room"
+        >
+          Sign in
+        </a>
         <button
           class="theme-toggle"
           data-theme-toggle
@@ -260,8 +271,8 @@ const graph = [
         </button>
         <a
           class="search-link"
-          href="/blogs#search"
-          aria-label="Search articles"
+          href="/search"
+          aria-label="Search the whole site"
         >
           <svg
             width="20"
@@ -289,9 +300,21 @@ const graph = [
         {navigation.map((item) => (
           <a href={item.href}>{item.label}</a>
         ))}
+        <a
+          class="reading-entry-link"
+          href="/people-and-journal"
+          rel="nofollow"
+          aria-label="Sign in to the private reading room"
+        >
+          Sign in
+        </a>
       </nav>
     </header>
     <main id="main">
+      <script>
+        import "../scripts/reading-link";
+        import "../scripts/responsive-filters";
+      </script>
       <slot />
     </main>
     <footer class="site-footer">

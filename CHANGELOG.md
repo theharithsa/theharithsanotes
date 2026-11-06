@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.14.0] — 2026-11-06
+
+- Adopt theharithsanotes.com as the primary domain, preserving old-domain paths through redirects.
+- Add invitation-only People and Journal posts, owner-managed expiring invitations, private illustrated media, CMS editing and collection-scoped APIs.
+- Keep private content out of public caches, public search, browser analytics, public taxonomy and build inputs; include private search matches only for active invited readers.
+- Contain Blog tags, use mobile category dropdowns, and add one global search across published pages and posts (#35).
+- Use the public Blog editorial layout for People and Journal.
+- Fix API-reference button hover/focus contrast.
+
 ## [1.13.1] — 2026-11-06
 
 - Prevent horizontal sidebar overflow, retain the real site icon on narrow screens, and keep Sign out on one line.

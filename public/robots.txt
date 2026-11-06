@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: /admin
 Disallow: /api/
+Disallow: /people-and-journal
+Disallow: /account
 Disallow: /*?preview=
 Allow: /
-Sitemap: https://theharithsa.com/sitemap.xml
+Sitemap: https://theharithsanotes.com/sitemap.xml

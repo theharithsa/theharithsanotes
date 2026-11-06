@@ -1,0 +1,77 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/cms.css";
+---
+
+<Base
+  title="Invited readers"
+  description="Manage invitations to your private reading room."
+>
+  <section class="cms-developer" id="invitations-room">
+    <p>
+      <a href="/admin">Back to workspace</a>
+    </p>
+    <header class="cms-developer-hero">
+      <span class="cms-overline">YOUR INNER CIRCLE</span>
+      <h1>
+        A few people.
+        <br />
+        <em>A little more of the story.</em>
+      </h1>
+      <p>
+        Invite someone to read People and Journal. Access lasts until the expiry
+        date or until you revoke it. Readers can’t edit your notebook.
+      </p>
+    </header>
+    <p id="invite-status" role="status">
+      Checking your sign-in…
+    </p>
+    <button id="invite-signin" class="cms-primary">
+      Continue with Google
+    </button>
+    <div id="invite-workspace" hidden>
+      <section class="cms-developer-card">
+        <h2>Invite a reader</h2>
+        <p>
+          Use their Google account email. We won’t send an email; share the
+          reading-room link with them yourself.
+        </p>
+        <form id="invite-form">
+          <label>
+            Google account email{" "}
+            <input
+              name="email"
+              type="email"
+              required
+              maxlength="254"
+              autocomplete="off"
+            />
+          </label>
+          <label>
+            Access for{" "}
+            <select name="days">
+              <option value="30">30 days</option>
+              <option value="90" selected>
+                90 days
+              </option>
+              <option value="365">1 year</option>
+            </select>
+          </label>
+          <button class="cms-primary" type="submit">
+            Add invitation
+          </button>
+        </form>
+        <p>
+          <a href="/people-and-journal">Open People and Journal</a>
+        </p>
+      </section>
+      <section class="cms-developer-card">
+        <h2>Your invitations</h2>
+        <div id="invite-list"></div>
+      </section>
+    </div>
+  </section>
+  <script>
+    import "../../scripts/invitations";
+  </script>
+</Base>

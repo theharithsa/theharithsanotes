@@ -128,7 +128,7 @@ if (event === "workflow_run") {
     "Observer connectivity",
     `https://github.com/${repository}/actions/runs/${process.env.GITHUB_RUN_ID}`,
   );
-const audience = "https://theharithsa.com/api/cms/ci";
+const audience = "https://theharithsanotes.com/api/cms/ci";
 const oidc = await fetch(
   `${process.env.ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${encodeURIComponent(audience)}`,
   {

@@ -14,6 +14,9 @@ const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
 const enabled =
   (!local || import.meta.env.PUBLIC_ENABLE_LOCAL_TELEMETRY === "true") &&
   !location.pathname.startsWith("/admin") &&
+  !location.pathname.startsWith("/people-and-journal") &&
+  !location.pathname.startsWith("/account") &&
+  location.pathname !== "/search" &&
   !new URLSearchParams(location.search).has("preview");
 let current: Consent | undefined;
 let started = false;
@@ -100,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     banner.hidden =
       current !== undefined ||
       location.pathname.startsWith("/admin") ||
+      location.pathname.startsWith("/people-and-journal") ||
+      location.pathname.startsWith("/account") ||
       new URLSearchParams(location.search).has("preview");
   if (current === "granted") void start();
   document

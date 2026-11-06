@@ -217,6 +217,12 @@ export function openApiDocument() {
                 file: { type: "string", format: "binary" },
                 title: { type: "string", maxLength: 240 },
                 alt: { type: "string", maxLength: 2000 },
+                section: {
+                  type: "string",
+                  enum: sections,
+                  description:
+                    "Required for private Journal/People media. Needs the corresponding collection permission. Private media never becomes anonymously readable.",
+                },
               },
             },
           },

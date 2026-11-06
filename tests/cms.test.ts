@@ -25,6 +25,18 @@ import {
   workspaceSummary,
 } from "../src/server/workspace.ts";
 import { openApiDocument } from "../src/server/openapi.ts";
+import {
+  authorizeReader,
+  inviteMember,
+  revokeMember,
+} from "../src/server/members.ts";
+import { searchApi } from "../src/server/search.ts";
+import {
+  searchDocument,
+  findSearchResults,
+} from "../src/server/search-index.ts";
+import { readingApi } from "../src/server/reading.ts";
+import { listPublished } from "../src/server/repository.ts";
 
 test("content validation rejects scripts, unsafe links, excessive nesting and reserved slugs", () => {
   const data = validateData("blogs", blog("safe"));
@@ -102,10 +114,229 @@ function blog(slug: string) {
   };
 }
 const integration = process.env.FIRESTORE_EMULATOR_HOST ? test : test.skip;
+integration(
+  "private journals require an active invitation; keys and media remain section scoped",
+  async () => {
+    const uid = "invited-reader";
+    await identity().createUser({
+      uid,
+      email: "invited@example.com",
+      emailVerified: true,
+    });
+    const request = (
+      path = "journal",
+      jwt = token(uid, "invited@example.com"),
+    ) =>
+      new Request(`http://localhost:4321/api/reading/${path}`, {
+        headers: { Authorization: `Bearer ${jwt}` },
+      });
+    assert.equal(
+      (
+        await readingApi(
+          new Request("http://localhost:4321/api/reading/journal"),
+          "journal",
+        )
+      ).status,
+      401,
+    );
+    assert.equal((await readingApi(request(), "journal")).status, 403);
+    const invited = await inviteMember({
+      email: "invited@example.com",
+      expiresInDays: 30,
+    });
+    assert.equal((await authorizeReader(request())).uid, uid);
+    assert.equal(
+      (
+        await readingApi(
+          request("journal", token(uid, "invited@example.com", false)),
+          "journal",
+        )
+      ).status,
+      403,
+    );
+    const deniedCms = await handleCmsApi(request(), "entries/journal");
+    assert.equal(deniedCms.status, 403);
+    const bytes = await sharp({
+      create: { width: 24, height: 16, channels: 3, background: "#b27849" },
+    })
+      .png()
+      .toBuffer();
+    const cover = await uploadMedia(
+      bytes,
+      "Private illustration",
+      "An abstract notebook",
+      "journal",
+    );
+    const regular = await uploadMedia(
+      bytes,
+      "Public illustration",
+      "A notebook",
+    );
+    assert.notEqual(regular.id, cover.id);
+    const draft = await saveEntry(
+      "journal",
+      randomUUID(),
+      {
+        title: "Private journal fixture",
+        slug: "private-journal-fixture",
+        description: "Synthetic private intro",
+        date: "2026-11-06",
+        image: `/media/${cover.id}/1600.webp`,
+        imageAlt: "An abstract notebook",
+        html: "<p>PRIVATE_BODY_SENTINEL</p>",
+        tags: ["PRIVATE_TAG_SENTINEL"],
+        sourceNotes: "PRIVATE_SOURCE_SENTINEL",
+      },
+      0,
+    );
+    const imageRequest = new Request(
+      `http://localhost:4321/media/${cover.id}/800.webp`,
+      { headers: request().headers },
+    );
+    await assert.rejects(() =>
+      mediaResponse(imageRequest, cover.id, "800.webp"),
+    );
+    await publishEntry("journal", draft.id, 1, "private-test-publish");
+    assert.equal(
+      (
+        await database().collection(collection("media")).doc(cover.id).get()
+      ).get("published"),
+      false,
+    );
+    await assert.rejects(() => listPublished("journal"));
+    await assert.rejects(() =>
+      publishedDetail("journal", "private-journal-fixture"),
+    );
+    const list = await readingApi(request(), "journal");
+    assert.equal(list.status, 200);
+    assert.match(list.headers.get("Cache-Control") ?? "", /no-store/);
+    const body = JSON.stringify(await list.json());
+    assert.ok(!body.includes("PRIVATE_BODY_SENTINEL"));
+    assert.ok(!body.includes("PRIVATE_SOURCE_SENTINEL"));
+    const detail = await readingApi(
+      request("journal/private-journal-fixture"),
+      "journal/private-journal-fixture",
+    );
+    assert.equal(detail.status, 200);
+    const detailBody = JSON.stringify(await detail.json());
+    assert.ok(detailBody.includes("PRIVATE_BODY_SENTINEL"));
+    assert.ok(!detailBody.includes("PRIVATE_SOURCE_SENTINEL"));
+    assert.equal(
+      (await mediaResponse(imageRequest, cover.id, "800.webp")).status,
+      200,
+    );
+    await assert.rejects(() =>
+      mediaResponse(new Request(imageRequest.url), cover.id, "800.webp"),
+    );
+    const publicKey = await createApiKey({
+      name: "Legacy public scope",
+      scopes: ["media:read", "content:read"],
+      sections: ["blogs"],
+      expiresInDays: 1,
+    });
+    const keyRequest = new Request(imageRequest.url, {
+      headers: { Authorization: `Bearer ${publicKey.token}` },
+    });
+    await assert.rejects(() =>
+      mediaResponse(keyRequest, cover.id, "800.webp", true),
+    );
+    assert.equal(
+      (await handleCmsApi(keyRequest, "entries/journal", true)).status,
+      403,
+    );
+    const privateKey = await createApiKey({
+      name: "Private scope",
+      scopes: ["media:read"],
+      sections: ["journal"],
+      expiresInDays: 1,
+    });
+    assert.equal(
+      (
+        await mediaResponse(
+          new Request(imageRequest.url, {
+            headers: { Authorization: `Bearer ${privateKey.token}` },
+          }),
+          cover.id,
+          "800.webp",
+          true,
+        )
+      ).status,
+      200,
+    );
+    await reconcileWorkspace();
+    const tags = await listPublished<Record<string, unknown>>("tags");
+    assert.ok(!JSON.stringify(tags).includes("PRIVATE_TAG_SENTINEL"));
+    const searchRequest = (jwt?: string, query = "PRIVATE_BODY_SENTINEL") =>
+      new Request("http://localhost:4321/api/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}),
+        },
+        body: JSON.stringify({ query }),
+      });
+    const anonymousSearch = await searchApi(searchRequest());
+    assert.equal(anonymousSearch.status, 200);
+    assert.equal((await anonymousSearch.json()).total, 0);
+    const invitedSearch = await searchApi(
+      searchRequest(token(uid, "invited@example.com")),
+    );
+    assert.match(invitedSearch.headers.get("Cache-Control") ?? "", /no-store/);
+    const searchBody = await invitedSearch.json();
+    assert.equal(searchBody.total, 1);
+    assert.equal(searchBody.results[0].private, true);
+    assert.ok(!JSON.stringify(searchBody).includes("PRIVATE_BODY_SENTINEL"));
+    assert.equal(
+      (
+        await (
+          await searchApi(
+            searchRequest(
+              token(uid, "invited@example.com"),
+              "PRIVATE_SOURCE_SENTINEL",
+            ),
+          )
+        ).json()
+      ).total,
+      0,
+    );
+    await revokeMember(invited.id);
+    const revokedSearch = await searchApi(
+      searchRequest(token(uid, "invited@example.com")),
+    );
+    assert.equal((await revokedSearch.json()).total, 0);
+
+    assert.equal((await readingApi(request(), "journal")).status, 403);
+    await assert.rejects(() =>
+      mediaResponse(imageRequest, cover.id, "800.webp"),
+    );
+    await inviteMember({ email: "invited@example.com", expiresInDays: 1 });
+    await unpublishEntry("journal", draft.id, 1);
+    await assert.rejects(() =>
+      mediaResponse(imageRequest, cover.id, "800.webp"),
+    );
+    await saveEntry(
+      "journal",
+      draft.id,
+      { ...draft.data, slug: "private-journal-renamed" },
+      1,
+    );
+    await publishEntry("journal", draft.id, 2, "private-test-alias");
+    const alias = await readingApi(
+      request("journal/private-journal-fixture"),
+      "journal/private-journal-fixture",
+    );
+    assert.equal(alias.status, 200);
+    assert.equal(
+      ((await alias.json()) as { post: { slug: string } }).post.slug,
+      "private-journal-renamed",
+    );
+    await unpublishEntry("journal", draft.id, 2);
+  },
+);
 test("OpenAPI covers all collections, explicit publishing, protected media and the real data schemas", () => {
   const doc = openApiDocument();
   assert.equal(doc.openapi, "3.1.0");
-  assert.equal(Object.keys(doc.paths).length, 56);
+  assert.equal(Object.keys(doc.paths).length, 68);
   for (const section of [
     "blogs",
     "books",
@@ -732,3 +963,44 @@ integration(
     );
   },
 );
+
+test("global search ranks titles, searches body text, paginates and excludes non-display metadata", async () => {
+  const docs = Array.from({ length: 25 }, (_, i) =>
+    searchDocument("blogs", `entry-${i}`, {
+      title: i === 24 ? "Observability" : `Entry ${i}`,
+      html: "<p>Observability &amp; learning</p>",
+      notion: { content: "PRIVATE_SOURCE_METADATA" },
+      sourceNotes: "PRIVATE_SOURCE_METADATA",
+    }),
+  );
+  assert.equal(
+    findSearchResults(docs, "observability", "", 0).results[0]!.title,
+    "Observability",
+  );
+  assert.equal(findSearchResults(docs, "observability", "", 0).next, 20);
+  assert.equal(
+    findSearchResults(docs, "observability", "", 20).results.length,
+    5,
+  );
+  assert.equal(
+    findSearchResults(docs, "PRIVATE_SOURCE_METADATA", "", 0).total,
+    0,
+  );
+  assert.equal(findSearchResults(docs, "observability", "books", 0).total, 0);
+  for (const body of [
+    "[]",
+    "null",
+    '{"query":"x"}',
+    '{"query":"ok","section":"admin"}',
+    JSON.stringify({ query: "x".repeat(2000) }),
+  ]) {
+    const response = await searchApi(
+      new Request("http://localhost:4321/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+      }),
+    );
+    assert.ok([400, 413].includes(response.status));
+  }
+});

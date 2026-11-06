@@ -11,8 +11,14 @@ export const sections = [
   "gogs",
   "pages",
   "tags",
+  "journal",
+  "people",
 ] as const;
 export type Section = (typeof sections)[number];
+export const isRestrictedSection = (
+  section: string,
+): section is "journal" | "people" =>
+  section === "journal" || section === "people";
 export type EntryData = Record<string, unknown>;
 export interface Entry {
   id: string;
@@ -25,6 +31,7 @@ export interface Entry {
   publishedAt: string | null;
 }
 export interface PublishedEntry {
+  mediaIds?: string[];
   id: string;
   section: Section;
   slug: string;
@@ -96,6 +103,34 @@ export const pageSlugs = [
   "privacy",
 ] as const;
 const schemas: Record<Section, z.ZodType> = {
+  journal: z
+    .object({
+      ...base,
+      slug,
+      description: text,
+      date,
+      tags: tags.optional(),
+      image: url,
+      imageAlt: text,
+      html: z.string().max(460000),
+      audience: z.literal("invited").default("invited"),
+    })
+    .catchall(z.unknown()),
+  people: z
+    .object({
+      ...base,
+      slug,
+      description: text,
+      date,
+      tags: tags.optional(),
+      image: url,
+      imageAlt: text,
+      html: z.string().max(460000),
+      relationship: z.string().max(100).default(""),
+      species: z.string().max(50).default("Human"),
+      audience: z.literal("invited").default("invited"),
+    })
+    .catchall(z.unknown()),
   blogs: z
     .object({
       ...base,
@@ -302,6 +337,16 @@ export function validateData(
   const data = result.data as EntryData;
   if (
     publish &&
+    isRestrictedSection(section) &&
+    !/^\/media\/[a-f0-9]{64}\/(?:400|800|1600)\.webp$/.test(String(data.image))
+  )
+    throw new CmsError(
+      "INVALID_MEDIA",
+      400,
+      "Upload a private cover for this collection before publishing",
+    );
+  if (
+    publish &&
     new Set(
       [...serialized.matchAll(/\/media\/([a-f0-9]{64})\//g)].map(
         (match) => match[1],
@@ -336,7 +381,7 @@ export function validateData(
   if (typeof data.html === "string") data.html = cleanHtml(data.html);
   if (
     publish &&
-    ["blogs", "gogs"].includes(section) &&
+    ["blogs", "gogs", "journal", "people"].includes(section) &&
     !(data.html as string).replace(/<[^>]*>/g, "").trim()
   )
     throw new CmsError(
@@ -354,7 +399,7 @@ export function validateData(
     );
   if (
     publish &&
-    ["blogs", "projects", "gogs"].includes(section) &&
+    ["blogs", "projects", "gogs", "journal", "people"].includes(section) &&
     (!data.image || !data.imageAlt)
   )
     throw new CmsError(
@@ -380,6 +425,9 @@ export function validateData(
       "about",
       "notes",
       "preview",
+      "people-and-journal",
+      "account",
+      "search",
     ].includes(String(data.slug))
   )
     throw new CmsError(
@@ -392,6 +440,24 @@ export function validateData(
 
 export function summaryData(section: Section, data: EntryData): EntryData {
   const result = structuredClone(data);
+  if (isRestrictedSection(section)) {
+    for (const field of Object.keys(result))
+      if (
+        ![
+          "title",
+          "slug",
+          "description",
+          "date",
+          "tags",
+          "image",
+          "imageAlt",
+          "relationship",
+          "species",
+          "audience",
+        ].includes(field)
+      )
+        delete result[field];
+  }
   if ("html" in result) result.html = "";
   if (
     section === "books" &&
