@@ -6,6 +6,7 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from "firebase/auth";
+import { AuthRestoration, type AuthPhase } from "../lib/auth-restoration";
 import { firebaseConfig } from "../lib/firebase-config";
 import type { Entry, EntryData, Section } from "../server/models";
 import type { Editor } from "@tiptap/core";
@@ -102,7 +103,8 @@ let saveTimer: ReturnType<typeof setTimeout> | undefined;
 let saving: Promise<boolean> | null = null;
 let loadingGeneration = 0;
 let editorGeneration = 0;
-let authGeneration = 0;
+let recoveryUid: string | null = null;
+const sessionRequests = new Set<Promise<unknown>>();
 let workspaceReady = false;
 let busyAction = false;
 let uploadTarget: string | ((url: string, alt: string) => void) | null = null;
@@ -137,8 +139,11 @@ async function refreshWorkspace() {
 async function showWorkspace() {
   if (!workspaceReady) return;
   const dev = location.hash === "#developer";
-  element("cms-developer").hidden = !dev;
-  element("cms-collection").hidden = dev;
+  const visible =
+    element("cms-restoring").closest<HTMLElement>(".cms-main")!.dataset
+      .authState === "ready";
+  element("cms-developer").hidden = !dev || !visible;
+  element("cms-collection").hidden = dev || !visible;
   document
     .querySelector<HTMLElement>('[data-cms-view="developer"]')!
     .setAttribute("aria-current", dev ? "page" : "false");
@@ -222,7 +227,13 @@ async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
   const user = auth.currentUser;
   if (!user)
     throw new RequestError("Sign in to continue", "UNAUTHENTICATED", 401);
+  const authVersion = workspaceSession.version;
   const token = await user.getIdToken();
+  if (
+    authVersion !== workspaceSession.version ||
+    user.uid !== auth.currentUser?.uid
+  )
+    throw new RequestError("Your session changed", "UNAUTHENTICATED", 401);
   const headers = new Headers(options.headers);
   headers.set("Authorization", `Bearer ${token}`);
   if (options.body && !(options.body instanceof FormData))
@@ -254,10 +265,15 @@ async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
       response.status,
     );
   }
+  if (
+    authVersion !== workspaceSession.version ||
+    user.uid !== auth.currentUser?.uid
+  )
+    throw new RequestError("Your session changed", "UNAUTHENTICATED", 401);
   return result as T;
 }
 function storageKey(id: string) {
-  return `harithsa.cms.${auth.currentUser?.uid ?? "signedout"}.${id}`;
+  return `harithsa.cms.${recoveryUid ?? auth.currentUser?.uid ?? "signedout"}.${id}`;
 }
 function keepCopy() {
   if (!current) return;
@@ -578,6 +594,7 @@ async function loadCollection(append = false) {
     renderRows();
     notice.hidden = true;
   } catch (error) {
+    if (generation !== loadingGeneration || !workspaceReady) return;
     message(error instanceof Error ? error.message : "Entries could not load");
     element("cms-row-count").textContent =
       "Could not load entries. Try Refresh.";
@@ -1731,7 +1748,9 @@ window.addEventListener("beforeunload", (event) => {
 signin.addEventListener("click", async () => {
   signin.disabled = true;
   try {
+    const before = workspaceSession.version;
     await signInWithPopup(auth, new GoogleAuthProvider());
+    if (before === workspaceSession.version) void workspaceSession.restore();
   } catch (error) {
     element("cms-login-message").textContent =
       error instanceof Error &&
@@ -1745,9 +1764,12 @@ signin.addEventListener("click", async () => {
 });
 signout.addEventListener("click", async () => {
   if (!(await flushSave())) return;
+  const uid = auth.currentUser?.uid;
+  workspaceSession.suspend();
+  workspacePhase("loading", "Signing out…");
   try {
+    await Promise.allSettled([...sessionRequests]);
     await api("session", { method: "DELETE" });
-    const uid = auth.currentUser?.uid;
     try {
       for (const key of Object.keys(sessionStorage))
         if (key.startsWith(`harithsa.cms.${uid}.`))
@@ -1755,55 +1777,105 @@ signout.addEventListener("click", async () => {
     } catch {}
     await firebaseSignOut(auth);
   } catch (error) {
-    message(
+    workspacePhase(
+      "error",
       error instanceof Error
         ? error.message
         : "Sign-out could not finish. Reconnect and try again.",
     );
   }
 });
-onAuthStateChanged(auth, (user) => {
-  const generation = ++authGeneration;
-  if (!user) {
-    workspaceReady = false;
-    developer.clear();
-    element("cms-developer").hidden = true;
-    element("cms-login").hidden = false;
-    element("cms-collection").hidden = true;
-    document.querySelector<HTMLElement>(".cms-account")!.hidden = true;
-    element("cms-login-message").textContent =
-      "Sign in with the journal owner’s Google account.";
-    rich?.destroy();
-    rich = null;
-    if (dialog.open) dialog.close();
-    current = null;
-    rows = [];
-    return;
-  }
-  element("cms-login-message").textContent = "Opening your workspace…";
-  void (async () => {
-    try {
-      const me = await api<{ environment: string; name: string }>("me");
-      await api("session", { method: "POST", body: "{}" });
-      if (generation !== authGeneration) return;
-      workspaceReady = true;
-      element("cms-login").hidden = true;
-      element("cms-collection").hidden = false;
-      document.querySelector<HTMLElement>(".cms-account")!.hidden = false;
-      element("cms-environment").textContent =
-        me.environment === "live" ? "PRIVATE WORKSPACE" : "PREVIEW WORKSPACE";
-      section = currentSection();
-      await refreshWorkspace();
-      await showWorkspace();
+function workspacePhase(state: AuthPhase, detail?: string) {
+  element("cms-restoring").hidden = state !== "loading" && state !== "error";
+  element("cms-login").hidden = state !== "signed-out" && state !== "denied";
+  element("cms-auth-retry").hidden = state !== "error";
+  element("cms-restoring-message").textContent =
+    detail ?? "Opening your workspace…";
+  element("cms-login-message").textContent =
+    detail ?? "Sign in with the journal owner’s Google account.";
+  element("cms-restoring").closest<HTMLElement>(
+    ".cms-main",
+  )!.dataset.authState = state;
+  document.querySelector<HTMLElement>(".cms-account")!.hidden =
+    state !== "ready";
+  const dev = location.hash === "#developer";
+  element("cms-collection").hidden = state !== "ready" || dev;
+  element("cms-developer").hidden = state !== "ready" || !dev;
+}
+function clearWorkspace() {
+  if (current && dirtyVersion !== savedVersion) keepCopy();
+  workspaceReady = false;
+  loadingGeneration++;
+  editorGeneration++;
+  if (saveTimer) clearTimeout(saveTimer);
+  developer.clear();
+  rich?.destroy();
+  rich = null;
+  if (dialog.open) dialog.close();
+  current = null;
+  rows = [];
+  labelRows = [];
+  nextCursor = null;
+  recoveryUid = null;
+  form.reset();
+  element("cms-rows").replaceChildren();
+  form
+    .querySelectorAll<HTMLImageElement>("img")
+    .forEach((img) => img.removeAttribute("src"));
+  document
+    .querySelectorAll<HTMLElement>("[data-cms-count]")
+    .forEach((node) => (node.textContent = "—"));
+}
+const workspaceSession = new AuthRestoration({
+  ready: () => auth.authStateReady(),
+  user: () => auth.currentUser,
+  clear: clearWorkspace,
+  show: workspacePhase,
+  verify: async () => {
+    const cookie = api("session", {
+      method: "POST",
+      body: "{}",
+      signal: AbortSignal.timeout(30000),
+    });
+    sessionRequests.add(cookie);
+    void cookie.then(
+      () => sessionRequests.delete(cookie),
+      () => sessionRequests.delete(cookie),
+    );
+    const [me] = await Promise.all([
+      api<{ environment: string; name: string }>("me", {
+        signal: AbortSignal.timeout(30000),
+      }),
+      cookie,
+    ]);
+    return me;
+  },
+  enter: async (me) => {
+    const version = workspaceSession.version;
+    workspaceReady = true;
+    recoveryUid = auth.currentUser!.uid;
+    element("cms-environment").textContent =
+      me.environment === "live" ? "PRIVATE WORKSPACE" : "PREVIEW WORKSPACE";
+    section = currentSection();
+    await Promise.all([refreshWorkspace(), showWorkspace()]);
+    if (version === workspaceSession.version && workspaceReady)
       void refreshAudit();
-    } catch (error) {
-      if (generation !== authGeneration) return;
-      element("cms-login-message").textContent =
-        error instanceof Error
-          ? error.message
-          : "Your workspace could not open. Try again.";
-    }
-  })();
+  },
+  denied: (error) =>
+    error instanceof RequestError && [401, 403].includes(error.status),
+  message: (error) =>
+    error instanceof RequestError
+      ? error.message
+      : "Your workspace could not open. Try again.",
+});
+element("cms-auth-retry").addEventListener(
+  "click",
+  () => void workspaceSession.restore(),
+);
+onAuthStateChanged(auth, () => void workspaceSession.restore());
+window.addEventListener("pagehide", () => workspaceSession.suspend());
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) void workspaceSession.restore();
 });
 
 const cmsTheme = element<HTMLButtonElement>("cms-theme");

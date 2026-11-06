@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Workspace/type/gallery 1.15.0 — issues #44–46
+
+Workspace and Invitations now use explicit auth restoration states and stale-response guards; body/prose use self-hosted Source Sans 3; Gallery is a tightly packed natural-proportion carousel with real tile-offset navigation. See docs/workspace-typography-gallery-1.15.0.md and the linked PR/issues for final release/provider/Chrome/tenant receipts. Preserve owner draft recovery, original photographs, invitation checks, private-aware rollback, Margin 1.0.0 and template 1.9.0.
+
 ## Reader session restoration 1.14.3 — issue #42
 
 PR #43 fixes the signed-in gate flash using explicit pending/ready/signed-out/denied/error states, parallel session/post requests and stale-response guards. Seven asynchronous client regressions and local Astro checks/build pass; application source e831e3b07ad58ca2beaabbe66d6f632c3293bc8f has passing CI and a successful immutable build. See docs/reader-session-1.14.3.md for the contract and PR #43 for final preview/live/provider/browser/tenant evidence and release status. Invitation checks, no-store, private media, content and brand remain unchanged; rollback must remain private-aware.

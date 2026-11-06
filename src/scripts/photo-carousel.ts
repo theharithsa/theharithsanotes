@@ -1,11 +1,9 @@
+import { photoScrollOffset, nearestPhotoIndex } from "../lib/carousel-geometry";
 document
   .querySelectorAll<HTMLElement>("[data-photo-journal]")
   .forEach((root) => {
     const track = root.querySelector<HTMLElement>(".photo-track");
     const slides = [...root.querySelectorAll<HTMLElement>(".photo-slide")];
-    const thumbs = [
-      ...root.querySelectorAll<HTMLButtonElement>("[data-photo-jump]"),
-    ];
     const dialog = root.querySelector<HTMLDialogElement>("dialog");
     const image = dialog?.querySelector<HTMLImageElement>(".lightbox-image");
     const title = dialog?.querySelector<HTMLElement>(".photo-dialog-title");
@@ -19,9 +17,6 @@ document
       matchMedia("(prefers-reduced-motion: reduce)").matches;
     function update(index: number) {
       current = Math.max(0, Math.min(index, slides.length - 1));
-      thumbs.forEach((button, i) =>
-        button.setAttribute("aria-current", i === current ? "true" : "false"),
-      );
       root
         .querySelectorAll<HTMLButtonElement>("[data-photo-prev]")
         .forEach((button) => (button.disabled = current === 0));
@@ -29,6 +24,11 @@ document
         .querySelectorAll<HTMLButtonElement>("[data-photo-next]")
         .forEach((button) => (button.disabled = current === slides.length - 1));
       if (count) count.textContent = `${current + 1} / ${slides.length}`;
+      const picker = root.querySelector<HTMLSelectElement>(
+        "[data-photo-date-picker]",
+      );
+      if (picker)
+        picker.value = slides[current]?.dataset.dateGroup ?? "undated";
       root
         .querySelectorAll<HTMLElement>("[data-photo-date]")
         .forEach((link) =>
@@ -40,10 +40,13 @@ document
           ),
         );
     }
+    const offsets = () =>
+      slides.map((slide) => slide.offsetLeft - slides[0]!.offsetLeft);
+    const maximum = () => Math.max(0, track!.scrollWidth - track!.clientWidth);
     function show(index: number, smooth = true) {
       update(index);
       track!.scrollTo({
-        left: current * track!.clientWidth,
+        left: photoScrollOffset(offsets(), current, maximum()),
         behavior: smooth && !reduced() ? "smooth" : "instant",
       });
       if (dialog!.open) showDialogImage();
@@ -58,9 +61,6 @@ document
       const label = dialog!.querySelector(".lightbox-count");
       if (label) label.textContent = `${current + 1} / ${slides.length}`;
     }
-    thumbs.forEach((button, index) =>
-      button.addEventListener("click", () => show(index)),
-    );
     root
       .querySelectorAll<HTMLButtonElement>("[data-photo-prev]")
       .forEach((button) =>
@@ -119,6 +119,10 @@ document
         event.target instanceof HTMLSelectElement
       )
         return;
+      if (event.key === "Home" || event.key === "End") {
+        event.preventDefault();
+        show(event.key === "Home" ? 0 : slides.length - 1);
+      }
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
         event.preventDefault();
         show(current + (event.key === "ArrowRight" ? 1 : -1));
@@ -127,9 +131,10 @@ document
     track.addEventListener(
       "scroll",
       () => {
+        if (dialog.open) return;
         cancelAnimationFrame(frame);
         frame = requestAnimationFrame(() =>
-          update(Math.round(track.scrollLeft / track.clientWidth)),
+          update(nearestPhotoIndex(offsets(), track.scrollLeft, maximum())),
         );
       },
       { passive: true },

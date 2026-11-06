@@ -639,7 +639,7 @@ body:has(#invitations-room) {
 }
 .cms-rich-editor .tiptap {
   outline: none;
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 19px;
   line-height: 1.85;
   min-height: 300px;
@@ -1506,4 +1506,27 @@ body:has(#invitations-room) {
     display: flex;
     margin: 0 6px 12px;
   }
+}
+
+.cms-restoring {
+  padding: clamp(30px, 5vw, 70px);
+  max-width: 1100px;
+}
+.cms-restoring h1 {
+  font-family: var(--serif);
+  font-size: clamp(25px, 3vw, 40px);
+  margin: 20px 0 35px;
+}
+.cms-table-placeholder {
+  display: grid;
+  gap: 14px;
+}
+.cms-table-placeholder span {
+  height: 52px;
+  border-radius: 5px;
+  background: var(--blue);
+  opacity: 0.55;
+}
+.cms-restoring:has(#cms-auth-retry:not([hidden])) .cms-table-placeholder {
+  display: none;
 }
