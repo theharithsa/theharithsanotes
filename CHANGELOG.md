@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.16.1] — 2026-11-06
+
+- Present the Meet Vish biography as one continuous reading column with comfortable line length and paragraph spacing at every screen size (#57).
+- Lead the biography section with a personal heading rather than the previous work-focused introduction.
+
 ## [1.16.0] — 2026-11-06
 
 - Add public page fades, native-navigation shimmer and cancellable Blog/Books/Projects/Entertainment filter reveals (#54).

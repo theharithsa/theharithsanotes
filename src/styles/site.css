@@ -1134,23 +1134,29 @@ figure {
   font-size: 10px;
   letter-spacing: 0.12em;
 }
+.personal-statement {
+  max-width: 720px;
+}
 .personal-statement h2 {
-  max-width: 1070px;
-  font-size: 45px;
+  max-width: 24ch;
+  font-size: clamp(32px, 3.4vw, 45px);
   line-height: 1.28;
 }
 .personal-statement h2 > span {
   color: #89917e;
 }
-.personal-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+.personal-story {
   margin-top: 40px;
-  max-width: 1000px;
+  max-width: 68ch;
+  font-size: 18px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
 }
-.personal-columns p {
-  font-size: 17px;
+.personal-story p {
+  margin: 0;
+}
+.personal-story p + p {
+  margin-top: 1.4em;
 }
 .interest-links {
   display: grid;
@@ -1866,9 +1872,6 @@ figure {
   .gallery-photo img {
     height: 300px;
   }
-  .personal-columns {
-    gap: 35px;
-  }
 }
 @media (max-width: 640px) {
   .wrap {
@@ -2225,13 +2228,9 @@ figure {
   .personal-statement h2 {
     font-size: 32px;
   }
-  .personal-columns {
-    grid-template-columns: 1fr;
-    gap: 0;
+  .personal-story {
     margin-top: 25px;
-  }
-  .personal-columns p {
-    font-size: 16px;
+    font-size: 17px;
   }
   .interest-links {
     grid-template-columns: 1fr;
