@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.1 — 2026-11-07
+
+- Reduce post and editor reading text by 15% while retaining large headings and genuine italics.
+- Extend classic Libre Baskerville typography across page copy, collection titles, biography, privacy and private People/Journal reading.
+- Preserve functional UI/code typography, full covers, E callouts, private photo grouping and access protections.
+
 ## 1.21.0 — 2026-11-07
 
 - Apply approved classic Libre Baskerville post typography, compact reading rhythm and full uncropped covers across post sections.

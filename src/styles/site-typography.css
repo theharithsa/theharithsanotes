@@ -1,0 +1,56 @@
+/* The approved classic face spans pages and posts; UI and code retain roles. */
+body {
+  font-synthesis: none;
+}
+button,
+input,
+select,
+textarea,
+.eyebrow,
+.section-kicker,
+.note-meta,
+.location,
+figcaption,
+time {
+  font-family: var(--sans);
+}
+.desktop-nav :is(a, button),
+.mobile-nav a {
+  font-family: var(--serif);
+}
+.projects-technical,
+.technical-card h3,
+.side-stories .technical-card h3,
+.workbench-header h1,
+.workbench-card h3,
+.workbench-card p,
+.home-project-copy p,
+.home-project-illustrated h3,
+.project-story-deck,
+.mega-intro p,
+.section-masthead p,
+.meet-glimpse p,
+.interest-links p,
+.footer-intro > p {
+  font-family: var(--serif);
+}
+.post-page .project-story-deck.post-body {
+  font-size: var(--post-text-size);
+}
+.cms-table .cms-entry-link {
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.privacy-body,
+.personal-story.post-body {
+  max-width: 600px;
+}
+#reading-date {
+  font: 400 13px/1.5 var(--sans);
+}
+@media (max-width: 600px) {
+  body,
+  .post-page .project-story-deck.post-body {
+    font-size: var(--post-mobile-size);
+  }
+}

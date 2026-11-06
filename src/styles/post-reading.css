@@ -15,6 +15,10 @@
 }
 :root {
   --post-font: "Libre Baskerville", Georgia, serif;
+  --post-text-size: 1.009375rem;
+  --post-mobile-size: 0.903125rem;
+  --post-note-size: 0.95625rem;
+  --post-paragraph-gap: 0.85rem;
   --post-ink: #171717;
   --post-muted: #626262;
   --post-rule: #d9d7d1;
@@ -30,7 +34,7 @@
 }
 :is(.post-body, .cms-rich-editor.post-editor .tiptap) {
   min-width: 0;
-  font: 400 19px/1.5 var(--post-font);
+  font: 400 var(--post-text-size)/1.5 var(--post-font);
   color: var(--post-ink);
   text-align: start;
   overflow-wrap: break-word;
@@ -45,7 +49,7 @@
 }
 :is(.post-body, .cms-rich-editor.post-editor .tiptap)
   :is(p, ul, ol, blockquote, figure, pre, table) {
-  margin: 0 0 16px;
+  margin: 0 0 var(--post-paragraph-gap);
 }
 :is(.post-body, .cms-rich-editor.post-editor .tiptap) p:empty {
   margin: 0;
@@ -145,7 +149,7 @@
   border-radius: 0;
   margin: 24px 0;
   box-shadow: none;
-  font: 400 18px/1.55 var(--post-font);
+  font: 400 var(--post-note-size)/1.55 var(--post-font);
 }
 :is(.post-body, .cms-rich-editor.post-editor .tiptap) .post-callout::before {
   content: attr(aria-label);
@@ -288,7 +292,7 @@
   letter-spacing: -0.035em;
 }
 .post-page :is(.article-deck, .project-story-deck) {
-  font: 400 19px/1.45 var(--sans);
+  font: 400 var(--post-text-size)/1.45 var(--post-font);
   color: var(--post-muted);
 }
 .post-page .article-header > .eyebrow {
@@ -368,29 +372,29 @@
 .post-body .project-feature-grid p {
   font: inherit;
   color: inherit;
-  margin-bottom: 16px;
+  margin-bottom: var(--post-paragraph-gap);
 }
 .post-body > section > p {
   font: inherit;
   color: inherit;
-  margin: 0 0 16px;
+  margin: 0 0 var(--post-paragraph-gap);
 }
 .post-body .workbench-meta {
   font: 600 11px/1.5 var(--mono);
   color: var(--post-muted);
 }
 .post-page .project-story-deck.post-body {
-  font: 400 19px/1.5 var(--post-font);
+  font: 400 var(--post-text-size)/1.5 var(--post-font);
   color: var(--post-ink);
   margin: 14px 0 22px;
 }
 #reading-body.post-body {
   max-width: 600px;
-  font: 400 19px/1.5 var(--post-font);
+  font: 400 var(--post-text-size)/1.5 var(--post-font);
   color: var(--post-ink);
 }
 #reading-body.post-body > p {
-  margin: 0 0 16px;
+  margin: 0 0 var(--post-paragraph-gap);
 }
 #reading-body.post-body h2 {
   font-size: 28px;
@@ -426,14 +430,17 @@
   }
 }
 @media (max-width: 600px) {
+  :root {
+    --post-paragraph-gap: 0.74375rem;
+  }
   :is(.post-body, .cms-rich-editor.post-editor .tiptap),
   #reading-body.post-body {
-    font-size: 17px;
+    font-size: var(--post-mobile-size);
     line-height: 1.55;
   }
   :is(.post-body, .cms-rich-editor.post-editor .tiptap) p,
   #reading-body.post-body > p {
-    margin-bottom: 14px;
+    margin-bottom: var(--post-paragraph-gap);
   }
   :is(.post-body, .cms-rich-editor.post-editor .tiptap) h2,
   #reading-body.post-body h2 {
@@ -449,7 +456,7 @@
   :is(.post-body, .cms-rich-editor.post-editor .tiptap) .post-callout,
   .post-page .screen-takeaway {
     padding: 16px;
-    font-size: 17px;
+    font-size: var(--post-mobile-size);
   }
   :is(.post-body, .cms-rich-editor.post-editor .tiptap) .post-image-mosaic {
     display: block;
@@ -460,7 +467,7 @@
     margin-bottom: 10px;
   }
   .post-page :is(.article-deck, .project-story-deck) {
-    font-size: 18px;
+    font-size: var(--post-mobile-size);
   }
   .post-page .article-header {
     margin-top: 22px;

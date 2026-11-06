@@ -13,7 +13,7 @@ const page = await getJournalPage("privacy");
     <span class="section-kicker">YOUR VISIT, YOUR CHOICE</span>
     <h1>{page.heading ?? page.title}</h1>
   </section>
-  <div class="article-body privacy-body">
+  <div class="post-body privacy-body">
     {page.paragraphs.map((text) => (
       <p>{text}</p>
     ))}
