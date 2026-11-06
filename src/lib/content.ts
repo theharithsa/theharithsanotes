@@ -1,4 +1,4 @@
-import sanitizeHtml from "sanitize-html";
+import { sanitizePostHtml } from "./post-html.ts";
 import coverArt from "../data/blog-art.json";
 import raw from "../data/articles.json";
 import medium from "../data/medium-articles.json";
@@ -34,29 +34,7 @@ export const articles: Article[] = [...raw, ...medium]
     alternateSources: mediumSources
       .filter((entry) => entry.slug === article.slug)
       .map((entry) => ({ label: "Medium", href: entry.source })),
-    html: sanitizeHtml(article.html, {
-      allowedTags: [
-        ...sanitizeHtml.defaults.allowedTags,
-        "img",
-        "figure",
-        "figcaption",
-      ],
-      allowedAttributes: {
-        a: ["href", "title"],
-        img: ["src", "alt", "width", "height", "loading"],
-        code: ["class"],
-        pre: ["class"],
-        h2: ["id"],
-        h3: ["id"],
-        h4: ["id"],
-        ol: ["start", "reversed"],
-        li: ["value"],
-      },
-      allowedSchemes: ["https", "http", "mailto"],
-      transformTags: {
-        img: sanitizeHtml.simpleTransform("img", { loading: "lazy" }),
-      },
-    }),
+    html: sanitizePostHtml(article.html),
   }))
   .sort((left, right) => Date.parse(right.date) - Date.parse(left.date));
 

@@ -1,3 +1,7 @@
+# Classic post reading 1.21.0 / issue #76
+
+Owner approved design D with E callouts. `post-reading.css` and self-hosted Libre Baskerville own shared post prose; source-sans metadata and mono code/technical labels remain. Blog/GoGs/private detail use full uncropped covers before title. Preserve private three/two-column photo grouping and invitation/session/motion guards. CMS custom wrappers live in `post-blocks.ts`; `post-html.ts` is the shared import/CMS/API sanitizer. No content republish or data migration. See docs/classic-post-reading-1.21.0.md; final provider and tenant evidence belongs on the linked PR.
+
 # Compact private reader 1.20.1 / issue #74
 
 Invitation-only reading uses compact title/cover/prose sizing. Consecutive top-level figures share three desktop or two phone columns, preserving natural proportions and alt text; prose interrupts each run. Public Blog styles, content contracts and access stay unchanged. See docs/compact-private-reader-1.20.1.md and the linked PR for evidence. Private content edits remain outside source and release archives; rollback uses matching 1.20.0 assets.

@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { sanitizePostHtml } from "../../lib/post-html";
 import EditorialImage from "../../components/EditorialImage.astro";
 import { detail, type GogNote } from "../../lib/journal";
 import { formatDate } from "../../lib/content";
@@ -21,20 +22,25 @@ const note = loaded.data;
   article
   publishedDate={note.date}
 >
-  <article class="article-page">
-    <header class="article-header wrap">
+  <article class="article-page post-page">
+    <div class="post-top wrap">
       <a class="back-link" href="/gogs">
         ← All GoGs
       </a>
+    </div>
+    <figure class="article-cover wrap">
+      <EditorialImage src={note.image} alt={note.imageAlt} eager />
+    </figure>
+    <header class="article-header wrap">
       <span class="eyebrow">
         {note.kind} · {formatDate(note.date)}
       </span>
       <h1>{note.title}</h1>
       <p class="article-deck">{note.description}</p>
     </header>
-    <figure class="article-cover wrap">
-      <EditorialImage src={note.image} alt={note.imageAlt} eager />
-    </figure>
-    <div class="prose wrap" set:html={note.html} />
+    <div
+      class="post-body post-dropcap wrap"
+      set:html={sanitizePostHtml(note.html)}
+    />
   </article>
 </Base>

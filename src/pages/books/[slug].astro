@@ -64,7 +64,7 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
       : {}),
   }}
 >
-  <article class="book-journal wrap">
+  <article class="book-journal post-page wrap">
     <a
       class="text-link book-journal-back"
       href={`/books#book-${entry.sourceReviewId}`}
@@ -93,7 +93,10 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
           )}
         </header>
         {paragraphs.length > 0 && (
-          <section class="book-review" aria-labelledby="review-heading">
+          <section
+            class="book-review post-body"
+            aria-labelledby="review-heading"
+          >
             <h2 id="review-heading">My notes from the book.</h2>
             {paragraphs.map((paragraph) => (
               <p>{paragraph}</p>

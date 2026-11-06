@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.21.0 — 2026-11-07
+
+- Apply approved classic Libre Baskerville post typography, compact reading rhythm and full uncropped covers across post sections.
+- Give quotations and restrained labelled callouts distinct treatments, with consistent headings, lists, image layouts, code and tables in light/dark themes.
+- Match workspace rich-editor typography and add safe Callout, Image grid, Mosaic and Strike controls through the existing HTML API contract.
+- Preserve original content, private invitation/session guards and the compact private photo grid.
+
 ## 1.20.1 — 2026-11-06
 
 - Make private reader titles, cover art and prose spacing more compact.

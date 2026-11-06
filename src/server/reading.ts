@@ -10,6 +10,7 @@ import {
   type PublishedEntry,
 } from "./models.ts";
 import { firebaseOperation, errorCode } from "./telemetry.ts";
+import { sanitizePostHtml } from "../lib/post-html.ts";
 
 const json = (
   data: unknown,
@@ -59,7 +60,10 @@ export async function readingApi(
       const [target, id] = preview.split(":");
       if (target !== section || !id || !/^[a-zA-Z0-9_-]{1,100}$/.test(id))
         throw new CmsError("INVALID_CONTENT", 400, "Invalid preview");
-      return json({ post: (await getEntry(section, id)).data });
+      const data = (await getEntry(section, id)).data;
+      return json({
+        post: { ...data, html: sanitizePostHtml(String(data.html ?? "")) },
+      });
     }
     const rows = await firebaseOperation(
       "query",
@@ -126,7 +130,13 @@ export async function readingApi(
       );
     // Source notes and import metadata remain owner-only even for invited readers.
     const data = revision.get("data") as Record<string, unknown>;
-    return json({ post: { ...row.data, html: data.html, id: row.id } });
+    return json({
+      post: {
+        ...row.data,
+        html: sanitizePostHtml(String(data.html ?? "")),
+        id: row.id,
+      },
+    });
   } catch (error) {
     return json(
       {

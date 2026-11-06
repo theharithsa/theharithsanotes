@@ -91,17 +91,17 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
     </div>
     <div id="reading-content" hidden>
       <div id="reading-posts"></div>
-      <article id="reading-post" hidden>
+      <article id="reading-post" class="post-page" hidden>
         <a id="reader-back" href="/people-and-journal/journal">
           Back to the notebook
         </a>
+        <img id="reading-cover" alt="" />
         <div class="reading-post-heading">
           <p id="reading-date"></p>
           <h2 id="reading-title"></h2>
           <p id="reading-description"></p>
         </div>
-        <img id="reading-cover" alt="" />
-        <div id="reading-body" class="article-body"></div>
+        <div id="reading-body" class="post-body post-dropcap"></div>
       </article>
     </div>
   </section>

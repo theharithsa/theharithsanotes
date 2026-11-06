@@ -1,6 +1,7 @@
 ---
 import ArticleArt from "../components/ArticleArt.astro";
 import Base from "../layouts/Base.astro";
+import { sanitizePostHtml } from "../lib/post-html";
 import NoteCard from "../components/NoteCard.astro";
 import {
   articles as snapshotArticles,
@@ -50,13 +51,23 @@ const headings = [
   <article
     class:list={[
       "article-page",
+      "post-page",
       { "technical-article": article.topic !== "Life & learning" },
     ]}
   >
-    <header class="article-header wrap">
+    <div class="post-top wrap">
       <a class="back-link" href="/blogs">
         ← All articles
       </a>
+    </div>
+    <figure class="article-cover wrap">
+      <ArticleArt article={article} eager />
+      <figcaption>
+        {article.imageCredit ??
+          `A note from the archive · Originally published ${formatDate(article.date)}`}
+      </figcaption>
+    </figure>
+    <header class="article-header wrap">
       <span class="eyebrow">{article.topic}</span>
       <h1>{article.title}</h1>
       <p class="article-deck">{article.description}</p>
@@ -84,13 +95,6 @@ const headings = [
         </p>
       ))}
     </header>
-    <figure class="article-cover wrap">
-      <ArticleArt article={article} eager />
-      <figcaption>
-        {article.imageCredit ??
-          `A note from the archive · Originally published ${formatDate(article.date)}`}
-      </figcaption>
-    </figure>
     <div class="article-reading-layout wrap">
       {headings.length > 1 && (
         <aside class="article-outline">
@@ -108,7 +112,10 @@ const headings = [
           </details>
         </aside>
       )}
-      <div class="article-body" set:html={article.html} />
+      <div
+        class="post-body post-dropcap"
+        set:html={sanitizePostHtml(article.html)}
+      />
     </div>
     <div class="article-end">
       <a href="/blogs" class="text-link">

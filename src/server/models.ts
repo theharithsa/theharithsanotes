@@ -1,5 +1,5 @@
 import { z } from "zod";
-import sanitizeHtml from "sanitize-html";
+import { sanitizePostHtml } from "../lib/post-html.ts";
 
 export const sections = [
   "blogs",
@@ -269,33 +269,7 @@ export function contentSchema(section: Section) {
 }
 
 export function cleanHtml(value: string): string {
-  return sanitizeHtml(value, {
-    allowedTags: [
-      ...sanitizeHtml.defaults.allowedTags,
-      "img",
-      "figure",
-      "figcaption",
-      "br",
-      "hr",
-    ],
-    allowedAttributes: {
-      a: ["href", "title"],
-      img: ["src", "alt", "width", "height", "loading"],
-      code: ["class"],
-      pre: ["class"],
-      h2: ["id"],
-      h3: ["id"],
-      h4: ["id"],
-      ol: ["start", "reversed"],
-      li: ["value"],
-      td: ["colspan", "rowspan"],
-      th: ["colspan", "rowspan"],
-    },
-    allowedSchemes: ["https", "http", "mailto"],
-    transformTags: {
-      img: sanitizeHtml.simpleTransform("img", { loading: "lazy" }),
-    },
-  });
+  return sanitizePostHtml(value);
 }
 export function validateData(
   section: Section,
