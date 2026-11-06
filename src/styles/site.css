@@ -3708,7 +3708,19 @@ figure {
   text-decoration-color: #bc805d;
 }
 .home-project-illustrated {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
   background: #f5f0e8;
+}
+.home-project-copy {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(20px, 2.5vw, 36px);
+  overflow-wrap: anywhere;
+}
+.home-project-copy > :last-child {
+  margin-bottom: 0;
 }
 .home-project-illustrated h3 {
   font-family: var(--mono);
@@ -3726,6 +3738,7 @@ figure {
   height: auto;
   aspect-ratio: 3/2;
   object-fit: cover;
+  margin-bottom: 0;
 }
 
 /* Listening follows the project collection/detail journey, keeping vinyl artwork. */

@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Homepage margins patch 1.14.2 — issue #40
+
+PR #41 gives homepage project copy responsive 20–36px insets, preserving full-bleed illustrations and the asymmetric grid. Source c58526f0bd01d8b3f727c3fae8287001771a685e is live on both channels; 503 client hashes match per channel, Chrome desktop/mobile checks and current code-head CI passed. See docs/project-card-margins-1.14.2.md for provider/runtime evidence. No content, API, data, invitations, brand or template changes. Preserve private-aware rollback targets.
+
 ## Reader audit patch 1.14.1 — issues #36, #38 and #39
 
 All 51 current Notion journals and 3 People posts remain published. Every post/body/illustration was opened in Chrome; source hashes and anonymous image denials were reconfirmed. The 1.14.1 patch reserves private cover space (measured shift reduced from 223.616px to 0), constrains Entertainment artwork/grids and fits tablet Books labels. The live 30-case responsive sweep passed. Application source is 1c5a7a4ebc4075a29d5ce8d04ff6c9ca95b9eaad; see docs/reader-ui-audit-1.14.1.md and PR #37 for immutable image/provider/UI/tenant evidence. Seven obsolete pre-1.14 zero-traffic tags were retired after verifying both active Hosting channels; current and private-aware rollback routes/revision history were preserved. Never recreate unsupported pre-private routes. Data, invitations, original art and ratings were preserved.
