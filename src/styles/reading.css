@@ -155,26 +155,83 @@
   grid-column: 1/-1;
 }
 .reading-post-heading {
-  max-width: 800px;
-  margin: 48px auto 32px;
+  max-width: 760px;
+  margin: 28px auto 24px;
 }
 .reading-post-heading h2 {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
-  line-height: 1.1;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.15;
   letter-spacing: -0.04em;
 }
 #reading-cover {
+  display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  max-width: 760px;
+  aspect-ratio: 16 / 9;
   background: var(--blue);
-  max-height: 650px;
+  max-height: 360px;
   object-fit: cover;
-  margin-bottom: 45px;
+  margin: 0 auto 28px;
 }
 #reading-body {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 12px;
   max-width: 760px;
   margin: auto;
+  font-size: 18px;
+  line-height: 1.65;
+}
+#reading-body > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+#reading-body > p {
+  margin: 0 0 0.85em;
+}
+#reading-body h2 {
+  font-size: clamp(1.5rem, 2.5vw, 1.8rem);
+  margin: 1.25em 0 0.55em;
+}
+#reading-body h3 {
+  font-size: 1.3rem;
+  margin: 1.1em 0 0.5em;
+}
+#reading-body > hr {
+  width: 100%;
+  margin: 12px 0;
+}
+#reading-body > figure {
+  width: 100%;
+  margin: 0 0 12px;
+}
+/* Only uninterrupted runs of photographs share rows; prose stays full width. */
+#reading-body > figure:has(+ figure),
+#reading-body > figure + figure {
+  grid-column: auto;
+}
+#reading-body > figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 6px;
+}
+#reading-body figcaption {
+  font-size: 0.8em;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+@media (max-width: 600px) {
+  #reading-body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 8px;
+    font-size: 17px;
+  }
+  #reading-body > figure {
+    margin-bottom: 8px;
+  }
 }
 .private-detail-masthead {
   padding-block: 40px;
