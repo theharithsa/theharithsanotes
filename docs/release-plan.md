@@ -1,3 +1,7 @@
+# Signature placement correction 1.19.2 / issue #67
+
+The signature belongs directly beneath the biography text/closing quote inside personal-statement, before interest links. Remove the former page-end placement. Reuse the same transparent asset and dark-mode treatment; no CMS/API/data or dependency changes. Check adjacency, single instance, desktop/mobile layout and unchanged alpha. Roll back to the prior runtime/Hosting if required.
+
 # Transparent Meet Vish sign-off 1.19.1 / issue #67
 
 Add a processed, alpha-transparent signature asset and a modest responsive image after the final Meet Vish content section, before the shared footer. Dark mode changes only the ink color through a CSS filter; no backing rectangle is added. Source photo stays private; only the processed cutout is committed. No CMS content, schema, dependencies, infrastructure, secrets or telemetry contracts change.
