@@ -1,3 +1,7 @@
+# Editorial layout polish 1.20.0 / issue #72
+
+FilterPanel wraps public Blog/Books/Projects/Entertainment/Podcast browsing; filter-panels.ts keeps desktop open and mobile initially collapsed, with native disclosure semantics. Blog archive dates now live inside this panel. Controls use the shared 8px shape. Meet Vish uses a 24px heading gap, 200px signature with printed name and no Life in between teaser; preserve the biography and gallery route. Blog-only opening prose drop caps are CSS presentation, not content writes. See docs/editorial-layout-1.20.0.md and issue/PR provider evidence. Rollback uses matching 1.19.3 runtime/client assets.
+
 # Books browsing controls 1.19.3 / issue #70
 
 Replace the genre button cards with #book-genre-filter beside My rating in a compact desktop row and stacked mobile layout, using Blog's control styling. Preserve genre/rating combinations, counts and empty state; page-motion reveals the book grid for both selectors. See docs/books-filters-1.19.3.md and the linked PR for validation and provider receipts. No content or backend changes; preserve the 1.19.2 biography/signature work.

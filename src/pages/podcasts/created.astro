@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import FilterPanel from "../../components/FilterPanel.astro";
 import PodcastArt from "../../components/PodcastArt.astro";
 import { getListening } from "../../lib/journal";
 const created = (await getListening()).filter(
@@ -12,12 +13,14 @@ const created = (await getListening()).filter(
   description="A space for conversations by Vishruth Harithsa."
 >
   <section class="wrap podcast-room created-room space">
-    <nav class="podcast-tabs" aria-label="Podcast collections">
-      <a href="/podcasts">Listening</a>
-      <a href="/podcasts/created" aria-current="page">
-        Created
-      </a>
-    </nav>
+    <FilterPanel label="Collections">
+      <nav class="podcast-tabs" aria-label="Podcast collections">
+        <a href="/podcasts">Listening</a>
+        <a href="/podcasts/created" aria-current="page">
+          Created
+        </a>
+      </nav>
+    </FilterPanel>
     <span class="eyebrow">MY CONVERSATIONS</span>
     <h1>Created.</h1>
     <p>A space for conversations of my own, when they’re ready.</p>

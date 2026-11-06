@@ -1,7 +1,6 @@
 ---
 import DirectoryBadge from "../components/DirectoryBadge.astro";
 import Base from "../layouts/Base.astro";
-import GalleryGrid from "../components/GalleryGrid.astro";
 import { site } from "../data/site";
 import { getJournalPage } from "../lib/journal";
 import { cleanHtml } from "../server/models";
@@ -63,6 +62,7 @@ const page = await getJournalPage("meet-vish");
         loading="lazy"
         decoding="async"
       />
+      <p class="meet-signoff-name">Vishruth Harithsa</p>
     </div>
   </section>
   <section class="interest-links wrap">
@@ -84,18 +84,6 @@ const page = await getJournalPage("meet-vish");
       <p>Good stories and what they leave behind.</p>
       <b aria-hidden="true">↗</b>
     </a>
-  </section>
-  <section class="wrap space">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">LIFE IN BETWEEN</span>
-        <h2>People, places, little moments.</h2>
-      </div>
-      <a href="/gallery" class="text-link">
-        The photo journal ↗
-      </a>
-    </div>
-    <GalleryGrid limit={3} />
   </section>
   <section class="connection-band tone-sage">
     <div class="wrap">

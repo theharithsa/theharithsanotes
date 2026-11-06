@@ -1,0 +1,98 @@
+.collection-filter-panel {
+  min-width: 0;
+}
+.collection-filter-panel > summary {
+  display: none;
+}
+.collection-filter-panel .project-filters,
+.collection-filter-panel .book-journal-tools {
+  margin-block: 0;
+}
+.collection-filter-panel:has(.podcast-tabs) {
+  margin-bottom: 32px;
+}
+.collection-filter-panel .podcast-tabs {
+  margin-bottom: 0;
+}
+@media (max-width: 767px) {
+  .collection-filter-panel > summary {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 14px var(--sans);
+    list-style: none;
+    cursor: pointer;
+  }
+  .collection-filter-panel > summary::-webkit-details-marker {
+    display: none;
+  }
+  .filter-panel-state::after {
+    content: "+";
+    margin-left: 12px;
+    color: var(--muted);
+  }
+  .collection-filter-panel[open] .filter-panel-state::after {
+    content: "−";
+  }
+  .collection-filter-panel[open] > .collection-filter-fields {
+    padding-top: 14px;
+    animation: filter-panel-reveal 180ms ease-out;
+  }
+  .collection-filter-panel .archive-tools {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    align-items: end;
+  }
+  .collection-filter-panel .mobile-category-filter,
+  .collection-filter-panel .archive-tools .blog-tag-picker,
+  .collection-filter-panel .date-jump-mobile {
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .collection-filter-panel .date-jump-mobile {
+    grid-column: 1 / -1;
+    padding-top: 12px;
+  }
+  .collection-filter-panel .podcast-tabs {
+    border: 0;
+    padding: 0;
+  }
+  .collection-filter-panel :is(select, .mobile-category-filter select) {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 26px 10px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    background: var(--paper);
+    font: 400 14px var(--sans);
+  }
+}
+@keyframes filter-panel-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collection-filter-panel[open] > .collection-filter-fields {
+    animation: none;
+  }
+}

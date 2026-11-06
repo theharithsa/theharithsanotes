@@ -1,5 +1,6 @@
 ---
 import PodcastArt from "../components/PodcastArt.astro";
+import FilterPanel from "../components/FilterPanel.astro";
 import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
 import { getListening, getJournalPage } from "../lib/journal";
@@ -34,12 +35,14 @@ const listening = (await getListening()).filter(
     class="wrap podcast-room podcast-collection space"
     aria-labelledby="listening-heading"
   >
-    <nav class="podcast-tabs" aria-label="Podcast collections">
-      <a href="/podcasts" aria-current="page">
-        Listening
-      </a>
-      <a href="/podcasts/created">Created</a>
-    </nav>
+    <FilterPanel label="Collections">
+      <nav class="podcast-tabs" aria-label="Podcast collections">
+        <a href="/podcasts" aria-current="page">
+          Listening
+        </a>
+        <a href="/podcasts/created">Created</a>
+      </nav>
+    </FilterPanel>
     <div class="section-heading">
       <div>
         <span class="eyebrow">EPISODES &amp; IDEAS</span>

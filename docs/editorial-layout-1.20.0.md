@@ -1,0 +1,9 @@
+# Editorial layout polish — 1.20.0
+
+Issue #72 tightens Meet Vish's oversized title-to-subtitle margin to 24px, brings the location/badge together, reduces the transparent signature to 200px and adds Vishruth Harithsa as accessible text beneath it. The Life in between photo teaser is removed from this page. The biography, original portrait, signature alpha and standalone gallery remain intact.
+
+Public filters share an 8px corner shape. FilterPanel groups Blog, Books, Projects, Entertainment and Podcast controls. Desktop groups stay open with no extra heading; phones start with one native disclosure row, and expanded controls retain the existing dropdowns, counts and category/rating/tag logic. Blog archive dates move out of the masthead into the same disclosure. Resizing restores desktop controls and collapses phone controls without clearing selections. Native summary supports keyboard and touch, with a short reduced-motion-aware reveal.
+
+Opening Blog prose uses a serif drop cap via a Blog-only first-paragraph/first-letter rule. Existing HTML, lists, code, headings and links are unchanged; technical body text keeps its monospace treatment. No drop caps are added to private People/Journal, privacy pages or entertainment notes. No API, schema, content, invitation, dependency, branding or template changes.
+
+Validate desktop/mobile/dark layout, disclosure accessibility and filtering, opening prose and transparent signature through applicable build/tests and browser checks. Current-head CI and immutable preview/live provider/runtime evidence belong in the linked PR. Rollback uses matching private-aware 1.19.3 runtime and client assets without reverting published content.

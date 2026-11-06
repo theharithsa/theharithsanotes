@@ -1,5 +1,6 @@
 ---
 import PageParagraphs from "../components/PageParagraphs.astro";
+import FilterPanel from "../components/FilterPanel.astro";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
 import { getArticles, getJournalPage } from "../lib/journal";
@@ -47,44 +48,46 @@ const years = [...new Set(months.map((month) => month.year))];
       <h1>{page.heading ?? page.title}</h1>
       <p>{page.description}</p>
     </div>
-    <label class="date-jump-mobile">
-      Jump through the archive{" "}
-      <select data-blog-date-picker>
-        <option value="">Choose a month or year</option>
-        {years.map((year) => (
-          <optgroup label={year}>
-            {months
-              .filter((month) => month.year === year)
-              .map((month) => (
-                <option value={month.key}>
-                  {month.label} · {month.items.length}
-                </option>
-              ))}
-          </optgroup>
-        ))}
-      </select>
-    </label>
   </section>
   <PageParagraphs paragraphs={page.paragraphs} />
   <section class="archive wrap space" aria-label="Browse blog articles">
-    <div class="archive-tools">
-      <div class="filters" aria-label="Filter by topic">
-        {topics.map((topic) => (
-          <button data-filter={topic} aria-pressed={topic === "All notes"}>
-            {topic === "All notes" ? "All articles" : topic}
-          </button>
-        ))}
+    <FilterPanel>
+      <div class="archive-tools">
+        <div class="filters" aria-label="Filter by topic">
+          {topics.map((topic) => (
+            <button data-filter={topic} aria-pressed={topic === "All notes"}>
+              {topic === "All notes" ? "All articles" : topic}
+            </button>
+          ))}
+        </div>
+        <label class="blog-tag-picker" for="blog-tag-filter">
+          <span>Explore a tag</span>
+          <select id="blog-tag-filter" aria-label="Filter articles by tag">
+            <option value="">All tags</option>
+            {tags.map((tag) => (
+              <option value={tag}>{tag}</option>
+            ))}
+          </select>
+        </label>
       </div>
-      <label class="blog-tag-picker" for="blog-tag-filter">
-        <span>Explore a tag</span>
-        <select id="blog-tag-filter" aria-label="Filter articles by tag">
-          <option value="">All tags</option>
-          {tags.map((tag) => (
-            <option value={tag}>{tag}</option>
+      <label class="date-jump-mobile">
+        Jump through the archive
+        <select data-blog-date-picker>
+          <option value="">Choose a month or year</option>
+          {years.map((year) => (
+            <optgroup label={year}>
+              {months
+                .filter((month) => month.year === year)
+                .map((month) => (
+                  <option value={month.key}>
+                    {month.label} · {month.items.length}
+                  </option>
+                ))}
+            </optgroup>
           ))}
         </select>
       </label>
-    </div>
+    </FilterPanel>
     <p id="result-count" class="result-count" aria-live="polite">
       {articles.length} articles
     </p>

@@ -627,6 +627,8 @@ test("Meet Vish signs the biography directly below its text with transparent ink
     /class="meet-signoff"[\s\S]*?vish-signature\.webp[\s\S]*?<\/main>/,
   );
   assert.match(page, /alt="Vishruth Harithsa’s handwritten signature"/);
+  assert.match(page, /class="meet-signoff-name">Vishruth Harithsa<\/p>/);
+  assert.ok(!page.includes("LIFE IN BETWEEN"));
   assert.ok(page.indexOf("personal-story") < page.indexOf("meet-signoff"));
   assert.ok(page.indexOf("meet-signoff") < page.indexOf("interest-links"));
   assert.equal((page.match(/vish-signature\.webp/g) ?? []).length, 1);
