@@ -1,4 +1,5 @@
 export interface Project {
+  html?: string;
   slug: string;
   title: string;
   category: string;

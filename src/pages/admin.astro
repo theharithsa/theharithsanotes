@@ -288,8 +288,8 @@ const tables = [
                 ["content:read", "Read drafts & history", true],
                 ["content:write", "Create & edit drafts", true],
                 ["content:publish", "Publish & unpublish", false],
-                ["media:read", "Read private images", false],
-                ["media:write", "Upload images", true],
+                ["media:read", "Read private media", false],
+                ["media:write", "Upload media", true],
               ].map(([value, label, checked]) => (
                 <label class="cms-check">
                   <input
@@ -433,6 +433,12 @@ const tables = [
       type="file"
       id="cms-file"
       accept="image/jpeg,image/png,image/webp"
+      hidden
+    />
+    <input
+      type="file"
+      id="cms-media-file"
+      accept="video/mp4,video/webm,audio/mpeg,audio/mp4,audio/ogg"
       hidden
     />
   </section>

@@ -216,7 +216,7 @@ export async function publishEntry(
           throw new CmsError(
             "MEDIA_NOT_READY",
             409,
-            "An image is still unavailable. Upload it again before publishing",
+            "A media file is still unavailable. Upload it again before publishing",
           );
         if (
           media.some(
@@ -228,7 +228,7 @@ export async function publishEntry(
           throw new CmsError(
             "FORBIDDEN",
             403,
-            "Private images must stay in their original collection",
+            "Private media must stay in its original collection",
           );
         if (
           isRestrictedSection(section) &&

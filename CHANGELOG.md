@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.0
+
+- Add editable, responsive YouTube/Vimeo/Spotify and native video/audio blocks, standalone-link paste conversion, and video/audio uploads with private authorization and byte-range playback.
+- Extend rich stories to all post collections and document the shared API/sanitizer contract.
+- Contain Workspace status/help text and remove redundant invitation filler.
+
 ## 1.21.1 — 2026-11-07
 
 - Reduce post and editor reading text by 15% while retaining large headings and genuine italics.

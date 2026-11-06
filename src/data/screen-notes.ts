@@ -1,4 +1,5 @@
 export interface ScreenNote {
+  html?: string;
   slug: string;
   title: string;
   kind: "Movie" | "Series";

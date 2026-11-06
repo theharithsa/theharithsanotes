@@ -1,4 +1,5 @@
 ---
+import { sanitizePostHtml } from "../../../lib/post-html";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import Base from "../../../layouts/Base.astro";
 import PodcastArt from "../../../components/PodcastArt.astro";
@@ -49,6 +50,14 @@ const index = Astro.props.index ?? 0;
         </a>
       </div>
     </header>
+    <div class="wrap">
+      {note.html && (
+        <div
+          class="post-body post-extra-body"
+          set:html={sanitizePostHtml(note.html)}
+        />
+      )}
+    </div>
     <div class="wrap podcast-detail-footer">
       <a class="text-link" href="/podcasts">
         More listening notes

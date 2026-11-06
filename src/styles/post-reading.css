@@ -32,6 +32,51 @@
   --post-note: #302e27;
   --post-note-ink: #eee8db;
 }
+.post-extra-body {
+  margin-block: 32px;
+}
+:is(.post-body, .cms-rich-editor) .post-media,
+#reading-body.post-body > .post-media {
+  display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  margin: 24px 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--post-rule);
+  border-radius: 8px;
+  background: var(--post-note);
+}
+:is(.post-body, .cms-rich-editor) :is(iframe, video) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #171717;
+}
+:is(.post-body, .cms-rich-editor) video {
+  object-fit: contain;
+}
+:is(.post-body, .cms-rich-editor) audio {
+  display: block;
+  width: 100%;
+  padding: 12px;
+}
+:is(.post-body, .cms-rich-editor) .post-media-audio iframe {
+  aspect-ratio: auto;
+  height: 352px;
+}
+:is(.post-body, .cms-rich-editor) .post-media figcaption {
+  padding: 10px 14px;
+  margin: 0;
+  font: 13px/1.5 var(--sans);
+}
+.cms-rich-editor .post-media.ProseMirror-selectednode {
+  outline: 2px solid #3859a6;
+  outline-offset: 3px;
+}
 :is(.post-body, .cms-rich-editor.post-editor .tiptap) {
   min-width: 0;
   font: 400 var(--post-text-size)/1.5 var(--post-font);

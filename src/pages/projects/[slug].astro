@@ -1,4 +1,5 @@
 ---
+import { sanitizePostHtml } from "../../lib/post-html";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import ProjectArt from "../../components/ProjectArt.astro";
 import Base from "../../layouts/Base.astro";
@@ -95,6 +96,14 @@ const project = loaded.data;
           </div>
         </section>
       </div>
+    </div>
+    <div class="wrap">
+      {project.html && (
+        <div
+          class="post-body post-extra-body"
+          set:html={sanitizePostHtml(project.html)}
+        />
+      )}
     </div>
   </article>
 </Base>

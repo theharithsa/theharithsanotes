@@ -1,4 +1,5 @@
 ---
+import { sanitizePostHtml } from "../../../lib/post-html";
 import Base from "../../../layouts/Base.astro";
 import PodcastArt from "../../../components/PodcastArt.astro";
 import { detail } from "../../../lib/journal";
@@ -41,5 +42,13 @@ const note = loaded.data;
         )}
       </div>
     </header>
+    <div class="wrap">
+      {note.html && (
+        <div
+          class="post-body post-extra-body"
+          set:html={sanitizePostHtml(note.html)}
+        />
+      )}
+    </div>
   </article>
 </Base>

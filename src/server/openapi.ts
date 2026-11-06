@@ -177,7 +177,7 @@ export function openApiDocument() {
       url: {
         type: "string",
         description:
-          "Use this path in entry image/src/poster fields. Private until published.",
+          "Images: use in image/src/poster fields. Video/audio: use in an HTML video/audio block. Private until published. Restricted collections remain invitation-only.",
       },
       apiUrl: {
         type: "string",
@@ -186,6 +186,8 @@ export function openApiDocument() {
       width: { type: "integer" },
       height: { type: "integer" },
       alt: { type: "string" },
+      kind: { type: "string", enum: ["image", "video", "audio"] },
+      contentType: { type: "string" },
     },
   };
   paths["/media"] = {
@@ -203,9 +205,9 @@ export function openApiDocument() {
     },
     post: {
       tags: ["Media"],
-      summary: "Upload an image",
+      summary: "Upload an image, video or audio file",
       description:
-        "Requires media:write. JPEG, PNG or WebP, at most 8 MiB / 40 megapixels. Metadata is stripped and responsive WebP variants generated. New images are private until referenced by a publication.",
+        "Requires media:write. JPEG/PNG/WebP ≤8 MiB / 40 megapixels are metadata-stripped and converted to responsive WebP. MP4/WebM video and MP3/M4A/Ogg audio ≤24 MiB retain original bytes and metadata; file signatures choose the served type. No transcoding. New media stays private until referenced by publication; Journal/People media remains invitation-only. HTML accepts standalone YouTube/Vimeo/Spotify links or safe video/audio/iframe blocks; arbitrary iframe providers are removed.",
       requestBody: {
         required: true,
         content: {
@@ -234,7 +236,7 @@ export function openApiDocument() {
   paths["/media/{id}/{variant}"] = {
     get: {
       tags: ["Media"],
-      summary: "Download an uploaded image, including private drafts",
+      summary: "Download uploaded media, including private drafts",
       description: "Requires media:read. Response is private/no-store.",
       parameters: [
         {
@@ -249,13 +251,24 @@ export function openApiDocument() {
           required: true,
           schema: {
             type: "string",
-            enum: ["master.webp", "400.webp", "800.webp", "1600.webp"],
+            enum: [
+              "master.webp",
+              "400.webp",
+              "800.webp",
+              "1600.webp",
+              "source.mp4",
+              "source.webm",
+              "source.mp3",
+              "source.m4a",
+              "source.ogg",
+            ],
           },
         },
       ],
       responses: {
         200: {
-          description: "WebP image",
+          description:
+            "Image, video or audio; playable files support a single byte range (206/416).",
           content: {
             "image/webp": { schema: { type: "string", format: "binary" } },
           },

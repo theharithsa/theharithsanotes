@@ -149,6 +149,7 @@ const schemas: Record<Section, z.ZodType> = {
   books: z
     .object({
       ...base,
+      html: z.string().max(460000).optional(),
       slug,
       author: z.string().max(240),
       status: z.literal("Read"),
@@ -166,6 +167,7 @@ const schemas: Record<Section, z.ZodType> = {
   projects: z
     .object({
       ...base,
+      html: z.string().max(460000).optional(),
       slug,
       category: z.string().max(80),
       description: text,
@@ -183,6 +185,7 @@ const schemas: Record<Section, z.ZodType> = {
   podcasts: z
     .object({
       ...base,
+      html: z.string().max(460000).optional(),
       slug,
       artLabel: text,
       show: text,
@@ -196,6 +199,7 @@ const schemas: Record<Section, z.ZodType> = {
   entertainment: z
     .object({
       ...base,
+      html: z.string().max(460000).optional(),
       slug,
       kind: z.enum(["Movie", "Series"]),
       date,
@@ -334,7 +338,7 @@ export function validateData(
     throw new CmsError(
       "INVALID_CONTENT",
       413,
-      "Use at most 100 uploaded images in one entry",
+      "Use at most 100 uploaded media files in one entry",
     );
   if (publish && section === "photos" && (!data.src || !data.alt))
     throw new CmsError(
