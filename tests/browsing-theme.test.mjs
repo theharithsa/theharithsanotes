@@ -51,9 +51,8 @@ test("read-only genre browsing combines genre, author and rating; project topics
     assert.ok(book.genres.length);
     assert.ok(book.genres.every((genre) => genres.includes(genre)));
   }
-  const genreButtons = ["All genres", ...genres].map((genre) =>
-    element({ genreFilter: genre }),
-  );
+  const genreSelect = element();
+  genreSelect.value = "All genres";
   const bookCards = books.map((book) =>
     element({
       genres: JSON.stringify(book.genres),
@@ -76,6 +75,7 @@ test("read-only genre browsing combines genre, author and rating; project topics
     projectCount = element();
   rating.value = "all";
   const singles = new Map([
+    ["#book-genre-filter", genreSelect],
     ["#book-search", search],
     ["#book-rating-filter", rating],
     ["#shelf-count", count],
@@ -84,7 +84,6 @@ test("read-only genre browsing combines genre, author and rating; project topics
     ["#project-count", projectCount],
   ]);
   const groups = new Map([
-    ["[data-genre-filter]", genreButtons],
     ["[data-book]", bookCards],
     ["[data-project-filter]", topicButtons],
     ["[data-project]", projectCards],
@@ -102,7 +101,11 @@ test("read-only genre browsing combines genre, author and rating; project topics
     buttons
       .find((button) => button.dataset[key] === value)
       .listeners.get("click")();
-  choose(genreButtons, "genreFilter", "Science & nature");
+  const chooseGenre = (genre) => {
+    genreSelect.value = genre;
+    genreSelect.listeners.get("change")();
+  };
+  chooseGenre("Science & nature");
   assert.equal(count.textContent, "6 books");
   search.value = "Hawking";
   search.listeners.get("input")();
@@ -116,7 +119,7 @@ test("read-only genre browsing combines genre, author and rating; project topics
   assert.equal(count.textContent, "0 books");
   search.value = "";
   rating.value = "all";
-  choose(genreButtons, "genreFilter", "All genres");
+  chooseGenre("All genres");
   assert.equal(count.textContent, "50 books");
   assert.equal(empty.hidden, true);
   for (const topic of [
@@ -261,7 +264,8 @@ test("SEO, route colours, canonical aliases and GoGs are present in the built do
   assert.ok(gogs.includes("coming soon"));
   const shelf = await page("books/index.html");
   assert.ok(!/data-shelf-filter|data-status=|>To read<|>Reading</.test(shelf));
-  assert.equal((shelf.match(/data-genre-filter=/g) ?? []).length, 9);
+  assert.ok(shelf.includes('id="book-genre-filter"'));
+  assert.ok(!shelf.includes("data-genre-filter="));
   const articleData = JSON.parse(
     await readFile(new URL("src/data/medium-articles.json", root), "utf8"),
   );
@@ -277,7 +281,9 @@ test("SEO, route colours, canonical aliases and GoGs are present in the built do
     );
     assert.equal(schema.headline, article.title);
     assert.equal(schema.datePublished, article.date);
-    assert.ok(schema.image[0].startsWith("https://theharithsanotes.com/images/"));
+    assert.ok(
+      schema.image[0].startsWith("https://theharithsanotes.com/images/"),
+    );
   }
   for (const book of books) {
     const html = await page(`books/${book.slug}/index.html`);

@@ -62,10 +62,26 @@ import BookRating from "../components/BookRating.astro";
         <h2>Different books. New perspectives.</h2>
       </div>
     </div>
-    <div class="book-journal-tools">
+    <div
+      class="book-journal-tools"
+      role="group"
+      aria-label="Filter the bookshelf"
+    >
+      <div>
+        <label for="book-genre-filter">Explore a genre</label>
+        <select id="book-genre-filter" aria-controls="book-results">
+          <option value="All genres">All genres · {books.length}</option>
+          {genres.map((genre) => (
+            <option value={genre}>
+              {genre} ·{" "}
+              {books.filter((book) => book.genres.includes(genre)).length}
+            </option>
+          ))}
+        </select>
+      </div>
       <div>
         <label for="book-rating-filter">My rating</label>
-        <select id="book-rating-filter">
+        <select id="book-rating-filter" aria-controls="book-results">
           <option value="all">All ratings</option>
           {[5, 4, 3, 2, 1, 0]
             .filter((rating) =>
@@ -78,25 +94,6 @@ import BookRating from "../components/BookRating.astro";
             ))}
         </select>
       </div>
-    </div>
-    <div
-      class="filters shelf-filters genre-filters"
-      aria-label="Filter by book genre"
-    >
-      {["All genres", ...genres].map((genre, index) => (
-        <button
-          data-genre-filter={genre}
-          aria-pressed={index === 0}
-          aria-controls="book-results"
-        >
-          {genre}
-          <span class="filter-count">
-            {index === 0
-              ? books.length
-              : books.filter((book) => book.genres.includes(genre)).length}
-          </span>
-        </button>
-      ))}
     </div>
     <p id="shelf-count" class="result-count" aria-live="polite">
       {books.length} books

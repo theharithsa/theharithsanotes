@@ -1,3 +1,7 @@
+# Books browsing controls 1.19.3 / issue #70
+
+Replace the genre button cards with #book-genre-filter beside My rating in a compact desktop row and stacked mobile layout, using Blog's control styling. Preserve genre/rating combinations, counts and empty state; page-motion reveals the book grid for both selectors. See docs/books-filters-1.19.3.md and the linked PR for validation and provider receipts. No content or backend changes; preserve the 1.19.2 biography/signature work.
+
 # Signature placement correction 1.19.2 / issue #67
 
 The signature belongs directly beneath the biography text/closing quote inside personal-statement, before interest links. Remove the former page-end placement. Reuse the same transparent asset and dark-mode treatment; no CMS/API/data or dependency changes. Check adjacency, single instance, desktop/mobile layout and unchanged alpha. Roll back to the prior runtime/Hosting if required.

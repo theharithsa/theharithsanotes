@@ -249,16 +249,15 @@ document.querySelector("[data-reset-search]")?.addEventListener("click", () => {
 });
 if (notes.length && filters.length) filterNotes();
 
-const genreFilters = document.querySelectorAll<HTMLButtonElement>(
-  "[data-genre-filter]",
-);
+const genreFilters =
+  document.querySelector<HTMLSelectElement>("#book-genre-filter");
 const bookCards = document.querySelectorAll<HTMLElement>("[data-book]");
 const bookSearch = document.querySelector<HTMLInputElement>("#book-search");
 const bookRatingFilter = document.querySelector<HTMLSelectElement>(
   "#book-rating-filter",
 );
-let selectedGenre = "All genres";
 function filterBooks(): void {
+  const selectedGenre = genreFilters?.value ?? "All genres";
   const query = (bookSearch?.value ?? "").trim().toLocaleLowerCase();
   const rating = bookRatingFilter?.value ?? "all";
   let count = 0;
@@ -278,17 +277,10 @@ function filterBooks(): void {
   const empty = document.querySelector<HTMLElement>("#book-empty");
   if (empty) empty.hidden = count > 0;
 }
-genreFilters.forEach((button) =>
-  button.addEventListener("click", () => {
-    selectedGenre = button.dataset.genreFilter ?? "All genres";
-    genreFilters.forEach((filter) =>
-      filter.setAttribute("aria-pressed", String(filter === button)),
-    );
-    filterBooks();
-  }),
-);
+genreFilters?.addEventListener("change", filterBooks);
 bookSearch?.addEventListener("input", filterBooks);
 bookRatingFilter?.addEventListener("change", filterBooks);
+if (bookCards.length) filterBooks();
 
 const projectFilters = document.querySelectorAll<HTMLButtonElement>(
   "[data-project-filter]",
