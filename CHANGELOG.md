@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.20.1 — 2026-11-06
+
+- Make private reader titles, cover art and prose spacing more compact.
+- Display consecutive journal photos in a responsive grid without cropping or changing private access.
+
 ## 1.20.0 — 2026-11-06
 
 - Tighten the Meet Vish hero, reduce the signature and add the printed name; remove its Life in between photo teaser.

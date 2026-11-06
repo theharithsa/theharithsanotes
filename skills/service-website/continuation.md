@@ -1,3 +1,7 @@
+# Compact private reader 1.20.1 / issue #74
+
+Invitation-only reading uses compact title/cover/prose sizing. Consecutive top-level figures share three desktop or two phone columns, preserving natural proportions and alt text; prose interrupts each run. Public Blog styles, content contracts and access stay unchanged. See docs/compact-private-reader-1.20.1.md and the linked PR for evidence. Private content edits remain outside source and release archives; rollback uses matching 1.20.0 assets.
+
 # Editorial layout polish 1.20.0 / issue #72
 
 FilterPanel wraps public Blog/Books/Projects/Entertainment/Podcast browsing; filter-panels.ts keeps desktop open and mobile initially collapsed, with native disclosure semantics. Blog archive dates now live inside this panel. Controls use the shared 8px shape. Meet Vish uses a 24px heading gap, 200px signature with printed name and no Life in between teaser; preserve the biography and gallery route. Blog-only opening prose drop caps are CSS presentation, not content writes. See docs/editorial-layout-1.20.0.md and issue/PR provider evidence. Rollback uses matching 1.19.3 runtime/client assets.
