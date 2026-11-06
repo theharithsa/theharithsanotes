@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.14.3] — 2026-11-06
+
+- Restore People and Journal sessions through a neutral loading state instead of flashing sign-in; load session and posts concurrently and guard navigation/sign-out races (#42).
+- Keep temporary reading failures retryable and preserve invitation checks and private caching boundaries.
+
 ## [1.14.2] — 2026-11-06
 
 - Give homepage project cards responsive inner text margins while preserving full-bleed illustrations and the asymmetric grid (#40).

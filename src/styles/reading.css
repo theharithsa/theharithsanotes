@@ -2,6 +2,29 @@
 .reading-room {
   min-height: 45vh;
 }
+.reading-loading {
+  max-width: 900px;
+}
+.reading-loading > p {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 16px 0 28px;
+}
+.reading-placeholder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.reading-placeholder span {
+  display: block;
+  height: clamp(120px, 22vw, 240px);
+  border-radius: 4px;
+  background: var(--blue);
+  opacity: 0.55;
+}
+.reading-loading:has(#reader-retry:not([hidden])) .reading-placeholder {
+  display: none;
+}
 .reading-gate {
   max-width: 660px;
   padding: clamp(24px, 5vw, 48px);
@@ -86,6 +109,8 @@
 .private-detail-masthead p {
   display: none;
 }
+#reading-loading[hidden],
+#reader-retry[hidden],
 #reading-content[hidden],
 #reading-gate[hidden],
 #reading-post[hidden],

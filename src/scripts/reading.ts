@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   signOut,
+  type User,
 } from "firebase/auth";
 import { firebaseConfig } from "../lib/firebase-config";
 
@@ -13,6 +14,29 @@ const node = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const message = node("reader-message");
 let generation = 0;
+let pendingRead: AbortController | undefined;
+let signingOut = false;
+let signOutFailed = false;
+const sessions = new Set<Promise<unknown>>();
+type Phase = "loading" | "ready" | "signed-out" | "denied" | "error";
+function phase(value: Phase, detail?: string) {
+  node("reading-room").dataset.state = value;
+  node("reading-room").setAttribute("aria-busy", String(value === "loading"));
+  node("reading-loading").hidden = value !== "loading" && value !== "error";
+  node("reading-gate").hidden = value !== "signed-out" && value !== "denied";
+  node("reading-content").hidden = value !== "ready";
+  node("reader-retry").hidden = value !== "error";
+  node("reader-loading-message").textContent =
+    detail ?? "Opening your notebook…";
+}
+class ReaderError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+  }
+}
 interface Post {
   id: string;
   title: string;
@@ -24,29 +48,42 @@ interface Post {
   html?: string;
   tags?: string[];
 }
-async function api<T>(path: string, method = "GET"): Promise<T> {
-  const token = await auth.currentUser?.getIdToken();
-  if (!token) throw new Error("Sign in with the Google account Vish invited.");
+async function api<T>(
+  path: string,
+  user: User,
+  signal?: AbortSignal,
+  method = "GET",
+): Promise<T> {
+  const token = await user.getIdToken();
+  signal?.throwIfAborted();
   const response = await fetch(`/api/reading/${path}`, {
     method,
     headers: { Authorization: `Bearer ${token}` },
     credentials: "same-origin",
     cache: "no-store",
+    signal: signal
+      ? AbortSignal.any([signal, AbortSignal.timeout(30000)])
+      : AbortSignal.timeout(30000),
   });
-  const result = await response.json();
+  const result = (await response.json()) as T & {
+    error?: { message?: string };
+  };
   if (!response.ok)
-    throw new Error(
+    throw new ReaderError(
       result.error?.message ?? "The reading room could not load. Try again.",
+      response.status,
     );
   return result as T;
 }
 function clear(forgetAccess = false) {
-  document
-    .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
-    .forEach((link) => {
-      link.textContent = "Sign in";
-      link.setAttribute("aria-label", "Sign in to the private reading room");
-    });
+  if (forgetAccess) {
+    document
+      .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
+      .forEach((link) => {
+        link.textContent = "Sign in";
+        link.setAttribute("aria-label", "Sign in to the private reading room");
+      });
+  }
   try {
     if (forgetAccess) localStorage.removeItem("harithsa.reader-ready");
   } catch {}
@@ -55,37 +92,44 @@ function clear(forgetAccess = false) {
   for (const id of ["reading-title", "reading-description", "reading-date"])
     node(id).textContent = "";
   node<HTMLImageElement>("reading-cover").removeAttribute("src");
-  node("reading-content").hidden = true;
-  node("reading-gate").hidden = false;
 }
 async function load() {
   const own = ++generation;
+  pendingRead?.abort();
+  pendingRead = new AbortController();
+  const signal = pendingRead.signal;
   clear();
-  if (!auth.currentUser) {
+  phase("loading");
+  if (signingOut) return;
+  await auth.authStateReady();
+  if (own !== generation) return;
+  const user = auth.currentUser;
+  if (!user) {
     clear(true);
     message.textContent = "By invitation, with a little room for curiosity.";
+    phase("signed-out");
     return;
   }
-  message.textContent = "Opening your invitation…";
   try {
-    await api("session", "POST");
-    try {
-      localStorage.setItem("harithsa.reader-ready", "true");
-    } catch {}
-    document
-      .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
-      .forEach((link) => {
-        link.textContent = "People & Journal";
-        link.setAttribute("aria-label", "Open People and Journal");
-      });
+    const session = api("session", user, undefined, "POST");
+    sessions.add(session);
+    void session.then(
+      () => sessions.delete(session),
+      () => sessions.delete(session),
+    );
     const segments = location.pathname.split("/").filter(Boolean);
     const section = segments[1] === "people" ? "people" : "journal";
     const slug = segments[2];
     if (slug) {
       const preview = new URLSearchParams(location.search).get("preview");
-      const { post } = await api<{ post: Post }>(
-        `${section}/${encodeURIComponent(slug)}${preview ? "?preview=" + encodeURIComponent(preview) : ""}`,
-      );
+      const [, { post }] = await Promise.all([
+        session,
+        api<{ post: Post }>(
+          `${section}/${encodeURIComponent(slug)}${preview ? "?preview=" + encodeURIComponent(preview) : ""}`,
+          user,
+          signal,
+        ),
+      ]);
       if (own !== generation) return;
       if (!preview && post.slug !== slug) {
         location.replace(
@@ -105,7 +149,10 @@ async function load() {
       node("reading-post").hidden = false;
       node("reading-posts").hidden = true;
     } else {
-      const { posts } = await api<{ posts: Post[] }>(section);
+      const [, { posts }] = await Promise.all([
+        session,
+        api<{ posts: Post[] }>(section, user, signal),
+      ]);
       if (own !== generation) return;
       posts.sort((a, b) =>
         section === "journal"
@@ -200,8 +247,17 @@ async function load() {
         grid.append(empty);
       }
     }
-    node("reading-gate").hidden = true;
-    node("reading-content").hidden = false;
+    if (own !== generation) return;
+    try {
+      localStorage.setItem("harithsa.reader-ready", "true");
+    } catch {}
+    document
+      .querySelectorAll<HTMLAnchorElement>(".reading-entry-link")
+      .forEach((link) => {
+        link.textContent = "People & Journal";
+        link.setAttribute("aria-label", "Open People and Journal");
+      });
+    phase("ready");
     document
       .querySelector<HTMLAnchorElement>(
         `.reading-categories a[href="/people-and-journal/${section}"]`,
@@ -209,9 +265,18 @@ async function load() {
       ?.setAttribute("aria-current", "page");
   } catch (error) {
     if (own !== generation) return;
-    clear(true);
-    message.textContent =
-      error instanceof Error ? error.message : "Try signing in again.";
+    pendingRead?.abort();
+    clear();
+    if (
+      error instanceof ReaderError &&
+      (error.status === 401 || error.status === 403)
+    ) {
+      clear(true);
+      message.textContent = error.message;
+      phase(error.status === 401 ? "signed-out" : "denied");
+    } else {
+      phase("error", "The notebook could not load. Please try again.");
+    }
   }
 }
 function formatDate(date: string) {
@@ -229,29 +294,52 @@ node("reader-signin").addEventListener("click", async () => {
   try {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
+    const before = generation;
     await signInWithPopup(auth, provider);
+    if (before === generation) void load();
   } catch {
     message.textContent = "Sign-in did not finish. You can try again.";
   }
 });
-node("reader-signout").addEventListener("click", async () => {
+node("reader-retry").addEventListener(
+  "click",
+  () => void (signOutFailed ? endSession() : load()),
+);
+async function endSession() {
+  signingOut = true;
   generation++;
+  pendingRead?.abort();
   clear(true);
+  phase("loading", "Signing out…");
   try {
-    await fetch("/api/reading/session", {
+    await signOut(auth);
+    // Let already-started session responses settle before deleting their cookie.
+    await Promise.allSettled([...sessions]);
+    const response = await fetch("/api/reading/session", {
       method: "DELETE",
       credentials: "same-origin",
+      cache: "no-store",
+      signal: AbortSignal.timeout(30000),
     });
-    await signOut(auth);
+    if (!response.ok) throw new Error("Session cleanup failed");
+    signOutFailed = false;
     message.textContent = "You’re signed out.";
+    phase("signed-out");
   } catch {
-    message.textContent = "Your sign-out could not finish. Please try again.";
+    signOutFailed = true;
+    phase("error", "Your sign-out could not finish. Please try again.");
+  } finally {
+    signingOut = false;
   }
-});
+}
+node("reader-signout").addEventListener("click", () => void endSession());
+phase("loading");
 onAuthStateChanged(auth, () => void load());
 window.addEventListener("pagehide", () => {
   generation++;
+  pendingRead?.abort();
   clear();
+  phase("loading");
 });
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) void load();
