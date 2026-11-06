@@ -1,3 +1,9 @@
+# Current release — 1.12.0
+
+CMS implementation PR #28 is merged and deployed. Read [CMS continuation](../../docs/cms-implementation-status.md) and [release evidence](../../docs/cms-release-1.12.0.md) before the historical notes below. Firestore is now the live authoring store; nine tables, drafts/publish, private media, timelines and durable Dynatrace audit delivery are active. Interactive owner sign-in was not completed because browser control stopped. Preserve all data and the frozen Margin identity.
+
+## Earlier continuation history
+
 # website continuation
 
 Current implementation: issue #25 / PR #26, application 1.11.0. Owner selected The Margin and requested the full logo/icon family. public/brand/v1 holds native path masters, raster exports, optical favicon and maskable/app/Apple/profile icons; the ZIP/hash manifest comes from scripts/generate-brand.py, render-brand.mts and package-brand.py. docs/brand-system.md owns identity 1.0.0. Base/Wordmark consume paths and icons, Racing Sans One is removed, and homepage decorative books/header sizing is corrected at 320px. Initial type/build passed (174 pages, two existing parser hints); twenty-one Node tests, foundation/links and Python passed with one POSIX-only skip. Final integrated rebuild and release receipts must reference the checked head. Owner cancelled the additional domain: the two newly created inactive Firebase custom-domain resources were removed; registrar records were never edited. Keep theharithsa.com canonical. No CMS/backend or consent changes; tenant/SDLC ingestion remains unverified.
