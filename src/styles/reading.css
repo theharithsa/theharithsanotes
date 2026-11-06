@@ -3,13 +3,20 @@
   margin: auto;
   padding: 70px 32px 110px;
 }
-.reading-entry-link {
-  font:
-    500 0.75rem "Public Sans Variable",
-    sans-serif;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: 8px 6px;
+.reading-mosaic > p {
+  grid-column: 1/-1;
+  padding: 28px 0;
+}
+.reading-detail .reading-heading {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+.reading-detail .reading-heading h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin: 14px 0;
+}
+.reading-detail .reading-heading > p {
+  display: none;
 }
 .reading-heading {
   border-bottom: 1px solid var(--line, #d6cdc2);
@@ -234,5 +241,8 @@ html[data-theme="dark"] .reading-gate {
   border-color: #5e6c80;
 }
 html[data-theme="dark"] .reading-heading h1 em {
+  color: #e7a47e;
+}
+html[data-theme="dark"] .reading-eyebrow {
   color: #e7a47e;
 }

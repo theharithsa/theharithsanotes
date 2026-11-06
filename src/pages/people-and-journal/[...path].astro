@@ -4,13 +4,17 @@ import "../../styles/reading.css";
 export function getStaticPaths() {
   return [undefined, "journal", "people"].map((path) => ({ params: { path } }));
 }
+const isDetail = Boolean(Astro.params.path?.split("/")[1]);
 ---
 
 <Base
   title="People and Journal"
   description="A private reading room for the people Vish invites."
 >
-  <section class="reading-room" id="reading-room">
+  <section
+    class:list={["reading-room", { "reading-detail": isDetail }]}
+    id="reading-room"
+  >
     <header class="reading-heading">
       <span class="reading-eyebrow">THE PRIVATE NOTEBOOK</span>
       <h1>
