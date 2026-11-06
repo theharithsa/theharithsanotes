@@ -1,6 +1,6 @@
 # Workspace/API continuation
 
-## Active issues #33 and #35 — 1.14.0
+## Release 1.14.0 — issues #33 and #35
 
 The owner has now explicitly authorized theharithsanotes.com as primary and theharithsa.com redirects. This supersedes the historical no-extra-domain restriction below. Preserve the frozen Margin identity and existing owner content. Journal and People are invitation-only posts; only the owner can whitelist readers. Read docs/people-journal.md before modifying access, media, API scopes or import behavior. Private Notion inputs and all 54 cover assets are outside the repository in the local private import directory; never include them in Git, public build assets or telemetry. Update final provider/runtime evidence after release; implementation, local tests and production verification are separate states.
 
@@ -15,3 +15,5 @@ Validated 26 Node tests, nine CMS/schema/emulator checks, current-head/main CI, 
 Apply any remaining final patch checks/deployment from its immutable checked artifact. Do not reset drafts, media, revocations or audit records when rolling back. Preserve Margin identity 1.0.0 and theharithsa.com. No DNS work or extra domain is authorized or needed here.
 
 Issue #35 adds contained Blog tags, shared mobile category dropdowns and `/search` backed by `/api/search/query`. Read docs/browsing-and-themes.md before changing search. Restricted indexes are request-local, reauthorize each search, and never enter public caches. The reading room uses Blog masthead/cards/archive/prose. Local Chrome checks verified 320px containment, desktop tag alignment, working category selections and cross-section search. Update final hosted evidence after release.
+
+Production 1.14.0 is deployed from a3c5443ef1ecfd61d965acd1ca4f689839bb11ee. All 51 Journal and 3 People records, source hashes and 54 distinct private illustrations were verified; all private image requests deny anonymous access. Fresh primary-domain Google sign-in, both reading collections/details, mobile selection, dark mode, search and sign-out were verified in Chrome. Old-domain/www redirects preserve paths and queries. See docs/people-journal-release.md for exact image, Hosting/Run/build and tenant evidence. This supersedes the historical old-domain/extra-domain restrictions below. Preserve invitation-only access; no reader was automatically invited.
