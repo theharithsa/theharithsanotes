@@ -1,3 +1,7 @@
+# Site-wide classic typography 1.21.1 / issue #78
+
+Owner requested 15% smaller reading text and consistent classic typography on every page. `post-reading.css` owns rem-based 16.15px desktop / 14.45px phone reading and 15.3px desktop notes, based on a 16px browser default; headings stay large. `site-typography.css` applies the classic face to page narratives, collections and navigation while preserving UI/code roles. Meet Vish and Privacy now share post-body styling; private People/Journal and Workspace editor use the same tokens. Source Serif imports are removed; frozen logo/artwork, covers, photo grouping, content and access stay unchanged. See docs/site-typography-1.21.1.md and the linked PR for release evidence.
+
 # Classic post reading 1.21.0 / issue #76
 
 Owner approved design D with E callouts. `post-reading.css` and self-hosted Libre Baskerville own shared post prose; source-sans metadata and mono code/technical labels remain. Blog/GoGs/private detail use full uncropped covers before title. Preserve private three/two-column photo grouping and invitation/session/motion guards. CMS custom wrappers live in `post-blocks.ts`; `post-html.ts` is the shared import/CMS/API sanitizer. No content republish or data migration. See docs/classic-post-reading-1.21.0.md; final provider and tenant evidence belongs on the linked PR.
