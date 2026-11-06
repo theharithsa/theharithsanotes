@@ -7,6 +7,7 @@ import "@fontsource-variable/source-sans-3";
 import "@fontsource-variable/source-sans-3/wght-italic.css";
 import "@fontsource-variable/jetbrains-mono";
 import EditorialImage from "../components/EditorialImage.astro";
+import SearchOverlay from "../components/SearchOverlay.astro";
 import DirectoryBadge from "../components/DirectoryBadge.astro";
 import SocialIcon from "../components/SocialIcon.astro";
 import { socialProfiles } from "../data/social";
@@ -106,7 +107,7 @@ const graph = [
 >
   <head>
     <meta charset="UTF-8" />
-    {publicMotion && <style is:inline>
+    {publicMotion && <style is:inline id="public-page-transitions">
       @view-transition {
         navigation: auto;
       }
@@ -282,9 +283,12 @@ const graph = [
             <span class="theme-star theme-star-two"></span>
           </span>
         </button>
-        <a
+        <button
           class="search-link"
-          href="/search"
+          type="button"
+          data-open-search
+          aria-haspopup="dialog"
+          aria-controls="site-search"
           aria-label="Search the whole site"
         >
           <svg
@@ -298,7 +302,7 @@ const graph = [
             <circle cx="10.5" cy="10.5" r="6.5" />
             <path d="m16 16 5 5" />
           </svg>
-        </a>
+        </button>
         <button
           class="menu-toggle"
           aria-expanded="false"
@@ -333,6 +337,7 @@ const graph = [
       </script>
       <slot />
     </main>
+    <SearchOverlay />
     <footer class="site-footer">
       <div class="footer-top">
         <div class="footer-intro">

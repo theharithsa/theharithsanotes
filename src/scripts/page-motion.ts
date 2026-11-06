@@ -55,10 +55,12 @@ if (root.dataset.pageMotion === "public") {
   document.addEventListener("change", (event) => {
     if (
       !(event.target instanceof Element) ||
-      !event.target.matches("#book-rating-filter")
+      !event.target.matches("#book-rating-filter, #blog-tag-filter")
     )
       return;
-    const results = document.querySelector<HTMLElement>("#book-results");
+    const results = document.querySelector<HTMLElement>(
+      "#book-results, .dated-articles",
+    );
     if (results) revealElement(results, reduced());
   });
 }

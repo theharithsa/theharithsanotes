@@ -1,0 +1,125 @@
+---
+import "../styles/search-overlay.css";
+---
+
+<dialog
+  id="site-search"
+  class="spotlight"
+  aria-labelledby="spotlight-title"
+  data-dtrum-mask
+  data-dt-mask
+>
+  <h2 id="spotlight-title" class="sr-only">
+    Search the notebook
+  </h2>
+  <form id="global-search-form" method="dialog" role="search" novalidate>
+    <div class="spotlight-input-row">
+      <svg
+        aria-hidden="true"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+      >
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m16 16 5 5" />
+      </svg>
+      <label for="global-query" class="sr-only">
+        Search titles, topics and ideas
+      </label>
+      <input
+        id="global-query"
+        type="search"
+        maxlength="160"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="What are you curious about?"
+        aria-controls="global-search-results"
+        aria-describedby="global-search-status"
+        autofocus
+      />
+      <button type="button" id="spotlight-close" aria-label="Close search">
+        <svg
+          aria-hidden="true"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+        >
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </div>
+    <div class="spotlight-scope">
+      <label for="global-section">Look in</label>
+      <select id="global-section">
+        <option value="">Everything</option>
+        <option value="blogs">Blog</option>
+        <option value="books">Books</option>
+        <option value="projects">Projects</option>
+        <option value="podcasts">Podcasts</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="photos">Photos</option>
+        <option value="gogs">GoGs</option>
+        <option value="pages">Pages</option>
+        <option value="journal" data-private-search hidden>
+          Journal
+        </option>
+        <option value="people" data-private-search hidden>
+          People
+        </option>
+      </select>
+      <span class="spotlight-shortcut" aria-hidden="true">
+        esc to close
+      </span>
+    </div>
+  </form>
+  <div class="spotlight-body">
+    <div id="spotlight-start" class="spotlight-start">
+      <span class="eyebrow">A THOUGHT, A BOOK, A LITTLE CURIOSITY</span>
+      <p>Where shall we start?</p>
+      <div>
+        {["Observability", "AI", "Books", "Projects"].map((query) => (
+          <button type="button" data-search-suggestion={query}>
+            {query}
+          </button>
+        ))}
+      </div>
+    </div>
+    <p id="global-search-status" role="status" aria-live="polite">
+      Search across the notebook.
+    </p>
+    <ul
+      id="global-search-results"
+      class="spotlight-results"
+      aria-busy="false"
+      aria-label="Search suggestions"
+    ></ul>
+    <div
+      id="spotlight-loading"
+      class="spotlight-loading"
+      aria-hidden="true"
+      hidden
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <button id="spotlight-retry" class="text-button" type="button" hidden>
+      Try again
+    </button>
+    <button id="global-search-more" class="text-button" type="button" hidden>
+      More matches
+    </button>
+  </div>
+  <div class="spotlight-foot">
+    <span id="global-private-status">Search the published notebook.</span>
+    <span aria-hidden="true">↑ ↓ navigate · enter open</span>
+  </div>
+</dialog>
+<script src="../scripts/search.ts"></script>

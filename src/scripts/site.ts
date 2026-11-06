@@ -156,10 +156,14 @@ document.addEventListener("keydown", (event) => {
 const search = document.querySelector<HTMLInputElement>("#search");
 const filters = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
 const notes = document.querySelectorAll<HTMLElement>("[data-note]");
+const tagPicker = document.querySelector<HTMLSelectElement>("#blog-tag-filter");
 const tagButtons =
   document.querySelectorAll<HTMLButtonElement>("[data-blog-tag]");
 let selectedTag = new URLSearchParams(window.location.search).get("tag") ?? "";
-if (![...tagButtons].some((button) => button.dataset.blogTag === selectedTag))
+if (
+  !tagPicker &&
+  ![...tagButtons].some((button) => button.dataset.blogTag === selectedTag)
+)
   selectedTag = "";
 
 let selected =
@@ -167,6 +171,11 @@ let selected =
 if (![...filters].some((filter) => filter.dataset.filter === selected))
   selected = "All notes";
 function filterNotes(): void {
+  if (tagPicker) {
+    if (![...tagPicker.options].some((option) => option.value === selectedTag))
+      selectedTag = "";
+    tagPicker.value = selectedTag;
+  }
   const query = search?.value.toLowerCase().trim() ?? "";
   let count = 0;
   notes.forEach((note) => {
@@ -197,7 +206,7 @@ function filterNotes(): void {
       String(button.dataset.blogTag === selectedTag),
     ),
   );
-  if (notes.length && tagButtons.length) {
+  if (notes.length && (tagPicker || tagButtons.length)) {
     const url = new URL(location.href);
     for (const [key, value] of [
       ["q", search?.value.trim() ?? ""],
@@ -211,6 +220,10 @@ function filterNotes(): void {
   }
   document.dispatchEvent(new CustomEvent("journal:filtered"));
 }
+tagPicker?.addEventListener("change", () => {
+  selectedTag = tagPicker.value;
+  filterNotes();
+});
 tagButtons.forEach((button) =>
   button.addEventListener("click", () => {
     selectedTag =
