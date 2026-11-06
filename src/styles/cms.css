@@ -1525,8 +1525,88 @@ body:has(#invitations-room) {
   height: 52px;
   border-radius: 5px;
   background: var(--blue);
-  opacity: 0.55;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 .cms-restoring:has(#cms-auth-retry:not([hidden])) .cms-table-placeholder {
   display: none;
+}
+
+/* Generic table skeletons never contain entry data. */
+.cms-table-placeholder {
+  --cms-glint: #ffffffb3;
+}
+[data-theme="dark"] .cms-table-placeholder {
+  --cms-glint: #ffffff1f;
+}
+.cms-table-placeholder span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    var(--cms-glint) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  animation: cms-shimmer 1.65s ease-in-out infinite;
+}
+.cms-table-placeholder span:nth-child(even)::after {
+  animation-delay: 0.18s;
+}
+.cms-collection-placeholder {
+  padding: 22px 0;
+  animation: cms-loading-in 140ms ease-out;
+}
+.cms-collection-placeholder[hidden] {
+  display: none;
+}
+.cms-table-region[data-state="loading"] .cms-table-scroll {
+  display: none;
+}
+.cms-table-region[data-state="ready"] .cms-table-scroll {
+  animation: cms-table-reveal 240ms cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+}
+.cms-main[data-auth-state="ready"] .cms-collection {
+  animation: cms-loading-in 180ms ease-out;
+}
+@keyframes cms-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes cms-loading-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cms-table-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cms-table-placeholder span::after,
+  .cms-collection-placeholder,
+  .cms-table-region[data-state="ready"] .cms-table-scroll,
+  .cms-main[data-auth-state="ready"] .cms-collection {
+    animation: none;
+  }
+}
+.cms-table-region[data-state="appending"] {
+  display: flex;
+  flex-direction: column;
+}
+.cms-table-region[data-state="appending"] .cms-table-scroll {
+  order: -1;
 }

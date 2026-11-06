@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.15.3] — 2026-11-06
+
+- Add Workspace table shimmer and smooth row reveals during authentication, collection switches and refreshes (#52).
+- Clear stale collection rows, preserve pagination rows and respect dark/reduced-motion preferences.
+
 ## [1.15.2] — 2026-11-06
 
 - Add animated card skeletons and a short content reveal to People and Journal, with dark and reduced-motion support (#50).

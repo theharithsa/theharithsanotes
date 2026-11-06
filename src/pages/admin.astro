@@ -188,32 +188,44 @@ const tables = [
             </button>
           </div>
         </div>
-        <div class="cms-table-scroll">
-          <table class="cms-table">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Collection</th>
-                <th scope="col">Last edited</th>
-                <th scope="col">Revision</th>
-              </tr>
-            </thead>
-            <tbody id="cms-rows"></tbody>
-          </table>
-        </div>
-        <div class="cms-table-foot">
-          <span id="cms-row-count" aria-live="polite"></span>
-          <button id="cms-more" class="cms-quiet-button" hidden>
-            Load more entries
-          </button>
-        </div>
-        <div class="cms-empty" id="cms-empty" hidden>
-          <h2>A fresh page.</h2>
-          <p>
-            Your first entry can start here. Nothing goes live until you
-            publish.
-          </p>
+        <div class="cms-table-region" id="cms-table-region" aria-busy="false">
+          <div
+            id="cms-collection-loading"
+            class="cms-table-placeholder cms-collection-placeholder"
+            aria-hidden="true"
+            hidden
+          >
+            {Array.from({ length: 6 }, () => (
+              <span></span>
+            ))}
+          </div>
+          <div class="cms-table-scroll">
+            <table class="cms-table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Collection</th>
+                  <th scope="col">Last edited</th>
+                  <th scope="col">Revision</th>
+                </tr>
+              </thead>
+              <tbody id="cms-rows"></tbody>
+            </table>
+          </div>
+          <div class="cms-table-foot">
+            <span id="cms-row-count" aria-live="polite"></span>
+            <button id="cms-more" class="cms-quiet-button" hidden>
+              Load more entries
+            </button>
+          </div>
+          <div class="cms-empty" id="cms-empty" hidden>
+            <h2>A fresh page.</h2>
+            <p>
+              Your first entry can start here. Nothing goes live until you
+              publish.
+            </p>
+          </div>
         </div>
         <div class="cms-audit-status">
           <span id="cms-audit-status">Audit delivery status</span>
