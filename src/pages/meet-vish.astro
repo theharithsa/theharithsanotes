@@ -1,4 +1,5 @@
 ---
+import DirectoryBadge from "../components/DirectoryBadge.astro";
 import Base from "../layouts/Base.astro";
 import GalleryGrid from "../components/GalleryGrid.astro";
 import { site } from "../data/site";
@@ -22,6 +23,9 @@ const page = await getJournalPage("meet-vish");
         )}
         <p>{page.description}</p>
         <span class="location">BASED IN BENGALURU, INDIA</span>
+        <div class="meet-directory">
+          <DirectoryBadge />
+        </div>
       </div>
       <img
         src={page.image ?? "/images/gallery/portrait-seated.webp"}

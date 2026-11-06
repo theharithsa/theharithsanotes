@@ -7,6 +7,10 @@ import "@fontsource-variable/source-sans-3";
 import "@fontsource-variable/source-sans-3/wght-italic.css";
 import "@fontsource-variable/jetbrains-mono";
 import EditorialImage from "../components/EditorialImage.astro";
+import DirectoryBadge from "../components/DirectoryBadge.astro";
+import SocialIcon from "../components/SocialIcon.astro";
+import { socialProfiles } from "../data/social";
+import "../styles/motion.css";
 import Wordmark from "../components/Wordmark.astro";
 import { site } from "../data/site";
 import { navigation } from "../data/navigation";
@@ -46,6 +50,7 @@ const noindex =
   current.startsWith("/people-and-journal") ||
   current.startsWith("/account") ||
   Boolean(Astro.locals.draftPreview);
+const publicMotion = !noindex;
 const author = {
   "@type": "Person",
   "@id": `${site.url}/meet-vish#person`,
@@ -96,10 +101,17 @@ const graph = [
 <!doctype html>
 <html
   lang="en"
+  data-page-motion={publicMotion ? "public" : undefined}
   style={`--page-chrome-light: ${palette.light}; --page-chrome-dark: ${palette.dark}`}
 >
   <head>
     <meta charset="UTF-8" />
+    {publicMotion && <style is:inline>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>}
+    <script src="../scripts/page-motion.ts"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -311,6 +323,9 @@ const graph = [
         </a>
       </nav>
     </header>
+    <span id="page-navigation-status" class="sr-only" role="status" hidden>
+      Opening page…
+    </span>
     <main id="main">
       <script>
         import "../scripts/reading-link";
@@ -320,15 +335,29 @@ const graph = [
     </main>
     <footer class="site-footer">
       <div class="footer-top">
-        <Wordmark />
-        <p>
-          A few things I’m learning.
-          <br />A little of the life in between.
-        </p>
-        <div class="footer-social">
-          <a href={site.github}>GitHub ↗</a>
-          <a href={site.linkedin}>LinkedIn ↗</a>
-          <a href="/rss.xml">RSS ↗</a>
+        <div class="footer-intro">
+          <Wordmark />
+          <p>
+            A few things I’m learning.
+            <br />A little of the life in between.
+          </p>
+          <DirectoryBadge />
+        </div>
+        <div class="footer-connections">
+          <span class="eyebrow">FIND ME AROUND THE INTERNET</span>
+          <h2>Let’s stay curious.</h2>
+          <nav class="footer-social" aria-label="Vishruth’s social profiles">
+            {socialProfiles.map((profile) => (
+              <a href={profile.href} rel="me">
+                <SocialIcon name={profile.icon} />
+                <span>{profile.name}</span>
+              </a>
+            ))}
+            <a href="/rss.xml">
+              <SocialIcon name="rss" />
+              <span>RSS feed</span>
+            </a>
+          </nav>
         </div>
       </div>
       <div class="footer-bottom">

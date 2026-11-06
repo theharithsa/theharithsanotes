@@ -1,0 +1,95 @@
+---
+import type { SocialIconName } from "../data/social";
+interface Props {
+  name: SocialIconName;
+}
+const { name } = Astro.props;
+---
+
+<svg
+  width="22"
+  height="22"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.7"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {name === "github" && (
+    <path d="M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-2.7c3.3-.4 6.7-1.6 6.7-7.2a5.6 5.6 0 0 0-1.5-3.9 5.2 5.2 0 0 0-.1-3.8s-1.3-.4-4.1 1.5a14 14 0 0 0-7.4 0C4.8 0 3.5.4 3.5.4a5.2 5.2 0 0 0-.1 3.8A5.6 5.6 0 0 0 2 8.1c0 5.6 3.4 6.8 6.7 7.2A3.5 3.5 0 0 0 8 18v4" />
+  )}
+  {name === "linkedin" && (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="3" />
+      <path d="M7 10v7m4 0v-7m0 3c0-4 6-4 6 0v4" />
+      <circle cx="7" cy="7" r=".8" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {name === "instagram" && (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {name === "x" && <path d="M4 3h4l12 18h-4L4 3Zm16 0L4 21" />}
+  {name === "medium" && (
+    <>
+      <ellipse cx="7" cy="12" rx="5" ry="6" fill="currentColor" stroke="none" />
+      <ellipse
+        cx="16"
+        cy="12"
+        rx="2.5"
+        ry="6"
+        fill="currentColor"
+        stroke="none"
+      />
+      <ellipse
+        cx="21.5"
+        cy="12"
+        rx="1"
+        ry="6"
+        fill="currentColor"
+        stroke="none"
+      />
+    </>
+  )}
+  {name === "dev" && (
+    <>
+      <rect x="1" y="4" width="22" height="16" rx="2" />
+      <text
+        x="12"
+        y="15.5"
+        text-anchor="middle"
+        font-family="monospace"
+        font-weight="bold"
+        font-size="9"
+        fill="currentColor"
+        stroke="none"
+      >
+        DEV
+      </text>
+    </>
+  )}
+  {name === "npm" && (
+    <>
+      <rect x="1" y="6" width="22" height="12" />
+      <path d="M5 15V9h4v6m3-6h3v6h-3V9Zm6 6V9h2v6" />
+    </>
+  )}
+  {name === "topmate" && (
+    <>
+      <rect x="3" y="5" width="18" height="16" rx="3" />
+      <path d="M7 3v4m10-4v4M3 11h18m-12 5 2 2 4-4" />
+    </>
+  )}
+  {name === "rss" && (
+    <>
+      <circle cx="5" cy="19" r="1" fill="currentColor" />
+      <path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16" />
+    </>
+  )}
+</svg>

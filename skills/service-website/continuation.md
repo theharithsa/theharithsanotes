@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Public motion and social footer 1.16.1 — issues #54–55
+
+Public documents opt into native page fades with a pending shimmer and immediate cancellable filter reveals. Private, preview and mixed search destinations remain excluded from snapshots; reader/workspace motion stays intact. Footer profiles live in src/data/social.ts; DirectoryBadge uses the unchanged owner-provided black/white SVGs from assets/smm/wedirectory. See docs/site-motion-footer-1.16.1.md and the linked PR for final provider/browser/tenant evidence. Preserve unrelated owner assets/output.
+
 ## Workspace transitions 1.15.3 — issue #52
 
 Initial restoration and collection fetches use generic table shimmer; current results reveal smoothly. Non-append fetches clear stale rows; pagination preserves existing rows and shows its skeleton below the table. Generation and owner-ready guards prevent stale/private results from reappearing. See docs/workspace-transitions-1.15.3.md and the linked PR for release evidence. No editor/draft, API, data, access or brand changes.

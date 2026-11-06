@@ -1,0 +1,104 @@
+:root {
+  --motion-reveal-duration: 240ms;
+  --motion-loading-duration: 1.65s;
+}
+html[data-page-motion="public"] #main {
+  animation: site-reveal var(--motion-reveal-duration)
+    cubic-bezier(0.2, 0.6, 0.2, 1) backwards;
+}
+html[data-navigating="true"]::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background: linear-gradient(
+    105deg,
+    var(--terracotta, #c65f3d) 25%,
+    #ffe1bd 50%,
+    var(--terracotta, #c65f3d) 75%
+  );
+  background-size: 200% 100%;
+  animation: site-shimmer var(--motion-loading-duration) ease-in-out infinite;
+}
+::view-transition-old(root) {
+  animation: site-page-out 140ms ease-out both;
+}
+::view-transition-new(root) {
+  animation: site-page-in 240ms ease-out both;
+}
+@keyframes site-page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes site-page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes site-reveal {
+  from {
+    opacity: 0.35;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes site-shimmer {
+  from {
+    background-position: 180% 0;
+  }
+  to {
+    background-position: -20% 0;
+  }
+}
+#global-search-results[aria-busy="true"]::after {
+  content: "";
+  display: block;
+  height: 160px;
+  border-radius: 4px;
+  background: linear-gradient(
+    105deg,
+    var(--blue) 25%,
+    #ffffffb3 50%,
+    var(--blue) 75%
+  );
+  background-size: 200% 100%;
+  animation: site-shimmer var(--motion-loading-duration) ease-in-out infinite;
+}
+[data-theme="dark"] #global-search-results[aria-busy="true"]::after {
+  background-image: linear-gradient(
+    105deg,
+    var(--blue) 25%,
+    #ffffff1f 50%,
+    var(--blue) 75%
+  );
+}
+#global-search-results[aria-busy="false"] {
+  animation: site-reveal var(--motion-reveal-duration) ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+  html[data-page-motion="public"] #main,
+  html[data-navigating="true"]::before,
+  #global-search-results[aria-busy] {
+    animation: none;
+  }
+  #global-search-results[aria-busy="true"]::after {
+    animation: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

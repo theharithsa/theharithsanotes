@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.16.1] — 2026-11-06
+
+- Add public page fades, native-navigation shimmer and cancellable Blog/Books/Projects/Entertainment filter reveals (#54).
+- Add a compact illustrated social footer with low-opacity brush strokes and the supplied monochrome WeDirectory badges from the footer and Meet Vish (#55).
+
 ## [1.15.3] — 2026-11-06
 
 - Add Workspace table shimmer and smooth row reveals during authentication, collection switches and refreshes (#52).
