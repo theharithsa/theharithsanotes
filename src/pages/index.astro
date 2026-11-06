@@ -4,10 +4,11 @@ import ProjectArt from "../components/ProjectArt.astro";
 import { getProjects, getArticles, getJournalPage } from "../lib/journal";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
-const [projects, articles, homePage] = await Promise.all([
+const [projects, articles, homePage, meetPage] = await Promise.all([
   getProjects(),
   getArticles(),
   getJournalPage("home"),
+  getJournalPage("meet-vish"),
 ]);
 const lead = articles[0];
 const featuredProjects = (
@@ -166,8 +167,11 @@ const selection = articles
   </section>
   <section class="wrap meet-glimpse space">
     <img
-      src="/images/gallery/portrait-seated.webp"
-      alt="Vishruth Harithsa seated in a light jacket"
+      src={meetPage.image ?? "/images/vish-casual-illustration.webp"}
+      alt={
+        meetPage.imageAlt ??
+        "Illustration of Vishruth smiling in a sage-green T-shirt and jeans"
+      }
       width="1200"
       height="1800"
       loading="lazy"

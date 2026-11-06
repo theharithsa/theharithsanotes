@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import GalleryGrid from "../components/GalleryGrid.astro";
 import { site } from "../data/site";
 import { getJournalPage } from "../lib/journal";
+import { cleanHtml } from "../server/models";
 const page = await getJournalPage("meet-vish");
 ---
 
@@ -28,8 +29,11 @@ const page = await getJournalPage("meet-vish");
         </div>
       </div>
       <img
-        src={page.image ?? "/images/gallery/portrait-seated.webp"}
-        alt="Vishruth seated in a light jacket against a charcoal background"
+        src={page.image ?? "/images/vish-casual-illustration.webp"}
+        alt={
+          page.imageAlt ??
+          "Illustration of Vishruth smiling in a sage-green T-shirt and jeans"
+        }
         width="1200"
         height="1800"
         fetchpriority="high"
@@ -44,9 +48,11 @@ const page = await getJournalPage("meet-vish");
       <span>And the people I’ve met along the way.</span>
     </h2>
     <div class="personal-story">
-      {page.paragraphs.map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
+      {page.html?.trim() ? (
+        <Fragment set:html={cleanHtml(page.html)} />
+      ) : (
+        page.paragraphs.map((paragraph) => <p>{paragraph}</p>)
+      )}
     </div>
   </section>
   <section class="interest-links wrap">

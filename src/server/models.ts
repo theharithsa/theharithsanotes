@@ -248,7 +248,9 @@ const schemas: Record<Section, z.ZodType> = {
       slug: z.enum(pageSlugs),
       description: text,
       paragraphs: z.array(text).max(100),
+      html: z.string().max(460000).optional(),
       image: url.optional(),
+      imageAlt: text.optional(),
       heading: z.string().max(500).optional(),
       featuredProjects: z.array(slug).max(20).optional(),
     })
