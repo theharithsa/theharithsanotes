@@ -1167,7 +1167,7 @@ figure {
 .personal-story p {
   margin: 0;
 }
-.personal-story > * + * {
+.personal-story > :not(:first-child) {
   margin-top: 1.4em;
 }
 .personal-story a {
