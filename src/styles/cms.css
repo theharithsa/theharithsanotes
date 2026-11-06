@@ -1429,3 +1429,25 @@ body:has(.cms-workspace) {
 .cms-sidebar {
   color: var(--ink);
 }
+.cms-sidebar {
+  overflow-x: hidden;
+}
+.cms-space-name > div {
+  min-width: 0;
+  flex: 1;
+}
+.cms-sidebar .wordmark {
+  max-width: calc(100% - 8px);
+}
+.cms-account {
+  flex: none;
+}
+.cms-account button {
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .cms-sidebar .cms-space-name {
+    display: flex;
+    margin: 0 6px 12px;
+  }
+}

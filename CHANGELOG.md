@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.13.1] — 2026-11-06
+
+- Prevent horizontal sidebar overflow, retain the real site icon on narrow screens, and keep Sign out on one line.
+
 ## [1.13.0] — 2026-11-06
 
 - Refresh the workspace with the frozen site icon, ink sidebar, clearer Write navigation, collection counts and a separate Developer Settings area.
