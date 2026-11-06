@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.14.2] — 2026-11-06
+
+- Give homepage project cards responsive inner text margins while preserving full-bleed illustrations and the asymmetric grid (#40).
+
 ## [1.14.1] — 2026-11-06
 
 - Reserve the private article cover area while its illustration loads, preventing the reading body from jumping (#36).
