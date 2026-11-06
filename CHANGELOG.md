@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.14.1] — 2026-11-06
+
+- Reserve the private article cover area while its illustration loads, preventing the reading body from jumping (#36).
+
 ## [1.14.0] — 2026-11-06
 
 - Adopt theharithsanotes.com as the primary domain, preserving old-domain paths through redirects.
