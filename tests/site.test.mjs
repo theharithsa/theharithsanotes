@@ -26,6 +26,10 @@ const articles = [...sourceArticles, ...mediumArticles].map((article) => ({
   ...blogArt.find((art) => art.slug === article.slug),
 }));
 const readPage = (path) => readFile(new URL(`dist/${path}`, root), "utf8");
+const renderedArticleBody = (page) =>
+  page
+    .split(/<div class="[^"]*\bpost-body\b[^"]*">/)[1]
+    ?.split('<div class="article-end"')[0] ?? "";
 
 test("Medium migration accounts for all 83 stories, original bodies, dates and copied media", async () => {
   const manifest = JSON.parse(
@@ -65,9 +69,8 @@ test("Medium migration accounts for all 83 stories, original bodies, dates and c
         .toISOString()
         .slice(0, 10),
     );
-    assert.ok(page.includes('class="article-body"'));
-    const renderedBody =
-      page.split('class="article-body">')[1]?.split("</div>")[0] ?? "";
+    assert.match(page, /class="[^"]*\bpost-body\b[^"]*"/);
+    const renderedBody = renderedArticleBody(page);
     for (const tag of ["pre", "br", "figure", "blockquote"]) {
       const pattern = new RegExp(`<${tag}(?:\\s[^>]*|)>`, "g");
       assert.equal(
@@ -202,7 +205,7 @@ test("the original 12 article paths and all published note bodies are preserved"
     assert.ok(
       page.includes(`href="https://theharithsanotes.com/${article.slug}"`),
     );
-    assert.ok(page.includes('class="article-body"'));
+    assert.match(page, /class="[^"]*\bpost-body\b[^"]*"/);
     assert.ok(article.html.length > 1000);
     assert.ok(!/<(?:iframe|object|embed)\b/i.test(page));
     await access(new URL(`public${article.image}`, root));
@@ -271,10 +274,7 @@ test("article contents links resolve and original ordered/unordered lists surviv
     const page = await readPage(`${article.slug}/index.html`);
     const countLists = (html) =>
       (html.match(/<(?:ul|ol)(?:\s[^>]*|)>/g) ?? []).length;
-    const body =
-      page
-        .split('class="article-body">')[1]
-        ?.split('<div class="article-end"')[0] ?? "";
+    const body = renderedArticleBody(page);
     assert.equal(countLists(body), countLists(article.html), article.slug);
     for (const [, id] of page.matchAll(/href="#(heading-[^"]+)"/g)) {
       assert.ok(page.includes(`id="${id}"`), `Missing article section ${id}`);

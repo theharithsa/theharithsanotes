@@ -1210,12 +1210,14 @@ async function createRichEditor(generation: number) {
     { default: Image },
     { TableKit },
     { default: Placeholder },
+    { PostCallout, PostImageGrid, PostImageMosaic },
   ] = await Promise.all([
     import("@tiptap/core"),
     import("@tiptap/starter-kit"),
     import("@tiptap/extension-image"),
     import("@tiptap/extension-table"),
     import("@tiptap/extension-placeholder"),
+    import("./post-blocks"),
   ]);
   if (!current || !dialog.open || generation !== editorGeneration) return;
   const editingId = current.id;
@@ -1228,7 +1230,7 @@ async function createRichEditor(generation: number) {
   toolbar.setAttribute("role", "toolbar");
   toolbar.setAttribute("aria-label", "Article formatting");
   const host = document.createElement("div");
-  host.className = "cms-rich-editor";
+  host.className = "cms-rich-editor post-editor";
   field.append(label, toolbar, host);
   form.append(field);
   const Figure = Node.create({
@@ -1276,6 +1278,9 @@ async function createRichEditor(generation: number) {
       Figure,
       Caption,
       Anchors,
+      PostCallout,
+      PostImageGrid,
+      PostImageMosaic,
     ],
     content: String(
       current.data.html ??
@@ -1350,6 +1355,12 @@ async function createRichEditor(generation: number) {
       },
     ],
     [
+      "Strike",
+      (editor) => {
+        editor.chain().focus().toggleStrike().run();
+      },
+    ],
+    [
       "List",
       (editor) => {
         editor.chain().focus().toggleBulletList().run();
@@ -1371,6 +1382,24 @@ async function createRichEditor(generation: number) {
       "Code",
       (editor) => {
         editor.chain().focus().toggleCodeBlock().run();
+      },
+    ],
+    [
+      "Callout",
+      (editor) => {
+        editor.chain().focus().toggleWrap("postCallout").run();
+      },
+    ],
+    [
+      "Image grid",
+      (editor) => {
+        editor.chain().focus().toggleWrap("postImageGrid").run();
+      },
+    ],
+    [
+      "Mosaic",
+      (editor) => {
+        editor.chain().focus().toggleWrap("postImageMosaic").run();
       },
     ],
     [

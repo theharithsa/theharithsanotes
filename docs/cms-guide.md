@@ -21,3 +21,27 @@ Preview and production are separate database namespaces. Edits on a review URL d
 The table footer shows queued or blocked audit delivery. Retry requests are bounded; a blocked queue needs an operator to inspect the ingestion configuration. Publishing commits its audit event atomically with the publication. Dynatrace receives operation names, outcomes, revisions, timings, safe identifiers and payload sizes/field names/SHA256 hashes. Draft bodies, tokens, cookies, email addresses and image bytes are not copied into telemetry.
 
 Browser RUM and Google Analytics remain opt-in on public pages. Both are disabled inside the workspace and private previews. Server reliability telemetry operates independently of browser consent and excludes raw content. See [the CMS architecture](cms-architecture.md) and [observability](observability.md).
+
+## Post formatting (1.21.0)
+
+The reading surface uses Libre Baskerville classic typography with restrained labelled callouts. In the rich editor, select paragraphs and choose Callout to wrap/unwrap a note. Select adjacent image figures and choose Image grid or Mosaic to group/ungroup them; ordinary paragraph blocks in a group remain full width. Strike toggles strikethrough. Quote remains a quotation, separate from a callout.
+
+The existing HTML field in authenticated draft/API writes accepts the same blocks. For example:
+
+```html
+<aside class="post-callout" aria-label="Key idea">
+  <p>A useful note in your own words.</p>
+</aside>
+<div class="post-image-grid">
+  <figure>
+    <img src="/media/example-one/800.webp" alt="Describe the first image" />
+    <figcaption>First caption</figcaption>
+  </figure>
+  <figure>
+    <img src="/media/example-two/800.webp" alt="Describe the second image" />
+    <figcaption>Second caption</figcaption>
+  </figure>
+</div>
+```
+
+Use post-image-mosaic for a larger first image with supporting figures. Keep original image order and descriptive alt text. Images remain uncropped; the phone mosaic stacks. Only these approved layout classes survive sanitizing; inline styles, scripts, event handlers and unrelated site classes do not. Drafts + Publish, key scopes, invitations and media access rules are unchanged.

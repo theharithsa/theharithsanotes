@@ -30,7 +30,7 @@ const index = Astro.props.index ?? 0;
 ---
 
 <Base title={note.title} description={note.note}>
-  <article class="podcast-room podcast-detail">
+  <article class="podcast-room podcast-detail post-page">
     <div class="wrap project-detail-top">
       <a class="workbench-back" href={`/podcasts#${note.slug}`}>
         ← Listening notes
@@ -43,7 +43,7 @@ const index = Astro.props.index ?? 0;
         <span class="eyebrow">THE LISTENING ROOM</span>
         <h1>{note.title}</h1>
         <p class="show-name">{note.show}</p>
-        <p class="project-story-deck">{note.note}</p>
+        <p class="project-story-deck post-body">{note.note}</p>
         <a class="project-visit" href={note.href}>
           Open the episode <span aria-hidden="true">↗</span>
         </a>

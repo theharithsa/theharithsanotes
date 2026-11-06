@@ -149,6 +149,31 @@ function blog(slug: string) {
 }
 const integration = process.env.FIRESTORE_EMULATOR_HOST ? test : test.skip;
 integration(
+  "approved post blocks survive draft and immutable publication",
+  async () => {
+    const id = randomUUID();
+    const slug = "post-blocks-" + id;
+    const draft = await saveEntry(
+      "blogs",
+      id,
+      {
+        ...blog(slug),
+        html: '<aside class="post-callout" aria-label="Key idea"><p>A note.</p></aside><div class="post-image-grid"><figure><img src="/images/test.webp" alt="Sample" /><figcaption>Caption</figcaption></figure></div><ul><p>A legacy point</p></ul>',
+      },
+      0,
+    );
+    assert.match(String(draft.data.html), /class="post-callout"/);
+    assert.match(String(draft.data.html), /<ul><li>A legacy point<\/li><\/ul>/);
+    assert.equal(await publishedDetail("blogs", slug), null);
+    await publishEntry("blogs", id, draft.draftRevision, "post-blocks-publish");
+    const published = await publishedDetail<{ html: string }>("blogs", slug);
+    assert.ok(published);
+    assert.equal(published.data.html, draft.data.html);
+    assert.match(published.data.html, /class="post-image-grid"/);
+    await unpublishEntry("blogs", id, draft.draftRevision);
+  },
+);
+integration(
   "private journals require an active invitation; keys and media remain section scoped",
   async () => {
     const uid = "invited-reader";

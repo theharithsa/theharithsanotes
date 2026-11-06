@@ -40,7 +40,7 @@ const next =
   description={note.description}
   image={note.poster.src}
 >
-  <article class="screen-note-page">
+  <article class="screen-note-page post-page">
     <header class="wrap screen-note-header">
       <a href="/entertainment" class="back-link">
         ← All screen notes
@@ -72,7 +72,7 @@ const next =
       <p class="editorial-caption">
         Edited from my personal viewing notes. Contains story details.
       </p>
-      <div class="article-body">
+      <div class="post-body">
         {note.paragraphs.map((paragraph) => (
           <p>{paragraph}</p>
         ))}

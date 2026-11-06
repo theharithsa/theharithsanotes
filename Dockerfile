@@ -17,6 +17,7 @@ COPY --from=build --chown=node:node /app/dist ./dist
 COPY --from=build --chown=node:node /app/runtime ./runtime
 COPY --from=build --chown=node:node /app/jobs ./jobs
 COPY --from=build --chown=node:node /app/src/server ./src/server
+COPY --from=build --chown=node:node /app/src/lib/post-html.ts ./src/lib/post-html.ts
 COPY --from=build --chown=node:node /app/package.json ./package.json
 USER node
 CMD ["node","--import","./runtime/instrumentation.mts","dist/server/entry.mjs"]
