@@ -1,0 +1,29 @@
+# Writing through the content API
+
+Open [Developer Settings](https://theharithsa.com/admin#developer) with the owner’s Google account. The workspace now separates **Write** from **Developer Settings**. All collections remain under Write, with counts and the frozen site icon. Pages includes Home, Meet Vish, Blog, Books, Projects, Podcasts, Entertainment, Photos, GoGs and Privacy. Their introductions/headings/paragraphs can be edited and published. Privacy retains its built-in policy text; page paragraphs add an introduction rather than replacing the policy. Existing labels are reconciled from actual entry tags, topics, categories and genres. “Sync existing labels” adds missing records without renaming or overwriting existing entries. Labels are suggestions; renaming a catalog label does not rewrite historical content.
+
+## Keys and permissions
+
+Generate a named key with a lifetime of 1–365 days (90 days by default). Choose collections and the permissions the integration needs: `content:read`, `content:write`, `content:publish`, `media:read`, `media:write`. Publishing is unchecked by default. Media permissions apply to the environment’s image library; images are shared across collections and are not collection-scoped. Up to 20 active keys are allowed. Revoke unused keys in the connection list. Revocation/expiry are checked on every request; there is no authentication cache to wait out.
+
+The full key is displayed once and never stored in recoverable form. Copy it into your integration’s secret store. Do not put it in a public repository, frontend bundle, URL or article. The workspace keeps the displayed value only in memory, clearing it when dismissed, leaving Developer Settings, signing out or reloading. Swagger authorization also stays in the current tab’s memory. No keys were generated for you to retain; create one when connecting your tool.
+
+Keys only work in the environment where they were issued. A review key cannot access production. Only owner Google authentication can manage keys or audit retries; an API key cannot mint another key or call internal scheduler/CI endpoints. Calls from a trusted server or CLI use `Authorization: Bearer <key>`. Cross-origin browser access is intentionally unsupported. Runtime throttling is 120 requests per minute per key per instance, not a distributed billing quota.
+
+## Explorer and workflow
+
+Use the [Swagger portal](https://theharithsa.com/admin/api) or [OpenAPI JSON](https://theharithsa.com/api/openapi.json). Swagger is self-hosted, uses the current origin’s `/api/v1` and disables remote schema validation and persisted authorization. It documents every section’s actual validation schema, revision protection, request limits and image upload/download operations. The public schema exposes no keys or private content; all data endpoints require a scoped key.
+
+1. Upload a JPEG, PNG or WebP using multipart `POST /api/v1/media` with `file`, `title` and `alt`. Limit: 8 MiB / 40 megapixels. The response contains a normalized `url`, image dimensions and an authenticated `apiUrl`. Use `url` in an entry’s image/src/poster properties. New images remain private until publication. Use `GET /api/v1/media/{id}/{variant}` with `media:read` to download private derivatives.
+2. Create a private draft with `POST /api/v1/entries/blogs` and `{ "data": { ... } }`. The response includes its `id` and `draftRevision`. Copy the complete section-specific data shape from Swagger. Create is not automatically retried or idempotent; if its outcome is unknown, list drafts before creating again.
+3. Read the saved draft with `GET /api/v1/entries/blogs/{id}`. Replace it using PUT with the complete `data` object and the current `expectedRevision`. Keep unedited/imported properties when updating; PUT is replacement, not merge. Stale revisions return 409. List endpoints return up to 100 entries; pass the returned `next` as `cursor` for the following page.
+4. Publish with `POST /api/v1/entries/blogs/{id}/publish`, `{ "expectedRevision": 1 }` and a unique `Idempotency-Key` header (letters, digits, underscores or hyphens, maximum 100 characters). Reuse that key only for retries of the same publication. The saved draft must pass publication validation, including required cover/alternative text and complete publication date. Uploading or saving alone never publishes.
+5. Revision history, restore into a draft and unpublish are also documented. Core pages cannot be unpublished. Page addresses are the ten existing core routes, not arbitrary new frontend routes. Public cache visibility is bounded to roughly 30 seconds.
+
+Use `books`, `projects`, `podcasts`, `entertainment`, `photos`, `gogs`, `pages` or `tags` in place of `blogs`. JSON requests are capped at 640 KiB and an entry at 600 KiB. HTML is sanitized; URLs, slugs, image types, nested data and revision expectations are validated by the same code used by the workspace.
+
+## Operations and recovery
+
+The API shares the existing namespace, rules, media handling, revisions, publication transactions and outbox. Key creation/revocation commit their audit events atomically. Key usage produces bounded authentication/Firebase/HTTP telemetry; the secret and its digest are excluded from summaries. Existing trace/log/metric/BizEvent privacy and delivery limits remain in [CMS observability](cms-observability.md).
+
+The one-off `jobs/workspace-catalog/main.mts` reconciles both namespaces using the deployed runtime identity. It creates only missing labels and core pages; content bodies, ratings, existing drafts and owner edits remain untouched. It is restartable and is not a recurring job. Deployment rollback must preserve API-key records; revocations cannot be undone by reverting an image. An older 1.12.0 image does not serve the versioned API. MCP is deliberately deferred; this API is the integration boundary for a later server.

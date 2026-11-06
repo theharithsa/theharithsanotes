@@ -127,13 +127,20 @@
     {
       "id": "website",
       "skillId": "service-website",
-      "sourcePaths": ["src", "jobs/content-migration"],
+      "sourcePaths": [
+        "src",
+        "jobs/content-migration",
+        "jobs/workspace-catalog"
+      ],
       "entrypoints": [
         "src/pages/index.astro",
         "src/pages/[slug].astro",
         "src/scripts/telemetry.ts",
         "src/pages/admin.astro",
         "src/pages/api/cms/[...path].ts",
+        "src/pages/api/v1/[...path].ts",
+        "src/pages/admin/api.astro",
+        "jobs/workspace-catalog/main.mts",
         "src/middleware.ts"
       ],
       "owner": "theharithsa",

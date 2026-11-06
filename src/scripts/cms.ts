@@ -10,6 +10,7 @@ import { firebaseConfig } from "../lib/firebase-config";
 import type { Entry, EntryData, Section } from "../server/models";
 import type { Editor } from "@tiptap/core";
 import { setEditingAvailability } from "../lib/editor-state";
+import { developerSettings } from "./developer-settings";
 
 const auth = getAuth(getApps()[0] ?? initializeApp(firebaseConfig));
 const descriptions: Record<
@@ -59,8 +60,7 @@ const descriptions: Record<
   pages: {
     title: "Pages",
     kicker: "THE JOURNAL ITSELF",
-    description:
-      "Shape the welcome on your homepage and the words on Meet Vish.",
+    description: "Edit your section introductions, homepage and Meet Vish.",
   },
   tags: {
     title: "Tags",
@@ -96,6 +96,54 @@ let workspaceReady = false;
 let busyAction = false;
 let uploadTarget: string | ((url: string, alt: string) => void) | null = null;
 const publishKeys = new Map<string, string>();
+const developer = developerSettings(api);
+let labelRows: Entry[] = [];
+async function refreshWorkspace() {
+  try {
+    const result = await api<{ counts: Record<string, number> }>("workspace");
+    document
+      .querySelectorAll<HTMLElement>("[data-cms-count]")
+      .forEach((node) => {
+        node.textContent = String(result.counts[node.dataset.cmsCount!] ?? 0);
+      });
+    let cursor: string | null = null;
+    labelRows = [];
+    do {
+      const result: { entries: Entry[]; next: string | null } = await api<{
+        entries: Entry[];
+        next: string | null;
+      }>(
+        "entries/tags" +
+          (cursor ? "?cursor=" + encodeURIComponent(cursor) : ""),
+      );
+      labelRows.push(...result.entries);
+      cursor = result.next;
+    } while (cursor && labelRows.length < 1000);
+  } catch {
+    message("Collection counts could not refresh. Your saved content is safe.");
+  }
+}
+async function showWorkspace() {
+  if (!workspaceReady) return;
+  const dev = location.hash === "#developer";
+  element("cms-developer").hidden = !dev;
+  element("cms-collection").hidden = dev;
+  document
+    .querySelector<HTMLElement>('[data-cms-view="developer"]')!
+    .setAttribute("aria-current", dev ? "page" : "false");
+  if (dev) {
+    loadingGeneration++;
+    element("cms-breadcrumb").textContent = "Developer Settings";
+    document
+      .querySelectorAll("[data-cms-section]")
+      .forEach((link) => link.removeAttribute("aria-current"));
+    await developer.open();
+  } else {
+    developer.clear();
+    section = currentSection();
+    await loadCollection();
+  }
+}
 class RequestError extends Error {
   constructor(
     message: string,
@@ -253,6 +301,12 @@ function updateState() {
     !current ||
     current.publishedRevision === null ||
     current.section === "pages";
+  element<HTMLButtonElement>("cms-preview").disabled =
+    current?.section === "tags";
+  element<HTMLButtonElement>("cms-preview").title =
+    current?.section === "tags"
+      ? "Labels appear in collection filters, not standalone pages"
+      : "Preview the saved draft";
   if (current) {
     element("cms-entry-heading").textContent = String(
       current.data.title ?? "Untitled",
@@ -823,14 +877,24 @@ function fieldsFor(target: Section): Field[] {
     case "pages":
       return [
         { path: "title", label: "Page name" },
-        { path: "heading", label: "Main heading" },
+        {
+          path: "heading",
+          label: "Main heading",
+          type: "textarea",
+          help: "Separate headline lines with a line break.",
+        },
         {
           path: "description",
           label: "Welcome / introduction",
           type: "textarea",
         },
         { path: "paragraphs", label: "Page paragraphs", type: "paragraphs" },
-        { path: "image", label: "Page image", type: "image" },
+        {
+          path: "image",
+          label: "Page / social image",
+          type: "image",
+          help: "Home and Meet Vish use this on the page; other sections use it for their social preview.",
+        },
         ...(current?.data.slug === "home"
           ? [
               {
@@ -887,6 +951,20 @@ function createField(field: Field) {
           : "text";
   }
   input.id = id;
+  if (
+    input instanceof HTMLInputElement &&
+    ["tags", "genres", "topic", "category"].includes(field.path)
+  ) {
+    const list = document.createElement("datalist");
+    list.id = id + "-options";
+    for (const row of labelRows) {
+      const option = document.createElement("option");
+      option.value = String(row.data.title);
+      list.append(option);
+    }
+    holder.append(list);
+    input.setAttribute("list", list.id);
+  }
   input.name = field.path;
   input.value = Array.isArray(value)
     ? value.join(field.type === "paragraphs" ? "\n\n" : ", ")
@@ -1543,7 +1621,34 @@ element<HTMLButtonElement>("cms-more").addEventListener("click", () => {
 element<HTMLButtonElement>("cms-refresh").addEventListener("click", () => {
   void loadCollection();
   void refreshAudit();
+  void refreshWorkspace();
 });
+element<HTMLButtonElement>("cms-sync-catalog").addEventListener(
+  "click",
+  async (event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    button.disabled = true;
+    try {
+      const result = await api<{ added: { tags: number; pages: number } }>(
+        "workspace",
+        { method: "POST", body: "{}" },
+      );
+      await refreshWorkspace();
+      await loadCollection();
+      message(
+        `Added ${result.added.tags} missing labels and ${result.added.pages} pages. Existing entries were preserved.`,
+      );
+    } catch (error) {
+      message(
+        error instanceof Error
+          ? error.message
+          : "Labels could not sync. Try again.",
+      );
+    } finally {
+      button.disabled = false;
+    }
+  },
+);
 element<HTMLButtonElement>("cms-audit-retry").addEventListener(
   "click",
   async () => {
@@ -1559,7 +1664,7 @@ window.addEventListener("hashchange", () => {
   section = currentSection();
   search.value = "";
   statusFilter.value = "all";
-  void loadCollection();
+  void showWorkspace();
 });
 window.addEventListener("online", () => {
   if (current) void saveDraft();
@@ -1608,6 +1713,8 @@ onAuthStateChanged(auth, (user) => {
   const generation = ++authGeneration;
   if (!user) {
     workspaceReady = false;
+    developer.clear();
+    element("cms-developer").hidden = true;
     element("cms-login").hidden = false;
     element("cms-collection").hidden = true;
     document.querySelector<HTMLElement>(".cms-account")!.hidden = true;
@@ -1633,7 +1740,8 @@ onAuthStateChanged(auth, (user) => {
       element("cms-environment").textContent =
         me.environment === "live" ? "PRIVATE WORKSPACE" : "PREVIEW WORKSPACE";
       section = currentSection();
-      await loadCollection();
+      await refreshWorkspace();
+      await showWorkspace();
       void refreshAudit();
     } catch (error) {
       if (generation !== authGeneration) return;

@@ -1,24 +1,27 @@
 ---
 import PodcastArt from "../components/PodcastArt.astro";
+import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
-import { getListening } from "../lib/journal";
+import { getListening, getJournalPage } from "../lib/journal";
+import PageHeading from "../components/PageHeading.astro";
+const page = await getJournalPage("podcasts");
 const listening = (await getListening()).filter(
   (note) => note.kind !== "created",
 );
 ---
 
-<Base title="Podcasts">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="podcast-hero tone-lilac">
     <div class="wrap">
       <span class="eyebrow">THE LISTENING ROOM</span>
       <h1>
-        Pull up a chair.
-        <br />
-        <em>Stay for a conversation.</em>
+        <PageHeading text={page.heading ?? page.title} />
       </h1>
-      <p>
-        Ideas I’ve listened to, a few takeaways, and the episodes on my list.
-      </p>
+      <p>{page.description}</p>
       <div class="soundwave" aria-hidden="true">
         {Array.from({ length: 45 }, (_, i) => (
           <i style={`--bar:${15 + Math.sin(i * 1.7) ** 2 * 85}%`} />
@@ -26,6 +29,7 @@ const listening = (await getListening()).filter(
       </div>
     </div>
   </section>
+  <PageParagraphs paragraphs={page.paragraphs} />
   <section
     class="wrap podcast-room podcast-collection space"
     aria-labelledby="listening-heading"

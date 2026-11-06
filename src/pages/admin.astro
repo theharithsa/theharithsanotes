@@ -25,22 +25,39 @@ const tables = [
     <aside class="cms-sidebar">
       <Wordmark />
       <div class="cms-space-name">
-        <span class="cms-space-avatar">v</span>
+        <img
+          class="cms-space-avatar"
+          src="/brand/v1/app-icon-192.png"
+          width="40"
+          height="40"
+          alt="The Harithsa Notes icon"
+        />
         <div>
           The Harithsa Notes<small>Writing &amp; publishing</small>
         </div>
       </div>
-      <div class="cms-nav-label">YOUR COLLECTIONS</div>
-      <nav aria-label="Content collections">
-        {tables.map(([id, label, icon]) => (
-          <a href={`#${id}`} data-cms-section={id}>
-            <span class="cms-nav-icon" aria-hidden="true">
-              {icon}
-            </span>
-            {label}
-          </a>
-        ))}
-      </nav>
+      <details class="cms-write-group" open>
+        <summary>
+          <span aria-hidden="true">✎</span> Write{" "}
+          <small>YOUR COLLECTIONS</small>
+        </summary>
+        <nav aria-label="Content collections">
+          {tables.map(([id, label, icon]) => (
+            <a href={`#${id}`} data-cms-section={id}>
+              <span class="cms-nav-icon" aria-hidden="true">
+                {icon}
+              </span>
+              {label}
+              <small class="cms-nav-count" data-cms-count={id}>
+                —
+              </small>
+            </a>
+          ))}
+        </nav>
+      </details>
+      <a class="cms-developer-nav" href="#developer" data-cms-view="developer">
+        <span aria-hidden="true">{`</>`}</span> Developer Settings
+      </a>
       <div class="cms-sidebar-bottom">
         <a href="/" target="_blank" rel="noopener">
           View the journal
@@ -140,6 +157,13 @@ const tables = [
             <button id="cms-refresh" class="cms-quiet-button">
               Refresh
             </button>
+            <button
+              id="cms-sync-catalog"
+              class="cms-quiet-button"
+              title="Add missing labels and core pages without overwriting existing entries"
+            >
+              Sync existing labels
+            </button>
           </div>
         </div>
         <div class="cms-table-scroll">
@@ -174,6 +198,138 @@ const tables = [
           <button class="cms-quiet-button" id="cms-audit-retry" hidden>
             Retry queued events
           </button>
+        </div>
+      </section>
+      <section
+        class="cms-developer"
+        id="cms-developer"
+        hidden
+        aria-labelledby="cms-developer-title"
+      >
+        <div class="cms-developer-hero">
+          <span class="cms-overline">TOOLS FOR YOUR NEXT IDEA</span>
+          <h1 id="cms-developer-title">
+            Your words.
+            <br />
+            <em>Your workflow.</em>
+          </h1>
+          <p>
+            Connect your writing tools to the journal. Keep control of what they
+            can read, write and publish.
+          </p>
+          <a
+            class="cms-primary"
+            href="/admin/api"
+            target="_blank"
+            rel="noopener"
+          >
+            Explore the API reference <span aria-hidden="true">↗</span>
+          </a>
+          <code>/api/v1</code>
+        </div>
+        <div class="cms-developer-grid">
+          <form id="cms-key-form" class="cms-key-form" autocomplete="off">
+            <span class="cms-overline">CREATE A CONNECTION</span>
+            <h2>Give your tool a key.</h2>
+            <label for="cms-key-name">Key name</label>
+            <input
+              id="cms-key-name"
+              name="name"
+              maxlength="80"
+              placeholder="My writing assistant"
+              required
+            />
+            <label for="cms-key-expiry">Expires after</label>
+            <select id="cms-key-expiry" name="expiresInDays">
+              <option value="7">7 days</option>
+              <option value="30">30 days</option>
+              <option value="90" selected>
+                90 days
+              </option>
+              <option value="365">1 year</option>
+            </select>
+            <fieldset>
+              <legend>Permissions</legend>
+              {[
+                ["content:read", "Read drafts & history", true],
+                ["content:write", "Create & edit drafts", true],
+                ["content:publish", "Publish & unpublish", false],
+                ["media:read", "Read private images", false],
+                ["media:write", "Upload images", true],
+              ].map(([value, label, checked]) => (
+                <label class="cms-check">
+                  <input
+                    type="checkbox"
+                    name="scope"
+                    value={String(value)}
+                    checked={Boolean(checked)}
+                  />
+                  {label}
+                </label>
+              ))}
+            </fieldset>
+            <fieldset>
+              <legend>Collections this key can access</legend>
+              <div class="cms-check-grid">
+                {tables.map(([id, label]) => (
+                  <label class="cms-check">
+                    <input type="checkbox" name="section" value={id} checked />
+                    {label}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <p class="cms-key-help">
+              Keep keys in your integration’s secret store. They are shown once,
+              expire automatically, and can be revoked at any time. Preview keys
+              work only on the review site.
+            </p>
+            <button class="cms-primary" id="cms-key-create" type="submit">
+              Generate API key
+            </button>
+            <p id="cms-key-message" role="status"></p>
+          </form>
+          <div class="cms-connections">
+            <div class="cms-key-secret" id="cms-key-secret" hidden>
+              <span class="cms-overline">COPY ONCE · KEEP IT PRIVATE</span>
+              <h2>Your connection is ready.</h2>
+              <p>This is the only time we can show the full key.</p>
+              <code id="cms-key-value"></code>
+              <div>
+                <button type="button" id="cms-key-copy" class="cms-primary">
+                  Copy key
+                </button>
+                <button
+                  type="button"
+                  id="cms-key-dismiss"
+                  class="cms-quiet-button"
+                >
+                  I’ve saved it
+                </button>
+              </div>
+            </div>
+            <div class="cms-connections-heading">
+              <h2>Your connections</h2>
+              <button
+                class="cms-quiet-button"
+                id="cms-keys-refresh"
+                type="button"
+              >
+                Refresh
+              </button>
+            </div>
+            <div id="cms-key-list" aria-live="polite"></div>
+            <div class="cms-api-note">
+              <span aria-hidden="true">01 → 02 → 03</span>
+              <h3>Upload. Draft. Publish.</h3>
+              <p>
+                Upload your illustration, create an entry with its media path,
+                then publish its saved revision. Every committed change is
+                audited. Existing keys can never create other keys.
+              </p>
+              <a href="/api/openapi.json">Download OpenAPI JSON ↗</a>
+            </div>
+          </div>
         </div>
       </section>
       <p class="cms-notice" id="cms-notice" role="status" hidden></p>

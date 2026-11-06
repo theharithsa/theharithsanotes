@@ -42,7 +42,7 @@ const rootRoutes = new Set([
 function routeName(path: string): string {
   const parts = path.split("/").filter(Boolean);
   if (parts[0] === "api")
-    return `/api/cms/${["health", "me", "session", "entries", "audit", "media", "ci", "delivery"].includes(parts[2] ?? "") ? parts[2] : "unknown"}${parts.length > 3 ? "/:entry" : ""}`;
+    return `/api/${parts[1] === "v1" ? "v1" : "cms"}/${["health", "me", "session", "entries", "audit", "media", "ci", "delivery", "keys", "workspace"].includes(parts[2] ?? "") ? parts[2] : "unknown"}${parts.length > 3 ? "/:entry" : ""}`;
   if (parts[0] === "media") return "/media/:image/:variant";
   if (parts.length === 0) return "/";
   if (!rootRoutes.has(parts[0]!)) return "/:article";

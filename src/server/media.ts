@@ -162,7 +162,12 @@ export async function mediaResponse(
   request: Request,
   id: string,
   variant: string,
+  apiKey = false,
 ): Promise<Response> {
+  if (apiKey)
+    await (
+      await import("./api-keys.ts")
+    ).authorizeApiKey(request, "media:read");
   if (
     !/^[a-f0-9]{64}$/.test(id) ||
     !["master.webp", "400.webp", "800.webp", "1600.webp"].includes(variant)
@@ -178,7 +183,7 @@ export async function mediaResponse(
   );
   if (!snap.exists) throw new CmsError("NOT_FOUND", 404, "Image not found");
   const row = snap.data() as MediaRecord;
-  if (!row.published) {
+  if (!row.published && !apiKey) {
     try {
       await authorize(request, true);
     } catch {
@@ -202,9 +207,10 @@ export async function mediaResponse(
     headers: {
       "Content-Type": "image/webp",
       "Content-Length": String(bytes.length),
-      "Cache-Control": row.published
-        ? "public,max-age=31536000,immutable"
-        : "private,no-store",
+      "Cache-Control":
+        row.published && !apiKey
+          ? "public,max-age=31536000,immutable"
+          : "private,no-store",
       "X-Content-Type-Options": "nosniff",
     },
   });

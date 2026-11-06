@@ -1,0 +1,26 @@
+---
+interface Props {
+  paragraphs: string[];
+}
+---
+
+{Astro.props.paragraphs.length > 0 && (
+  <div class="wrap page-editorial-notes">
+    {Astro.props.paragraphs.map((text) => (
+      <p>{text}</p>
+    ))}
+  </div>
+)}
+<style>
+  .page-editorial-notes {
+    padding-top: 32px;
+    padding-bottom: 24px;
+    max-width: 900px;
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.7;
+  }
+  .page-editorial-notes p + p {
+    margin-top: 1em;
+  }
+</style>

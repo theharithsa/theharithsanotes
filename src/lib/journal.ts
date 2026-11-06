@@ -1,3 +1,5 @@
+import { pageDefaults, type JournalPage } from "../server/page-defaults.ts";
+export { pageDefaults, type JournalPage } from "../server/page-defaults.ts";
 import { articles, type Article } from "./content.ts";
 import { books, type Book } from "../data/books.ts";
 import { projects, type Project } from "../data/projects.ts";
@@ -8,15 +10,6 @@ import { firestoreEnabled } from "../server/config.ts";
 import { listPublished, publishedDetail } from "../server/repository.ts";
 import type { Section } from "../server/models.ts";
 
-export interface JournalPage {
-  slug: string;
-  title: string;
-  description: string;
-  paragraphs: string[];
-  image?: string;
-  heading?: string;
-  featuredProjects?: string[];
-}
 export interface GogNote {
   slug: string;
   title: string;
@@ -28,28 +21,6 @@ export interface GogNote {
   imageAlt: string;
   tags?: string[];
 }
-export const pageDefaults: JournalPage[] = [
-  {
-    slug: "home",
-    title: "The Harithsa Notes",
-    heading: "So much to be curious about.",
-    description: "Technology. Stories. Everyday discoveries.",
-    paragraphs: ["Welcome to my little corner of the internet."],
-    featuredProjects: ["aroha-retreat", "copilot-otel"],
-    image: "/images/curiosity-editorial.webp",
-  },
-  {
-    slug: "meet-vish",
-    title: "Meet Vish",
-    heading: "Call me Vish.",
-    description: "Engineer. Builder. Still a student of the world.",
-    paragraphs: [
-      "I’m a Senior Customer Success Engineer at Dynatrace. My work brings together observability, OpenTelemetry, and AI tooling—helping engineers make sense of what’s happening inside their software.",
-      "Outside that, you’ll find me building side projects, reading, listening to long conversations, or writing down a thought before it disappears. These pages bring those parts of my life together.",
-    ],
-    image: "/images/gallery/portrait-seated.webp",
-  },
-];
 export function inferredTags(
   article: Pick<Article, "topic" | "title" | "description">,
 ): string[] {

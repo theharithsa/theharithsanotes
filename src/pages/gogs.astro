@@ -1,28 +1,26 @@
 ---
+import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
 import EditorialImage from "../components/EditorialImage.astro";
-import { getGogs } from "../lib/journal";
+import { getGogs, getJournalPage } from "../lib/journal";
+import PageHeading from "../components/PageHeading.astro";
+const page = await getJournalPage("gogs");
 const notes = await getGogs();
 ---
 
 <Base
-  title="Games and Gadget (GoGs)"
-  description="GoGs is Vishruth Harithsa’s space for games, gadgets, and everyday experiences. The first personal stories are coming soon."
-  image="/images/navigation/gogs-portrait-v1.png"
+  title={page.title}
+  description={page.description}
+  image={page.image || "/images/navigation/gogs-portrait-v1.png"}
   imageAlt="An illustrated Vishruth enjoying a game, surrounded by everyday technology"
 >
   <section class="gogs-hero wrap">
     <div>
       <span class="eyebrow">GAMES AND GADGET · GoGs</span>
       <h1>
-        Press pause.
-        <br />
-        <em>Find a little wonder.</em>
+        <PageHeading text={page.heading ?? page.title} />
       </h1>
-      <p>
-        A space for the games I play, the gadgets I use, and the little
-        experiences that make life more interesting.
-      </p>
+      <p>{page.description}</p>
       <span class="gogs-label">A new chapter, coming soon.</span>
     </div>
     <EditorialImage
@@ -32,6 +30,7 @@ const notes = await getGogs();
       sizes="(max-width: 760px) 92vw, 50vw"
     />
   </section>
+  <PageParagraphs paragraphs={page.paragraphs} />
   {notes.length > 0 && (
     <section
       class="wrap space notes-grid"

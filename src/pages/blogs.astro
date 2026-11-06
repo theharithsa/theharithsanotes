@@ -1,7 +1,9 @@
 ---
+import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
-import { getArticles } from "../lib/journal";
+import { getArticles, getJournalPage } from "../lib/journal";
+const page = await getJournalPage("blogs");
 const articles = await getArticles();
 import { topics as originalTopics } from "../data/site";
 const topics = [
@@ -34,14 +36,16 @@ const months = [...byMonth].map(([key, items]) => ({
 const years = [...new Set(months.map((month) => month.year))];
 ---
 
-<Base title="Blog">
+<Base
+  title={page.title}
+  description={page.description}
+  image={page.image || undefined}
+>
   <section class="section-masthead tone-blue">
     <div class="wrap">
       <span class="eyebrow">THE WRITTEN WORD</span>
-      <h1>Blog</h1>
-      <p>
-        Making sense of systems, technology, and the occasional life lesson.
-      </p>
+      <h1>{page.heading ?? page.title}</h1>
+      <p>{page.description}</p>
     </div>
     <div class="blog-tag-row filters" aria-label="Filter articles by tag">
       <button data-blog-tag="" aria-pressed="true">
@@ -71,6 +75,7 @@ const years = [...new Set(months.map((month) => month.year))];
       </select>
     </label>
   </section>
+  <PageParagraphs paragraphs={page.paragraphs} />
   <section class="archive wrap space" aria-label="Browse blog articles">
     <div class="archive-tools">
       <div class="filters" aria-label="Filter by topic">

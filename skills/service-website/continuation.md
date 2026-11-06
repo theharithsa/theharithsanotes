@@ -1,3 +1,15 @@
+# Workspace and API delivery — issue 30
+
+Current work adds the actual Margin icon, a stronger writing-room palette, Write/Developer Settings navigation, complete core pages/label reconciliation and a scoped content API. Read docs/content-api.md for the key model and exact developer workflow. Existing private draft/publication boundaries remain intact. No permanent integration key is created automatically.
+
+Source modules: src/server/api-keys.ts, openapi.ts, workspace.ts and page-defaults.ts; src/pages/api/v1; src/pages/admin/api.astro; src/scripts/developer-settings.ts. Workspace reconciliation is an explicit one-off job and owner action, never a write on public page reads. It preserves existing edits and original content.
+
+Local checks passed: 26 Node tests, nine content/API/emulator tests including key scope/expiry/revocation/media/optimistic conflicts and repeatable catalog reconciliation; Swagger rendered all collections in Chrome. Core authenticated owner UI verification requires an existing signed-in owner session. Never bypass browser authentication or create permanent keys through browser automation without the required action-time confirmation. Use isolated emulator/preview fixtures for integration tests.
+
+Before release, inspect current PR/checks, image source/digest and provider receipts. Deploy preview and live from the same checked immutable image, run the catalog job in each namespace and verify content/labels, exact Hosting client assets, denial behavior and actual Dynatrace records. Roll back without deleting entries, key revocations or audit data. The previous production 1.12.0 release is documented in docs/cms-release-1.12.0.md.
+
+## Earlier release history
+
 # Current release — 1.12.0
 
 CMS implementation PR #28 is merged and deployed. Read [CMS continuation](../../docs/cms-implementation-status.md) and [release evidence](../../docs/cms-release-1.12.0.md) before the historical notes below. Firestore is now the live authoring store; nine tables, drafts/publish, private media, timelines and durable Dynatrace audit delivery are active. Interactive owner sign-in was not completed because browser control stopped. Preserve all data and the frozen Margin identity.

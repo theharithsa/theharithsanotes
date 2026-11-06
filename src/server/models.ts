@@ -83,6 +83,18 @@ const base = {
   title: z.string().trim().min(1).max(240),
   slug: slug.optional(),
 };
+export const pageSlugs = [
+  "home",
+  "meet-vish",
+  "blogs",
+  "books",
+  "projects",
+  "podcasts",
+  "entertainment",
+  "gallery",
+  "gogs",
+  "privacy",
+] as const;
 const schemas: Record<Section, z.ZodType> = {
   blogs: z
     .object({
@@ -198,16 +210,24 @@ const schemas: Record<Section, z.ZodType> = {
   pages: z
     .object({
       ...base,
-      slug,
+      slug: z.enum(pageSlugs),
       description: text,
       paragraphs: z.array(text).max(100),
       image: url.optional(),
+      heading: z.string().max(500).optional(),
+      featuredProjects: z.array(slug).max(20).optional(),
     })
     .catchall(z.unknown()),
   tags: z
     .object({ ...base, slug, kind: z.enum(["topic", "genre", "tag"]) })
     .catchall(z.unknown()),
 };
+export function contentSchema(section: Section) {
+  return z.toJSONSchema(schemas[section], {
+    target: "draft-2020-12",
+    unrepresentable: "any",
+  });
+}
 
 export function cleanHtml(value: string): string {
   return sanitizeHtml(value, {
@@ -308,7 +328,10 @@ export function validateData(
         "Add the real poster and its alternative text before publishing",
       );
   }
-  if (section === "pages" && !["home", "meet-vish"].includes(String(data.slug)))
+  if (
+    section === "pages" &&
+    !pageSlugs.includes(String(data.slug) as (typeof pageSlugs)[number])
+  )
     throw new CmsError("INVALID_CONTENT", 400, "Choose an existing core page");
   if (typeof data.html === "string") data.html = cleanHtml(data.html);
   if (

@@ -19,6 +19,12 @@ import { handleCmsApi } from "../src/server/api.ts";
 import { uploadMedia, mediaResponse } from "../src/server/media.ts";
 import { drainAudit } from "../src/server/outbox.ts";
 import { payloadSummary } from "../src/server/telemetry.ts";
+import { createApiKey } from "../src/server/api-keys.ts";
+import {
+  reconcileWorkspace,
+  workspaceSummary,
+} from "../src/server/workspace.ts";
+import { openApiDocument } from "../src/server/openapi.ts";
 
 test("content validation rejects scripts, unsafe links, excessive nesting and reserved slugs", () => {
   const data = validateData("blogs", blog("safe"));
@@ -96,6 +102,27 @@ function blog(slug: string) {
   };
 }
 const integration = process.env.FIRESTORE_EMULATOR_HOST ? test : test.skip;
+test("OpenAPI covers all collections, explicit publishing, protected media and the real data schemas", () => {
+  const doc = openApiDocument();
+  assert.equal(doc.openapi, "3.1.0");
+  assert.equal(Object.keys(doc.paths).length, 56);
+  for (const section of [
+    "blogs",
+    "books",
+    "projects",
+    "podcasts",
+    "entertainment",
+    "photos",
+    "gogs",
+    "pages",
+    "tags",
+  ]) {
+    assert.ok(doc.paths[`/entries/${section}/{id}/publish`]);
+    assert.ok((doc.components.schemas as Record<string, unknown>)[section]);
+  }
+  assert.ok(!JSON.stringify(doc).includes("theharithsa@gmail.com"));
+  assert.deepEqual(doc.security, [{ ApiKey: [] }]);
+});
 integration(
   "drafts, optimistic conflicts, publish idempotency, immutable bodies, aliases and history",
   async () => {
@@ -460,5 +487,248 @@ integration(
       `http://${process.env.FIREBASE_STORAGE_EMULATOR_HOST}/v0/b/the-harithsa-notes-94.firebasestorage.app/o?prefix=journal/`,
     );
     assert.equal(storage.status, 403);
+  },
+);
+integration(
+  "scoped keys enforce draft, publish, media and collection permissions; revocation and expiry are immediate",
+  async () => {
+    const full = await createApiKey({
+      name: "Synthetic integration",
+      scopes: [
+        "content:read",
+        "content:write",
+        "content:publish",
+        "media:read",
+        "media:write",
+      ],
+      sections: ["blogs"],
+      expiresInDays: 1,
+    });
+    const readonly = await createApiKey({
+      name: "Synthetic reader",
+      scopes: ["content:read"],
+      sections: ["blogs"],
+      expiresInDays: 1,
+    });
+    const call = (
+      path: string,
+      method = "GET",
+      data?: unknown,
+      key = full.token,
+      headers: Record<string, string> = {},
+    ) =>
+      handleCmsApi(
+        new Request("http://localhost:4321/api/v1/" + path, {
+          method,
+          headers: {
+            Authorization: "Bearer " + key,
+            ...(data instanceof FormData
+              ? {}
+              : { "Content-Type": "application/json" }),
+            ...headers,
+          },
+          ...(data === undefined
+            ? {}
+            : { body: data instanceof FormData ? data : JSON.stringify(data) }),
+        }),
+        path,
+        true,
+      );
+    assert.equal(
+      (await call("entries/blogs", "GET", undefined, "invalid")).status,
+      401,
+    );
+    assert.equal(
+      (await call("entries/books", "GET", undefined, readonly.token)).status,
+      403,
+    );
+    assert.equal(
+      (
+        await call(
+          "entries/blogs",
+          "POST",
+          { data: blog(randomUUID()) },
+          readonly.token,
+        )
+      ).status,
+      403,
+    );
+    assert.equal((await call("keys")).status, 404);
+    const created = await call("entries/blogs", "POST", {
+      data: blog(randomUUID()),
+    });
+    assert.equal(created.status, 201);
+    const entry = (await created.json()) as {
+      id: string;
+      draftRevision: number;
+      publishedRevision: number | null;
+      data: Record<string, unknown>;
+    };
+    assert.equal(entry.publishedRevision, null);
+    assert.equal(
+      (
+        await call("entries/blogs/" + entry.id, "PUT", {
+          data: entry.data,
+          expectedRevision: 0,
+        })
+      ).status,
+      409,
+    );
+    assert.equal(
+      (
+        await call(
+          `entries/blogs/${entry.id}/publish`,
+          "POST",
+          { expectedRevision: 1 },
+          readonly.token,
+          { "Idempotency-Key": "synthetic-first" },
+        )
+      ).status,
+      403,
+    );
+    for (let attempt = 0; attempt < 2; attempt++)
+      assert.equal(
+        (
+          await call(
+            `entries/blogs/${entry.id}/publish`,
+            "POST",
+            { expectedRevision: 1 },
+            full.token,
+            { "Idempotency-Key": "synthetic-first" },
+          )
+        ).status,
+        200,
+      );
+    assert.equal(
+      (
+        await call(`entries/blogs/${entry.id}/unpublish`, "POST", {
+          expectedRevision: 1,
+        })
+      ).status,
+      200,
+    );
+    assert.equal(
+      (
+        await call(`entries/blogs/${entry.id}/restore`, "POST", {
+          expectedRevision: 1,
+          revision: 1,
+        })
+      ).status,
+      200,
+    );
+    assert.equal(
+      (await call(`entries/blogs/${entry.id}/revisions`)).status,
+      200,
+    );
+    assert.equal(
+      (await call("entries/blogs/x/publish/ignored", "POST", {})).status,
+      404,
+    );
+    const image = await sharp({
+      create: { width: 18, height: 12, channels: 3, background: "#5678ab" },
+    })
+      .png()
+      .toBuffer();
+    const form = new FormData();
+    form.set(
+      "file",
+      new Blob([new Uint8Array(image)], { type: "image/png" }),
+      "synthetic.png",
+    );
+    form.set("alt", "Synthetic image");
+    const uploaded = await call("media", "POST", form);
+    assert.equal(uploaded.status, 201);
+    const media = (await uploaded.json()) as { id: string; url: string };
+    assert.equal((await call(`media/${media.id}/400.webp`)).status, 200);
+    assert.equal(
+      (
+        await call(
+          `media/${media.id}/400.webp`,
+          "GET",
+          undefined,
+          readonly.token,
+        )
+      ).status,
+      403,
+    );
+    assert.equal(
+      (
+        await mediaResponse(
+          new Request("http://localhost:4321" + media.url),
+          media.id,
+          "400.webp",
+        ).catch((error) => new Response(null, { status: error.status }))
+      ).status,
+      404,
+    );
+    const stored = await database()
+      .collection(collection("apiKeys"))
+      .doc(full.key.id)
+      .get();
+    assert.equal(stored.get("digest").length, 64);
+    assert.ok(!JSON.stringify(stored.data()).includes(full.token));
+    const metadata = await handleCmsApi(
+      new Request("http://localhost:4321/api/cms/keys", {
+        headers: { Authorization: "Bearer " + token("cms-owner") },
+      }),
+      "keys",
+    );
+    assert.equal(metadata.status, 200);
+    const list = await metadata.text();
+    assert.ok(!list.includes(full.token));
+    assert.ok(!list.includes("digest"));
+    const revoke = await handleCmsApi(
+      new Request("http://localhost:4321/api/cms/keys/" + full.key.id, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + token("cms-owner") },
+      }),
+      "keys/" + full.key.id,
+    );
+    assert.equal(revoke.status, 200);
+    assert.equal((await call("entries/blogs")).status, 401);
+    await database()
+      .collection(collection("apiKeys"))
+      .doc(readonly.key.id)
+      .update({ expiresAt: "2000-01-01T00:00:00.000Z" });
+    assert.equal(
+      (await call("entries/blogs", "GET", undefined, readonly.token)).status,
+      401,
+    );
+    const audit = await database().collection(collection("outbox")).get();
+    assert.ok(
+      !JSON.stringify(audit.docs.map((row) => row.data())).includes(full.token),
+    );
+  },
+);
+integration(
+  "catalog reconciliation exposes every core page and existing labels, preserving edits and remaining idempotent",
+  async () => {
+    const first = await reconcileWorkspace();
+    assert.equal(first.counts.pages, 10);
+    assert.ok(first.counts.tags! > 0);
+    const second = await reconcileWorkspace();
+    assert.deepEqual(second.added, { tags: 0, pages: 0 });
+    assert.equal((await workspaceSummary()).counts.pages, 10);
+    const page = await database()
+      .collection(collection("entries"))
+      .doc("pages--blogs")
+      .get();
+    const data = page.get("data") as Record<string, unknown>;
+    await saveEntry(
+      "pages",
+      "blogs",
+      { ...data, heading: "An owner-edited heading" },
+      1,
+    );
+    await reconcileWorkspace();
+    assert.equal(
+      (
+        await database()
+          .collection(collection("entries"))
+          .doc("pages--blogs")
+          .get()
+      ).get("data.heading"),
+      "An owner-edited heading",
+    );
   },
 );

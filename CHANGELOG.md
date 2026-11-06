@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0] — 2026-11-06
+
+- Refresh the workspace with the frozen site icon, ink sidebar, clearer Write navigation, collection counts and a separate Developer Settings area.
+- Add scoped, expiring, revocable API keys and the versioned content/media API with a self-hosted Swagger explorer and OpenAPI 3.1 schemas.
+- Reconcile existing labels and all ten core page records without replacing owner edits; section introductions now read published page content.
+- Audit key creation/revocation and API operations through the existing transactional outbox and OpenTelemetry pipeline; exclude credentials from logs/events.
+
 ## [1.12.0] — 2026-11-06
 
 - Add the owner-only Notion-style CMS with collection tables, rich editing, private autosave, publication, revision history, preview and metadata-stripped media uploads.
