@@ -4,6 +4,8 @@ import "../../styles/reading.css";
 export function getStaticPaths() {
   return [undefined, "journal", "people"].map((path) => ({ params: { path } }));
 }
+const selectedCollection =
+  Astro.params.path?.split("/")[0] === "people" ? "people" : "journal";
 const isDetail = Boolean(Astro.params.path?.split("/")[1]);
 ---
 
@@ -48,13 +50,13 @@ const isDetail = Boolean(Astro.params.path?.split("/")[1]);
         >
           <a
             href="/people-and-journal/journal"
-            aria-current={Astro.params.path !== "people" ? "page" : undefined}
+            aria-current={selectedCollection === "journal" ? "page" : undefined}
           >
             Journal
           </a>
           <a
             href="/people-and-journal/people"
-            aria-current={Astro.params.path === "people" ? "page" : undefined}
+            aria-current={selectedCollection === "people" ? "page" : undefined}
           >
             People
           </a>
