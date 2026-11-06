@@ -9,6 +9,7 @@ import {
 import { firebaseConfig } from "../lib/firebase-config";
 import type { Entry, EntryData, Section } from "../server/models";
 import type { Editor } from "@tiptap/core";
+import { setEditingAvailability } from "../lib/editor-state";
 
 const auth = getAuth(getApps()[0] ?? initializeApp(firebaseConfig));
 const descriptions: Record<
@@ -226,7 +227,7 @@ function updateState() {
       | HTMLButtonElement
     >("input,textarea,select,button")
     .forEach((input) => (input.disabled = busyAction));
-  rich?.setEditable(!busyAction);
+  setEditingAvailability(rich, busyAction);
   const dirty = dirtyVersion !== savedVersion;
   const label = saving
     ? "Saving…"
