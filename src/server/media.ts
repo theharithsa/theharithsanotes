@@ -6,8 +6,12 @@ import { authorize } from "./auth.ts";
 import { CmsError, isRestrictedSection } from "./models.ts";
 import { authorizeReader } from "./members.ts";
 import { auditEvent, firebaseOperation, outboxDocument } from "./telemetry.ts";
+import { playableFormat, mediaRange } from "./media-format.ts";
 
 export interface MediaRecord {
+  kind?: "image" | "video" | "audio";
+  contentType?: string;
+  fileName?: string;
   section?: "journal" | "people";
   id: string;
   state: "ready";
@@ -26,6 +30,87 @@ export async function uploadMedia(
   alt: string,
   section?: "journal" | "people",
 ): Promise<MediaRecord> {
+  const playable = playableFormat(bytes);
+  if (playable) {
+    if (bytes.length > 24 * 1024 * 1024)
+      throw new CmsError(
+        "INVALID_MEDIA",
+        413,
+        "Choose video or audio under 24 MiB",
+      );
+    const id = createHash("sha256")
+      .update(`${section ?? "public"}-playable-v1`)
+      .update(bytes)
+      .digest("hex");
+    const fileName = `source.${playable.extension}`;
+    const path = `journal/${namespace}/media/${id}/${fileName}`;
+    const row: MediaRecord = {
+      ...(section ? { section } : {}),
+      id,
+      kind: playable.kind,
+      contentType: playable.contentType,
+      fileName,
+      state: "ready",
+      published: false,
+      title: title.slice(0, 240),
+      alt: alt.slice(0, 2000),
+      width: 0,
+      height: 0,
+      createdAt: new Date().toISOString(),
+      sourceSha256: createHash("sha256").update(bytes).digest("hex"),
+      paths: { source: path },
+    };
+    await firebaseOperation(
+      "upload",
+      "media",
+      { id, bytes: bytes.length, kind: playable.kind },
+      async () => {
+        try {
+          await mediaBucket()
+            .file(path)
+            .save(bytes, {
+              resumable: false,
+              metadata: {
+                contentType: playable.contentType,
+                cacheControl: "private,no-store",
+              },
+              preconditionOpts: { ifGenerationMatch: 0 },
+            });
+        } catch (error) {
+          if (!(
+            error &&
+            typeof error === "object" &&
+            "code" in error &&
+            Number(error.code) === 412
+          ))
+            throw error;
+        }
+      },
+      () => ({ id, bytes: bytes.length }),
+    );
+    const event = auditEvent("media.ready", {
+      "media.id": id,
+      "media.kind": playable.kind,
+      "media.bytes": bytes.length,
+    });
+    return firebaseOperation(
+      "create",
+      "media",
+      { id, kind: playable.kind },
+      () =>
+        database().runTransaction(async (tx) => {
+          const reference = database().collection(collection("media")).doc(id);
+          const existing = await tx.get(reference);
+          if (existing.exists) return existing.data() as MediaRecord;
+          tx.create(reference, row);
+          tx.create(
+            database().collection(collection("outbox")).doc(event.id),
+            outboxDocument(event),
+          );
+          return row;
+        }),
+    );
+  }
   if (bytes.length > 8 * 1024 * 1024)
     throw new CmsError(
       "INVALID_MEDIA",
@@ -174,7 +259,17 @@ export async function mediaResponse(
     ).authorizeApiKey(request, "media:read");
   if (
     !/^[a-f0-9]{64}$/.test(id) ||
-    !["master.webp", "400.webp", "800.webp", "1600.webp"].includes(variant)
+    ![
+      "master.webp",
+      "400.webp",
+      "800.webp",
+      "1600.webp",
+      "source.mp4",
+      "source.webm",
+      "source.mp3",
+      "source.m4a",
+      "source.ogg",
+    ].includes(variant)
   )
     throw new CmsError("NOT_FOUND", 404, "Image not found");
   const snap = await firebaseOperation(
@@ -230,7 +325,10 @@ export async function mediaResponse(
       throw new CmsError("NOT_FOUND", 404, "Image not found");
     }
   }
-  const path = row.paths[variant.replace(".webp", "")];
+  const playable = variant.startsWith("source.");
+  if (playable && row.fileName !== variant)
+    throw new CmsError("NOT_FOUND", 404, "Media not found");
+  const path = row.paths[playable ? "source" : variant.replace(".webp", "")];
   if (!path || !path.startsWith(`journal/${namespace}/media/${id}/`))
     throw new CmsError("NOT_FOUND", 404, "Image not found");
   const bytes = await firebaseOperation(
@@ -243,10 +341,32 @@ export async function mediaResponse(
     },
     (value) => ({ bytes: value.length }),
   );
-  return new Response(new Uint8Array(bytes), {
+  let range: { start: number; end: number } | null = null;
+  try {
+    range = playable
+      ? mediaRange(request.headers.get("range"), bytes.length)
+      : null;
+  } catch {
+    return new Response(null, {
+      status: 416,
+      headers: {
+        "Content-Range": `bytes */${bytes.length}`,
+        "Cache-Control": "private,no-store",
+      },
+    });
+  }
+  const body = range ? bytes.subarray(range.start, range.end + 1) : bytes;
+  return new Response(new Uint8Array(body), {
+    status: range ? 206 : 200,
     headers: {
-      "Content-Type": "image/webp",
-      "Content-Length": String(bytes.length),
+      "Content-Type": playable ? row.contentType! : "image/webp",
+      "Content-Length": String(body.length),
+      ...(playable ? { "Accept-Ranges": "bytes" } : {}),
+      ...(range
+        ? {
+            "Content-Range": `bytes ${range.start}-${range.end}/${bytes.length}`,
+          }
+        : {}),
       "Cache-Control":
         row.published && !apiKey && !restricted
           ? "public,max-age=31536000,immutable"

@@ -141,7 +141,7 @@ const invitationSession = new AuthRestoration({
       (phase === "loading"
         ? "Opening your invitations…"
         : phase === "ready"
-          ? "You control who can read this part of the notebook."
+          ? ""
           : "Sign in as the workspace owner.");
   },
   enter: ({ members }) => renderMembers(members),

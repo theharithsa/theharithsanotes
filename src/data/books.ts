@@ -25,6 +25,7 @@ export interface GoodreadsEntry {
   reviewUrl: string;
 }
 export interface Book {
+  html?: string;
   title: string;
   author: string;
   status: "Read";

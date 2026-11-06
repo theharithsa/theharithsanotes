@@ -1107,6 +1107,58 @@ body:has(#invitations-room) {
 #invitations-room {
   padding-bottom: 100px;
 }
+#invite-status:not(:empty),
+#cms-key-message:not(:empty),
+#cms-entry-message:not(:empty) {
+  margin: 20px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--cms-border);
+  border-radius: 8px;
+  background: var(--cms-panel);
+  color: var(--ink);
+  font: 14px/1.6 var(--sans);
+  overflow-wrap: anywhere;
+}
+#invite-status:empty,
+#cms-key-message:empty,
+#cms-entry-message:empty {
+  display: none;
+}
+.cms-media-composer {
+  min-width: 0;
+  margin: 12px 0;
+  padding: 18px;
+  border: 1px solid var(--cms-border);
+  border-radius: 8px;
+  background: var(--cms-panel);
+  font: 14px/1.5 var(--sans);
+}
+.cms-media-composer[hidden] {
+  display: none;
+}
+.cms-media-composer label {
+  display: grid;
+  gap: 8px;
+}
+.cms-media-composer input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+}
+.cms-media-composer p {
+  margin: 10px 0 14px;
+  color: var(--cms-muted);
+}
+.cms-media-composer > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cms-developer-card > p {
+  max-width: 68ch;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
 #invitations-room .cms-developer-hero:after {
   content: "✎";
   font-family: var(--serif);

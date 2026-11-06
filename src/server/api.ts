@@ -282,8 +282,8 @@ export async function handleCmsApi(
           .map((doc) => ({
             ...doc.data(),
             paths: undefined,
-            url: `/media/${doc.id}/1600.webp`,
-            apiUrl: `/api/v1/media/${doc.id}/1600.webp`,
+            url: `/media/${doc.id}/${doc.get("fileName") ?? "1600.webp"}`,
+            apiUrl: `/api/v1/media/${doc.id}/${doc.get("fileName") ?? "1600.webp"}`,
           })),
       });
     }
@@ -294,14 +294,18 @@ export async function handleCmsApi(
         throw new CmsError(
           "INVALID_MEDIA",
           415,
-          "Send a multipart/form-data image upload",
+          "Send a multipart/form-data media upload",
         );
       if (parts.length !== 1)
         throw new CmsError("NOT_FOUND", 404, "Unknown media operation");
       const length = Number(request.headers.get("content-length"));
-      if (length > 9 * 1024 * 1024)
-        throw new CmsError("INVALID_MEDIA", 413, "Choose an image under 8 MiB");
-      const bytes = await boundedBody(request, 9 * 1024 * 1024);
+      if (length > 25 * 1024 * 1024)
+        throw new CmsError(
+          "INVALID_MEDIA",
+          413,
+          "Choose an image under 8 MiB or video/audio under 24 MiB",
+        );
+      const bytes = await boundedBody(request, 25 * 1024 * 1024);
       const form = await new Request(request.url, {
         method: "POST",
         headers: { "content-type": request.headers.get("content-type") ?? "" },
@@ -309,7 +313,11 @@ export async function handleCmsApi(
       }).formData();
       const file = form.get("file");
       if (!(file instanceof File))
-        throw new CmsError("INVALID_MEDIA", 400, "Choose an image to upload");
+        throw new CmsError(
+          "INVALID_MEDIA",
+          400,
+          "Choose a supported media file",
+        );
       const targetSection = String(form.get("section") ?? "");
       if (targetSection && !isSection(targetSection))
         throw new CmsError("INVALID_MEDIA", 400, "Choose a valid collection");
@@ -325,8 +333,8 @@ export async function handleCmsApi(
         {
           ...row,
           paths: undefined,
-          url: `/media/${row.id}/1600.webp`,
-          apiUrl: `/api/v1/media/${row.id}/1600.webp`,
+          url: `/media/${row.id}/${row.fileName ?? "1600.webp"}`,
+          apiUrl: `/api/v1/media/${row.id}/${row.fileName ?? "1600.webp"}`,
         },
         201,
       );

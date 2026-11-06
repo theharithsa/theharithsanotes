@@ -1,3 +1,7 @@
+# Multimedia posts 1.22.0 / issue #80
+
+Shared post-media mapper/sanitizer and Tiptap PostMediaBlock own YouTube/Vimeo/Spotify/native players. Workspace media composer supports replacement; standalone URLs paste as blocks. All post collections expose optional rich stories, preserving structured content. Uploads add MP4/WebM/MP3/M4A/Ogg under 24 MiB, original bytes, same private/published reference checks and range support. Images remain unchanged. Read docs/multimedia-posts.md and the linked PR for limits, tests, rollout and rollback. Invite ready filler removed; status notices have consistent containment. No content migration, new dependency or permission expansion.
+
 # Site-wide classic typography 1.21.1 / issue #78
 
 Owner requested 15% smaller reading text and consistent classic typography on every page. `post-reading.css` owns rem-based 16.15px desktop / 14.45px phone reading and 15.3px desktop notes, based on a 16px browser default; headings stay large. `site-typography.css` applies the classic face to page narratives, collections and navigation while preserving UI/code roles. Meet Vish and Privacy now share post-body styling; private People/Journal and Workspace editor use the same tokens. Source Serif imports are removed; frozen logo/artwork, covers, photo grouping, content and access stay unchanged. See docs/site-typography-1.21.1.md and the linked PR for release evidence.

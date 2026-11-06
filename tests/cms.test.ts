@@ -232,6 +232,24 @@ integration(
       "A notebook",
     );
     assert.notEqual(regular.id, cover.id);
+    const clipBytes = Buffer.alloc(64);
+    clipBytes.writeUInt32BE(24);
+    clipBytes.write("ftypisom", 4);
+    const clip = await uploadMedia(
+      clipBytes,
+      "Synthetic video transport fixture",
+      "",
+      "journal",
+    );
+    const clipRequest = new Request("http://localhost/media", {
+      headers: {
+        ...Object.fromEntries(request().headers),
+        Range: "bytes=8-15",
+      },
+    });
+    await assert.rejects(() =>
+      mediaResponse(clipRequest, clip.id, "source.mp4"),
+    );
     const draft = await saveEntry(
       "journal",
       randomUUID(),
@@ -242,7 +260,7 @@ integration(
         date: "2026-11-06",
         image: `/media/${cover.id}/1600.webp`,
         imageAlt: "An abstract notebook",
-        html: "<p>PRIVATE_BODY_SENTINEL</p>",
+        html: `<p>PRIVATE_BODY_SENTINEL</p><video src="/media/${clip.id}/source.mp4" controls></video><p>https://youtu.be/dQw4w9WgXcQ</p>`,
         tags: ["PRIVATE_TAG_SENTINEL"],
         sourceNotes: "PRIVATE_SOURCE_SENTINEL",
       },
@@ -256,6 +274,19 @@ integration(
       mediaResponse(imageRequest, cover.id, "800.webp"),
     );
     await publishEntry("journal", draft.id, 1, "private-test-publish");
+    const clipResponse = await mediaResponse(
+      clipRequest,
+      clip.id,
+      "source.mp4",
+    );
+    assert.equal(clipResponse.status, 206);
+    assert.equal(clipResponse.headers.get("Content-Range"), "bytes 8-15/64");
+    assert.match(clipResponse.headers.get("Cache-Control") ?? "", /no-store/);
+    assert.equal(clipResponse.headers.get("Content-Type"), "video/mp4");
+    assert.equal((await clipResponse.arrayBuffer()).byteLength, 8);
+    await assert.rejects(() =>
+      mediaResponse(new Request(clipRequest.url), clip.id, "source.mp4"),
+    );
     assert.equal(
       (
         await database().collection(collection("media")).doc(cover.id).get()
@@ -279,6 +310,7 @@ integration(
     assert.equal(detail.status, 200);
     const detailBody = JSON.stringify(await detail.json());
     assert.ok(detailBody.includes("PRIVATE_BODY_SENTINEL"));
+    assert.ok(detailBody.includes("youtube-nocookie.com"));
     assert.ok(!detailBody.includes("PRIVATE_SOURCE_SENTINEL"));
     assert.equal(
       (await mediaResponse(imageRequest, cover.id, "800.webp")).status,

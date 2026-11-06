@@ -2,6 +2,7 @@ export { books } from "./books.ts";
 export type { Book } from "./books.ts";
 
 export interface ListeningNote {
+  html?: string;
   slug: string;
   artLabel: string;
   title: string;

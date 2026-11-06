@@ -12,6 +12,7 @@ import type { Entry, EntryData, Section } from "../server/models";
 import type { Editor } from "@tiptap/core";
 import { setEditingAvailability } from "../lib/editor-state";
 import { developerSettings } from "./developer-settings";
+import { mediaComposer } from "./media-composer";
 
 const auth = getAuth(getApps()[0] ?? initializeApp(firebaseConfig));
 const descriptions: Record<
@@ -1210,7 +1211,7 @@ async function createRichEditor(generation: number) {
     { default: Image },
     { TableKit },
     { default: Placeholder },
-    { PostCallout, PostImageGrid, PostImageMosaic },
+    { PostCallout, PostImageGrid, PostImageMosaic, PostMediaBlock },
   ] = await Promise.all([
     import("@tiptap/core"),
     import("@tiptap/starter-kit"),
@@ -1281,6 +1282,7 @@ async function createRichEditor(generation: number) {
       PostCallout,
       PostImageGrid,
       PostImageMosaic,
+      PostMediaBlock,
     ],
     content: String(
       current.data.html ??
@@ -1323,6 +1325,8 @@ async function createRichEditor(generation: number) {
         );
     },
   });
+  const mediaPanel = mediaComposer(rich, editorMessage);
+  field.insertBefore(mediaPanel.element, host);
   const commands: Array<[string, (editor: Editor) => void]> = [
     [
       "Text",
@@ -1434,6 +1438,21 @@ async function createRichEditor(generation: number) {
           .run();
       },
     ],
+    ["Embed media", () => mediaPanel.open()],
+    [
+      "Upload video/audio",
+      (editor) => {
+        uploadTarget = (url) => {
+          if (!editor.isDestroyed)
+            editor
+              .chain()
+              .focus()
+              .insertContent({ type: "postMedia", attrs: { url } })
+              .run();
+        };
+        element<HTMLInputElement>("cms-media-file").click();
+      },
+    ],
     [
       "Image",
       (editor) => {
@@ -1468,7 +1487,16 @@ async function renderEditor() {
   fieldsFor(current.section).forEach(createField);
   if (current.section === "projects") createFeatures();
   if (
-    ["blogs", "gogs", "journal", "people"].includes(current.section) ||
+    [
+      "blogs",
+      "books",
+      "projects",
+      "podcasts",
+      "entertainment",
+      "gogs",
+      "journal",
+      "people",
+    ].includes(current.section) ||
     (current.section === "pages" && current.data.slug === "meet-vish")
   )
     await createRichEditor(generation);
@@ -1728,53 +1756,55 @@ element<HTMLButtonElement>("cms-history").addEventListener(
     }
   },
 );
-element<HTMLInputElement>("cms-file").addEventListener(
-  "change",
-  async (event) => {
-    const input = event.currentTarget as HTMLInputElement;
-    const file = input.files?.[0];
-    const target = uploadTarget;
-    input.value = "";
-    if (!file || !target || !current) return;
-    const id = current.id;
-    editorMessage("Preparing your image…");
-    try {
-      const alt = String(current.data.imageAlt ?? current.data.alt ?? "");
-      const data = new FormData();
-      data.set("section", current.section);
-      data.set("file", file);
-      data.set("title", file.name);
-      data.set("alt", alt);
-      const result = await api<{ url: string; width: number; height: number }>(
-        "media",
-        { method: "POST", body: data },
-      );
-      if (current?.id !== id) return;
-      if (typeof target === "function") target(result.url, alt);
-      else {
-        setValue(target, result.url);
-        if (current.section === "photos") {
-          setValue("width", result.width);
-          setValue("height", result.height);
+for (const fileInput of ["cms-file", "cms-media-file"])
+  element<HTMLInputElement>(fileInput).addEventListener(
+    "change",
+    async (event) => {
+      const input = event.currentTarget as HTMLInputElement;
+      const file = input.files?.[0];
+      const target = uploadTarget;
+      input.value = "";
+      if (!file || !target || !current) return;
+      const id = current.id;
+      editorMessage("Preparing your media…");
+      try {
+        const alt = String(current.data.imageAlt ?? current.data.alt ?? "");
+        const data = new FormData();
+        data.set("section", current.section);
+        data.set("file", file);
+        data.set("title", file.name);
+        data.set("alt", alt);
+        const result = await api<{
+          url: string;
+          width: number;
+          height: number;
+        }>("media", { method: "POST", body: data });
+        if (current?.id !== id) return;
+        if (typeof target === "function") target(result.url, alt);
+        else {
+          setValue(target, result.url);
+          if (current.section === "photos") {
+            setValue("width", result.width);
+            setValue("height", result.height);
+          }
+          if (target === "poster.src") {
+            setValue("poster.width", result.width);
+            setValue("poster.height", result.height);
+          }
+          await renderEditor();
         }
-        if (target === "poster.src") {
-          setValue("poster.width", result.width);
-          setValue("poster.height", result.height);
-        }
-        await renderEditor();
+        editorMessage(
+          "Media ready. It stays private until this entry is published.",
+        );
+      } catch (error) {
+        editorMessage(
+          error instanceof Error
+            ? error.message
+            : "Media upload failed. Your draft is safe.",
+        );
       }
-      editorMessage(
-        "Image ready. It stays private until this entry is published.",
-      );
-    } catch (error) {
-      editorMessage(
-        error instanceof Error
-          ? error.message
-          : "Image upload failed. Your draft is safe.",
-      );
-    }
-  },
-);
+    },
+  );
 search.addEventListener("input", renderRows);
 statusFilter.addEventListener("change", renderRows);
 element<HTMLButtonElement>("cms-more").addEventListener("click", () => {
