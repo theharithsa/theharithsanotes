@@ -1,0 +1,99 @@
+---
+import Base from "../../layouts/Base.astro";
+import swaggerJs from "swagger-ui-dist/swagger-ui-bundle.js?url";
+import swaggerCss from "swagger-ui-dist/swagger-ui.css?url";
+---
+
+<Base
+  title="Content API reference"
+  description="The Harithsa Notes content API reference."
+>
+  <main class="api-reference">
+    <header>
+      <a href="/admin#developer">← Developer Settings</a>
+      <span>THE HARITHSA NOTES / API v1</span>
+      <h1>Your journal. Your tools.</h1>
+      <p>
+        Draft, upload, and publish from your own integrations. Generate a scoped
+        key in Developer Settings, then use Authorize below. Credentials stay in
+        this tab’s memory and are cleared on reload.
+      </p>
+      <a href="/api/openapi.json" download="harithsa-notes-openapi.json">
+        Download OpenAPI JSON
+      </a>
+    </header>
+    <div id="swagger-ui" data-swagger-src={swaggerJs}></div>
+  </main>
+  <link rel="stylesheet" href={swaggerCss} />
+  <script>
+    const host = document.getElementById("swagger-ui")!;
+    const script = document.createElement("script");
+    script.src = host.dataset.swaggerSrc!;
+    script.onload = () => {
+      const swagger = (
+        window as unknown as {
+          SwaggerUIBundle: (options: Record<string, unknown>) => unknown;
+        }
+      ).SwaggerUIBundle;
+      swagger({
+        url: "/api/openapi.json",
+        dom_id: "#swagger-ui",
+        deepLinking: true,
+        validatorUrl: null,
+        persistAuthorization: false,
+        queryConfigEnabled: false,
+        tryItOutEnabled: false,
+        displayRequestDuration: true,
+        supportedSubmitMethods: ["get", "post", "put", "delete"],
+      });
+    };
+    script.onerror = () => {
+      host.textContent =
+        "The API explorer could not load. Download the OpenAPI JSON above or reload this page.";
+    };
+    document.body.append(script);
+  </script>
+  <style is:global>
+    body:has(.api-reference) .site-header,
+    body:has(.api-reference) .site-footer {
+      display: none;
+    }
+    .api-reference {
+      max-width: 1400px;
+      margin: auto;
+      padding: 40px 24px;
+      background: #fff;
+      color: #242321;
+      min-height: 100vh;
+    }
+    .api-reference > header {
+      padding: 24px 25px 40px;
+      border-bottom: 1px solid #ddd;
+    }
+    .api-reference > header span {
+      display: block;
+      font: 12px var(--mono);
+      letter-spacing: 0.1em;
+      margin-top: 32px;
+      color: #7654a3;
+    }
+    .api-reference h1 {
+      font: clamp(32px, 5vw, 64px)/1.1 var(--serif);
+      margin: 16px 0;
+    }
+    .api-reference > header p {
+      max-width: 760px;
+      line-height: 1.7;
+    }
+    .api-reference a {
+      color: #573e83;
+      text-decoration: underline;
+    }
+    .api-reference .swagger-ui {
+      padding: 24px 0;
+    }
+    .api-reference .swagger-ui .info {
+      margin-top: 20px;
+    }
+  </style>
+</Base>

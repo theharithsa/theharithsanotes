@@ -14,7 +14,8 @@ export const collection = (
     | "media"
     | "outbox"
     | "settings"
-    | "operations",
+    | "operations"
+    | "apiKeys",
 ) => `cms_${namespace}_${name}`;
 export const firestoreEnabled = () =>
   process.env.CMS_DATA_SOURCE === "firestore" ||

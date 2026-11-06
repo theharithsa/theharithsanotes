@@ -1,7 +1,10 @@
 ---
+import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
 import ProjectArt from "../components/ProjectArt.astro";
-import { getProjects } from "../lib/journal";
+import { getProjects, getJournalPage } from "../lib/journal";
+import PageHeading from "../components/PageHeading.astro";
+const page = await getJournalPage("projects");
 const projects = await getProjects();
 const projectTopics = [...new Set(projects.map((project) => project.category))];
 ---
@@ -16,22 +19,18 @@ const projectTopics = [...new Set(projects.map((project) => project.category))];
       <div class="workbench-intro-title">
         <span class="eyebrow">PROJECTS / THE WORKBENCH</span>
         <h1>
-          A few ideas.
-          <br />
-          <span>Out in the world.</span>
+          <PageHeading text={page.heading ?? page.title} />
         </h1>
       </div>
       <div class="workbench-intro-note">
-        <p>
-          Some start with a problem. Others with a little curiosity. These are
-          the products, tools and experiments I keep coming back to.
-        </p>
+        <p>{page.description}</p>
         <span class="workbench-count">
           {String(projects.length).padStart(2, "0")} projects &amp; counting{" "}
           <span aria-hidden="true">↘</span>
         </span>
       </div>
     </header>
+    <PageParagraphs paragraphs={page.paragraphs} />
     <section
       class="wrap workbench-section"
       aria-labelledby="projects-heading"

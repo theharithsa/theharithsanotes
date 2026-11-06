@@ -1,6 +1,9 @@
 ---
+import PageParagraphs from "../components/PageParagraphs.astro";
 import Base from "../layouts/Base.astro";
-import { getBooks } from "../lib/journal";
+import { getBooks, getJournalPage } from "../lib/journal";
+import PageHeading from "../components/PageHeading.astro";
+const page = await getJournalPage("books");
 import { genres as originalGenres } from "../data/books";
 const books = await getBooks();
 const completedBooks = books;
@@ -17,14 +20,9 @@ import BookRating from "../components/BookRating.astro";
       <div>
         <span class="eyebrow">THE READING ROOM</span>
         <h1>
-          A whole world.
-          <br />
-          <em>One page away.</em>
+          <PageHeading text={page.heading ?? page.title} />
         </h1>
-        <p>
-          {books.length} books read, and plenty of ideas still unfolding. My
-          ratings, notes from the margins, and new perspectives to return to.
-        </p>
+        <p>{page.description}</p>
         <a href="#bookshelf" class="text-link">
           Browse the shelf ↓
         </a>
@@ -52,6 +50,7 @@ import BookRating from "../components/BookRating.astro";
       </div>
     </div>
   </section>
+  <PageParagraphs paragraphs={page.paragraphs} />
   <section class="wrap space" id="bookshelf">
     <div class="section-heading">
       <div>
