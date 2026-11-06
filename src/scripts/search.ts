@@ -1,145 +1,279 @@
-export {};
-interface Result {
-  title: string;
-  description: string;
-  label: string;
-  href: string;
-  private: boolean;
-}
-interface ResponseData {
-  results: Result[];
-  total: number;
-  next: number | null;
-  privateAvailable: boolean;
-  error?: { message: string };
-}
-const form = document.querySelector<HTMLFormElement>("#global-search-form")!;
-const input = document.querySelector<HTMLInputElement>("#global-query")!;
-const section = document.querySelector<HTMLSelectElement>("#global-section")!;
-const results = document.querySelector<HTMLElement>("#global-search-results")!;
-const searchStatus = document.querySelector<HTMLElement>(
-  "#global-search-status",
-)!;
-const privateStatus = document.querySelector<HTMLElement>(
-  "#global-private-status",
-)!;
-const more = document.querySelector<HTMLButtonElement>("#global-search-more")!;
-let controller: AbortController | undefined;
-let timer: ReturnType<typeof setTimeout> | undefined;
+import { SearchSession, type SearchResponse } from "../lib/search-session";
+import { revealElement } from "../lib/public-motion";
+const node = <T extends HTMLElement>(id: string) =>
+  document.getElementById(id) as T;
+const dialog = node<HTMLDialogElement>("site-search");
+const form = node<HTMLFormElement>("global-search-form");
+const input = node<HTMLInputElement>("global-query");
+const scope = node<HTMLSelectElement>("global-section");
+const results = node<HTMLUListElement>("global-search-results");
+const status = node("global-search-status");
+const loading = node("spotlight-loading");
+const start = node("spotlight-start");
+const retry = node<HTMLButtonElement>("spotlight-retry");
+const more = node<HTMLButtonElement>("global-search-more");
+const privateStatus = node("global-private-status");
+const root = document.documentElement;
+const viewStyle = node<HTMLStyleElement>("public-page-transitions");
+const viewRule = viewStyle?.textContent ?? "";
 let next: number | null = null;
-let generation = 0;
-async function search(append = false): Promise<void> {
-  controller?.abort();
-  const own = ++generation;
-  if (!append) results.replaceChildren();
+let returnFocus: HTMLElement | null = null;
+let closing: ReturnType<typeof setTimeout> | undefined;
+let leaving = false;
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+function resetResults(): void {
+  results.replaceChildren();
+  next = null;
   more.hidden = true;
-  const query = input.value.trim();
-  if (query.length < 2) {
-    searchStatus.textContent = "Enter at least two characters to begin.";
-    results.setAttribute("aria-busy", "false");
-    return;
-  }
-  controller = new AbortController();
-  results.setAttribute("aria-busy", "true");
-  searchStatus.textContent = "Looking through the notebook…";
-  try {
+  retry.hidden = true;
+  results.setAttribute("aria-busy", "false");
+  loading.hidden = true;
+  privateStatus.textContent = "Search the published notebook.";
+  document
+    .querySelectorAll<HTMLOptionElement>("[data-private-search]")
+    .forEach((option) => (option.hidden = true));
+}
+const session = new SearchSession({
+  request: async (query, section, offset, signal) => {
     const response = await fetch("/api/search/query", {
       method: "POST",
       credentials: "same-origin",
       cache: "no-store",
-      signal: controller.signal,
+      signal,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query,
-        section: section.value,
-        offset: append ? next : 0,
-      }),
+      body: JSON.stringify({ query, section, offset }),
     });
-    if (!response.headers.get("Content-Type")?.includes("application/json"))
-      throw new Error("Search is temporarily unavailable. Please try again.");
-    const data = (await response.json()) as ResponseData;
-    if (own !== generation) return;
-    if (!response.ok)
-      throw new Error(
-        data.error?.message ?? "Search could not finish. Please try again.",
-      );
+    if (
+      !response.ok ||
+      !response.headers.get("Content-Type")?.includes("application/json")
+    )
+      throw new Error("SEARCH_UNAVAILABLE");
+    const data = (await response.json()) as SearchResponse;
+    if (!Array.isArray(data.results) || !Number.isFinite(data.total))
+      throw new Error("SEARCH_RESPONSE_INVALID");
+    return data;
+  },
+  idle: () => {
+    resetResults();
+    start.hidden = false;
+    status.textContent =
+      input.value.trim().length === 1
+        ? "Type one more character to search."
+        : "Search titles, topics and ideas across the notebook.";
+  },
+  loading: (append) => {
+    if (!append) resetResults();
+    start.hidden = true;
+    retry.hidden = true;
+    more.hidden = true;
+    loading.hidden = false;
+    results.setAttribute("aria-busy", "true");
+    status.textContent = "Looking through the notebook…";
+  },
+  ready: (data, append) => {
+    if (!dialog.open) return;
+    if (!data.privateAvailable && ["journal", "people"].includes(scope.value)) {
+      scope.value = "";
+      void session.run(input.value, "");
+      return;
+    }
+    if (!append) results.replaceChildren();
     for (const result of data.results) {
-      // Links are local, server-owned published addresses; text never becomes HTML.
-      if (!result.href.startsWith("/") || result.href.startsWith("//"))
+      if (
+        typeof result.href !== "string" ||
+        !result.href.startsWith("/") ||
+        result.href.startsWith("//")
+      )
         continue;
-      const card = document.createElement("article");
-      card.className = "global-search-result";
-      const label = document.createElement("span");
-      label.className = "eyebrow";
-      label.textContent = `${result.label}${result.private ? " · By invitation" : ""}`;
-      const title = document.createElement("h2");
+      let url: URL;
+      try {
+        url = new URL(result.href, location.origin);
+      } catch {
+        continue;
+      }
+      if (url.origin !== location.origin) continue;
+      const item = document.createElement("li");
       const link = document.createElement("a");
       link.href = result.href;
-      link.textContent = result.title;
-      title.append(link);
-      const description = document.createElement("p");
+      link.className = "spotlight-result";
+      const label = document.createElement("span");
+      label.className = "spotlight-result-label";
+      label.textContent = `${result.label}${result.private ? " · By invitation" : ""}`;
+      const title = document.createElement("strong");
+      title.textContent = result.title;
+      const description = document.createElement("span");
+      description.className = "spotlight-result-description";
       description.textContent = result.description;
-      card.append(label, title, description);
-      results.append(card);
+      link.append(label, title, description);
+      item.append(link);
+      results.append(item);
     }
-    searchStatus.textContent = data.total
-      ? `${data.total} ${data.total === 1 ? "result" : "results"} · ${results.childElementCount} shown`
-      : "No matches yet. Try another word or a different section.";
+    loading.hidden = true;
+    results.setAttribute("aria-busy", "false");
+    status.textContent = data.total
+      ? `${data.total} ${data.total === 1 ? "match" : "matches"}`
+      : "No matches. Try another word or section.";
     privateStatus.textContent = data.privateAvailable
-      ? "Your invited People and Journal posts are included."
-      : "Searching the public notebook. Sign in to People and Journal to include your invited posts.";
+      ? "Includes your invited People & Journal posts."
+      : "Searching the public notebook.";
     document
       .querySelectorAll<HTMLOptionElement>("[data-private-search]")
-      .forEach((option) => {
-        option.hidden = !data.privateAvailable;
-      });
+      .forEach((option) => (option.hidden = !data.privateAvailable));
     next = data.next;
     more.hidden = next === null;
-  } catch (error) {
-    if (
-      own !== generation ||
-      (error instanceof DOMException && error.name === "AbortError")
-    )
-      return;
-    // Remove prior private results on any failed authorization/network attempt.
-    results.replaceChildren();
-    searchStatus.textContent =
-      error instanceof Error
-        ? error.message
-        : "Search could not finish. Try again.";
-  } finally {
-    if (own === generation) results.setAttribute("aria-busy", "false");
-  }
+    revealElement(results, reduced());
+  },
+  failed: () => {
+    resetResults();
+    start.hidden = true;
+    status.textContent = "Search couldn’t finish. Please try again.";
+    retry.hidden = false;
+  },
+});
+function openSearch(trigger?: HTMLElement): void {
+  if (document.querySelector("dialog[open]") && !dialog.open) return;
+  clearTimeout(closing);
+  delete dialog.dataset.closing;
+  returnFocus =
+    trigger ??
+    (document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null);
+  session.reset();
+  input.value = "";
+  scope.value = "";
+  // An open search may contain invited results: opt out before rendering any.
+  if (viewStyle)
+    viewStyle.textContent = "@view-transition { navigation: none; }";
+  root.dataset.searchOpen = "true";
+  if (!dialog.open) dialog.showModal();
+  input.focus({ preventScroll: true });
 }
+function finishClose(): void {
+  clearTimeout(closing);
+  session.reset();
+  input.value = "";
+  scope.value = "";
+  delete root.dataset.searchOpen;
+  delete dialog.dataset.closing;
+  if (!leaving && viewStyle) viewStyle.textContent = viewRule;
+  if (
+    !leaving &&
+    returnFocus?.isConnected &&
+    !document.querySelector("dialog[open]")
+  )
+    returnFocus.focus({ preventScroll: true });
+}
+function closeSearch(immediate = false): void {
+  session.reset();
+  input.value = "";
+  clearTimeout(closing);
+  if (!dialog.open) {
+    finishClose();
+    return;
+  }
+  dialog.dataset.closing = "true";
+  const close = () => {
+    if (dialog.open) dialog.close();
+    finishClose();
+  };
+  if (immediate || reduced()) close();
+  else closing = setTimeout(close, 150);
+}
+dialog.addEventListener("close", () => {
+  if (!dialog.open) finishClose();
+});
+dialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeSearch();
+});
+node("spotlight-close").addEventListener("click", () => closeSearch());
+dialog.addEventListener("click", (event) => {
+  if (event.target !== dialog) return;
+  const box = dialog.getBoundingClientRect();
+  if (
+    event.clientX < box.left ||
+    event.clientX > box.right ||
+    event.clientY < box.top ||
+    event.clientY > box.bottom
+  )
+    closeSearch();
+});
+document
+  .querySelectorAll<HTMLElement>("[data-open-search]")
+  .forEach((button) =>
+    button.addEventListener("click", () => openSearch(button)),
+  );
+input.addEventListener("input", () =>
+  session.schedule(input.value, scope.value),
+);
+scope.addEventListener(
+  "change",
+  () => void session.run(input.value, scope.value),
+);
+retry.addEventListener(
+  "click",
+  () => void session.run(input.value, scope.value),
+);
+more.addEventListener(
+  "click",
+  () => void session.run(input.value, scope.value, next),
+);
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  clearTimeout(timer);
-  void search();
+  const first = results.querySelector<HTMLAnchorElement>("a");
+  if (first) first.click();
+  else void session.run(input.value, scope.value);
 });
-input.addEventListener("input", () => {
-  controller?.abort();
-  generation++;
-  results.replaceChildren();
-  more.hidden = true;
-  clearTimeout(timer);
-  timer = setTimeout(() => void search(), 400);
+document
+  .querySelectorAll<HTMLButtonElement>("[data-search-suggestion]")
+  .forEach((button) =>
+    button.addEventListener("click", () => {
+      input.value = button.dataset.searchSuggestion ?? "";
+      input.focus();
+      void session.run(input.value, scope.value);
+    }),
+  );
+dialog.addEventListener("keydown", (event) => {
+  if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+  if (event.target instanceof HTMLSelectElement) return;
+  const links = [...results.querySelectorAll<HTMLAnchorElement>("a")];
+  if (!links.length) return;
+  const index = links.findIndex((link) => link === document.activeElement);
+  const target =
+    event.key === "ArrowDown"
+      ? (index + 1) % links.length
+      : index <= 0
+        ? -1
+        : index - 1;
+  event.preventDefault();
+  (target < 0 ? input : links[target])?.focus({ preventScroll: true });
+  if (target >= 0)
+    links[target]?.scrollIntoView({ block: "nearest", behavior: "instant" });
 });
-section.addEventListener("change", () => {
-  clearTimeout(timer);
-  void search();
-});
-more.addEventListener("click", () => void search(true));
-window.addEventListener("pagehide", () => {
-  controller?.abort();
-  clearTimeout(timer);
-  generation++;
-  results.replaceChildren();
-  input.value = "";
-  more.hidden = true;
-});
-window.addEventListener("pageshow", (event) => {
-  if (event.persisted) {
-    results.replaceChildren();
-    searchStatus.textContent = "Enter a word to search the notebook.";
+document.addEventListener("keydown", (event) => {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+    if (document.querySelector("dialog[open]") && !dialog.open) return;
+    event.preventDefault();
+    if (dialog.open) input.focus();
+    else openSearch();
   }
 });
+window.addEventListener("pagehide", () => {
+  leaving = true;
+  closeSearch(true);
+});
+window.addEventListener("pageshow", () => {
+  leaving = false;
+  if (viewStyle && !dialog.open) viewStyle.textContent = viewRule;
+});
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && dialog.open) closeSearch(true);
+});
+window.addEventListener("storage", (event) => {
+  if (event.key === "harithsa.reader-ready" && dialog.open) closeSearch(true);
+});
+window.addEventListener("focus", () => {
+  if (dialog.open) void session.run(input.value, scope.value);
+});
+if (location.pathname === "/search") openSearch();

@@ -137,7 +137,8 @@ test("Goodreads journal preserves all 50 personal ratings and original reviews",
       );
   }
   assert.ok(!archive.includes('id="book-search"'));
-  assert.ok(archive.includes('href="/search"'));
+  assert.ok(archive.includes('aria-controls="site-search"'));
+  assert.ok(archive.includes("data-open-search"));
   assert.ok(archive.includes('id="book-rating-filter"'));
 });
 
@@ -273,7 +274,7 @@ test("article contents links resolve and original ordered/unordered lists surviv
     const body =
       page
         .split('class="article-body">')[1]
-        ?.split('<div class="article-margin-note"')[0] ?? "";
+        ?.split('<div class="article-end"')[0] ?? "";
     assert.equal(countLists(body), countLists(article.html), article.slug);
     for (const [, id] of page.matchAll(/href="#(heading-[^"]+)"/g)) {
       assert.ok(page.includes(`id="${id}"`), `Missing article section ${id}`);

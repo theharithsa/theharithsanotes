@@ -47,16 +47,6 @@ const years = [...new Set(months.map((month) => month.year))];
       <h1>{page.heading ?? page.title}</h1>
       <p>{page.description}</p>
     </div>
-    <div class="blog-tag-row filters wrap" aria-label="Filter articles by tag">
-      <button data-blog-tag="" aria-pressed="true">
-        All tags
-      </button>
-      {tags.map((tag) => (
-        <button data-blog-tag={tag} aria-pressed="false">
-          {tag}
-        </button>
-      ))}
-    </div>
     <label class="date-jump-mobile">
       Jump through the archive{" "}
       <select data-blog-date-picker>
@@ -85,6 +75,15 @@ const years = [...new Set(months.map((month) => month.year))];
           </button>
         ))}
       </div>
+      <label class="blog-tag-picker" for="blog-tag-filter">
+        <span>Explore a tag</span>
+        <select id="blog-tag-filter" aria-label="Filter articles by tag">
+          <option value="">All tags</option>
+          {tags.map((tag) => (
+            <option value={tag}>{tag}</option>
+          ))}
+        </select>
+      </label>
     </div>
     <p id="result-count" class="result-count" aria-live="polite">
       {articles.length} articles

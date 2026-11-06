@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.17.0] — 2026-11-06
+
+- Move Blog tags out of the masthead into a compact labeled selector beside article browsing (#60).
+- Open global search in a blurred, animated dialog with live suggestions, section scope and keyboard navigation (#61).
+- Clear query/private-result state on close or navigation and exclude open search from page snapshots and replay capture.
+
 ## [1.16.2] — 2026-11-06
 
 - Present the Meet Vish biography as one continuous reading column with comfortable line length and paragraph spacing at every screen size (#57).

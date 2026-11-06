@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Search overlay and Blog controls 1.17.0 — issues #60–61
+
+The header opens one native search dialog on the current page. SearchSession owns debounced/abortable/latest-only requests, and the controller owns focus, close/cleanup, private-result masking and snapshot opt-out. /search is a compatibility entry that opens the same dialog. Blog tags are a native selector below the masthead, combining with topics and the timeline. See docs/search-overlay-1.17.0.md and the linked PR for final provider/browser/tenant evidence. Preserve invitation checks, draft/editor state, footer/brand and unrelated owner files.
+
 ## Meet Vish readability 1.16.2 — issue #57
 
 Meet Vish uses one continuous 68ch reading column, consistent paragraph spacing and responsive 17–18px body text. A personal heading replaces the old work-led section heading. Published CMS biography, image, gallery, navigation and access remain unchanged. See docs/meet-vish-readability-1.16.2.md for scope and verification; final release receipts belong on the linked PR.
