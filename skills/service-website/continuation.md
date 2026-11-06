@@ -1,3 +1,7 @@
+# Full page body correction
+
+Issue #63 / 1.18.1: public list projections intentionally remove html. getJournalPage must use publishedDetail to read the immutable body; do not return getPages summaries for full page rendering. CMS revision 5 already contains the approved formatted story and portrait; no second publication is needed.
+
 # Profile presentation continuation
 
 Issue #63 / app 1.18.0 adds optional sanitized pages.html and imageAlt. Only Meet Vish exposes the rich editor; edits synchronize legacy paragraphs. Both personal portraits read Meet Vish image/alt. CMS publication remains a separate guarded step after deployment. See docs/profile-illustration.md for provenance.

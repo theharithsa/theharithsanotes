@@ -1,3 +1,7 @@
+# Full published page bodies 1.18.1 / issue #63
+
+Core page rendering now reads the immutable published detail instead of the body-free list projection. Preview draft isolation remains handled by publishedDetail; legacy pages still render paragraphs. No migration, republish, dependencies or infrastructure changes. Add an emulator regression covering legacy content, unpublished draft isolation and complete published HTML despite the empty summary HTML. Gate current-head CI and deploy a new immutable artifact. Roll back to the prior compatible runtime if needed; stored revision 5 remains intact.
+
 # Profile presentation 1.18.0 / issue #63
 
 Optional bounded pages.html and imageAlt fields preserve existing clients and plain paragraphs. Meet Vish sanitizes rich text on render and on save; its CMS editor keeps plain paragraphs synchronized. Other pages retain their existing paragraph editor. The home personal section reads the same Meet Vish image and alt text; the main home illustration and gallery stay unchanged. New original portrait is derived from the owner-provided photo. No dependencies, indexes, IAM, secret bindings or telemetry contracts change.

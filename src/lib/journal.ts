@@ -80,7 +80,9 @@ export const getGogs = async () =>
   );
 export const getPages = async () => entries<JournalPage>("pages", pageDefaults);
 export async function getJournalPage(slug: string): Promise<JournalPage> {
-  const match = (await getPages()).find((page) => page.slug === slug);
+  const match = firestoreEnabled()
+    ? (await publishedDetail<JournalPage>("pages", slug))?.data
+    : pageDefaults.find((page) => page.slug === slug);
   return (
     match ?? pageDefaults.find((page) => page.slug === slug) ?? pageDefaults[0]!
   );

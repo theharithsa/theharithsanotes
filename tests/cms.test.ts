@@ -6,6 +6,7 @@ import sharp from "sharp";
 import { validateData, CmsError } from "../src/server/models.ts";
 import {
   saveEntry,
+  getEntry,
   publishEntry,
   unpublishEntry,
   publishedDetail,
@@ -37,6 +38,7 @@ import {
 } from "../src/server/search-index.ts";
 import { readingApi } from "../src/server/reading.ts";
 import { listPublished } from "../src/server/repository.ts";
+import { getJournalPage, getPages } from "../src/lib/journal.ts";
 
 test("page stories preserve rich formatting and reject executable markup", () => {
   const base = {
@@ -1036,3 +1038,42 @@ test("global search ranks titles, searches body text, paginates and excludes non
     assert.ok([400, 413].includes(response.status));
   }
 });
+
+integration(
+  "public core page loader reads the published rich revision, preserving legacy fallback and draft isolation",
+  async () => {
+    await reconcileWorkspace();
+    const original = await getEntry("pages", "meet-vish");
+    const legacyData: Record<string, unknown> = {
+      ...original.data,
+      paragraphs: ["Legacy words."],
+    };
+    delete legacyData.html;
+    const legacy = await saveEntry(
+      "pages",
+      original.id,
+      legacyData,
+      original.draftRevision,
+    );
+    await publishEntry("pages", legacy.id, legacy.draftRevision, randomUUID());
+    assert.equal((await getJournalPage("meet-vish")).html, undefined);
+    assert.deepEqual((await getJournalPage("meet-vish")).paragraphs, [
+      "Legacy words.",
+    ]);
+    const html =
+      '<p><strong>A friendship.</strong> <a href="https://unsplash.com/@sayspoorthi">Spoorthi</a></p><blockquote><p>My words.</p></blockquote>';
+    const rich = await saveEntry(
+      "pages",
+      legacy.id,
+      { ...legacy.data, html },
+      legacy.draftRevision,
+    );
+    assert.equal((await getJournalPage("meet-vish")).html, undefined);
+    await publishEntry("pages", rich.id, rich.draftRevision, randomUUID());
+    assert.equal(
+      (await getPages()).find((page) => page.slug === "meet-vish")?.html,
+      "",
+    );
+    assert.equal((await getJournalPage("meet-vish")).html, html);
+  },
+);
