@@ -7,6 +7,7 @@ function syncFilterPanels(): void {
     panel.open = !mobileFilters.matches;
   });
 }
-syncFilterPanels();
+// Preserve a native disclosure opened before this module finishes loading.
+if (!mobileFilters.matches) syncFilterPanels();
 mobileFilters.addEventListener("change", syncFilterPanels);
 export {};

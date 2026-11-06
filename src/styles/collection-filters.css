@@ -4,6 +4,9 @@
 .collection-filter-panel > summary {
   display: none;
 }
+.collection-filter-panel:not([open]) > summary {
+  display: flex;
+}
 .collection-filter-panel .project-filters,
 .collection-filter-panel .book-journal-tools {
   margin-block: 0;
