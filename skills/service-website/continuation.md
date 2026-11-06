@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Natural masonry gallery 1.15.1 — issue #48
+
+Photos now use a continuous vertical masonry grid, matching the owner’s supplied screenshot. Three/two/one columns preserve natural image heights, with thin frames and soft shadows. Horizontal strip controls/geometry are removed; date jumps and optional accessible full-size viewing remain. See docs/gallery-masonry-1.15.1.md and the linked issue/PR for final build/provider/Chrome/tenant receipts. Source Sans 3, workspace/session behavior, original photos, data and frozen brand/template remain unchanged.
+
 ## Workspace/type/gallery 1.15.0 — issues #44–46
 
 Workspace and Invitations now use explicit auth restoration states and stale-response guards; body/prose use self-hosted Source Sans 3; Gallery is a tightly packed natural-proportion carousel with real tile-offset navigation. See docs/workspace-typography-gallery-1.15.0.md and the linked PR/issues for final release/provider/Chrome/tenant receipts. Preserve owner draft recovery, original photographs, invitation checks, private-aware rollback, Margin 1.0.0 and template 1.9.0.

@@ -42,7 +42,7 @@ const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
         </a>
       ))}
     </nav>
-    <div class="photo-carousel">
+    <div class="photo-collection">
       <label class="date-jump-mobile">
         Browse moments{" "}
         <select data-photo-date-picker>
@@ -51,20 +51,20 @@ const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
           ))}
         </select>
       </label>
-      <div
-        class="photo-track"
-        tabindex="0"
-        aria-label="Photographs; use left and right keys to browse"
-      >
+      <div class="photo-masonry" role="list" aria-label="Photo gallery">
         {photos.map((photo, index) => (
           <figure
-            class="photo-slide"
+            class="photo-tile"
+            role="listitem"
             style={`--photo-ratio: ${photo.width / photo.height}`}
             id={`photo-${index}`}
             data-title={photo.title}
             data-caption={photo.caption}
             data-date-group={dateKey(photo.capturedAt)}
           >
+            <span class="photo-index" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </span>
             <button
               class="photo-expand"
               data-photo-expand
@@ -91,22 +91,6 @@ const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
             </figcaption>
           </figure>
         ))}
-      </div>
-      <div class="photo-carousel-tools">
-        <p class="photo-browse-hint">
-          Scroll or swipe. Open a photograph to linger.
-        </p>
-        <div class="photo-arrow-controls">
-          <button data-photo-prev aria-label="Previous photograph">
-            ←
-          </button>
-          <span class="photo-position" aria-live="polite">
-            1 / {photos.length}
-          </span>
-          <button data-photo-next aria-label="Next photograph">
-            →
-          </button>
-        </div>
       </div>
     </div>
     <dialog class="photo-lightbox" aria-label="Full photograph">
@@ -141,4 +125,4 @@ const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
     New moments will appear here when they’re published.
   </p>
 )}
-<script src="../scripts/photo-carousel.ts"></script>
+<script src="../scripts/photo-gallery.ts"></script>

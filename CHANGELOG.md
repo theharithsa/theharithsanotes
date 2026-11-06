@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.15.1] — 2026-11-06
+
+- Correct Photos to a continuous vertical masonry grid with natural image heights, responsive columns, subtle frames and soft shadows (#48).
+- Remove sideways carousel controls while keeping date links and accessible full-size viewing.
+
 ## [1.15.0] — 2026-11-06
 
 - Restore Workspace and Invitations through explicit loading/access/error states, with stale-response guards and draft recovery preserved (#44).
