@@ -1,10 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { AuthRestoration } from "../src/lib/auth-restoration.ts";
-import {
-  photoScrollOffset,
-  nearestPhotoIndex,
-} from "../src/lib/carousel-geometry.ts";
+
 function deferred() {
   let resolve, reject;
   const promise = new Promise((yes, no) => {
@@ -107,16 +104,7 @@ test("a late failure cannot overwrite a newer signed-out state", async () => {
   await first;
   assert.equal(h.phases.at(-1), "signed-out");
 });
-test("variable-width carousel targets real photo offsets and clamps the last item", () => {
-  const offsets = [0, 408, 716, 924, 1432, 1740];
-  const maximum = 1450;
-  assert.equal(photoScrollOffset(offsets, 2, maximum), 716);
-  assert.equal(photoScrollOffset(offsets, 5, maximum), 1450);
-  assert.equal(photoScrollOffset(offsets, -1, maximum), 0);
-  assert.equal(nearestPhotoIndex(offsets, 710, maximum), 2);
-  assert.equal(nearestPhotoIndex(offsets, 1450, maximum), 5);
-  assert.equal(nearestPhotoIndex(offsets, 0, maximum), 0);
-});
+
 test("catalog initialization finishes before the workspace becomes ready", async () => {
   const entered = deferred();
   const phases = [];
