@@ -14,6 +14,8 @@ const tables = [
   ["gogs", "GoGs", "+"],
   ["pages", "Pages", "□"],
   ["tags", "Tags", "#"],
+  ["journal", "Journal", "✎"],
+  ["people", "People", "◎"],
 ];
 ---
 
@@ -57,6 +59,9 @@ const tables = [
       </details>
       <a class="cms-developer-nav" href="#developer" data-cms-view="developer">
         <span aria-hidden="true">{`</>`}</span> Developer Settings
+      </a>
+      <a class="cms-developer-nav" href="/admin/invitations">
+        Invited readers
       </a>
       <div class="cms-sidebar-bottom">
         <a href="/" target="_blank" rel="noopener">
@@ -273,7 +278,12 @@ const tables = [
               <div class="cms-check-grid">
                 {tables.map(([id, label]) => (
                   <label class="cms-check">
-                    <input type="checkbox" name="section" value={id} checked />
+                    <input
+                      type="checkbox"
+                      name="section"
+                      value={id}
+                      checked={!["journal", "people"].includes(id!)}
+                    />
                     {label}
                   </label>
                 ))}

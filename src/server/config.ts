@@ -15,11 +15,12 @@ export const collection = (
     | "outbox"
     | "settings"
     | "operations"
-    | "apiKeys",
+    | "apiKeys"
+    | "members",
 ) => `cms_${namespace}_${name}`;
 export const firestoreEnabled = () =>
   process.env.CMS_DATA_SOURCE === "firestore" ||
   Boolean(process.env.FIRESTORE_EMULATOR_HOST);
-export const origin = "https://theharithsa.com";
+export const origin = "https://theharithsanotes.com";
 export const isEmulator = () => Boolean(process.env.FIRESTORE_EMULATOR_HOST);
 export const serviceVersion = process.env.SERVICE_VERSION ?? "development";

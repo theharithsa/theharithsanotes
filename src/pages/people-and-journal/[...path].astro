@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import "../../styles/reading.css";
+export function getStaticPaths() {
+  return [undefined, "journal", "people"].map((path) => ({ params: { path } }));
+}
+---
+
+<Base
+  title="People and Journal"
+  description="A private reading room for the people Vish invites."
+>
+  <section class="reading-room" id="reading-room">
+    <header class="reading-heading">
+      <span class="reading-eyebrow">THE PRIVATE NOTEBOOK</span>
+      <h1>
+        People <em>&amp; Journal.</em>
+      </h1>
+      <p>Small moments. Important people. A little more of the story.</p>
+    </header>
+    <div class="reading-gate" id="reading-gate">
+      <span aria-hidden="true" class="reading-seal">
+        ✎
+      </span>
+      <h2>A seat at the table.</h2>
+      <p>
+        This part of the notebook is shared by invitation. Continue with the
+        Google account Vish invited.
+      </p>
+      <button id="reader-signin" class="reading-button">
+        Continue with Google
+      </button>
+      <p role="status" id="reader-message">
+        Checking your invitation…
+      </p>
+    </div>
+    <div id="reading-content" hidden>
+      <nav class="reading-nav" aria-label="Private collections">
+        <a href="/people-and-journal/journal">Journal</a>
+        <a href="/people-and-journal/people">People</a>
+        <button id="reader-signout">Sign out</button>
+      </nav>
+      <div id="reading-posts" class="reading-mosaic"></div>
+      <article id="reading-post" hidden>
+        <a id="reader-back" href="/people-and-journal/journal">
+          Back to the notebook
+        </a>
+        <div class="reading-post-heading">
+          <p id="reading-date"></p>
+          <h2 id="reading-title"></h2>
+          <p id="reading-description"></p>
+        </div>
+        <img id="reading-cover" alt="" />
+        <div id="reading-body" class="article-body"></div>
+      </article>
+    </div>
+  </section>
+  <script>
+    import "../../scripts/reading";
+  </script>
+</Base>

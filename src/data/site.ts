@@ -1,7 +1,7 @@
 export const site = {
   title: "The Harithsa Notes",
   author: "Vishruth Harithsa",
-  url: "https://theharithsa.com",
+  url: "https://theharithsanotes.com",
   description:
     "Notes on observability, artificial intelligence, and a life of learning. A personal journal by Vishruth Harithsa, from Bengaluru.",
   github: "https://github.com/theharithsa",

@@ -1,5 +1,7 @@
 # Writing through the content API
 
+As of 1.14.0 the primary origin is **https://theharithsanotes.com**. Use this origin directly for integrations; the old domain redirects browser traffic, and clients must not depend on forwarding authorization or POST bodies across origins. Journal and People are invitation-only post collections. Their media permissions are collection-scoped and their images never become public. See [People and Journal](people-journal.md) for the private API, invitations and import contract. The original shared-media description below applies only to public collections.
+
 Open [Developer Settings](https://theharithsa.com/admin#developer) with the owner’s Google account. The workspace now separates **Write** from **Developer Settings**. All collections remain under Write, with counts and the frozen site icon. Pages includes Home, Meet Vish, Blog, Books, Projects, Podcasts, Entertainment, Photos, GoGs and Privacy. Their introductions/headings/paragraphs can be edited and published. Privacy retains its built-in policy text; page paragraphs add an introduction rather than replacing the policy. Existing labels are reconciled from actual entry tags, topics, categories and genres. “Sync existing labels” adds missing records without renaming or overwriting existing entries. Labels are suggestions; renaming a catalog label does not rewrite historical content.
 
 ## Keys and permissions

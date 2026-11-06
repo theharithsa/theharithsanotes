@@ -1,5 +1,9 @@
 # Workspace/API continuation
 
+## Active issue #33 — 1.14.0
+
+The owner has now explicitly authorized theharithsanotes.com as primary and theharithsa.com redirects. This supersedes the historical no-extra-domain restriction below. Preserve the frozen Margin identity and existing owner content. Journal and People are invitation-only posts; only the owner can whitelist readers. Read docs/people-journal.md before modifying access, media, API scopes or import behavior. Private Notion inputs and all 54 cover assets are outside the repository in the local private import directory; never include them in Git, public build assets or telemetry. Update final provider/runtime evidence after release; implementation, local tests and production verification are separate states.
+
 Issue #30: the 1.13.0 content API and refreshed workspace were merged in PR #31 and deployed. See docs/content-api.md for contracts and docs/workspace-api-release.md for actual source/provider/test/tenant receipts. The current 1.13.1 patch only fixes sidebar overflow, mobile icon visibility and sign-out wrapping found during browser review. Its final deployment evidence is recorded on the linked issue; inspect the current release/PR before further work.
 
 Write contains all collection tables; Developer Settings manages scoped expiring/revocable keys shown once. `/api/v1` shares CMS validation/revisions/publishing/media code; `/admin/api` serves self-hosted Swagger and `/api/openapi.json` the real schema. Keys cannot manage keys. No permanent key was generated for the owner automatically. MCP remains deferred.

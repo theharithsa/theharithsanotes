@@ -217,17 +217,17 @@ test("theme follows the system until chosen, persists, synchronizes tabs and sur
 });
 test("SEO, route colours, canonical aliases and GoGs are present in the built documents", async () => {
   const sitemap = await page("sitemap.xml");
-  assert.ok(sitemap.includes("https://theharithsa.com/gogs</loc>"));
+  assert.ok(sitemap.includes("https://theharithsanotes.com/gogs</loc>"));
   for (const [alias, target] of [
     ["notes", "blogs"],
     ["about", "meet-vish"],
   ]) {
     assert.ok(
       (await page(`${alias}/index.html`)).includes(
-        `rel="canonical" href="https://theharithsa.com/${target}"`,
+        `rel="canonical" href="https://theharithsanotes.com/${target}"`,
       ),
     );
-    assert.ok(!sitemap.includes(`https://theharithsa.com/${alias}</loc>`));
+    assert.ok(!sitemap.includes(`https://theharithsanotes.com/${alias}</loc>`));
   }
   assert.ok((await page("404.html")).includes('content="noindex,follow"'));
   for (const route of [
@@ -277,7 +277,7 @@ test("SEO, route colours, canonical aliases and GoGs are present in the built do
     );
     assert.equal(schema.headline, article.title);
     assert.equal(schema.datePublished, article.date);
-    assert.ok(schema.image[0].startsWith("https://theharithsa.com/images/"));
+    assert.ok(schema.image[0].startsWith("https://theharithsanotes.com/images/"));
   }
   for (const book of books) {
     const html = await page(`books/${book.slug}/index.html`);

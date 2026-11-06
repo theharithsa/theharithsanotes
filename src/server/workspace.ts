@@ -1,7 +1,12 @@
 import { createHash } from "node:crypto";
 import { database } from "./firebase.ts";
 import { collection } from "./config.ts";
-import { sections, type Entry, CmsError } from "./models.ts";
+import {
+  sections,
+  type Entry,
+  CmsError,
+  isRestrictedSection,
+} from "./models.ts";
 import { firebaseOperation } from "./telemetry.ts";
 import { saveEntry, publishEntry } from "./repository.ts";
 import { pageDefaults } from "./page-defaults.ts";
@@ -53,6 +58,7 @@ export async function reconcileWorkspace() {
     { title: string; kind: "tag" | "genre" | "topic" }
   >();
   for (const row of entries) {
+    if (isRestrictedSection(row.section)) continue;
     for (const [field, kind] of [
       ["tags", "tag"],
       ["genres", "genre"],

@@ -1102,6 +1102,46 @@ body:has(.cms-workspace) {
 .cms-developer[hidden] {
   display: none;
 }
+#invitations-room {
+  padding-bottom: 100px;
+}
+#invitations-room .cms-developer-card {
+  border: 1px solid var(--cms-border, #d5c9ba);
+  background: var(--cms-surface, #fff);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 26px;
+}
+#invite-form {
+  display: flex;
+  gap: 18px;
+  align-items: end;
+  flex-wrap: wrap;
+}
+#invite-form label {
+  display: grid;
+  gap: 10px;
+}
+#invite-form input,
+#invite-form select {
+  min-height: 44px;
+  padding: 10px 14px;
+  background: var(--cms-surface, #fff);
+  color: inherit;
+  border: 1px solid var(--cms-border, #b8b0a6);
+  border-radius: 5px;
+  max-width: 100%;
+}
+.cms-invitation-row {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--cms-border, #d5c9ba);
+  padding: 14px 0;
+  overflow-wrap: anywhere;
+}
 .cms-developer-hero {
   background: #243c62;
   color: #fff;
@@ -1110,6 +1150,12 @@ body:has(.cms-workspace) {
   position: relative;
   overflow: hidden;
   border-bottom: 5px solid #d68862;
+}
+.cms-developer-hero > a.cms-primary:hover,
+.cms-developer-hero > a.cms-primary:focus-visible {
+  background: #2b4f8e;
+  color: #fff;
+  border-color: #fff;
 }
 .cms-developer-hero:after {
   content: "{ }";

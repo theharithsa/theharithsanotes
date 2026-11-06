@@ -41,6 +41,8 @@ const noindex =
   current === "/404" ||
   current === "/404.html" ||
   current.startsWith("/admin") ||
+  current.startsWith("/people-and-journal") ||
+  current.startsWith("/account") ||
   Boolean(Astro.locals.draftPreview);
 const author = {
   "@type": "Person",
@@ -243,6 +245,14 @@ const graph = [
         ))}
       </nav>
       <div class="header-actions">
+        <a
+          class="reading-entry-link"
+          href="/people-and-journal"
+          rel="nofollow"
+          aria-label="Sign in to the private reading room"
+        >
+          Sign in
+        </a>
         <button
           class="theme-toggle"
           data-theme-toggle
@@ -292,6 +302,9 @@ const graph = [
       </nav>
     </header>
     <main id="main">
+      <script>
+        import "../scripts/reading-link";
+      </script>
       <slot />
     </main>
     <footer class="site-footer">

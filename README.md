@@ -2,7 +2,7 @@
 
 Template version: **1.9.0**.
 
-Vishruth Harithsa’s personal journal for **theharithsa.com**, built with Astro and TypeScript. Gates Notes-inspired editorial design with classic locally served typography, original illustrations, twelve projects, a personal photo gallery, and 88 articles, including 75 imported from Medium and 12 migrated at their original URLs. See the [design and media provenance](docs/editorial-design.md) and [Medium migration](docs/medium-journal.md).
+Vishruth Harithsa’s personal journal for **theharithsanotes.com**, with **theharithsa.com** redirecting to the primary domain, built with Astro and TypeScript. Gates Notes-inspired editorial design with classic locally served typography, original illustrations, twelve projects, a personal photo gallery, and 88 articles, including 75 imported from Medium and 12 migrated at their original paths. The invitation-only [People and Journal](docs/people-journal.md) collections include CMS editing, private media and scoped APIs. See the [design and media provenance](docs/editorial-design.md) and [Medium migration](docs/medium-journal.md).
 
 ## Run locally
 

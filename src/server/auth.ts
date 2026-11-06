@@ -6,6 +6,8 @@ import { requestContext, observe, firebaseOperation } from "./telemetry.ts";
 import type { DecodedIdToken } from "firebase-admin/auth";
 
 const allowedOrigins = new Set([
+  "https://theharithsanotes.com",
+  "https://www.theharithsanotes.com",
   "https://theharithsa.com",
   "https://www.theharithsa.com",
   "https://the-harithsa-notes-94--review-tzxuxkbf.web.app",

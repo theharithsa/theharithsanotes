@@ -119,7 +119,7 @@ test("Goodreads journal preserves all 50 personal ratings and original reviews",
     assert.ok(page.includes(`My rating: ${entry.rating} out of 5 stars`));
     assert.ok(page.includes(`href="${entry.reviewUrl}"`));
     assert.ok(page.includes(`href="${entry.goodreadsUrl}"`));
-    assert.ok(sitemap.includes(`<loc>https://theharithsa.com${route}</loc>`));
+    assert.ok(sitemap.includes(`<loc>https://theharithsanotes.com${route}</loc>`));
     for (const paragraph of entry.review.split(/\n\s*\n/).filter(Boolean)) {
       assert.ok(
         page
@@ -168,10 +168,10 @@ test("screen reflections have reading pages, lessons and discoverable canonical 
     assert.ok(page.includes(`href="${note.poster.source}"`));
     assert.ok(archive.includes(`href="${route}"`));
     assert.equal(
-      sitemap.split(`<loc>https://theharithsa.com${route}</loc>`).length - 1,
+      sitemap.split(`<loc>https://theharithsanotes.com${route}</loc>`).length - 1,
       1,
     );
-    assert.ok(page.includes(`href="https://theharithsa.com${route}"`));
+    assert.ok(page.includes(`href="https://theharithsanotes.com${route}"`));
     assert.ok(page.includes(note.lesson));
     for (const paragraph of note.paragraphs)
       assert.ok(page.includes(paragraph), note.slug);
@@ -194,7 +194,7 @@ test("the original 12 article paths and all published note bodies are preserved"
     const page = await readPage(`${article.slug}/index.html`);
     if (migrated.includes(article))
       assert.equal(new URL(article.source).pathname, `/${article.slug}`);
-    assert.ok(page.includes(`href="https://theharithsa.com/${article.slug}"`));
+    assert.ok(page.includes(`href="https://theharithsanotes.com/${article.slug}"`));
     assert.ok(page.includes('class="article-body"'));
     assert.ok(article.html.length > 1000);
     assert.ok(!/<(?:iframe|object|embed)\b/i.test(page));
@@ -225,7 +225,7 @@ test("every internal page link and local asset resolves in the built site", asyn
   for (const route of routes) {
     const html = await readPage(route);
     for (const match of html.matchAll(/(?:href|src)="(\/[^"\s]*)"/g)) {
-      const pathname = new URL(match[1], "https://theharithsa.com").pathname;
+      const pathname = new URL(match[1], "https://theharithsanotes.com").pathname;
       const file = /\.[a-z0-9]+$/i.test(pathname)
         ? pathname.slice(1)
         : `${pathname.replace(/^\//, "")}${pathname.endsWith("/") ? "" : "/"}index.html`;
@@ -233,7 +233,7 @@ test("every internal page link and local asset resolves in the built site", asyn
         access(new URL(`dist/${file}`, root)),
         `${route}: ${pathname}`,
       );
-      const target = new URL(match[1], "https://theharithsa.com");
+      const target = new URL(match[1], "https://theharithsanotes.com");
       if (target.hash && /\.html$/.test(file)) {
         const targetHtml = await readPage(file);
         const id = decodeURIComponent(target.hash.slice(1));
@@ -280,7 +280,7 @@ test("feed and sitemap include every migrated canonical article exactly once", a
   assert.equal((feed.match(/<item>/g) ?? []).length, articles.length);
   for (const article of articles)
     assert.equal(
-      sitemap.split(`<loc>https://theharithsa.com/${article.slug}</loc>`)
+      sitemap.split(`<loc>https://theharithsanotes.com/${article.slug}</loc>`)
         .length - 1,
       1,
     );
@@ -479,7 +479,7 @@ test("every project opens a researched detail page with a distinct cover and ver
     assert.equal(image.readUInt32BE(16), 1536);
     assert.equal(image.readUInt32BE(20), 1024);
     assert.equal(
-      sitemap.split(`<loc>https://theharithsa.com${route}</loc>`).length - 1,
+      sitemap.split(`<loc>https://theharithsanotes.com${route}</loc>`).length - 1,
       1,
     );
   }
@@ -527,7 +527,7 @@ test("podcast listening journeys preserve notes and resources while Created stay
     assert.ok(page.includes(note.note));
     assert.ok(page.includes(note.status));
     assert.ok(page.includes(`href="/podcasts#${note.slug}"`));
-    assert.ok(sitemap.includes(`<loc>https://theharithsa.com${route}</loc>`));
+    assert.ok(sitemap.includes(`<loc>https://theharithsanotes.com${route}</loc>`));
   }
   assert.ok(created.includes('aria-label="No created episodes yet"'));
   assert.ok(!created.includes('class="workbench-card"'));

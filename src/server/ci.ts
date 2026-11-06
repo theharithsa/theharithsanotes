@@ -59,7 +59,10 @@ export async function authorizeCi(request: Request): Promise<Claims> {
     const now = Date.now() / 1000;
     if (
       claims.iss !== "https://token.actions.githubusercontent.com" ||
-      claims.aud !== "https://theharithsa.com/api/cms/ci" ||
+      ![
+        "https://theharithsanotes.com/api/cms/ci",
+        "https://theharithsa.com/api/cms/ci",
+      ].includes(claims.aud) ||
       claims.exp <= now ||
       (claims.nbf ?? 0) > now + 30 ||
       claims.repository !== "theharithsa/theharithsanotes" ||

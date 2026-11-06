@@ -4,6 +4,7 @@ import { database } from "./firebase.ts";
 import { collection } from "./config.ts";
 import {
   CmsError,
+  isRestrictedSection,
   identifier,
   validateData,
   summaryData,
@@ -35,17 +36,19 @@ const revisionRef = (section: Section, id: string, revision: number) =>
     .doc(revisionKey(section, id, revision));
 const objectData = (value: unknown) => value as EntryData;
 export const entryPath = (section: Section, slug: string) =>
-  section === "blogs"
-    ? `/${slug}`
-    : section === "podcasts"
-      ? `/podcasts/listening/${slug}`
-      : section === "photos"
-        ? "/gallery"
-        : section === "pages"
-          ? slug === "home"
-            ? "/"
-            : `/${slug}`
-          : `/${section}/${slug}`;
+  isRestrictedSection(section)
+    ? `/people-and-journal/${section}/${slug}`
+    : section === "blogs"
+      ? `/${slug}`
+      : section === "podcasts"
+        ? `/podcasts/listening/${slug}`
+        : section === "photos"
+          ? "/gallery"
+          : section === "pages"
+            ? slug === "home"
+              ? "/"
+              : `/${slug}`
+            : `/${section}/${slug}`;
 
 export async function listEntries(
   section: Section,
@@ -215,6 +218,27 @@ export async function publishEntry(
             409,
             "An image is still unavailable. Upload it again before publishing",
           );
+        if (
+          media.some(
+            (snap) =>
+              isRestrictedSection(String(snap.get("section"))) &&
+              snap.get("section") !== section,
+          )
+        )
+          throw new CmsError(
+            "FORBIDDEN",
+            403,
+            "Private images must stay in their original collection",
+          );
+        if (
+          isRestrictedSection(section) &&
+          media.some((snap) => snap.get("section") !== section)
+        )
+          throw new CmsError(
+            "INVALID_MEDIA",
+            400,
+            "Upload images specifically for this private collection",
+          );
         const now = new Date().toISOString();
         const updated = {
           ...row,
@@ -231,6 +255,7 @@ export async function publishEntry(
             ? new Date(valid.date).toISOString()
             : now;
         const published: PublishedEntry = {
+          mediaIds,
           id,
           section,
           slug,
@@ -253,7 +278,8 @@ export async function publishEntry(
           database().collection(collection("outbox")).doc(event.id),
           outboxDocument(event),
         );
-        for (const image of media) tx.update(image.ref, { published: true });
+        for (const image of media)
+          tx.update(image.ref, { published: !isRestrictedSection(section) });
         clearPublishedCache();
         return updated;
       }),
@@ -381,6 +407,8 @@ async function cached<T>(key: string, load: () => Promise<T>): Promise<T> {
   return value;
 }
 export async function listPublished<T>(section: Section): Promise<T[]> {
+  if (isRestrictedSection(section))
+    throw new CmsError("FORBIDDEN", 403, "Use the invitation-only reading API");
   const result = await cached(`${section}:list`, () =>
     firebaseOperation("query", "published", { section }, async () => {
       const snap = await database()
@@ -413,6 +441,8 @@ export async function publishedDetail<T>(
   section: Section,
   slug: string,
 ): Promise<{ data: T; canonical: string } | null> {
+  if (isRestrictedSection(section))
+    throw new CmsError("FORBIDDEN", 403, "Use the invitation-only reading API");
   const preview = requestContext.getStore()?.preview;
   if (preview?.section === section) {
     const draft = await getEntry(section, preview.id);

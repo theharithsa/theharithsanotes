@@ -5,7 +5,7 @@ import { observe } from "./telemetry.ts";
 const verifier = new OAuth2Client();
 export const auditAudience = () =>
   namespace === "live"
-    ? "https://theharithsa.com/api/cms/delivery"
+    ? "https://theharithsanotes.com/api/cms/delivery"
     : "https://the-harithsa-notes-94--review-tzxuxkbf.web.app/api/cms/delivery";
 export async function authorizeScheduler(request: Request): Promise<void> {
   const token = request.headers

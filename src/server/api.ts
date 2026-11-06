@@ -1,7 +1,14 @@
 import { ZodError } from "zod";
 import { collection, namespace, serviceVersion } from "./config.ts";
 import { authorize, checkOrigin, createPreviewSession } from "./auth.ts";
-import { CmsError, identifier, isSection } from "./models.ts";
+import {
+  CmsError,
+  identifier,
+  isSection,
+  isRestrictedSection,
+  type Section,
+} from "./models.ts";
+import { inviteMember, listMembers, revokeMember } from "./members.ts";
 import {
   getEntry,
   listEntries,
@@ -166,7 +173,12 @@ export async function handleCmsApi(
         "Set-Cookie":
           "__session=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0",
       });
-    let user: { uid: string; email?: string; name?: string };
+    let user: {
+      uid: string;
+      email?: string;
+      name?: string;
+      sections?: Section[];
+    };
     if (external) {
       const section =
         parts[0] === "entries" && isSection(parts[1] ?? "")
@@ -185,6 +197,19 @@ export async function handleCmsApi(
       user = await authorizeApiKey(request, scope, section);
     } else user = await authorize(request);
     rateLimit(user.uid);
+    if (!external && parts[0] === "members") {
+      if (parts.length === 1 && method === "GET")
+        return json({ members: await listMembers() });
+      if (parts.length === 1 && method === "POST")
+        return json(await inviteMember(await body(request)), 201);
+      if (parts.length === 2 && method === "DELETE")
+        return json(await revokeMember(parts[1]!));
+      throw new CmsError(
+        "METHOD_NOT_ALLOWED",
+        405,
+        "Unsupported invitation operation",
+      );
+    }
     if (!external && parts[0] === "workspace" && parts.length === 1) {
       if (method === "GET") return json(await workspaceSummary());
       if (method === "POST") return json(await reconcileWorkspace());
@@ -247,12 +272,19 @@ export async function handleCmsApi(
         (snap) => ({ count: snap.size }),
       );
       return json({
-        media: rows.docs.map((doc) => ({
-          ...doc.data(),
-          paths: undefined,
-          url: `/media/${doc.id}/1600.webp`,
-          apiUrl: `/api/v1/media/${doc.id}/1600.webp`,
-        })),
+        media: rows.docs
+          .filter(
+            (doc) =>
+              !external ||
+              !isRestrictedSection(String(doc.get("section"))) ||
+              user.sections?.includes(doc.get("section") as Section),
+          )
+          .map((doc) => ({
+            ...doc.data(),
+            paths: undefined,
+            url: `/media/${doc.id}/1600.webp`,
+            apiUrl: `/api/v1/media/${doc.id}/1600.webp`,
+          })),
       });
     }
     if (parts[0] === "media" && method === "POST") {
@@ -278,10 +310,16 @@ export async function handleCmsApi(
       const file = form.get("file");
       if (!(file instanceof File))
         throw new CmsError("INVALID_MEDIA", 400, "Choose an image to upload");
+      const targetSection = String(form.get("section") ?? "");
+      if (targetSection && !isSection(targetSection))
+        throw new CmsError("INVALID_MEDIA", 400, "Choose a valid collection");
+      if (external && isRestrictedSection(targetSection))
+        await authorizeApiKey(request, "media:write", targetSection);
       const row = await uploadMedia(
         Buffer.from(await file.arrayBuffer()),
         String(form.get("title") ?? file.name),
         String(form.get("alt") ?? ""),
+        isRestrictedSection(targetSection) ? targetSection : undefined,
       );
       return json(
         {
