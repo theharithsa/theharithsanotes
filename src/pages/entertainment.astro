@@ -132,10 +132,7 @@ const senna = articles.find((article) =>
       </div>
       <a href={`/${senna.slug}`} class="senna-archive">
         <img
-          {...responsiveMedia(
-            senna.image,
-            "auto, (max-width: 760px) 92vw, 560px",
-          )}
+          {...responsiveMedia(senna.image, "(max-width: 760px) 92vw, 560px")}
           alt={senna.imageAlt}
           width="1200"
           height="800"

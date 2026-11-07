@@ -190,7 +190,7 @@ async function load() {
       node("reading-description").textContent = post.description;
       node("reading-date").textContent = formatDate(post.date);
       const cover = node<HTMLImageElement>("reading-cover");
-      setCover(cover, post.image, "(max-width: 800px) 92vw, 760px");
+      setCover(cover, post.image, "(max-width: 1200px) 92vw, 1100px");
       cover.alt = post.imageAlt;
       node("reading-body").innerHTML = post.html ?? "";
       node<HTMLAnchorElement>("reader-back").href =
@@ -266,7 +266,7 @@ async function load() {
         image.loading = "lazy";
         image.width = 1536;
         image.height = 1024;
-        setCover(image, post.image, "auto, (max-width: 640px) 92vw, 540px");
+        setCover(image, post.image, "(max-width: 640px) 92vw, 540px");
         cover.append(image);
         const copy = document.createElement("div");
         copy.className = "card-copy";

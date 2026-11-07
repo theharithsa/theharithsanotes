@@ -110,7 +110,7 @@ export function sanitizePostHtml(value: string, responsive = false): string {
         if (responsive && image.src)
           Object.assign(
             attribs,
-            responsiveMedia(image.src, "auto, (max-width: 760px) 92vw, 720px"),
+            responsiveMedia(image.src, "(max-width: 760px) 92vw, 720px"),
           );
         return { tagName, attribs };
       },

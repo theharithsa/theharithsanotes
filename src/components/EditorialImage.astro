@@ -43,7 +43,7 @@ const asset = assets[`../../public${src}`]?.default;
   />
 ) : (
   <img
-    {...responsiveMedia(src, eager ? sizes : `auto, ${sizes}`)}
+    {...responsiveMedia(src, sizes)}
     alt={alt}
     class={className}
     loading={eager ? "eager" : "lazy"}
