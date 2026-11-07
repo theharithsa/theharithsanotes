@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.23.0
+
+- Stage an image-free Firebase Hosting release with public artwork in Firebase Storage and local-only brand and recovery archives.
+- Package the existing publishing API and invitation-only reader as a scale-to-zero Firebase HTTP function.
+
 ## 1.22.1 — 2026-11-07
 
 - Put the Workspace story first, with grouped formatting icons, visible active states, and collapsible entry details.

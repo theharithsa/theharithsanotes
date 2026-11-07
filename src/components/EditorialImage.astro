@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { responsiveMedia } from "../lib/post-media";
+import { firebaseImage } from "../lib/firebase-art.mjs";
 interface Props {
   src: string;
   alt: string;
@@ -26,9 +27,23 @@ const assets = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const asset = assets[`../../public${src}`]?.default;
+const hosted =
+  asset && process.env.CMS_BUILD_TARGET === "firebase"
+    ? firebaseImage(asset, widths)
+    : undefined;
 ---
 
-{asset ? (
+{hosted ? (
+  <img
+    {...hosted}
+    alt={alt}
+    sizes={sizes}
+    class={className}
+    loading={eager ? "eager" : "lazy"}
+    fetchpriority={eager ? "high" : "auto"}
+    decoding="async"
+  />
+) : asset ? (
   <Image
     src={asset}
     alt={alt}
