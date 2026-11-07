@@ -1,3 +1,7 @@
+# Hosting storage cap and local archives / issue #90
+
+The owner capped total Hosting storage at 1 GB and asked for archive files to stay in the local `archives/` directory. The live channel keeps the current release. Retire preview channels and obsolete Hosting versions after checking the live version ID and a local rollback bundle. Provider storage usage can lag the deletion. `archives/` is excluded from Git, container builds and Hosting deployment. The legacy dynamic site still depends on Cloud Run and site artwork. Keep the live release available during the Firebase-only migration and review its replacement before changing runtime or artwork routing.
+
 # Hosting download optimization / 1.22.2 / issue #88
 
 The 6 November Hosting total was 13.5 GB. There were no Hosting request logs for the window. Cloud Run recorded about 1.02 GB across both services, including about 669 MB from the 1600 px CMS image route. That is origin evidence only. Responsive CMS artwork now selects the existing variants by rendered size, with gallery enlargement retaining the original URL. The public and private readers generate safe responsive markup without modifying stored content or media access. Hosting caches public artwork for one day. See the [deployment cost policy](../project-deployment/SKILL.md) for attribution and low-bandwidth verification.
