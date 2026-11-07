@@ -23,3 +23,5 @@ Medium archive: `medium-articles.json` owns 75 imported articles, alongside 13 e
 Presentation/browsing: books.ts exposes only the 50 confirmed read books; book-genres.json owns editorial genres. Projects filters existing categories. GoGs remains an empty journal with original menu art. page-meta.ts owns canonical aliases, section descriptions and browser colours; Base emits social and structured metadata. theme.ts owns system/default/manual preference and resilient local persistence; site.css owns both palettes. See docs/browsing-and-themes.md.
 
 Use the task's shared workflow skill; keep this file about the actual service. Continuation owns the current work/evidence/next action.
+
+Releases use a locally built Docker Hub image pinned by digest. Follow the [project deployment cost policy](../project-deployment/SKILL.md) for build, retention and rollback rules.

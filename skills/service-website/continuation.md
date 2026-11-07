@@ -1,3 +1,7 @@
+# Deployment cost controls / issues #84 and #86
+
+Release 1.22.1 moved to Docker Hub by the original digest. The production and preview Cloud Run services and all seven jobs use that image. The old Artifact Registry repository was removed after the site and access checks passed. The Cloud Build API is disabled. Six legacy source archives were removed from active storage and follow the staging bucket’s seven-day soft-delete retention. Use the [project deployment cost policy](../project-deployment/SKILL.md) for future releases. Firebase Hosting download attribution and optimization are separate work.
+
 # Workspace and editorial design / 1.22.1 / issue #82
 
 The writing surface brings the story above collapsible entry details. Icon groups reuse the existing editor commands and expose pressed states and accessible names. The public site shares a terracotta link accent and uses native customizable select styling when supported. Notebook navigation uses the reading face, Meet Vish cards carry faint editorial art, and each hover menu uses a different supplied portrait as its reference. The review preview uses synthetic content. The owner approved production promotion. PR #83 records release verification.
