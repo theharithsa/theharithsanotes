@@ -179,6 +179,27 @@ await writeFile(
   path.join(root, "firebase.json"),
   JSON.stringify(config, null, 2),
 );
+// The Firebase CLI would redeploy a Function with a pinTag rewrite even for
+// a Hosting-only command. Pin its already deployed managed service instead.
+const hostingOnly = {
+  hosting: {
+    ...config.hosting,
+    rewrites: [
+      {
+        source: "**",
+        run: {
+          serviceId: functionId.toLowerCase(),
+          region: "us-east1",
+          pinTag: true,
+        },
+      },
+    ],
+  },
+};
+await writeFile(
+  path.join(root, "firebase.hosting.json"),
+  JSON.stringify(hostingOnly, null, 2),
+);
 process.stdout.write(
   JSON.stringify({
     root,
