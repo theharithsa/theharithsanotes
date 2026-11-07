@@ -13,6 +13,7 @@ import type { Editor } from "@tiptap/core";
 import { setEditingAvailability } from "../lib/editor-state";
 import { developerSettings } from "./developer-settings";
 import { mediaComposer } from "./media-composer";
+import { populateEditorToolbar } from "./editor-toolbar";
 
 const auth = getAuth(getApps()[0] ?? initializeApp(firebaseConfig));
 const descriptions: Record<
@@ -1224,16 +1225,24 @@ async function createRichEditor(generation: number) {
   const editingId = current.id;
   const field = document.createElement("div");
   field.className = "cms-rich-field";
-  const label = document.createElement("label");
+  const label = document.createElement("h3");
+  label.className = "cms-story-label";
   label.textContent = "The story";
   const toolbar = document.createElement("div");
   toolbar.className = "cms-rich-toolbar";
-  toolbar.setAttribute("role", "toolbar");
-  toolbar.setAttribute("aria-label", "Article formatting");
   const host = document.createElement("div");
   host.className = "cms-rich-editor post-editor";
   field.append(label, toolbar, host);
-  form.append(field);
+  const details = document.createElement("details");
+  details.className = "cms-story-details";
+  const summary = document.createElement("summary");
+  summary.textContent = "Entry details";
+  const metadata = [...form.children];
+  const titleField = metadata.find((item) =>
+    item.querySelector("#cms-field-title"),
+  );
+  details.append(summary, ...metadata.filter((item) => item !== titleField));
+  form.append(field, details);
   const Figure = Node.create({
     name: "journalFigure",
     group: "block",
@@ -1464,16 +1473,7 @@ async function createRichEditor(generation: number) {
       },
     ],
   ];
-  for (const [name, run] of commands) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = name;
-    button.setAttribute("aria-label", name);
-    button.addEventListener("click", () => {
-      if (rich) run(rich);
-    });
-    toolbar.append(button);
-  }
+  populateEditorToolbar(toolbar, rich, new Map(commands));
 }
 async function renderEditor() {
   const generation = ++editorGeneration;

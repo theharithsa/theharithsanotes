@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.1 — 2026-11-07
+
+- Put the Workspace story first, with grouped formatting icons, visible active states, and collapsible entry details.
+- Style editorial links, notebook navigation, and supported dropdown pickers.
+- Add illustrated Meet Vish cards and seven distinct menu portraits.
+
 ## 1.22.0
 
 - Add editable, responsive YouTube/Vimeo/Spotify and native video/audio blocks, standalone-link paste conversion, and video/audio uploads with private authorization and byte-range playback.

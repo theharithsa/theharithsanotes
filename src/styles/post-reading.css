@@ -134,7 +134,7 @@
   text-decoration-thickness: 1px;
 }
 :is(.post-body, .cms-rich-editor.post-editor .tiptap) a {
-  color: inherit;
+  color: var(--link-accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
