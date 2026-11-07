@@ -106,19 +106,13 @@ export function sanitizePostHtml(value: string, responsive = false): string {
       }),
       img: (tagName, attributes) => {
         const { srcset: _srcset, sizes: _sizes, ...image } = attributes;
-        return {
-          tagName,
-          attribs: {
-            ...image,
-            ...(responsive && image.src
-              ? responsiveMedia(
-                  image.src,
-                  "auto, (max-width: 760px) 92vw, 720px",
-                )
-              : {}),
-            loading: "lazy",
-          },
-        };
+        const attribs = { ...image, loading: "lazy" };
+        if (responsive && image.src)
+          Object.assign(
+            attribs,
+            responsiveMedia(image.src, "auto, (max-width: 760px) 92vw, 720px"),
+          );
+        return { tagName, attribs };
       },
     },
   });
