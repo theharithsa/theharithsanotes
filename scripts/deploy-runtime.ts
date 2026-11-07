@@ -17,7 +17,7 @@ const version = process.env.SERVICE_VERSION;
 if (
   !["live", "preview"].includes(namespace) ||
   !image?.match(
-    /^us-east1-docker\.pkg\.dev\/the-harithsa-notes-94\/harithsa-journal\/web@sha256:[a-f0-9]{64}$/,
+    /^docker\.io\/theharithsa\/harithsa-notes@sha256:[a-f0-9]{64}$/,
   ) ||
   !sha?.match(/^[a-f0-9]{40}$/) ||
   !version
