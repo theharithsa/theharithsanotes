@@ -1,6 +1,6 @@
-# Workspace and editorial design review / issue #82
+# Workspace and editorial design / 1.22.1 / issue #82
 
-The writing surface brings the story above collapsible entry details. Icon groups reuse the existing editor commands and expose pressed states and accessible names. The public site shares a terracotta link accent and uses native customizable select styling when supported. Notebook navigation uses the reading face, Meet Vish cards carry faint editorial art, and each hover menu uses a different supplied portrait as its reference. The review preview uses synthetic content. Production promotion follows the design review.
+The writing surface brings the story above collapsible entry details. Icon groups reuse the existing editor commands and expose pressed states and accessible names. The public site shares a terracotta link accent and uses native customizable select styling when supported. Notebook navigation uses the reading face, Meet Vish cards carry faint editorial art, and each hover menu uses a different supplied portrait as its reference. The review preview uses synthetic content. The owner approved production promotion. PR #83 records release verification.
 
 # Multimedia posts 1.22.0 / issue #80
 
