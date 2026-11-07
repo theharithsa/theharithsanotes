@@ -4,6 +4,7 @@ import ProjectArt from "../components/ProjectArt.astro";
 import { getProjects, getArticles, getJournalPage } from "../lib/journal";
 import Base from "../layouts/Base.astro";
 import NoteCard from "../components/NoteCard.astro";
+import { responsiveMedia } from "../lib/post-media";
 const [projects, articles, homePage, meetPage] = await Promise.all([
   getProjects(),
   getArticles(),
@@ -26,7 +27,10 @@ const selection = articles
 <Base>
   <section class="home-hero">
     <img
-      src={homePage.image ?? "/images/curiosity-editorial.webp"}
+      {...responsiveMedia(
+        homePage.image ?? "/images/curiosity-editorial.webp",
+        "(max-width: 760px) 100vw, (max-width: 1500px) 88vw, 1320px",
+      )}
       alt="An illustrated notebook landscape with a telescope, a tree, circuits, and open pages"
       width="1536"
       height="1024"
@@ -167,11 +171,12 @@ const selection = articles
   </section>
   <section class="wrap meet-glimpse space">
     <img
-      src={
+      {...responsiveMedia(
         homePage.portraitImage ??
-        meetPage.image ??
-        "/images/vish-casual-illustration.webp"
-      }
+          meetPage.image ??
+          "/images/vish-casual-illustration.webp",
+        "auto, (max-width: 760px) 92vw, 500px",
+      )}
       alt={
         homePage.portraitImageAlt ??
         meetPage.imageAlt ??

@@ -1,5 +1,6 @@
 ---
 import { getGallery } from "../lib/journal";
+import { responsiveMedia } from "../lib/post-media";
 interface Props {
   limit?: number;
 }
@@ -71,7 +72,10 @@ const groups = [...new Set(photos.map((photo) => dateKey(photo.capturedAt)))];
               aria-label={`View photograph: ${photo.title}`}
             >
               <img
-                src={photo.src}
+                {...responsiveMedia(
+                  photo.src,
+                  `${index < 3 ? "" : "auto, "}(max-width: 540px) 92vw, (max-width: 860px) 44vw, 360px`,
+                )}
                 data-full={photo.src}
                 alt={photo.alt}
                 width={photo.width}

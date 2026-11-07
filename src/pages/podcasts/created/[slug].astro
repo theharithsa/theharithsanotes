@@ -46,7 +46,7 @@ const note = loaded.data;
       {note.html && (
         <div
           class="post-body post-extra-body"
-          set:html={sanitizePostHtml(note.html)}
+          set:html={sanitizePostHtml(note.html, true)}
         />
       )}
     </div>

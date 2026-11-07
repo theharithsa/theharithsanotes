@@ -107,7 +107,7 @@ const paragraphs = entry.review.split(/\n\s*\n/).filter(Boolean);
         {book.html && (
           <div
             class="post-body post-extra-body"
-            set:html={sanitizePostHtml(book.html)}
+            set:html={sanitizePostHtml(book.html, true)}
           />
         )}
         <footer class="book-review-source">

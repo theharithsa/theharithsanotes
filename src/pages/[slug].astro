@@ -114,7 +114,7 @@ const headings = [
       )}
       <div
         class="post-body post-dropcap"
-        set:html={sanitizePostHtml(article.html)}
+        set:html={sanitizePostHtml(article.html, true)}
       />
     </div>
     <div class="article-end">

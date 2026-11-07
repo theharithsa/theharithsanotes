@@ -5,6 +5,20 @@ export interface PostMedia {
   src: string;
 }
 
+/** Use the existing CMS variants without changing the stored URL or its access checks. */
+export function responsiveMedia(src: string, sizes: string) {
+  const path =
+    /^\/media\/[a-f0-9]{64}\/(?=(?:master|400|800|1600)\.webp$)/.exec(src)?.[0];
+  if (!path) return { src };
+  return {
+    src: `${path}800.webp`,
+    srcset: [400, 800, 1600]
+      .map((width) => `${path}${width}.webp ${width}w`)
+      .join(", "),
+    sizes,
+  };
+}
+
 /** Pure allowlist shared by the editor, API sanitizer and readers. No URL fetch. */
 export function postMedia(value: string): PostMedia | null {
   if (value.length > 2048) return null;

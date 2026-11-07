@@ -1,8 +1,8 @@
 import sanitizeHtml from "sanitize-html";
-import { mediaHtml, postMedia } from "./post-media.ts";
+import { mediaHtml, postMedia, responsiveMedia } from "./post-media.ts";
 
 /** One bounded HTML contract for imports, CMS drafts, API writes and readers. */
-export function sanitizePostHtml(value: string): string {
+export function sanitizePostHtml(value: string, responsive = false): string {
   const ancestors: string[] = [];
   const clean = sanitizeHtml(value, {
     onOpenTag: (name) => {
@@ -25,7 +25,7 @@ export function sanitizePostHtml(value: string): string {
     ],
     allowedAttributes: {
       a: ["href", "title"],
-      img: ["src", "alt", "width", "height", "loading"],
+      img: ["src", "alt", "width", "height", "loading", "srcset", "sizes"],
       aside: ["class", "aria-label"],
       div: ["class"],
       figure: ["class", "data-media-url"],
@@ -104,7 +104,22 @@ export function sanitizePostHtml(value: string): string {
         tagName: ["ul", "ol"].includes(ancestors.at(-2) ?? "") ? "li" : name,
         attribs: attributes,
       }),
-      img: sanitizeHtml.simpleTransform("img", { loading: "lazy" }),
+      img: (tagName, attributes) => {
+        const { srcset: _srcset, sizes: _sizes, ...image } = attributes;
+        return {
+          tagName,
+          attribs: {
+            ...image,
+            ...(responsive && image.src
+              ? responsiveMedia(
+                  image.src,
+                  "auto, (max-width: 760px) 92vw, 720px",
+                )
+              : {}),
+            loading: "lazy",
+          },
+        };
+      },
     },
   });
   // Only a whole URL paragraph becomes a block. Inline links remain prose.

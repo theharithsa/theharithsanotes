@@ -8,10 +8,18 @@ import {
   type User,
 } from "firebase/auth";
 import { firebaseConfig } from "../lib/firebase-config";
+import { responsiveMedia } from "../lib/post-media";
 
 const auth = getAuth(getApps()[0] ?? initializeApp(firebaseConfig));
 const node = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
+
+function setCover(image: HTMLImageElement, source: string, sizes: string) {
+  const media = responsiveMedia(source, sizes);
+  image.sizes = media.sizes ?? "";
+  image.srcset = media.srcset ?? "";
+  image.src = media.src;
+}
 const message = node("reader-message");
 let generation = 0;
 let pendingRead: AbortController | undefined;
@@ -96,7 +104,10 @@ function clear(forgetAccess = false) {
   node("reading-body").replaceChildren();
   for (const id of ["reading-title", "reading-description", "reading-date"])
     node(id).textContent = "";
-  node<HTMLImageElement>("reading-cover").removeAttribute("src");
+  const cover = node<HTMLImageElement>("reading-cover");
+  cover.removeAttribute("srcset");
+  cover.removeAttribute("sizes");
+  cover.removeAttribute("src");
 }
 function syncCollection(section: "journal" | "people") {
   const links = [
@@ -179,7 +190,7 @@ async function load() {
       node("reading-description").textContent = post.description;
       node("reading-date").textContent = formatDate(post.date);
       const cover = node<HTMLImageElement>("reading-cover");
-      cover.src = post.image;
+      setCover(cover, post.image, "(max-width: 800px) 92vw, 760px");
       cover.alt = post.imageAlt;
       node("reading-body").innerHTML = post.html ?? "";
       node<HTMLAnchorElement>("reader-back").href =
@@ -251,11 +262,11 @@ async function load() {
         cover.tabIndex = -1;
         cover.setAttribute("aria-hidden", "true");
         const image = document.createElement("img");
-        image.src = post.image;
         image.alt = "";
         image.loading = "lazy";
         image.width = 1536;
         image.height = 1024;
+        setCover(image, post.image, "auto, (max-width: 640px) 92vw, 540px");
         cover.append(image);
         const copy = document.createElement("div");
         copy.className = "card-copy";

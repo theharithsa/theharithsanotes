@@ -101,7 +101,7 @@ const project = loaded.data;
       {project.html && (
         <div
           class="post-body post-extra-body"
-          set:html={sanitizePostHtml(project.html)}
+          set:html={sanitizePostHtml(project.html, true)}
         />
       )}
     </div>

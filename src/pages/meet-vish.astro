@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import { site } from "../data/site";
 import { getJournalPage } from "../lib/journal";
 import { cleanHtml } from "../server/models";
+import { responsiveMedia } from "../lib/post-media";
 const page = await getJournalPage("meet-vish");
 ---
 
@@ -28,7 +29,10 @@ const page = await getJournalPage("meet-vish");
         </div>
       </div>
       <img
-        src={page.image ?? "/images/vish-casual-illustration.webp"}
+        {...responsiveMedia(
+          page.image ?? "/images/vish-casual-illustration.webp",
+          "(max-width: 760px) 92vw, (max-width: 1200px) 43vw, 540px",
+        )}
         alt={
           page.imageAlt ??
           "Illustration of Vishruth smiling in a sage-green T-shirt and jeans"

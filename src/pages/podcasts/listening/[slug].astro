@@ -54,7 +54,7 @@ const index = Astro.props.index ?? 0;
       {note.html && (
         <div
           class="post-body post-extra-body"
-          set:html={sanitizePostHtml(note.html)}
+          set:html={sanitizePostHtml(note.html, true)}
         />
       )}
     </div>

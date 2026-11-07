@@ -81,7 +81,7 @@ const next =
       {note.html && (
         <div
           class="post-body post-extra-body"
-          set:html={sanitizePostHtml(note.html)}
+          set:html={sanitizePostHtml(note.html, true)}
         />
       )}
       <aside class={`screen-takeaway tone-${note.tone}`}>

@@ -1,5 +1,6 @@
 ---
 import type { ListeningNote } from "../data/interests";
+import { responsiveMedia } from "../lib/post-media";
 interface Props {
   note: ListeningNote;
   index?: number;
@@ -11,7 +12,10 @@ const tones = ["peach", "lilac", "blue", "ochre", "peach"];
 {note.image ? (
   <img
     class="record-art podcast-record-art"
-    src={note.image}
+    {...responsiveMedia(
+      note.image,
+      "auto, (max-width: 640px) 92vw, (max-width: 1000px) 48vw, 500px",
+    )}
     alt={note.artLabel}
     width="1200"
     height="1000"

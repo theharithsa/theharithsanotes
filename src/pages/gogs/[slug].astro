@@ -40,7 +40,7 @@ const note = loaded.data;
     </header>
     <div
       class="post-body post-dropcap wrap"
-      set:html={sanitizePostHtml(note.html)}
+      set:html={sanitizePostHtml(note.html, true)}
     />
   </article>
 </Base>
