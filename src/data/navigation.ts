@@ -5,7 +5,7 @@ export const navigation = [
     tone: "blue",
     title: "Ideas worth a closer look.",
     description: "Observability, AI, and lessons from work and life.",
-    image: "/images/navigation/blogs-portrait-v1.png",
+    image: "/images/navigation/blogs-portrait-v2.webp",
     links: [
       { label: "All articles", href: "/blogs" },
       { label: "Observability", href: "/blogs?topic=Observability" },
@@ -19,7 +19,7 @@ export const navigation = [
     tone: "peach",
     title: "Another page, another perspective.",
     description: "A home for reading notes and the library I’m building.",
-    image: "/images/navigation/books-portrait-v1.png",
+    image: "/images/navigation/books-portrait-v2.webp",
     links: [
       { label: "The reading room", href: "/books" },
       {
@@ -34,7 +34,7 @@ export const navigation = [
     tone: "lilac",
     title: "Make room for a good conversation.",
     description: "A place for episodes, ideas, and listening notes.",
-    image: "/images/navigation/podcasts-portrait-v1.png",
+    image: "/images/navigation/podcasts-portrait-v2.webp",
     links: [
       { label: "Listening", href: "/podcasts" },
       { label: "Created", href: "/podcasts/created" },
@@ -47,7 +47,7 @@ export const navigation = [
     title: "From a question to something useful.",
     description:
       "Small experiments, open-source tools, and products for everyday life.",
-    image: "/images/navigation/projects-portrait-v1.png",
+    image: "/images/navigation/projects-portrait-v2.webp",
     links: [
       { label: "All projects", href: "/projects" },
       { label: "SalesDrone", href: "/projects/salesdrone" },
@@ -63,7 +63,7 @@ export const navigation = [
     tone: "ochre",
     title: "The story after the credits.",
     description: "Movies, series, and the lessons that follow us into life.",
-    image: "/images/navigation/entertainment-portrait-v1.png",
+    image: "/images/navigation/entertainment-portrait-v2.webp",
     links: [
       { label: "Screen notes", href: "/entertainment" },
       { label: "Subservience", href: "/entertainment/subservience" },
@@ -84,7 +84,7 @@ export const navigation = [
     tone: "peach",
     title: "Hello. I’m Vishruth.",
     description: "Engineer, builder, and a person with plenty left to learn.",
-    image: "/images/navigation/meet-vish-portrait-v1.png",
+    image: "/images/navigation/meet-vish-portrait-v2.webp",
     links: [
       { label: "My story", href: "/meet-vish" },
       { label: "Life in photographs", href: "/gallery" },
@@ -98,7 +98,7 @@ export const navigation = [
     title: "A little play. A little everyday wonder.",
     description:
       "Games and Gadget — a space for the games I play, the things I use, and the experiences in between.",
-    image: "/images/navigation/gogs-portrait-v1.png",
+    image: "/images/navigation/gogs-portrait-v2.webp",
     links: [
       { label: "Explore GoGs", href: "/gogs" },
       { label: "Games", href: "/gogs#games" },

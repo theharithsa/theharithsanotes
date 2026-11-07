@@ -596,46 +596,98 @@ body:has(#invitations-room) {
   border-top: 1px solid var(--cms-border);
   padding-top: 22px;
 }
-.cms-rich-field > label {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--cms-muted);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.cms-story-label {
+  margin: 0 0 12px;
+  font: 600 1.15rem/1.4 var(--serif);
 }
 .cms-rich-toolbar {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 6px 0;
   flex-wrap: wrap;
-  padding: 7px;
-  border: 1px solid var(--cms-border);
-  border-radius: 6px 6px 0 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px 12px 0 0;
   position: sticky;
   top: 0;
-  background: var(--cms-surface);
+  background: color-mix(in srgb, var(--paper) 78%, var(--peach));
   z-index: 1;
 }
-.cms-rich-toolbar button {
-  background: transparent;
+.cms-tool-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding-inline: 6px;
+  border-inline-end: 1px solid var(--line);
+  max-width: 100%;
+}
+.cms-tool-group:last-child {
   border: 0;
-  border-radius: 3px;
-  font-family: var(--sans);
-  font-size: 11px;
-  color: var(--cms-muted);
-  padding: 6px 8px;
+}
+.cms-rich-toolbar button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 38px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font: 600 15px/1 var(--serif);
+  color: var(--ink);
+  padding: 0;
   cursor: pointer;
 }
-.cms-rich-toolbar button:hover {
-  background: var(--cms-active);
-  color: var(--ink);
+.cms-rich-toolbar button span {
+  display: grid;
+  place-items: center;
+}
+.cms-rich-toolbar button svg {
+  width: 18px;
+  height: 18px;
+}
+.cms-rich-toolbar button[data-tool="bold"] {
+  font-weight: 700;
+}
+.cms-rich-toolbar button[data-tool="italic"] {
+  font-style: italic;
+}
+.cms-rich-toolbar button[data-tool="strike"] {
+  text-decoration: line-through;
+}
+.cms-rich-toolbar button:is(:hover, :focus-visible, [aria-pressed="true"]) {
+  background: var(--link-tint);
+  color: var(--link-accent);
+}
+.cms-rich-toolbar button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--link-accent) 37%, transparent);
 }
 .cms-rich-editor {
-  border: 1px solid var(--cms-border);
+  border: 1px solid var(--line);
   border-top: 0;
-  border-radius: 0 0 6px 6px;
-  padding: 25px 28px;
+  border-radius: 0 0 12px 12px;
+  padding: clamp(20px, 4vw, 48px);
   min-height: 360px;
+  background: var(--paper);
+  box-shadow: 0 12px 28px #00000008;
+}
+.cms-story-details {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 14px 18px;
+}
+.cms-story-details summary {
+  cursor: pointer;
+  font: 600 0.9rem/1.5 var(--serif);
+}
+.cms-story-details[open] > :not(summary) {
+  margin-top: 16px;
+}
+@media (pointer: coarse) {
+  .cms-rich-toolbar button {
+    width: 44px;
+    height: 44px;
+  }
 }
 .cms-rich-editor .tiptap {
   outline: none;

@@ -1,3 +1,7 @@
+# Workspace and editorial design review / issue #82
+
+The writing surface brings the story above collapsible entry details. Icon groups reuse the existing editor commands and expose pressed states and accessible names. The public site shares a terracotta link accent and uses native customizable select styling when supported. Notebook navigation uses the reading face, Meet Vish cards carry faint editorial art, and each hover menu uses a different supplied portrait as its reference. The review preview uses synthetic content. Production promotion follows the design review.
+
 # Multimedia posts 1.22.0 / issue #80
 
 Shared post-media mapper/sanitizer and Tiptap PostMediaBlock own YouTube/Vimeo/Spotify/native players. Workspace media composer supports replacement; standalone URLs paste as blocks. All post collections expose optional rich stories, preserving structured content. Uploads add MP4/WebM/MP3/M4A/Ogg under 24 MiB, original bytes, same private/published reference checks and range support. Images remain unchanged. Read docs/multimedia-posts.md and the linked PR for limits, tests, rollout and rollback. Invite ready filler removed; status notices have consistent containment. No content migration, new dependency or permission expansion.

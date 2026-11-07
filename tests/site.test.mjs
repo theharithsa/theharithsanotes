@@ -564,11 +564,11 @@ test("section menus use full-label disclosure buttons and seven local portrait i
     "meet-vish",
     "gogs",
   ]) {
-    assert.ok(header.includes(`${slug}-portrait-v1`));
+    assert.ok(header.includes(`${slug}-portrait-v2`));
     const master = await readFile(
-      new URL(`public/images/navigation/${slug}-portrait-v1.png`, root),
+      new URL(`public/images/navigation/${slug}-portrait-v2.webp`, root),
     );
-    assert.equal(master.subarray(1, 4).toString(), "PNG");
+    assert.equal(master.subarray(8, 12).toString(), "WEBP");
   }
   assert.ok(home.includes('href="/projects/copilot-otel"'));
   assert.ok(home.includes("aroha-retreat-editorial-v2"));

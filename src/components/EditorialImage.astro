@@ -18,7 +18,10 @@ const {
   class: className,
 } = Astro.props;
 const assets = import.meta.glob<{ default: ImageMetadata }>(
-  ["../../public/images/blog/*.png", "../../public/images/navigation/*.png"],
+  [
+    "../../public/images/blog/*.png",
+    "../../public/images/navigation/*.{png,webp}",
+  ],
   { eager: true },
 );
 const asset = assets[`../../public${src}`]?.default;
