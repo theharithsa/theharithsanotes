@@ -1,7 +1,11 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // No direct client URLs or public download tokens. The server checks visibility.
+    // Only the deployment's isolated, prebuilt public artwork is readable here.
+    match /public-art/v1/{asset=**} {
+      allow get: if true;
+    }
+    // The server checks visibility for CMS uploads and private reader media.
     match /{object=**} { allow read, write: if false; }
   }
 }

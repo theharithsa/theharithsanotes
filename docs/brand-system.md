@@ -6,7 +6,7 @@ Owner-selected on 6 November 2026. The canonical brand name is **the harithsa no
 
 ## Deliverables and usage
 
-Download [the complete brand kit](../public/brand/harithsa-notes-brand-v1.zip). Exports live under `public/brand/v1`; [identity.json](../public/brand/v1/identity.json) records asset hashes, geometry ownership and font provenance.
+Run `python scripts/package-brand.py` to export the complete brand kit to the local, ignored `archives/` directory. Exports live under `public/brand/v1`; [identity.json](../public/brand/v1/identity.json) records asset hashes, geometry ownership and font provenance.
 
 | Use               | Export                                                 | Contract                                                            |
 | ----------------- | ------------------------------------------------------ | ------------------------------------------------------------------- |

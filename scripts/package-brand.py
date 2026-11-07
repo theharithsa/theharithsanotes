@@ -4,7 +4,8 @@ from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 
 root = Path(__file__).resolve().parents[1]
 exports = root / "public/brand/v1"
-target = root / "public/brand/harithsa-notes-brand-v1.zip"
+target = root / "archives/harithsa-notes-brand-v1.zip"
+target.parent.mkdir(exist_ok=True)
 with ZipFile(target, "w", compression=ZIP_DEFLATED, compresslevel=9) as archive:
     paths = [(path.name, path) for path in sorted(exports.iterdir()) if path.is_file()]
     paths.append(("OFL.txt", root / "assets/brand-identity/source/OFL.txt"))
