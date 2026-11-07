@@ -1,0 +1,19 @@
+# Firebase-only migration
+
+The public site keeps its existing addresses. Publishing, drafts and revision history stay available, and People and Journal remains invitation-only. Hosting has a 1 GB project-wide cap. Website artwork moves to the existing Firebase Storage bucket. Originals, ZIPs and recovery artifacts stay in `archives/` on the local machine.
+
+## Backend decision
+
+Firebase Functions can run the existing server behavior with an HTTP entry point. Production deployment requires Blaze, Cloud Build and Artifact Registry. Second-generation Functions also run on Cloud Run underneath. A function can scale to zero and use free quotas, but the deployment and invocation path can incur charges. This path conflicts with the current restriction on reintroducing paid infrastructure. [Firebase Functions infrastructure](https://firebase.google.com/docs/functions/version-comparison) · [Deployment and billing requirements](https://firebase.google.com/docs/functions/faq-and-troubleshooting)
+
+The candidate within the infrastructure restriction is static Firebase Hosting with the existing Firebase Auth, Firestore and Storage services. The browser can authenticate readers, while Security Rules enforce permissions. A trusted local publisher can reuse content validation and immutable publication transactions. The current Workspace Publish button and external scoped REST API still need a compatible design. A local tool can exercise publishing without a new runtime, but substituting it for the existing web flow needs approval. Keep the current server in production until the replacement passes the same behavior checks.
+
+## Sequence
+
+1. Establish a cost baseline. Verify active versus soft-deleted Storage bytes, billable download regions and recent requests. Keep live and draft media referenced by entries, revisions or publications. Never infer that an object is unused from its age or publication flag alone.
+2. Stage only public webpage art from the local build. Generate responsive, fingerprinted renditions. Reuse the existing `us-east1` bucket in a dedicated public-art prefix. Permit object reads only for that prefix and verify that listing, writes, and anonymous access to `journal/**` remain denied. Use direct Firebase Storage URLs in pages and social metadata. Test old image links, dark mode, gallery enlargement and responsive variants. Measure the expected download and operation cost before uploading. [Firebase Storage locations and free tier](https://firebase.google.com/docs/storage/locations)
+3. Build a static Hosting preview with images excluded and existing canonical URLs preserved. Keep only the HTML, scripts, fonts, styles and configuration needed to render pages. Reject a release whose proposed Hosting files plus any retained versions would exceed 1 GB. Inspect the upload manifest for raster images, SVG artwork and archives before publishing.
+4. Prototype the reader and publishing paths against emulators. Use Firebase Auth and isolate browser-readable public projections from drafts and private records. Test invited, expired, revoked and anonymous access to both documents and media, including deep links and search. Prove draft isolation, idempotent publish, slug collisions, concurrent edits, revision restore and a failed write. Verify the existing API and audit behavior before selecting a replacement.
+5. Cut over only after the new implementation passes these checks with representative data. Keep a local recovery bundle and rehearse restoring it. Switch Hosting after both public and private journeys pass. Retire the old runtime, job schedules and registry references after the new site is healthy.
+
+The Firebase Storage allowance is usage-based. Moving image requests from Hosting changes which product records their transfer. Keep the existing origin in place while testing the Storage path and its billing impact. [Firebase pricing](https://firebase.google.com/pricing)
