@@ -62,7 +62,10 @@ export async function readingApi(
         throw new CmsError("INVALID_CONTENT", 400, "Invalid preview");
       const data = (await getEntry(section, id)).data;
       return json({
-        post: { ...data, html: sanitizePostHtml(String(data.html ?? "")) },
+        post: {
+          ...data,
+          html: sanitizePostHtml(String(data.html ?? ""), true),
+        },
       });
     }
     const rows = await firebaseOperation(
@@ -133,7 +136,7 @@ export async function readingApi(
     return json({
       post: {
         ...row.data,
-        html: sanitizePostHtml(String(data.html ?? "")),
+        html: sanitizePostHtml(String(data.html ?? ""), true),
         id: row.id,
       },
     });

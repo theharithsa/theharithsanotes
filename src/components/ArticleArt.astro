@@ -13,5 +13,10 @@ const { article, eager = false, decorative = false } = Astro.props;
   src={article.image}
   alt={decorative ? "" : article.imageAlt}
   eager={eager}
+  sizes={
+    eager
+      ? "(max-width: 760px) 92vw, (max-width: 1300px) 85vw, 1120px"
+      : "(max-width: 640px) 92vw, (max-width: 1000px) 48vw, 540px"
+  }
   class="blog-editorial-art"
 />

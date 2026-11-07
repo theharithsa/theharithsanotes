@@ -1,3 +1,7 @@
+# Hosting download optimization / 1.22.2 / issue #88
+
+The 6 November Hosting total was 13.5 GB. There were no Hosting request logs for the window. Cloud Run recorded about 1.02 GB across both services, including about 669 MB from the 1600 px CMS image route. That is origin evidence only. Responsive CMS artwork now selects the existing variants by rendered size, with gallery enlargement retaining the original URL. The public and private readers generate safe responsive markup without modifying stored content or media access. Hosting caches public artwork for one day. See the [deployment cost policy](../project-deployment/SKILL.md) for attribution and low-bandwidth verification.
+
 # Deployment cost controls / issues #84 and #86
 
 Release 1.22.1 moved to Docker Hub by the original digest. The production and preview Cloud Run services and all seven jobs use that image. The old Artifact Registry repository was removed after the site and access checks passed. The Cloud Build API is disabled. Six legacy source archives were removed from active storage and follow the staging bucket’s seven-day soft-delete retention. Use the [project deployment cost policy](../project-deployment/SKILL.md) for future releases. Firebase Hosting download attribution and optimization are separate work.

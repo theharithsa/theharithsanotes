@@ -6,6 +6,7 @@ import ScreenArt from "../components/ScreenArt.astro";
 import { getScreenNotes, getArticles, getJournalPage } from "../lib/journal";
 const page = await getJournalPage("entertainment");
 import { formatDate } from "../lib/content";
+import { responsiveMedia } from "../lib/post-media";
 const screenNotes = await getScreenNotes();
 const articles = await getArticles();
 const [lead, ...otherNotes] = screenNotes;
@@ -131,7 +132,7 @@ const senna = articles.find((article) =>
       </div>
       <a href={`/${senna.slug}`} class="senna-archive">
         <img
-          src={senna.image}
+          {...responsiveMedia(senna.image, "(max-width: 760px) 92vw, 560px")}
           alt={senna.imageAlt}
           width="1200"
           height="800"

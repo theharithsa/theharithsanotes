@@ -2,6 +2,21 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { sanitizePostHtml } from "../src/lib/post-html.ts";
 
+test("reader image variants preserve the protected route and reject authored srcset", () => {
+  const path = `/media/${"a".repeat(64)}`;
+  const input = `<img src="${path}/1600.webp" srcset="https://evil.example/track 2x" alt="Cover" /><img src="https://example.com/photo.webp" srcset="https://evil.example/track 2x" />`;
+  const stored = sanitizePostHtml(input);
+  assert.ok(stored.includes(`src="${path}/1600.webp"`));
+  assert.doesNotMatch(stored, /srcset|evil\.example/);
+  const rendered = sanitizePostHtml(stored, true);
+  assert.ok(rendered.includes(`src="${path}/800.webp"`));
+  assert.ok(rendered.includes(`${path}/400.webp 400w`));
+  assert.ok(rendered.includes(`${path}/1600.webp 1600w`));
+  assert.ok(rendered.includes('src="https://example.com/photo.webp"'));
+  assert.doesNotMatch(rendered, /evil\.example/);
+  assert.equal(sanitizePostHtml(rendered, true), rendered);
+});
+
 test("legacy paragraph lists become real list items without changing nested prose", () => {
   const html = sanitizePostHtml(
     '<p>Before</p><ul><p>First <strong>point</strong><br />continued</p><li><p>Existing item</p><ul><p>Nested point</p></ul></li><p>Last <img src="/sample.webp" alt="sample" /> point</p></ul><ol start="4"><p>Fourth</p></ol><p>After</p>',
