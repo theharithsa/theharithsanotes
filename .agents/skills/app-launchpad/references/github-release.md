@@ -7,6 +7,7 @@ Shared boundaries: [safety](safety.md), [evidence](evidence.md), [service owners
 - Pin third-party actions to verified commit SHAs, document updates, and use least-privilege job permissions.
 - Prefer OIDC/workload identity and narrow environment secrets over service-account keys.
 - Branch protection/environment approvals are separate authorized settings changes; propose them without silently granting access.
+- On The Harithsa Notes, write issues, PRs and comments from Vishruth's perspective when describing his decisions or preferences. Use first person for those statements and precise role names such as admin or invited reader for access controls.
 
 ## Issue-to-merge delivery
 
