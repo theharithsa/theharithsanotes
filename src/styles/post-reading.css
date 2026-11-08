@@ -369,6 +369,7 @@
 .post-page .article-cover figcaption {
   font: 13px/1.5 var(--sans);
   color: var(--post-muted);
+  text-align: center;
 }
 .post-page .article-byline {
   font: 13px/1.45 var(--sans);
