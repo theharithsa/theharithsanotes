@@ -7,6 +7,12 @@ interface RumAgent {
 declare global {
   interface Window {
     dtrum?: RumAgent;
+    dynatrace?: {
+      sendBizEvent(
+        type: string,
+        fields: Record<string, string | boolean>,
+      ): void;
+    };
   }
 }
 const consentKey = "harithsa.analytics.v1";
@@ -31,6 +37,57 @@ function safeFailure(
   }
 }
 
+export function emitReaderEvent(
+  type: "content.viewed" | "content.read_completed" | "content.search_query",
+  fields: Record<string, string | boolean>,
+): boolean {
+  if (!enabled || current !== "granted" || !window.dynatrace?.sendBizEvent)
+    return false;
+  try {
+    window.dynatrace.sendBizEvent(type, {
+      ...fields,
+      "event.provider": "harithsa-notes.reader",
+      "event.authority": "browser-observed",
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function observeReading(): void {
+  const end = document.querySelector<HTMLElement>("[data-reader-article]");
+  const slug = end?.dataset.readerArticle;
+  if (!end || !slug || !/^[a-z0-9-]{1,180}$/.test(slug)) return;
+  const fields = { "content.section": "blogs", "content.slug": slug };
+  if (!emitReaderEvent("content.viewed", fields)) return;
+  if (!("IntersectionObserver" in window)) return;
+  const earliestCompletion = performance.now() + 10000;
+  let visible = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const complete = () => {
+    if (visible && document.visibilityState === "visible") {
+      emitReaderEvent("content.read_completed", fields);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", check);
+    }
+  };
+  const check = () => {
+    clearTimeout(timer);
+    if (visible && document.visibilityState === "visible")
+      timer = setTimeout(
+        complete,
+        Math.max(0, earliestCompletion - performance.now()),
+      );
+  };
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry?.isIntersecting ?? false;
+    check();
+  });
+  observer.observe(end);
+  document.addEventListener("visibilitychange", check);
+}
+
 async function start(): Promise<void> {
   if (!enabled || started) return;
   started = true;
@@ -40,7 +97,10 @@ async function start(): Promise<void> {
     "https://js-cdn.dynatrace.com/jstag/18b1df4492a/bf12470wrz/95689bd753f916a6_complete.js";
   script.crossOrigin = "anonymous";
   script.id = "dynatrace-rum";
-  script.addEventListener("load", () => window.dtrum?.disableSessionReplay?.());
+  script.addEventListener("load", () => {
+    window.dtrum?.disableSessionReplay?.();
+    observeReading();
+  });
   document.head.append(script);
   try {
     const [

@@ -170,6 +170,14 @@ export async function acceptCi(input: Record<string, unknown>, claims: Claims) {
               "sdlc.reporter.run_id": claims.run_id,
               "sdlc.reporter.attempt": claims.run_attempt,
               "sdlc.kind": String(row.kind),
+              "sdlc.stage":
+                row.kind === "issue"
+                  ? "intake"
+                  : row.kind === "pull_request"
+                    ? "review"
+                    : row.kind === "deployment" || row.kind === "verification"
+                      ? row.kind
+                      : "ci",
               ...(typeof row.durationMs === "number" &&
               Number.isFinite(row.durationMs) &&
               row.durationMs >= 0

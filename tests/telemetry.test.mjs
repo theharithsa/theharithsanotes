@@ -128,6 +128,12 @@ test("binary OTLP preserves concurrent parentage, correlated logs, delta metrics
     assert.ok(roots.every(Boolean));
     const serverSpan = spans.find((span) => string(span, 5) === "probe.server");
     assert.equal(Number(serverSpan.get(6)[0]), 2);
+    assert.equal(attributes(serverSpan, 9)["http.route"], "/probe/:entry");
+    assert.equal(attributes(serverSpan, 9)["error.type"], "FORBIDDEN");
+    assert.equal(
+      attributes(serverSpan, 9)["error.message"],
+      "Operation failed (FORBIDDEN)",
+    );
     const delivered = spans.find(
       (span) => string(span, 5) === "probe.delivery",
     );
