@@ -13,6 +13,7 @@ import { CmsError } from "./server/models.ts";
 import {
   auditEvent,
   enqueueAudit,
+  errorAttributes,
   errorCode,
   observe,
   operationalLog,
@@ -147,12 +148,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
                 : "private,no-store",
             );
           code = response.headers.get("X-App-Error") ?? code;
-          trace.getActiveSpan()?.setAttributes({
-            "http.response.status_code": response.status,
-            "error.type": code,
-          });
-          if (response.status >= 400)
-            trace.getActiveSpan()?.setStatus({ code: SpanStatusCode.ERROR });
+          const span = trace.getActiveSpan();
+          span?.setAttribute("http.response.status_code", response.status);
+          if (response.status >= 400) {
+            if (code === "NONE") code = "http_error";
+            span?.setAttributes(
+              errorAttributes(code, `HTTP ${response.status} (${code})`),
+            );
+            span?.setStatus({ code: SpanStatusCode.ERROR });
+          }
           const seconds = (performance.now() - start) / 1000;
           const outcome = response.status >= 400 ? "failed" : "success";
           requestCount.add(1, { route, method, outcome, "error.type": code });

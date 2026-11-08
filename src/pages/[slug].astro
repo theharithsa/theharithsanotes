@@ -117,7 +117,7 @@ const headings = [
         set:html={sanitizePostHtml(article.html, true)}
       />
     </div>
-    <div class="article-end">
+    <div class="article-end" data-reader-article={article.slug}>
       <a href="/blogs" class="text-link">
         Back to all articles ↗
       </a>

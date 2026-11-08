@@ -353,7 +353,10 @@ const client = ts
       },
     },
   )
-  .outputText.replace(/export \{\};?\s*$/, "");
+  .outputText.replace(
+    /^export function emitReaderEvent/m,
+    "function emitReaderEvent",
+  );
 function telemetryHarness(
   hostname,
   stored,
@@ -364,6 +367,7 @@ function telemetryHarness(
   const handlers = new Map();
   const controls = new Map();
   const requests = [];
+  const events = [];
   const banner = { hidden: true };
   const storage = new Map(stored ? [["harithsa.analytics.v1", stored]] : []);
   for (const consent of ["granted", "denied"])
@@ -374,7 +378,12 @@ function telemetryHarness(
     });
   const context = vm.createContext({
     URLSearchParams,
-    window: { addEventListener: () => {} },
+    window: {
+      addEventListener: () => {},
+      dynatrace: {
+        sendBizEvent: (type, fields) => events.push({ type, fields }),
+      },
+    },
     location: {
       hostname,
       origin: `https://${hostname}`,
@@ -403,7 +412,8 @@ function telemetryHarness(
   });
   vm.runInContext(client, context);
   handlers.get("DOMContentLoaded")();
-  return { requests, banner, controls, storage };
+  const emit = vm.runInContext("emitReaderEvent", context);
+  return { requests, banner, controls, storage, events, emit };
 }
 
 test("first visit and denied consent do not request monitoring scripts", () => {
@@ -434,6 +444,37 @@ test("private workspace and draft previews never load browser analytics", () => 
     );
     assert.equal(view.requests.length, 0);
     assert.equal(view.banner.hidden, true);
+  }
+});
+
+test("reader business events require public analytics consent", () => {
+  const fields = { "search.has_results": true };
+  const publicPage = telemetryHarness("theharithsa.com", "granted");
+  assert.equal(publicPage.emit("content.search_query", fields), true);
+  assert.equal(
+    publicPage.events[0].fields["event.authority"],
+    "browser-observed",
+  );
+  assert.equal(publicPage.events[0].fields["search.has_results"], true);
+  for (const view of [
+    telemetryHarness("theharithsa.com"),
+    telemetryHarness("theharithsa.com", "denied"),
+    telemetryHarness(
+      "theharithsa.com",
+      "granted",
+      false,
+      "/people-and-journal",
+    ),
+    telemetryHarness(
+      "theharithsa.com",
+      "granted",
+      false,
+      "/article",
+      "?preview=blogs:draft",
+    ),
+  ]) {
+    assert.equal(view.emit("content.search_query", fields), false);
+    assert.equal(view.events.length, 0);
   }
 });
 

@@ -42,6 +42,14 @@ Metrics are `journal.http.requests`, `journal.http.duration` (seconds), `journal
 
 Outbox delivery accepts only HTTP 202. A crash after acceptance and before receipt can replay the same event ID. Use distinct `event.id` when counting business outcomes. Pending/blocked rows retain their data; only delivered rows receive a 30-day TTL. Inspect queue health and actual tenant queries separately from a successful Cloud Run execution.
 
+## Weekly telemetry audit
+
+Check fields against the event or span that owns them. Application events retain dotted fields and provide the weekly report's underscore aliases when the source fields exist. Request-scoped events have a request and transaction identifier. Publish retains the stable publish operation key as its transaction identifier. Actor identifiers apply after successful authentication. Content identifiers apply to entry operations. Collection queries can carry the section without a single entry ID. Key, membership, generic HTTP and infrastructure events do not require a content ID. CI events retain actual provider execution identities and a bounded delivery stage.
+
+On application HTTP spans, check `http.route` and `http.response.status_code`. Dependency spans can have an error without an HTTP status or route. Check error messages only on failed spans. Error messages emitted by the app are bounded summaries, with raw error text and full request URLs excluded. Use an explicit release window when comparing coverage with older events.
+
+Consent-based public RUM sends `content.viewed` and `content.read_completed` for blog articles and one `content.search_query` per search overlay opening after a public results response. Reading completion means the end of the article was visible at least ten seconds after the view signal. Search events carry only a result-presence flag. Searches that can include invited posts are excluded. These events use the `harithsa-notes.reader` provider and describe browser activity.
+
 ## Trusted CI reports
 
 `.github/workflows/observability.yml` runs trusted main. Its exact workflow ref, repository, issuer, audience and event type are validated server-side. PR-triggered reporting never checks out or executes PR code. Actual GitHub API statuses and runner JUnit reports supply outcomes. Downloaded artifacts are bounded and allowlisted XML members; neither artifacts nor their contents are executed. Free-text test failures/logs are discarded. Test identities are hashed; measured case duration is retained. The event time is the workflow's observed completion time when the runner does not provide an individual case timestamp.

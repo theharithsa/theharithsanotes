@@ -16,7 +16,7 @@ import {
   namespace,
   serviceVersion,
 } from "./config.ts";
-import { CmsError, type AuditEvent } from "./models.ts";
+import { CmsError, isSection, type AuditEvent } from "./models.ts";
 
 export interface RequestContext {
   requestId: string;
@@ -87,6 +87,10 @@ export function errorCode(error: unknown): string {
   if (code.startsWith("auth/")) return "UNAUTHENTICATED";
   return "INTERNAL";
 }
+export function errorAttributes(code: string, message: string): Attributes {
+  return { "error.type": code, "error.message": message };
+}
+
 export function operationalLog(
   name: string,
   fields: Attributes,
@@ -142,7 +146,12 @@ export function auditEvent(
       "origin.service.version": serviceVersion,
       "origin.service.name":
         process.env.OTEL_SERVICE_NAME ?? "harithsa-notes-web",
-      ...(state ? { "request.id": state.requestId } : {}),
+      ...(state
+        ? {
+            "request.id": state.requestId,
+            "transaction.id": data["transaction.id"] ?? state.requestId,
+          }
+        : {}),
       ...(state?.actor ? { "actor.id": state.actor } : {}),
       ...(span
         ? {
@@ -215,7 +224,10 @@ export async function observe<T>(
       try {
         return await operation();
       } catch (error) {
-        span.setAttribute("error.type", errorCode(error));
+        const code = errorCode(error);
+        span.setAttributes(errorAttributes(code, `Operation failed (${code})`));
+        if (error instanceof CmsError && kind === SpanKind.SERVER)
+          span.setAttribute("http.response.status_code", error.status);
         span.setStatus({ code: SpanStatusCode.ERROR });
         operationalLog("operation.failed", attributes, error);
         throw error;
@@ -233,6 +245,23 @@ export async function firebaseOperation<T>(
   summarize: (value: T) => unknown = (value) => value,
 ): Promise<T> {
   const start = performance.now();
+  // These models receive structured application arguments, separate from raw input.
+  const content =
+    ["entries", "revisions", "published"].includes(model) &&
+    payload &&
+    typeof payload === "object" &&
+    "section" in payload &&
+    typeof payload.section === "string" &&
+    isSection(payload.section)
+      ? {
+          "content.section": payload.section,
+          ...("id" in payload &&
+          typeof payload.id === "string" &&
+          /^[a-zA-Z0-9_-]{1,100}$/.test(payload.id)
+            ? { "content.id": payload.id }
+            : {}),
+        }
+      : {};
   return observe(
     `firebase.${operation}`,
     {
@@ -245,6 +274,7 @@ export async function firebaseOperation<T>(
             : "gcp.firestore",
       "db.operation.name": operation,
       "db.collection.name": model,
+      ...content,
     },
     async () => {
       let outcome = "success";
@@ -272,6 +302,7 @@ export async function firebaseOperation<T>(
             {
               "firebase.operation": operation,
               "firebase.collection": model,
+              ...content,
               outcome,
               "error.type": failure,
               "duration.ms": Math.round(seconds * 1000),
@@ -306,5 +337,17 @@ export function wireEvent(
   for (const [key, value] of Object.entries(event.data))
     if (value !== null)
       fields[key] = typeof value === "string" ? value.slice(0, 2048) : value;
+  // Keep existing dotted fields for dashboards while the weekly audit uses
+  // these aliases. Only copy fields present on the source event.
+  for (const [source, alias] of [
+    ["actor.id", "actor_id"],
+    ["request.id", "request_id"],
+    ["transaction.id", "transaction_id"],
+    ["content.id", "content_id"],
+    ["content.section", "content_section"],
+    ["sdlc.execution.id", "sdlc.execution_id"],
+  ] as const) {
+    if (source in fields) fields[alias] = fields[source]!;
+  }
   return fields;
 }

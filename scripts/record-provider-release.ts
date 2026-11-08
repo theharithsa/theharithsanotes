@@ -55,6 +55,7 @@ if (input.kind === "cloud-build") {
   )
     throw Error("Build source or terminal state mismatch");
   Object.assign(data, {
+    "sdlc.stage": "build",
     "sdlc.status": build.status === "SUCCESS" ? "success" : "failure",
     "sdlc.occurred_at": build.finishTime ?? "",
     "deployment.image.digest": build.results?.images?.[0]?.digest ?? "",

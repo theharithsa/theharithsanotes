@@ -1,5 +1,6 @@
 import { SearchSession, type SearchResponse } from "../lib/search-session";
 import { revealElement } from "../lib/public-motion";
+import { emitReaderEvent } from "./telemetry";
 const node = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const dialog = node<HTMLDialogElement>("site-search");
@@ -20,6 +21,7 @@ let next: number | null = null;
 let returnFocus: HTMLElement | null = null;
 let closing: ReturnType<typeof setTimeout> | undefined;
 let leaving = false;
+let searchReported = false;
 const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 function resetResults(): void {
   results.replaceChildren();
@@ -77,6 +79,10 @@ const session = new SearchSession({
       void session.run(input.value, "");
       return;
     }
+    if (!append && !searchReported && !data.privateAvailable)
+      searchReported = emitReaderEvent("content.search_query", {
+        "search.has_results": data.total > 0,
+      });
     if (!append) results.replaceChildren();
     for (const result of data.results) {
       if (
@@ -140,6 +146,7 @@ function openSearch(trigger?: HTMLElement): void {
       ? document.activeElement
       : null);
   session.reset();
+  searchReported = false;
   input.value = "";
   scope.value = "";
   // An open search may contain invited results: opt out before rendering any.
