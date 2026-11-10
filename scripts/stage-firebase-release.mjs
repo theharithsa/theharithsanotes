@@ -166,11 +166,11 @@ const config = JSON.parse(
     "utf8",
   ),
 );
-const source = config.hosting.rewrites[0].source;
+const regex = config.hosting.rewrites[0].regex;
 config.hosting.public = "hosting";
 config.hosting.redirects = redirects;
 config.hosting.rewrites = [
-  { source, function: { functionId, region: "us-east1", pinTag: true } },
+  { regex, function: { functionId, region: "us-east1", pinTag: true } },
 ];
 config.functions = {
   source: "functions",
@@ -189,7 +189,7 @@ const hostingOnly = {
     ...config.hosting,
     rewrites: [
       {
-        source,
+        regex,
         run: {
           serviceId: functionId.toLowerCase(),
           region: "us-east1",

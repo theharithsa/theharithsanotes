@@ -6,7 +6,7 @@
     "trailingSlash": false,
     "rewrites": [
       {
-        "source": "!**/@(wp-admin|wp-content|wp-includes|wp-json|wp-login|wordpress|*.[pP][hH][pP]){,/**}",
+        "regex": "^/(([a-vx-z0-9][a-z0-9]*|w([a-oq-z0-9][a-z0-9]*)?|wp[a-z0-9]+)(-[a-z0-9]+)*|(books|projects|entertainment|gogs)/[a-z0-9-]+|podcasts/(created|listening)(/[a-z0-9-]+)?|people-and-journal/(journal|people)(/[a-z0-9-]+)?|admin/(api|invitations)|api/(cms|v1|reading|search)(/[A-Za-z0-9_-]+)*(\\.(webp|mp4|webm|mp3|m4a|ogg))?|media/[a-f0-9]{64}/(master\\.webp|400\\.webp|800\\.webp|1600\\.webp|source\\.(mp4|webm|mp3|m4a|ogg))|api/openapi\\.json|sitemap\\.xml|rss\\.xml|_image)?/?$",
         "run": {
           "serviceId": "harithsa-journal",
           "region": "us-east1",
