@@ -10,6 +10,7 @@ import {
   wireEvent,
 } from "../../src/server/telemetry.ts";
 import assert from "node:assert/strict";
+import { registerHooks } from "node:module";
 import { CmsError, type AuditEvent } from "../../src/server/models.ts";
 import { SpanKind } from "@opentelemetry/api";
 let produced: AuditEvent | undefined;
@@ -94,4 +95,40 @@ assert.equal(
   "fixture-run",
 );
 assert.equal(wireEvent(auditEvent("http.request", {})).actor_id, undefined);
+
+// Astro supplies this identity wrapper through its virtual middleware module.
+const middlewareHook = registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (specifier === "astro:middleware")
+      return {
+        url: "data:text/javascript,export const defineMiddleware = (handler) => handler",
+        shortCircuit: true,
+      };
+    return nextResolve(specifier, context);
+  },
+});
+const { onRequest } = await import("../../src/middleware.ts");
+middlewareHook.deregister();
+process.env.CMS_DATA_SOURCE = "firestore";
+process.env.CMS_AUDIT_CAPTURE = "off";
+for (const [path, status, method] of [
+  ["/missing-article", 404, "GET"],
+  ["/wp-admin/install.php", 404, "HEAD"],
+  ["/_image", 404, "GET"],
+  ["/api/v1/missing", 404, "GET"],
+  ["/broken-article", 503, "GET"],
+] as const) {
+  const url = new URL(path, "https://example.test");
+  const context = {
+    url,
+    request: new Request(url, { method }),
+    locals: {},
+  } as Parameters<typeof onRequest>[0];
+  const response = await onRequest(
+    context,
+    async () => new Response(null, { status }),
+  );
+  assert.ok(response instanceof Response);
+  assert.equal(response.status, status);
+}
 await globalThis.__harithsaTelemetry?.shutdown();

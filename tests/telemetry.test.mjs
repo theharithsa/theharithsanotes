@@ -134,6 +134,27 @@ test("binary OTLP preserves concurrent parentage, correlated logs, delta metrics
       attributes(serverSpan, 9)["error.message"],
       "Operation failed (FORBIDDEN)",
     );
+    for (const name of ["HTTP GET /_unmatched", "HTTP HEAD /_unmatched"]) {
+      const span = spans.find((row) => string(row, 5) === name);
+      assert.ok(span, name);
+      const status = messages(span, 9).find(
+        (pair) => string(pair, 1) === "http.response.status_code",
+      );
+      assert.ok(status);
+      assert.equal(Number(messages(status, 2)[0].get(3)[0]), 404);
+      assert.equal(attributes(span, 9)["error.type"], undefined);
+      assert.notEqual(Number(messages(span, 15)[0]?.get(3)?.[0]), 2);
+    }
+    for (const name of [
+      "HTTP GET /_image",
+      "HTTP GET /api/v1/unknown",
+      "HTTP GET /:article",
+    ]) {
+      const span = spans.find((row) => string(row, 5) === name);
+      assert.ok(span, name);
+      assert.equal(attributes(span, 9)["error.type"], "http_error");
+      assert.equal(Number(messages(span, 15)[0].get(3)[0]), 2);
+    }
     const delivered = spans.find(
       (span) => string(span, 5) === "probe.delivery",
     );
@@ -168,6 +189,17 @@ test("binary OTLP preserves concurrent parentage, correlated logs, delta metrics
     );
     assert.ok(counter);
     assert.equal(Number(messages(counter, 7)[0].get(2)[0]), 1);
+    const requestOutcomes = metrics
+      .filter((row) => string(row, 1) === "journal.http.requests")
+      .flatMap((row) => messages(messages(row, 7)[0], 1))
+      .map((point) => attributes(point, 7));
+    for (const method of ["GET", "HEAD"]) {
+      const misses = requestOutcomes.filter(
+        (point) => point.route === "/_unmatched" && point.method === method,
+      );
+      assert.ok(misses.length > 0);
+      assert.ok(misses.every((point) => point.outcome === "not_found"));
+    }
     const histogram = metrics.find(
       (row) => string(row, 1) === "journal.http.duration",
     );
