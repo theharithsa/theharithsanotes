@@ -22,6 +22,21 @@ import {
   requestDuration,
 } from "./server/telemetry.ts";
 
+const legacyNavigationImages = new Map([
+  [
+    "/_astro/blogs-portrait-v2.Cw4xcCge.webp",
+    "/images/navigation/blogs-portrait-v2.webp",
+  ],
+  [
+    "/_astro/books-portrait-v2.DntFic-9.webp",
+    "/images/navigation/books-portrait-v2.webp",
+  ],
+  [
+    "/_astro/podcasts-portrait-v2.cvX-Ifc2.webp",
+    "/images/navigation/podcasts-portrait-v2.webp",
+  ],
+]);
+
 const rootRoutes = new Set([
   "",
   "blogs",
@@ -42,15 +57,6 @@ const rootRoutes = new Set([
   "sitemap.xml",
   "rss.xml",
   "robots.txt",
-  "_astro",
-  "_image",
-  "brand",
-  "fonts",
-  "images",
-  "favicon.ico",
-  "favicon.svg",
-  "site.webmanifest",
-  "404",
 ]);
 function routeName(path: string): string {
   const parts = path.split("/").filter(Boolean);
@@ -101,6 +107,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
           let response: Response;
           let code = "NONE";
           try {
+            const { pathname, searchParams } = context.url;
+            const legacyImage =
+              pathname === "/_image" &&
+              (method === "GET" || method === "HEAD") &&
+              searchParams.size === 1
+                ? legacyNavigationImages.get(searchParams.get("href") ?? "")
+                : undefined;
             const preview = context.url.searchParams.get("preview");
             if (preview) {
               await authorize(context.request, true);
@@ -119,7 +132,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
               state.preview = { section, id };
               context.locals.draftPreview = true;
             }
-            response = await next();
+            response = legacyImage
+              ? new Response(null, {
+                  status: 302,
+                  headers: { Location: legacyImage },
+                })
+              : await next();
           } catch (error) {
             code = errorCode(error);
             operationalLog(
@@ -157,25 +175,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
                 : "private,no-store",
             );
           code = response.headers.get("X-App-Error") ?? code;
-          const missingArticle =
-            route === "/:article" &&
-            (method === "GET" || method === "HEAD") &&
-            response.status === 404 &&
-            !privateResponse &&
-            code === "NONE";
-          const reportedRoute = missingArticle ? "/_unmatched" : route;
-          const outcome = missingArticle
-            ? "not_found"
-            : response.status >= 400
-              ? "failed"
-              : "success";
           const span = trace.getActiveSpan();
           span?.setAttribute("http.response.status_code", response.status);
-          if (missingArticle) {
-            span?.updateName(`HTTP ${method} ${reportedRoute}`);
-            span?.setAttribute("http.route", reportedRoute);
-          }
-          if (outcome === "failed") {
+          if (response.status >= 400) {
             if (code === "NONE") code = "http_error";
             span?.setAttributes(
               errorAttributes(code, `HTTP ${response.status} (${code})`),
@@ -183,17 +185,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
             span?.setStatus({ code: SpanStatusCode.ERROR });
           }
           const seconds = (performance.now() - start) / 1000;
-          requestCount.add(1, {
-            route: reportedRoute,
-            method,
-            outcome,
-            "error.type": code,
-          });
-          requestDuration.record(seconds, {
-            route: reportedRoute,
-            method,
-            outcome,
-          });
+          const outcome = response.status >= 400 ? "failed" : "success";
+          requestCount.add(1, { route, method, outcome, "error.type": code });
+          requestDuration.record(seconds, { route, method, outcome });
           if (
             route !== "/api/cms/delivery" ||
             [401, 403].includes(response.status)
@@ -202,7 +196,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
               auditEvent(
                 "http.request",
                 {
-                  "http.route": reportedRoute,
+                  "http.route": route,
                   "http.method": method,
                   "http.status": response.status,
                   "request.payload.bytes": Number(

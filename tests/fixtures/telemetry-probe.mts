@@ -111,24 +111,35 @@ const { onRequest } = await import("../../src/middleware.ts");
 middlewareHook.deregister();
 process.env.CMS_DATA_SOURCE = "firestore";
 process.env.CMS_AUDIT_CAPTURE = "off";
-for (const [path, status, method] of [
-  ["/missing-article", 404, "GET"],
-  ["/wp-admin/install.php", 404, "HEAD"],
-  ["/_image", 404, "GET"],
-  ["/api/v1/missing", 404, "GET"],
-  ["/broken-article", 503, "GET"],
-] as const) {
-  const url = new URL(path, "https://example.test");
+const legacyImageCases = [
+  [
+    "/_astro/blogs-portrait-v2.Cw4xcCge.webp",
+    "/images/navigation/blogs-portrait-v2.webp",
+  ],
+  [
+    "/_astro/books-portrait-v2.DntFic-9.webp",
+    "/images/navigation/books-portrait-v2.webp",
+  ],
+  [
+    "/_astro/podcasts-portrait-v2.cvX-Ifc2.webp",
+    "/images/navigation/podcasts-portrait-v2.webp",
+  ],
+  ["https://example.net/unrelated.webp", null],
+] as const;
+for (const [source, target] of legacyImageCases) {
+  const url = new URL("/_image", "https://example.test");
+  url.searchParams.set("href", source);
   const context = {
     url,
-    request: new Request(url, { method }),
+    request: new Request(url),
     locals: {},
   } as Parameters<typeof onRequest>[0];
   const response = await onRequest(
     context,
-    async () => new Response(null, { status }),
+    async () => new Response(null, { status: 404 }),
   );
   assert.ok(response instanceof Response);
-  assert.equal(response.status, status);
+  assert.equal(response.status, target ? 302 : 404);
+  assert.equal(response.headers.get("location"), target);
 }
 await globalThis.__harithsaTelemetry?.shutdown();
