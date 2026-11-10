@@ -118,6 +118,8 @@ for (const entry of await readdir("dist/client", {
     }
   }
 }
+await cp("hosting/404.html", path.join(root, "hosting", "404.html"));
+hostingBytes += (await readFile("hosting/404.html")).length;
 if (hostingBytes >= 100_000_000 || artworkBytes >= 500_000_000) {
   throw new Error(
     `Deployment payload exceeds its budget: Hosting ${hostingBytes}, artwork ${artworkBytes}`,
@@ -164,10 +166,11 @@ const config = JSON.parse(
     "utf8",
   ),
 );
+const regex = config.hosting.rewrites[0].regex;
 config.hosting.public = "hosting";
 config.hosting.redirects = redirects;
 config.hosting.rewrites = [
-  { source: "**", function: { functionId, region: "us-east1", pinTag: true } },
+  { regex, function: { functionId, region: "us-east1", pinTag: true } },
 ];
 config.functions = {
   source: "functions",
@@ -186,7 +189,7 @@ const hostingOnly = {
     ...config.hosting,
     rewrites: [
       {
-        source: "**",
+        regex,
         run: {
           serviceId: functionId.toLowerCase(),
           region: "us-east1",
