@@ -6,7 +6,7 @@
     "trailingSlash": false,
     "rewrites": [
       {
-        "source": "**",
+        "source": "!**/@(wp-admin|wp-content|wp-includes|wp-json|wp-login|wordpress|*.[pP][hH][pP]){,/**}",
         "run": {
           "serviceId": "harithsa-journal",
           "region": "us-east1",
