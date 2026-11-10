@@ -22,6 +22,21 @@ import {
   requestDuration,
 } from "./server/telemetry.ts";
 
+const legacyNavigationImages = new Map([
+  [
+    "/_astro/blogs-portrait-v2.Cw4xcCge.webp",
+    "/images/navigation/blogs-portrait-v2.webp",
+  ],
+  [
+    "/_astro/books-portrait-v2.DntFic-9.webp",
+    "/images/navigation/books-portrait-v2.webp",
+  ],
+  [
+    "/_astro/podcasts-portrait-v2.cvX-Ifc2.webp",
+    "/images/navigation/podcasts-portrait-v2.webp",
+  ],
+]);
+
 const rootRoutes = new Set([
   "",
   "blogs",
@@ -92,6 +107,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
           let response: Response;
           let code = "NONE";
           try {
+            const { pathname, searchParams } = context.url;
+            const legacyImage =
+              pathname === "/_image" &&
+              (method === "GET" || method === "HEAD") &&
+              searchParams.size === 1
+                ? legacyNavigationImages.get(searchParams.get("href") ?? "")
+                : undefined;
             const preview = context.url.searchParams.get("preview");
             if (preview) {
               await authorize(context.request, true);
@@ -110,7 +132,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
               state.preview = { section, id };
               context.locals.draftPreview = true;
             }
-            response = await next();
+            response = legacyImage
+              ? new Response(null, {
+                  status: 302,
+                  headers: { Location: legacyImage },
+                })
+              : await next();
           } catch (error) {
             code = errorCode(error);
             operationalLog(
