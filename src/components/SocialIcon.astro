@@ -35,6 +35,13 @@ const { name } = Astro.props;
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </>
   )}
+  {name === "unsplash" && (
+    <path
+      d="M9 3h6v6H9zM3 10h6v5h6v-5h6v11H3z"
+      fill="currentColor"
+      stroke="none"
+    />
+  )}
   {name === "x" && <path d="M4 3h4l12 18h-4L4 3Zm16 0L4 21" />}
   {name === "medium" && (
     <>

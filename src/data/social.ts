@@ -11,6 +11,11 @@ export const socialProfiles = [
     href: "https://instagram.com/theharithsa",
     icon: "instagram",
   },
+  {
+    name: "Unsplash",
+    href: "https://unsplash.com/@harithsa",
+    icon: "unsplash",
+  },
   { name: "X", href: "https://twitter.com/theharithsa", icon: "x" },
   { name: "Medium", href: "https://medium.com/@theharithsa", icon: "medium" },
   { name: "DEV", href: "https://dev.to/theharithsa", icon: "dev" },
