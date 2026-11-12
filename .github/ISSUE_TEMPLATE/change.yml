@@ -1,6 +1,7 @@
 name: Change request
-description: Feature, maintenance, documentation or infrastructure change
+description: Maintenance, documentation or infrastructure change
 title: "[Change] "
+labels: ["type: task"]
 body:
   - type: textarea
     id: problem
