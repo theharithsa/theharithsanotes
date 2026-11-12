@@ -142,4 +142,24 @@ for (const [source, target] of legacyImageCases) {
   assert.equal(response.status, target ? 302 : 404);
   assert.equal(response.headers.get("location"), target);
 }
+const notFoundCases = [
+  "/missing-article?token=PRIVATE_PROBE_TEXT",
+  "/people-and-journal/PRIVATE_PROBE_TEXT",
+  "/_image?href=%2F_astro%2Fblogs-portrait-v2.Cw4xcCge.webp&token=PRIVATE_PROBE_TEXT",
+  "/_image?href=PRIVATE_PROBE_TEXT",
+];
+for (const path of notFoundCases) {
+  const url = new URL(path, "https://example.test");
+  const context = {
+    url,
+    request: new Request(url),
+    locals: {},
+  } as Parameters<typeof onRequest>[0];
+  const response = await onRequest(
+    context,
+    async () => new Response(null, { status: 404 }),
+  );
+  assert.ok(response instanceof Response);
+  assert.equal(response.status, 404);
+}
 await globalThis.__harithsaTelemetry?.shutdown();

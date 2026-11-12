@@ -70,6 +70,29 @@ function routeName(path: string): string {
   if (!rootRoutes.has(parts[0]!)) return "/:article";
   return `/${parts[0]}${parts.length > 1 ? "/:slug" : ""}`;
 }
+function notFoundAttributes(url: URL, route: string) {
+  const { pathname, searchParams } = url;
+  const privatePath =
+    searchParams.has("preview") ||
+    /^\/(?:api|admin|account|media|people-and-journal|search)(?:\/|$)/i.test(
+      pathname,
+    );
+  const publicPath =
+    !privatePath &&
+    pathname.length <= 160 &&
+    /^\/(?:[a-z0-9._-]{1,80}\/)*[a-z0-9._-]{0,80}$/i.test(pathname);
+  // Export the fixed public destination as an asset identifier, never the query value.
+  const href = searchParams.getAll("href");
+  const asset =
+    !privatePath && pathname === "/_image" && href.length === 1
+      ? legacyNavigationImages.get(href[0]!)
+      : undefined;
+  return {
+    "url.path": publicPath ? pathname : route,
+    ...(asset ? { "app.image.asset": asset } : {}),
+  };
+}
+
 export const onRequest = defineMiddleware(async (context, next) => {
   if (!firestoreEnabled()) return next();
   const state = {
@@ -183,6 +206,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
               errorAttributes(code, `HTTP ${response.status} (${code})`),
             );
             span?.setStatus({ code: SpanStatusCode.ERROR });
+          }
+          if (response.status === 404) {
+            const target = notFoundAttributes(context.url, route);
+            span?.setAttributes(target);
+            operationalLog("http.request_not_found", {
+              ...target,
+              "http.route": route,
+              "http.request.method": method,
+              "http.response.status_code": response.status,
+              "request.id": state.requestId,
+              "error.type": code,
+            });
           }
           const seconds = (performance.now() - start) / 1000;
           const outcome = response.status >= 400 ? "failed" : "success";

@@ -63,3 +63,14 @@ Local checks independently decode emitted OTLP protobuf and verify two concurren
 The actual tenant independently returned the development milestone, publication/Firebase/HTTP events, native server spans and Firestore children, correlated live logs, request metrics, final Cloud Build/Hosting records and trusted GitHub workflow/test/merge records. See [release evidence](cms-release-1.12.0.md) for source identities and limits. OTLP HTTP acceptance and provider success remain separate from tenant searchability; no native RUM-to-server linkage is claimed.
 
 Browser inspection reached the hosted Google account chooser but Windows browser control stopped before the owner selection completed. The interactive owner sign-in/editor flow remains explicitly unverified until a browser check completes; emulator authorization tests are separate evidence.
+
+### Investigating application 404s
+
+Filter server spans by `http.response.status_code == 404` and group by
+`url.path` and `app.image.asset`. The correlated OTLP log is
+`http.request_not_found`. Public paths use a bounded ASCII path format.
+Private routes, preview requests, and paths outside that format use their route
+template. For `/_image`, the asset field is a fixed public identifier for the
+three known legacy targets. No raw query, host, fragment, or request headers
+are included in these fields. Firebase Hosting responses served before the
+function do not pass through this instrumentation.
