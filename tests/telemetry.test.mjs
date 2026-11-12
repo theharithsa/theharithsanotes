@@ -47,7 +47,7 @@ function attributes(parent, key) {
   return Object.fromEntries(
     messages(parent, key).map((pair) => [
       string(pair, 1),
-      string(messages(pair, 2)[0], 1),
+      string(messages(pair, 2)[0], 1) ?? messages(pair, 2)[0].get(3)?.[0],
     ]),
   );
 }
@@ -162,6 +162,45 @@ test("binary OTLP preserves concurrent parentage, correlated logs, delta metrics
       assert.ok(log);
       assert.deepEqual(log.get(9)[0], child.get(1)[0]);
       assert.deepEqual(log.get(10)[0], child.get(2)[0]);
+    }
+    const missing = spans.filter(
+      (span) =>
+        Number(attributes(span, 9)["http.response.status_code"]) === 404,
+    );
+    assert.equal(missing.length, 5);
+    assert.deepEqual(
+      missing.map((span) => attributes(span, 9)["url.path"]).sort(),
+      [
+        "/_image",
+        "/_image",
+        "/_image",
+        "/missing-article",
+        "/people-and-journal/:slug",
+      ],
+    );
+    const knownAsset = missing.filter(
+      (span) => attributes(span, 9)["app.image.asset"] !== undefined,
+    );
+    assert.equal(knownAsset.length, 1);
+    assert.equal(
+      attributes(knownAsset[0], 9)["app.image.asset"],
+      "/images/navigation/blogs-portrait-v2.webp",
+    );
+    for (const span of missing) {
+      const attrs = attributes(span, 9);
+      const log = logs.find(
+        (row) => attributes(row, 6)["request.id"] === attrs["request.id"],
+      );
+      assert.ok(log);
+      assert.deepEqual(log.get(9)[0], span.get(1)[0]);
+      assert.deepEqual(log.get(10)[0], span.get(2)[0]);
+      assert.equal(attributes(log, 6)["url.path"], attrs["url.path"]);
+      assert.equal(
+        attributes(log, 6)["app.image.asset"],
+        attrs["app.image.asset"],
+      );
+      assert.equal(attrs["url.query"], undefined);
+      assert.equal(attributes(log, 6)["url.query"], undefined);
     }
     const counter = metrics.find(
       (row) => string(row, 1) === "journal.http.requests",
