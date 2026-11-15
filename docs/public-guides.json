@@ -1,0 +1,184 @@
+{
+  "project": "The Harithsa Notes",
+  "guides": {
+    "product": {
+      "intro": "The Harithsa Notes is Vishruth Harithsa’s personal editorial site.",
+      "sections": [
+        [
+          "Explore the site",
+          "Read articles, browse books and projects, or explore podcasts and the photo gallery."
+        ],
+        [
+          "Read People and Journal",
+          "Sign in with the Google account that received an invitation. Contact the site owner if that account cannot open the reading room."
+        ],
+        [
+          "Publish a note",
+          "In Workspace, choose a collection, edit a draft, preview it, then publish when it is ready."
+        ]
+      ],
+      "links": [
+        [
+          "Live site",
+          "https://theharithsanotes.com/"
+        ],
+        [
+          "Roadmap",
+          "roadmap.html"
+        ],
+        [
+          "Release history",
+          "releases.html"
+        ]
+      ]
+    },
+    "technical": {
+      "intro": "Astro and TypeScript power the site, with Firebase services behind the live application.",
+      "sections": [
+        [
+          "Request flow",
+          "Firebase Hosting serves public assets and routes dynamic requests to a Firebase HTTP function. Firestore stores drafts and published entries. Firebase Storage serves public artwork and holds protected media."
+        ],
+        [
+          "Access and API",
+          "Firebase Authentication identifies readers. The application enforces invitations and scoped Content API access."
+        ],
+        [
+          "Observability",
+          "The application sends operational telemetry to Dynatrace. Its 404 reporting includes safe request paths and omits raw query strings."
+        ]
+      ],
+      "links": [
+        [
+          "Content API reference",
+          "https://theharithsanotes.com/api/openapi.json"
+        ]
+      ]
+    },
+    "settings": {
+      "intro": "Reader preferences and publishing access apply at different scopes.",
+      "sections": [
+        [
+          "Appearance",
+          "The site follows the system theme by default. A reader can switch themes in the header. The preference takes effect immediately and is saved in that browser."
+        ],
+        [
+          "Analytics consent",
+          "Optional analytics start disabled until the visitor opts in. Consent is stored in the browser."
+        ],
+        [
+          "Invitations",
+          "People and Journal requires an invitation and sign-in. Workspace access is limited to the site administrator."
+        ]
+      ]
+    },
+    "sdlc": {
+      "intro": "Each change is tracked from a GitHub issue through release verification.",
+      "sections": [
+        [
+          "Plan and review",
+          "Link a pull request to its issue and milestone. Record the documentation impact. The Foundation and Website checks are required on the default branch."
+        ],
+        [
+          "Release and verify",
+          "Use Firebase preview when isolated acceptance testing is needed. Verify the deployed runtime and public pages after a production release."
+        ]
+      ],
+      "links": [
+        [
+          "GitHub Project",
+          "https://github.com/users/theharithsa/projects/2"
+        ]
+      ]
+    },
+    "pipeline": {
+      "intro": "The application and documentation have separate publication steps.",
+      "sections": [
+        [
+          "If publication fails",
+          "Inspect the Pages run, correct the failing stage, and verify the published source revision before reporting success."
+        ]
+      ],
+      "stages": [
+        [
+          "PR checks",
+          "Validate project structure, documentation, the Website build and tests."
+        ],
+        [
+          "Merge",
+          "Merge the reviewed PR into main after required checks."
+        ],
+        [
+          "Publish",
+          "GitHub Actions publishes the curated docs artifact to Pages. Firebase application releases follow the Firebase release procedure."
+        ],
+        [
+          "Verify",
+          "Check the public guide URLs and published source revision."
+        ]
+      ]
+    },
+    "roadmap": {
+      "intro": "Follow shipped features and planned work in the public GitHub Project.",
+      "sections": [
+        [
+          "Available now",
+          "Readers can browse the editorial site. Invited readers can open People and Journal, and the author can draft and publish entries."
+        ],
+        [
+          "Sprint 2 · Nov 30–Dec 13, 2026",
+          "Review the queued dependency updates, confirm compatibility and run required checks before release."
+        ]
+      ],
+      "links": [
+        [
+          "Project roadmap",
+          "https://github.com/users/theharithsa/projects/2/views/4"
+        ]
+      ]
+    },
+    "releases": {
+      "intro": "Production updates and tagged releases have separate evidence.",
+      "sections": [
+        [
+          "Nov 12, 2026 · Production",
+          "Added Unsplash and Facebook links to the footer and verified safe 404 telemetry in production."
+        ],
+        [
+          "Published versions",
+          "The version links below point to GitHub Releases. The changelog includes additional implementation history."
+        ]
+      ],
+      "links": [
+        [
+          "Version 1.22.1",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.1"
+        ],
+        [
+          "Version 1.22.0",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.0"
+        ],
+        [
+          "Version 1.21.1",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.1"
+        ],
+        [
+          "Version 1.21.0",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.0"
+        ],
+        [
+          "Version 1.13.1",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.13.1"
+        ],
+        [
+          "Version 1.12.0",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.12.0"
+        ],
+        [
+          "Changelog",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/CHANGELOG.md"
+        ]
+      ]
+    }
+  }
+}
