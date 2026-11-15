@@ -8,6 +8,10 @@ CMS tests cover malicious HTML/URLs/nesting, reserved slugs, payload exclusion, 
 
 Hosted preview health, anonymous denial, private no-store/noindex shell, public SSR archive, responsive media and the image endpoint returned expected responses. Independent tenant DQL found a real preview HTTP root and its Firestore children. Google owner selection could not complete because Windows browser control stopped; this is an explicit UI verification gap, not a passed login test. Final source/production/tenant receipts belong in the release evidence and continuations.
 
+## Public product documentation
+
+Run `python scripts/build_public_docs.py` for the curated build and relative-link checks. For a visual review, build to an empty `dist/public-docs` directory and serve it locally. After Pages publishes, confirm the `source-revision` metadata matches the merged commit. Open the landing page and every guide at desktop and phone widths, check that the screenshots load, play the demo, and follow the live site and article links. Keep Pages verification separate from Firebase release evidence.
+
 ## Earlier validation history
 
 # Website and foundation checks

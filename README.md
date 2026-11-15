@@ -2,7 +2,11 @@
 
 The Harithsa Notes is Vishruth Harithsa’s personal editorial site for readers interested in technology, books, projects, and life outside work. [Read the live site](https://theharithsanotes.com/), follow the [public roadmap](docs/public/roadmap.md), or browse the [release history](docs/public/releases.md).
 
-[Read the public documentation](https://theharithsa.github.io/theharithsanotes/).
+[Explore the product and public guides](https://theharithsa.github.io/theharithsanotes/) · [Watch the 20-second product tour](https://theharithsa.github.io/theharithsanotes/#tour).
+
+![The Harithsa Notes home page and illustrated notebook landscape](site/media/home.webp)
+
+![The Blog archive with topic filters, tag selector and a year rail](site/media/blog.webp)
 
 Template version: **1.9.0**. Repository-local app-launchpad guidance: **1.14.0**.
 
