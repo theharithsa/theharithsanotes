@@ -2,7 +2,7 @@
 
 The Harithsa Notes is Vishruth Harithsa’s personal editorial site for readers interested in technology, books, projects, and life outside work. [Read the live site](https://theharithsanotes.com/), follow the [public roadmap](docs/public/roadmap.md), or browse the [release history](docs/public/releases.md).
 
-Template version: **1.9.0**. Repository-local app-launchpad guidance: **1.13.2**.
+Template version: **1.9.0**. Repository-local app-launchpad guidance: **1.14.0**.
 
 ## Run locally
 
@@ -36,6 +36,6 @@ Firebase Hosting routes dynamic requests to the Firebase HTTP function in US Eas
 
 See [observability](docs/observability.md), [decisions](docs/decisions.md), [testing](docs/testing.md), and [release plan](docs/release-plan.md). Firebase Analytics uses the supplied public config. Dynatrace credentials are supplied to the runtime through server-side secrets.
 
-The repository was generated from `theharithsa/app-launchpad-template` v1.9.0, revision `f04c042a9e000f606982863518fa7bb9cfbb7d85`. The local skills were refreshed from template revision `87a9124c09e83d7d67db2de4a6469e708b37200a`. The inherited root LICENSE covers template material. Article content and new application assets remain the authorâ€™s; no additional open-source license is granted by this project.
+The repository was generated from `theharithsa/app-launchpad-template` v1.9.0, revision `f04c042a9e000f606982863518fa7bb9cfbb7d85`. The local skills were refreshed from template revision `c715f0a04e1fa523aa8aed240e54e70c3f751eed`. The inherited root LICENSE covers template material. Article content and new application assets remain the authorâ€™s; no additional open-source license is granted by this project.
 
 Typography: Source Serif 4 and Public Sans for editorial pages, and JetBrains Mono for technical content. The approved Margin wordmark uses path artwork derived from Bodoni Moda with an original bookmark h; no logo font download is required. See the [brand system and export kit](docs/brand-system.md). Font licences remain in LICENSES. Promotional film/series images retain their respective rights-holder ownership; sources are in docs/screen-media.json.
