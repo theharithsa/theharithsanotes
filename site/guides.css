@@ -1,14 +1,24 @@
-.guide {
-  max-width: 72ch;
-  padding-block: clamp(2rem, 7vw, 5rem);
-  overflow-wrap: anywhere;
-}
-
-.guide h1 { font-size: clamp(2.5rem, 6vw, 4.75rem); }
-.guide h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: .65rem; }
-.guide section { margin-block: 2rem; line-height: 1.6; }
-.guide .lead { max-width: 58ch; }
-.pipeline { border-inline-start: 2px solid #7663a2; margin: 0; padding-inline-start: 1.75rem; }
-.pipeline li { padding: .5rem 0 .85rem .25rem; }
+.guide-layout { display: grid; grid-template-columns: 13rem minmax(0, 48rem); align-items: start; gap: clamp(1.5rem, 6vw, 5rem); padding-block: 2rem 4rem; }
+.guide-nav { position: sticky; top: 1.4rem; }
+.guide-nav h2 { font: 700 .8rem/1.4 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .12em; margin: 0 0 .5rem; }
+.guide-nav a { display: block; border-inline-start: 2px solid var(--line); padding: .35rem .65rem; }
+.guide-nav a[aria-current="page"] { border-color: var(--accent); background: var(--cream); font-weight: 700; }
+.guide { min-width: 0; overflow-wrap: anywhere; }
+.guide h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
+.guide h2 { font-size: clamp(1.45rem, 4vw, 2.15rem); }
+.guide section { margin-top: 2.3rem; padding-top: 1.35rem; border-top: 1px solid var(--line); }
+.guide li { margin-bottom: .45rem; }
+.guide code { background: var(--sage); padding-inline: .2em; }
+.guide figure { margin-block: 1.5rem; }
+.pipeline { border-inline-start: 2px solid var(--accent); margin: 0; padding-inline-start: 1.8rem; }
+.pipeline li { padding: .4rem 0 .65rem .2rem; }
 .pipeline span { display: block; }
-nav a[aria-current="page"] { color: #514089; font-weight: 700; }
+.roadmap-flow { display: grid; gap: .5rem; padding: 0; list-style: none; }
+.roadmap-flow li { position: relative; padding: .7rem 1rem; border: 1px solid var(--line); background: var(--sage); }
+.roadmap-flow li + li::before { content: "↓"; position: absolute; top: -1rem; right: 1rem; color: var(--accent); font-weight: bold; }
+@media (max-width: 50rem) {
+  .guide-layout { grid-template-columns: minmax(0, 1fr); }
+  .guide-nav { position: static; display: flex; flex-wrap: wrap; gap: .3rem .5rem; }
+  .guide-nav h2 { flex-basis: 100%; }
+  .guide-nav a { padding: .15rem .45rem; }
+}

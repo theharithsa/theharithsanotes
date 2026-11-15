@@ -3,27 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Harithsa Notes documentation</title>
+  <meta name="description" content="Explore the public notebook and learn how The Harithsa Notes is published and maintained.">
+  <title>The Harithsa Notes · Product and guides</title>
+  <link rel="icon" href="media/icon.png">
   <link rel="stylesheet" href="landing.css">
-  <link rel="stylesheet" href="guides.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="wrap header"><a class="brand" href="./">The Harithsa Notes</a><a href="https://theharithsanotes.com/">Read the site</a></header>
-  <main id="main" class="wrap guide">
-    <h1>Documentation</h1>
-    <p class="lead">Read the guides for browsing, publishing, and maintaining The Harithsa Notes.</p>
-    <nav aria-label="Guides">
-      <ul>
-        <li><a href="docs/product.html">Product handbook</a></li>
-        <li><a href="docs/technical.html">Technical guide</a></li>
-        <li><a href="docs/settings.html">Settings reference</a></li>
-        <li><a href="docs/sdlc.html">SDLC guide</a></li>
-        <li><a href="docs/pipeline.html">CI/CD pipeline</a></li>
-        <li><a href="docs/roadmap.html">Roadmap</a></li>
-        <li><a href="docs/releases.html">Release history</a></li>
-      </ul>
-    </nav>
+  <header class="wrap header">
+    <a href="./" class="brand"><img src="media/wordmark.webp" alt="The Harithsa Notes" width="210" height="58"></a>
+    <nav aria-label="Main navigation"><a href="#tour">Demo</a><a href="#guides">Guides</a><a href="https://github.com/theharithsa/theharithsanotes">GitHub</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <p class="eyebrow">Product &amp; documentation</p>
+          <h1>A curious mind.<br><em>An open notebook.</em></h1>
+          <p class="lead">Vishruth Harithsa’s personal site brings together writing on technology, notes on books and podcasts, projects, and photography.</p>
+          <div class="actions"><a class="button" href="https://theharithsanotes.com/">Read the live site</a><a href="docs/product.html">Open the handbook</a></div>
+        </div>
+        <figure class="hero-shot">
+          <img src="media/home.webp" width="1600" height="810" alt="The home page with an illustrated notebook landscape and the heading So much to be curious about">
+          <figcaption>The public home page</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section id="tour" class="wrap section tour">
+      <div>
+        <p class="eyebrow">Product demo</p>
+        <h2>From a search to a story</h2>
+        <p>Open site search, look up <em>cloud cost</em>, and follow a suggestion to the published article.</p>
+        <a href="https://theharithsanotes.com/know-your-cloud-cost-per-user-before-you-build">Read the article in the demo</a>
+      </div>
+      <figure>
+        <video controls playsinline preload="metadata" poster="media/demo-poster.jpg" width="1280" height="720" aria-label="Search for an article on The Harithsa Notes">
+          <source src="media/demo.mp4" type="video/mp4">
+          <track kind="captions" srclang="en" label="English" src="media/demo.vtt">
+          <a href="media/demo.mp4">Download the demo</a>
+        </video>
+        <figcaption>20-second tour with on-screen instructions and optional English captions.</figcaption>
+      </figure>
+    </section>
+    <section class="screens">
+      <div class="wrap section">
+        <h2>Inside the notebook</h2>
+        <div class="gallery">
+          <figure><a href="media/blog.webp"><img src="media/blog.webp" alt="Blog archive showing topic filters, a tag dropdown, and the year rail beside article cards" width="1600" height="810" loading="lazy"></a><figcaption>Find articles by topic, tag, or publication date.</figcaption></figure>
+          <figure><a href="media/search.webp"><img src="media/search.webp" alt="Site search overlay with cloud cost typed and matching articles listed" width="1600" height="810" loading="lazy"></a><figcaption>Search across the notebook without leaving the current page.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+    <section id="guides" class="wrap section">
+      <h2>Choose a guide</h2>
+      <div class="guide-cards">
+        <a href="docs/product.html"><strong>Product handbook</strong><span>Browse the site, open the private reading room, or publish a post.</span></a>
+        <a href="docs/technical.html"><strong>Technical guide</strong><span>Follow a request through Firebase and run the app locally.</span></a>
+        <a href="docs/settings.html"><strong>Settings reference</strong><span>Find appearance, cookie, invitation, and API key settings.</span></a>
+        <a href="docs/sdlc.html"><strong>SDLC guide</strong><span>Take an issue through review, release, and recovery.</span></a>
+        <a href="docs/pipeline.html"><strong>CI/CD pipeline</strong><span>See which checks run and how Pages and Firebase ship.</span></a>
+        <a href="docs/roadmap.html"><strong>Roadmap</strong><span>See what readers can use today and what’s planned.</span></a>
+        <a href="docs/releases.html"><strong>Release history</strong><span>Find published versions and verified production updates.</span></a>
+      </div>
+    </section>
   </main>
+  <footer class="wrap footer"><a href="https://theharithsanotes.com/">The Harithsa Notes</a><a href="https://github.com/theharithsa/theharithsanotes/issues">Report a docs issue</a></footer>
 </body>
 </html>

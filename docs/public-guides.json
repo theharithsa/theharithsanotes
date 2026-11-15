@@ -2,25 +2,72 @@
   "project": "The Harithsa Notes",
   "guides": {
     "product": {
-      "intro": "The Harithsa Notes is Vishruth Harithsa’s personal editorial site.",
+      "intro": "Find something to read, open the invitation-only notebook, or learn how a new post becomes visible to readers.",
       "sections": [
         [
-          "Explore the site",
-          "Read articles, browse books and projects, or explore podcasts and the photo gallery."
+          "Find a story",
+          [
+            "Open Blog and choose a topic or a tag. The archive lets you jump by year and month. Books has genre and rating filters, and Projects can be filtered by topic.",
+            "The header search opens a dialog over the current page. Type a few words and choose a result. The demo uses “cloud cost” to find an article."
+          ],
+          [
+            "Open Search in the header.",
+            "Type cloud cost and wait for suggestions.",
+            "Select Know Your Cloud Cost per User Before You Build. Use All articles to return to the archive."
+          ]
         ],
         [
-          "Read People and Journal",
-          "Sign in with the Google account that received an invitation. Contact the site owner if that account cannot open the reading room."
+          "Open People and Journal",
+          [
+            "People and Journal is an editorial reading room with two collections. A Google sign-in is required and the site owner must have invited the account. An invitation gives reading access to published posts and their protected images."
+          ],
+          [
+            "Open People and Journal and sign in with the invited Google address.",
+            "Choose Journal or People and select a post from that collection.",
+            "If access is denied, check which Google account you used and ask the site owner to verify the invitation and expiry."
+          ]
         ],
         [
-          "Publish a note",
-          "In Workspace, choose a collection, edit a draft, preview it, then publish when it is ready."
+          "Draft and publish in Workspace",
+          [
+            "Workspace is restricted to the site owner. Write includes Blog, Books, Projects, Podcasts, Entertainment, Photos, GoGs, Pages, Tags, Journal, and People.",
+            "Publishing a Journal or People post makes it available to valid invited readers. Publishing a Blog post makes it public."
+          ],
+          [
+            "Choose the collection under Write and open or create an entry.",
+            "Fill in the required properties. For an article, add its title, date, cover and descriptive alt text, then write the body. Wait for the draft to save.",
+            "Open Preview and read the saved draft. Check links, media and captions, including on a narrow screen.",
+            "Click Publish and check the result in the appropriate reader view. Allow up to roughly 30 seconds for a public result to refresh."
+          ]
+        ],
+        [
+          "Correct a published entry",
+          [
+            "Open the entry and save your changes as a draft. Publish again to apply them. History restores a saved revision as a new draft for review. Unpublish removes eligible entries from their reader view while preserving revision history.",
+            "If a newer edit conflicts with yours, download your unsaved copy before reloading and compare it with the latest saved draft. Upload JPEG, PNG, or WebP images up to 8 MiB and check the preview after upload."
+          ]
         ]
       ],
       "links": [
         [
-          "Live site",
-          "https://theharithsanotes.com/"
+          "Live Blog",
+          "https://theharithsanotes.com/blogs"
+        ],
+        [
+          "People and Journal",
+          "https://theharithsanotes.com/people-and-journal"
+        ],
+        [
+          "Workspace",
+          "https://theharithsanotes.com/admin"
+        ],
+        [
+          "Demo",
+          "../#tour"
+        ],
+        [
+          "Settings reference",
+          "settings.html"
         ],
         [
           "Roadmap",
@@ -33,150 +80,352 @@
       ]
     },
     "technical": {
-      "intro": "Astro and TypeScript power the site, with Firebase services behind the live application.",
+      "intro": "The public notebook and the publishing workspace share an Astro and TypeScript application. GitHub Pages builds this documentation as a separate static site.",
       "sections": [
         [
-          "Request flow",
-          "Firebase Hosting serves public assets and routes dynamic requests to a Firebase HTTP function. Firestore stores drafts and published entries. Firebase Storage serves public artwork and holds protected media."
+          "Follow a request",
+          [
+            "Firebase Hosting serves the versioned web assets. Supported application routes are rewritten to a pinned second-generation Firebase HTTP Function. The Astro server renders public pages from the published content projection and handles search, publishing, and content API requests.",
+            "Firestore holds drafts, immutable revisions, published projections, invitations and the publication audit outbox. Firebase Storage holds public artwork and uploaded media. The application authorizes protected files before serving them."
+          ]
         ],
         [
-          "Access and API",
-          "Firebase Authentication identifies readers. The application enforces invitations and scoped Content API access."
+          "Separate public and invited content",
+          [
+            "Firebase Auth verifies Google identity. The application authorizes workspace operations for the site owner and reader access for active invitees. Private posts and their media are excluded from public feeds, sitemaps and snapshots. Preview uses a separate data namespace for acceptance tests."
+          ]
         ],
         [
-          "Observability",
-          "The application sends operational telemetry to Dynatrace. Its 404 reporting includes safe request paths and omits raw query strings."
+          "Integrate through the Content API",
+          [
+            "Use the versioned /api/v1 endpoints with a collection-scoped Bearer key from Developer Settings. OpenAPI and Swagger show per-collection schemas, media operations, revision checks and publish actions."
+          ],
+          [
+            "If needed, upload media with multipart POST /api/v1/media and keep the returned URL.",
+            "Create a draft under /api/v1/entries/{collection}. Read the current draft before replacing its complete data with PUT and expectedRevision.",
+            "Publish the saved revision with the publish endpoint and an Idempotency-Key. Reuse that key when retrying the same publish action. A stale revision returns HTTP 409."
+          ]
+        ],
+        [
+          "Run locally",
+          [
+            "Use Node.js 24 and Python 3.12. In a checkout, run npm ci, then npm run dev and open http://127.0.0.1:4321. Local public pages use checked-in content snapshots. For CMS checks, install Java 21 for the Firebase emulator and use the test workflow with fictional data."
+          ],
+          [
+            "Run npm run check, npm run build and npm test for the public app.",
+            "Run npm run test:cms for Firebase-backed contract tests.",
+            "Run python scripts/build_public_docs.py to validate the Pages build and its relative links."
+          ]
+        ],
+        [
+          "Observe the app",
+          [
+            "Dynatrace receives operational telemetry from the runtime. Publication writes include an audit event in the same transaction. Request diagnostics use safe fields. Browser analytics are opt-in on public pages and stay disabled in the private reading room and Workspace."
+          ]
         ]
       ],
       "links": [
         [
-          "Content API reference",
+          "Swagger",
+          "https://theharithsanotes.com/admin/api"
+        ],
+        [
+          "OpenAPI JSON",
           "https://theharithsanotes.com/api/openapi.json"
+        ],
+        [
+          "API guide",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/docs/content-api.md"
+        ],
+        [
+          "Emulator and test instructions",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/docs/testing.md"
         ]
       ]
     },
     "settings": {
-      "intro": "Reader preferences and publishing access apply at different scopes.",
+      "intro": "Use the public header and footer for browser preferences, and Workspace for publishing and access settings.",
       "sections": [
         [
-          "Appearance",
-          "The site follows the system theme by default. A reader can switch themes in the header. The preference takes effect immediately and is saved in that browser."
+          "Theme · public header",
+          [
+            "Anyone can use the theme toggle. With no saved choice, it follows the system appearance. The change takes effect immediately and the choice is saved in that browser."
+          ]
         ],
         [
-          "Analytics consent",
-          "Optional analytics start disabled until the visitor opts in. Consent is stored in the browser."
+          "Analytics · footer Cookie settings",
+          [
+            "Optional analytics start disabled until a visitor opts in. The visitor can revisit the setting in the footer. The preference is browser-specific. Private reading and Workspace keep browser analytics disabled."
+          ]
         ],
         [
-          "Invitations",
-          "People and Journal requires an invitation and sign-in. Workspace access is limited to the site administrator."
-        ]
-      ]
-    },
-    "sdlc": {
-      "intro": "Each change is tracked from a GitHub issue through release verification.",
-      "sections": [
-        [
-          "Plan and review",
-          "Link a pull request to its issue and milestone. Record the documentation impact. The Foundation and Website checks are required on the default branch."
+          "Invitations · Workspace → Invited readers",
+          [
+            "The site owner can invite a verified Google address for 1–365 days, with 90 days selected by default. Share the reading-room link separately. Workspace does not send the invitation by email. Renew or revoke access in the same screen. The current membership is checked on subsequent protected requests."
+          ]
         ],
         [
-          "Release and verify",
-          "Use Firebase preview when isolated acceptance testing is needed. Verify the deployed runtime and public pages after a production release."
+          "API keys · Workspace → Developer Settings",
+          [
+            "Only the site owner issues and revokes keys. Choose the environment, collections, scopes and lifetime. The default lifetime is 90 days and Publish is unchecked initially. Journal and People must be explicitly selected when needed.",
+            "Copy the full key when it is displayed. Store it in your integration’s secret store. Revocation and expiry are enforced on subsequent requests."
+          ]
+        ],
+        [
+          "Publication · Workspace → Write",
+          [
+            "Draft changes are private until Publish is selected. Preview reads the saved draft. History restores into a new draft. Older public artwork may remain accessible or cached after unpublishing, so keep sensitive artwork in private collections from the first upload."
+          ]
         ]
       ],
       "links": [
         [
+          "Privacy policy",
+          "https://theharithsanotes.com/privacy"
+        ],
+        [
+          "Product handbook",
+          "product.html"
+        ],
+        [
+          "API guide",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/docs/content-api.md"
+        ]
+      ]
+    },
+    "sdlc": {
+      "intro": "Changes are tracked in GitHub and delivered through a protected main branch. Application and documentation deployments have separate verification records.",
+      "sections": [
+        [
+          "Intake and sprint planning",
+          [
+            "Open a bug, feature or task using the issue forms. Add expected behavior, scope and acceptance checks. Use the project views for milestone, sprint, status and roadmap. Give the issue and implementation PR the same milestone when the work is planned."
+          ]
+        ],
+        [
+          "Develop and review",
+          [
+            "Create a short-lived branch from main and open an issue-linked PR. State the documentation impact and link the changed guide or explain why the existing guides still apply. Attach check results and concise evidence. Use synthetic fixtures for access and publishing tests.",
+            "Foundation and Website are required on main. The solo-maintainer rules require a PR and zero independent approvals. Wait for the checks on the candidate, then merge through GitHub."
+          ]
+        ],
+        [
+          "Promote changes",
+          [
+            "Use an isolated Firebase preview when a runtime change needs acceptance tests. Verify the intended revision, access controls, and public reads before promoting it. Documentation changes publish from the default branch through the Pages workflow.",
+            "Record the source SHA, workflow or release evidence, and verified URLs. Close the issue after its acceptance checks pass."
+          ]
+        ],
+        [
+          "Recover a release",
+          [
+            "For Pages, correct the change or revert it through a PR, then verify the published revision. For the application, use a compatible previous Hosting and Function pair or roll forward. Retest anonymous denial, invited access and publishing with synthetic preview data before promoting the recovery. Preserve memberships, revocations, immutable revisions, media classifications and pending events."
+          ]
+        ]
+      ],
+      "links": [
+        [
+          "Issue forms",
+          "https://github.com/theharithsa/theharithsanotes/issues/new/choose"
+        ],
+        [
           "GitHub Project",
           "https://github.com/users/theharithsa/projects/2"
+        ],
+        [
+          "Contribution guide",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/CONTRIBUTING.md"
+        ],
+        [
+          "Private vulnerability reporting",
+          "https://github.com/theharithsa/theharithsanotes/security/advisories/new"
+        ],
+        [
+          "CI/CD pipeline",
+          "pipeline.html"
         ]
       ]
     },
     "pipeline": {
-      "intro": "The application and documentation have separate publication steps.",
+      "intro": "GitHub Actions checks each PR. Pages publishes the curated documentation artifact. Firebase application releases follow the separate staging and promotion runbook.",
       "sections": [
         [
-          "If publication fails",
-          "Inspect the Pages run, correct the failing stage, and verify the published source revision before reporting success."
+          "Read the gates",
+          [
+            "Foundation runs on PR changes, including PR body edits, and on pushes to main. It checks the repository foundation, local links, the public docs build, foundation tests, and the PR documentation decision.",
+            "Website runs on PRs and pushes to main. It installs locked dependencies and runs Astro checks, the site build, site tests, emulator-backed CMS tests, the server build, and a high-severity dependency audit."
+          ]
+        ],
+        [
+          "Diagnose a failed publication",
+          [
+            "Open the matching workflow run and compare its commit with the intended release. If Package failed, review the generator’s missing path or anchor message. If Publish failed after a green Package, check the Pages environment and Actions deployment result. Fix the failing step and verify the new Pages revision and links independently.",
+            "For a Firebase release, check the preview or live Hosting release and its pinned Function revision individually. Confirm the public article, content schema and anonymous reader gate on the expected domain."
+          ]
         ]
       ],
       "stages": [
         [
-          "PR checks",
-          "Validate project structure, documentation, the Website build and tests."
+          "PR · validate the candidate",
+          "Foundation and Website must pass. For changes to the public site inputs, Publish product site also builds and uploads a curated preview artifact."
         ],
         [
-          "Merge",
-          "Merge the reviewed PR into main after required checks."
+          "Merge · preserve the checked revision",
+          "Merge the reviewed PR into protected main. The workflow builds a new artifact from the merged revision."
         ],
         [
-          "Publish",
-          "GitHub Actions publishes the curated docs artifact to Pages. Firebase application releases follow the Firebase release procedure."
+          "Pages · package then publish",
+          "Matching pushes and authorized manual runs build the static artifact. The publish job needs the package and uses Pages and OIDC permissions only on the default branch when Pages is enabled."
         ],
         [
-          "Verify",
-          "Check the public guide URLs and published source revision."
+          "Firebase · stage, preview, promote",
+          "For runtime changes, stage from a full reviewed SHA, test the isolated preview, deploy the managed Function, and publish the Hosting configuration pinned to that revision. A docs-only merge does not run a Firebase deploy."
+        ],
+        [
+          "Verify · record evidence",
+          "Check Pages source-revision, guide and media links, desktop and phone layouts, and demo playback. For a runtime release, also verify the Firebase revision and applicable public, authentication, API and telemetry paths."
+        ]
+      ],
+      "links": [
+        [
+          "Foundation checks",
+          "https://github.com/theharithsa/theharithsanotes/actions/workflows/foundation.yml"
+        ],
+        [
+          "Website checks",
+          "https://github.com/theharithsa/theharithsanotes/actions/workflows/website.yml"
+        ],
+        [
+          "Pages publication",
+          "https://github.com/theharithsa/theharithsanotes/actions/workflows/product-pages.yml"
+        ],
+        [
+          "Firebase release procedure",
+          "https://github.com/theharithsa/theharithsanotes/blob/main/docs/firebase-only-migration.md"
         ]
       ]
     },
     "roadmap": {
-      "intro": "Follow shipped features and planned work in the public GitHub Project.",
+      "intro": "Follow what readers can use today and what the project has scheduled next.",
       "sections": [
         [
-          "Available now",
-          "Readers can browse the editorial site. Invited readers can open People and Journal, and the author can draft and publish entries."
+          "Available · public readers",
+          [
+            "Browse the Blog archive, look up books, explore projects and photo collections, or find a post through site search."
+          ]
         ],
         [
-          "Sprint 2 · Nov 30–Dec 13, 2026",
-          "Review the queued dependency updates, confirm compatibility and run required checks before release."
+          "Available · invited readers and author",
+          [
+            "Invited readers can open published People and Journal posts. The author can save drafts, preview, publish, and manage invitations from Workspace."
+          ]
+        ],
+        [
+          "Planned · dependency maintenance",
+          [
+            "The Sprint 2 window is November 30–December 13, 2026. Check queued dependency updates for compatibility and release validated changes when ready. Readers benefit from maintained tooling and a tested delivery path."
+          ]
+        ],
+        [
+          "Future editorial work",
+          [
+            "New content and section changes will appear on the GitHub Project when their scope and target window are set."
+          ]
+        ]
+      ],
+      "flow": [
+        [
+          "Editorial site",
+          "Live for public readers"
+        ],
+        [
+          "Publishing and private reading",
+          "Live for the author and invited readers"
+        ],
+        [
+          "Maintenance candidate",
+          "Review and test during the planned window"
+        ],
+        [
+          "Production verification",
+          "Verify the release before marking it shipped"
         ]
       ],
       "links": [
         [
           "Project roadmap",
           "https://github.com/users/theharithsa/projects/2/views/4"
+        ],
+        [
+          "Release history",
+          "releases.html"
         ]
       ]
     },
     "releases": {
-      "intro": "Production updates and tagged releases have separate evidence.",
+      "intro": "Use this index to find tagged releases and production updates with verification evidence.",
       "sections": [
         [
-          "Nov 12, 2026 · Production",
-          "Added Unsplash and Facebook links to the footer and verified safe 404 telemetry in production."
+          "Verified production updates",
+          [
+            "On November 12, 2026, the site added Unsplash and Facebook footer links and began reporting safe 404 paths and legacy image identifiers in Dynatrace. The linked issues record the production checks."
+          ]
         ],
         [
-          "Published versions",
-          "The version links below point to GitHub Releases. The changelog includes additional implementation history."
+          "Changelog history",
+          [
+            "The repository changelog records additional implementation work. Entries without a published GitHub Release or a live verification record appear as implementation history."
+          ]
+        ]
+      ],
+      "versions": [
+        [
+          "1.22.1",
+          "Writing-first Workspace and editorial polish.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.1"
+        ],
+        [
+          "1.22.0",
+          "Editable multimedia embeds and a clearer Workspace.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.0"
+        ],
+        [
+          "1.21.1",
+          "Smaller reading text and consistent editorial typography.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.1"
+        ],
+        [
+          "1.21.0",
+          "Classic post typography, quotations and callouts.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.0"
+        ],
+        [
+          "1.13.1",
+          "Publishing Workspace with a scoped Content API.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.13.1"
+        ],
+        [
+          "1.12.0",
+          "Drafts, preview, and explicit publication in Workspace.",
+          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.12.0"
         ]
       ],
       "links": [
         [
-          "Version 1.22.1",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.1"
+          "Footer links verification",
+          "https://github.com/theharithsa/theharithsanotes/issues/114#issuecomment-6823952244"
         ],
         [
-          "Version 1.22.0",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.22.0"
+          "404 telemetry verification",
+          "https://github.com/theharithsa/theharithsanotes/issues/110#issuecomment-6820962388"
         ],
         [
-          "Version 1.21.1",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.1"
-        ],
-        [
-          "Version 1.21.0",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.21.0"
-        ],
-        [
-          "Version 1.13.1",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.13.1"
-        ],
-        [
-          "Version 1.12.0",
-          "https://github.com/theharithsa/theharithsanotes/releases/tag/v1.12.0"
-        ],
-        [
-          "Changelog",
+          "Repository changelog",
           "https://github.com/theharithsa/theharithsanotes/blob/main/CHANGELOG.md"
+        ],
+        [
+          "Roadmap",
+          "roadmap.html"
         ]
       ]
     }
