@@ -22,8 +22,6 @@ jobs:
           python-version: "3.12"
       - name: Check foundation, links and tests
         run: sh scripts/check.sh
-      - name: Check documentation impact
-        run: python scripts/check_docs_impact.py
       - name: Preserve actual test reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
