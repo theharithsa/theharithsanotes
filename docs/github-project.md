@@ -10,3 +10,7 @@
 Assign a planned issue and its implementation PR the same milestone. The intake workflows fill missing issue types and milestones, preserve explicit assignments, and send unplanned Dependabot work to Dependency maintenance. Project status alone does not close issues.
 
 The intake workflows are based on [app-launchpad-template](https://github.com/theharithsa/app-launchpad-template/tree/31e91a6b5ea45cb59474e378842fe535fe0d92f7).
+
+## Delivery and promotion
+
+Open an issue-linked PR to protected `main`. The required Foundation and Website checks run on the PR, with zero required independent approvals. The Foundation check validates the documentation decision. The Website check builds the site and runs its application tests. Use a Firebase preview when the change needs isolated acceptance testing. After an authorized merge, use the [Firebase release procedure](firebase-only-migration.md) for runtime changes and verify the production revision.

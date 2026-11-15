@@ -5,3 +5,5 @@ Use the [GitHub issue forms](https://github.com/theharithsa/theharithsanotes/iss
 Use Node.js 24 and run `npm ci`. Start with `npm run dev`. Follow the [test commands](docs/testing.md) and use the isolated Firebase emulator for CMS tests. Use fictional data when testing publishing or access controls.
 
 Open a pull request linked to its issue. Include the expected behavior, scope, relevant checks, and any deployment or telemetry impact. Report security concerns through the [private reporting channel](SECURITY.md).
+
+Use the PR template’s **Documentation impact** section to link affected guides or explain why they still apply. The Foundation check verifies that a decision is present. Review the decision against the actual change before merging.
