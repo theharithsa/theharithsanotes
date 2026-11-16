@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { applicationDefault } from "firebase-admin/app";
 import { createHash } from "node:crypto";
 import { database } from "../src/server/firebase.ts";
-import { collection } from "../src/server/config.ts";
+import { collection, namespace } from "../src/server/config.ts";
 import { auditEvent, outboxDocument } from "../src/server/telemetry.ts";
 const project = "the-harithsa-notes-94";
 const input = JSON.parse(await readFile(process.argv[2] ?? "", "utf8")) as {
@@ -13,6 +13,7 @@ const input = JSON.parse(await readFile(process.argv[2] ?? "", "utf8")) as {
 };
 if (
   !["cloud-build", "hosting"].includes(input.kind) ||
+  !["live", "preview"].includes(namespace) ||
   !input.sha?.match(/^[a-f0-9]{40}$/) ||
   !/^[a-zA-Z0-9_-]{1,100}$/.test(input.id)
 )
@@ -40,6 +41,7 @@ const data: Record<string, string | number | boolean | null> = {
 if (input.kind === "cloud-build") {
   const build = row as {
     id: string;
+    projectId: string;
     status: string;
     finishTime?: string;
     startTime?: string;
@@ -48,12 +50,45 @@ if (input.kind === "cloud-build") {
   };
   if (
     build.id !== input.id ||
-    build.substitutions?._SOURCE_REVISION !== input.sha ||
+    build.projectId !== project ||
     !["SUCCESS", "FAILURE", "TIMEOUT", "CANCELLED", "EXPIRED"].includes(
       build.status,
     )
   )
-    throw Error("Build source or terminal state mismatch");
+    throw Error("Build identity or terminal state mismatch");
+  const sourceRevision = build.substitutions?._SOURCE_REVISION;
+  if (sourceRevision === undefined) {
+    // Managed builds have no custom source substitution.
+    const functionId = namespace === "live" ? "journalLive" : "journalPreview";
+    const functionResponse = await fetch(
+      `https://cloudfunctions.googleapis.com/v2/projects/${project}/locations/us-east1/functions/${functionId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${credential.access_token}`,
+          "x-goog-user-project": project,
+        },
+        signal: AbortSignal.timeout(15000),
+      },
+    );
+    if (!functionResponse.ok)
+      throw Error(`Function receipt read failed ${functionResponse.status}`);
+    const fn = (await functionResponse.json()) as {
+      state?: string;
+      buildConfig?: { build?: string };
+      serviceConfig?: { environmentVariables?: Record<string, string> };
+    };
+    if (
+      fn.state !== "ACTIVE" ||
+      build.status !== "SUCCESS" ||
+      !fn.buildConfig?.build?.endsWith(
+        `/locations/us-east1/builds/${input.id}`,
+      ) ||
+      fn.serviceConfig?.environmentVariables?.SOURCE_REVISION !== input.sha
+    )
+      throw Error("Firebase Function build or source mismatch");
+  } else if (sourceRevision !== input.sha) {
+    throw Error("Cloud Build source mismatch");
+  }
   Object.assign(data, {
     "sdlc.stage": "build",
     "sdlc.status": build.status === "SUCCESS" ? "success" : "failure",

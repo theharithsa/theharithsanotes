@@ -19,7 +19,12 @@ import { collection, projectId } from "../src/server/config.ts";
 import { handleCmsApi } from "../src/server/api.ts";
 import { uploadMedia, mediaResponse } from "../src/server/media.ts";
 import { drainAudit } from "../src/server/outbox.ts";
-import { payloadSummary } from "../src/server/telemetry.ts";
+import {
+  payloadSummary,
+  requestContext,
+  wireEvent,
+} from "../src/server/telemetry.ts";
+import type { AuditEvent } from "../src/server/models.ts";
 import { createApiKey } from "../src/server/api-keys.ts";
 import {
   reconcileWorkspace,
@@ -148,6 +153,29 @@ function blog(slug: string) {
   };
 }
 const integration = process.env.FIRESTORE_EMULATOR_HOST ? test : test.skip;
+async function checkCorrelatedAudit<T>(
+  type: string,
+  operation: () => Promise<T>,
+) {
+  const requestId = randomUUID();
+  const result = await requestContext.run(
+    { requestId, cache: new Map() },
+    operation,
+  );
+  const rows = await database()
+    .collection(collection("outbox"))
+    .where("event.type", "==", type)
+    .get();
+  const event = rows.docs
+    .map((row) => row.get("event") as AuditEvent)
+    .find((row) => row.data["request.id"] === requestId);
+  assert.ok(event, type);
+  const wire = wireEvent(event);
+  assert.equal(wire["transaction.id"], requestId, type);
+  assert.equal(wire.transaction_id, requestId, type);
+  return result;
+}
+
 integration(
   "approved post blocks survive draft and immutable publication",
   async () => {
@@ -170,7 +198,9 @@ integration(
     assert.ok(published);
     assert.equal(published.data.html, draft.data.html);
     assert.match(published.data.html, /class="post-image-grid"/);
-    await unpublishEntry("blogs", id, draft.draftRevision);
+    await checkCorrelatedAudit("content.unpublished", () =>
+      unpublishEntry("blogs", id, draft.draftRevision),
+    );
   },
 );
 integration(
@@ -199,10 +229,12 @@ integration(
       401,
     );
     assert.equal((await readingApi(request(), "journal")).status, 403);
-    const invited = await inviteMember({
-      email: "invited@example.com",
-      expiresInDays: 30,
-    });
+    const invited = await checkCorrelatedAudit("membership.invited", () =>
+      inviteMember({
+        email: "invited@example.com",
+        expiresInDays: 30,
+      }),
+    );
     assert.equal((await authorizeReader(request())).uid, uid);
     assert.equal(
       (
@@ -390,7 +422,9 @@ integration(
       ).total,
       0,
     );
-    await revokeMember(invited.id);
+    await checkCorrelatedAudit("membership.revoked", () =>
+      revokeMember(invited.id),
+    );
     const revokedSearch = await searchApi(
       searchRequest(token(uid, "invited@example.com")),
     );
@@ -814,18 +848,20 @@ integration(
 integration(
   "scoped keys enforce draft, publish, media and collection permissions; revocation and expiry are immediate",
   async () => {
-    const full = await createApiKey({
-      name: "Synthetic integration",
-      scopes: [
-        "content:read",
-        "content:write",
-        "content:publish",
-        "media:read",
-        "media:write",
-      ],
-      sections: ["blogs"],
-      expiresInDays: 1,
-    });
+    const full = await checkCorrelatedAudit("developer.key_created", () =>
+      createApiKey({
+        name: "Synthetic integration",
+        scopes: [
+          "content:read",
+          "content:write",
+          "content:publish",
+          "media:read",
+          "media:write",
+        ],
+        sections: ["blogs"],
+        expiresInDays: 1,
+      }),
+    );
     const readonly = await createApiKey({
       name: "Synthetic reader",
       scopes: ["content:read"],
