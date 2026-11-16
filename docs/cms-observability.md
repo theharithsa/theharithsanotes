@@ -52,6 +52,17 @@ Consent-based public RUM sends `content.viewed` and `content.read_completed` for
 
 ## Trusted CI reports
 
+For a Firebase Functions release, record the finished Cloud Build as soon as
+the target Function is active. Run `npm exec -- tsx scripts/record-provider-release.ts <receipt.json>`
+with operator Application Default Credentials and `CMS_NAMESPACE=live` or
+`preview` to match the target. The local receipt contains `kind` set to
+`cloud-build`, the provider build `id`, and the deployed Git `sha`. The recorder
+checks the active Function's build reference and deployed source revision when
+Cloud Build has no custom source substitution. The durable event uses
+`sdlc.source = cloud-build` and `sdlc.stage = build`. Verify that event in Grail
+after the audit drain. Record the receipt before another update replaces the
+Function's current build reference.
+
 `.github/workflows/observability.yml` runs trusted main. Its exact workflow ref, repository, issuer, audience and event type are validated server-side. PR-triggered reporting never checks out or executes PR code. Actual GitHub API statuses and runner JUnit reports supply outcomes. Downloaded artifacts are bounded and allowlisted XML members; neither artifacts nor their contents are executed. Free-text test failures/logs are discarded. Test identities are hashed; measured case duration is retained. The event time is the workflow's observed completion time when the runner does not provide an individual case timestamp.
 
 Stable source IDs include repository, execution attempt, job/step/case identity. Report-only retries retain original execution attempt and add the reporting run/attempt. Operational gateway telemetry remains server-observed; execution outcomes are `ci-reported`. These are not synthesized runtime business successes.

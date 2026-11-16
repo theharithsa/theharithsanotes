@@ -20,6 +20,10 @@ The Firebase Storage allowance is usage-based. Moving image requests from Hostin
 
 ## Stage and release
 
+Record the successful managed Cloud Build in Dynatrace as part of release
+verification. Follow the [provider receipt procedure](cms-observability.md#trusted-ci-reports)
+while the target Function still points to that build.
+
 Run `node scripts/stage-firebase-release.mjs preview <full-git-sha>` from a clean source tree using Node.js 24. The ignored release directory contains `functions/`, the image-free `hosting/` directory, fingerprinted `storage/` objects and Firebase configuration. Review the size and paths before deployment. Use Firebase CLI 15.35.0, which supports the Node.js 24 Functions runtime. Apply the narrow public Storage rule and upload only the staged public-art objects. Deploy `journalPreview` before publishing the preview Hosting version. Stage `live` from the same reviewed revision, deploy `journalLive`, and publish its pinned Hosting config. Enable the one-day Functions artifact cleanup policy. Delete verified obsolete build inputs from staging storage once deployment has finished, and keep the Hosting release and rollback bundle local.
 
 Use the stage's `firebase.json` with `deploy --only functions`. Verify the resulting Function's managed service and ready revision before publishing Hosting. Use the stage's `firebase.hosting.json` with `hosting:channel:deploy review --expires 1d` for preview and `deploy --only hosting` for production. The Hosting-only configuration pins the Function's existing managed revision and avoids triggering a second build. Confirm the published Hosting version, target revision and version size, then remove the temporary preview channel.
