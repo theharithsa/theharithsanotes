@@ -1,4 +1,4 @@
-"""Build the approved Margin identity as native SVG paths. Requires fonttools==4.60.1."""
+"""Build the approved Margin identity as native SVG paths. Requires fonttools==4.60.2."""
 
 from hashlib import sha256
 from html import escape

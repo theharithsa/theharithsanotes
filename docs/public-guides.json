@@ -8,7 +8,7 @@
           "Find a story",
           [
             "Open Blog and choose a topic or a tag. The archive lets you jump by year and month. Books has genre and rating filters, and Projects can be filtered by topic.",
-            "The header search opens a dialog over the current page. Type a few words and choose a result. The demo uses “cloud cost” to find an article."
+            "The header search opens a dialog over the current page. Type a few words and choose a result. The demo uses “cloud cost” to find an article. The Documentation link in the live site's footer opens this guide collection."
           ],
           [
             "Open Search in the header.",
