@@ -10,6 +10,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import { hostingRedirects, hostingRewritePattern } from "./hosting-routes.mjs";
 import {
   artVariant,
   artWidths,
@@ -166,9 +167,9 @@ const config = JSON.parse(
     "utf8",
   ),
 );
-const regex = config.hosting.rewrites[0].regex;
+const regex = hostingRewritePattern;
 config.hosting.public = "hosting";
-config.hosting.redirects = redirects;
+config.hosting.redirects = [...hostingRedirects, ...redirects];
 config.hosting.rewrites = [
   { regex, function: { functionId, region: "us-east1", pinTag: true } },
 ];

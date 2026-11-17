@@ -20,6 +20,13 @@ The Firebase Storage allowance is usage-based. Moving image requests from Hostin
 
 ## Stage and release
 
+The public path list in `src/data/hosting-paths.json` defines the permanent
+Hosting redirects and exact probe slugs. The release stage generates the RE2
+rewrite from that list. Check the CMS for active and historical Blog slugs
+before reserving a path. The current aliases are `/archive` to `/blogs` and
+`/home` to `/`. Verify their 301 responses at Hosting and the probe fallback's
+404 status, static marker, and absence of the Function's request ID.
+
 Record the successful managed Cloud Build in Dynatrace as part of release
 verification. Follow the [provider receipt procedure](cms-observability.md#trusted-ci-reports)
 while the target Function still points to that build.

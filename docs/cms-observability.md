@@ -85,3 +85,10 @@ template. For `/_image`, the asset field is a fixed public identifier for the
 three known legacy targets. No raw query, host, fragment, or request headers
 are included in these fields. Firebase Hosting responses served before the
 function do not pass through this instrumentation.
+
+When Astro renders the missing-page UI for a failed request, the original
+middleware pass owns the status, request ID, span, log, metric, and HTTP
+BizEvent. The nested render does not create a second request record. During
+release verification, request a unique missing public slug and compare its
+`X-Request-ID` in the 404 span, log, and BizEvent. Compare Cloud Run request
+logs with the sampled trace view when measuring total inbound 404s.

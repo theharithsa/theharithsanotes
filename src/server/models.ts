@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { sanitizePostHtml } from "../lib/post-html.ts";
+import hostingPaths from "../data/hosting-paths.json" with { type: "json" };
 
 export const sections = [
   "blogs",
@@ -410,6 +411,8 @@ export function validateData(
       "people-and-journal",
       "account",
       "search",
+      ...Object.keys(hostingPaths.redirects),
+      ...hostingPaths.probeSlugs,
     ].includes(String(data.slug))
   )
     throw new CmsError(
