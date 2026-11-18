@@ -95,6 +95,10 @@ function notFoundAttributes(url: URL, route: string) {
 
 export const onRequest = defineMiddleware(async (context, next) => {
   if (!firestoreEnabled()) return next();
+  // Astro runs middleware again when a page rewrites to the missing-page UI.
+  // The original request still owns the response, correlation ID, and telemetry.
+  if (context.url.pathname === "/404" && requestContext.getStore())
+    return next();
   const state = {
     requestId: randomUUID(),
     cache: new Map<string, Promise<unknown>>(),

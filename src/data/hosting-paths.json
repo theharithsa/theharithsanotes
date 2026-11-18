@@ -1,0 +1,17 @@
+{
+  "redirects": {
+    "archive": "/blogs",
+    "home": "/"
+  },
+  "probeSlugs": [
+    "administrator",
+    "backup",
+    "bc",
+    "bk",
+    "main",
+    "new",
+    "old",
+    "roundcube",
+    "wordpress"
+  ]
+}

@@ -81,9 +81,17 @@ test("content validation rejects scripts, unsafe links, excessive nesting and re
   const data = validateData("blogs", blog("safe"));
   assert.ok(!String(data.html).includes("<script"));
   assert.ok(!String(data.html).includes("javascript:"));
-  assert.throws(
-    () => validateData("blogs", { ...blog("admin"), slug: "admin" }),
-    CmsError,
+  for (const address of [
+    "admin",
+    "archive",
+    "home",
+    "administrator",
+    "roundcube",
+  ])
+    assert.throws(() => validateData("blogs", blog(address)), CmsError);
+  assert.equal(
+    validateData("blogs", blog("wordpress-guide")).slug,
+    "wordpress-guide",
   );
   let nested: unknown = "x";
   for (let i = 0; i < 20; i++) nested = { child: nested };
