@@ -77,6 +77,54 @@ test("page stories preserve rich formatting and reject executable markup", () =>
   );
 });
 
+test("projects accept captioned screenshots placed after existing overview paragraphs", () => {
+  const project = {
+    title: "Example tool",
+    slug: "example-tool",
+    category: "Tools",
+    description: "A sample project.",
+    href: "",
+    source: "",
+    image: "/images/example.webp",
+    imageAlt: "Example cover",
+    colour: "blue",
+    overview: ["How it works.", "What to try."],
+    features: [],
+    stack: [],
+    linkLabel: "Open",
+  };
+  const screenshot = {
+    afterParagraph: 2,
+    image: `/media/${"a".repeat(64)}/master.webp`,
+    imageAlt: "The example tool overview",
+    caption: "The tool shows the active tasks.",
+    width: 1200,
+    height: 675,
+  };
+
+  assert.deepEqual(validateData("projects", project, true), project);
+  const updated = { ...project, screenshots: [screenshot] };
+  assert.deepEqual(validateData("projects", updated, true), updated);
+  assert.throws(
+    () =>
+      validateData("projects", {
+        ...project,
+        screenshots: [{ ...screenshot, afterParagraph: 3 }],
+      }),
+    /Place each screenshot after an existing overview paragraph/,
+  );
+  assert.throws(
+    () =>
+      validateData("projects", {
+        ...project,
+        screenshots: [
+          { ...screenshot, image: "https://example.test/image.webp" },
+        ],
+      }),
+    CmsError,
+  );
+});
+
 test("content validation rejects scripts, unsafe links, excessive nesting and reserved slugs", () => {
   const data = validateData("blogs", blog("safe"));
   assert.ok(!String(data.html).includes("<script"));
