@@ -103,6 +103,14 @@ export const pageSlugs = [
   "gogs",
   "privacy",
 ] as const;
+const projectScreenshot = z.object({
+  afterParagraph: z.number().int().min(1).max(100),
+  image: z.string().regex(/^\/media\/[a-f0-9]{64}\/master\.webp$/),
+  imageAlt: z.string().trim().min(1).max(2000),
+  caption: z.string().trim().min(1).max(300),
+  width: z.number().int().min(1).max(2400),
+  height: z.number().int().min(1).max(2400),
+});
 const schemas: Record<Section, z.ZodType> = {
   journal: z
     .object({
@@ -178,11 +186,22 @@ const schemas: Record<Section, z.ZodType> = {
       imageAlt: text,
       colour: z.string().max(30),
       overview: z.array(text).max(100),
+      screenshots: z.array(projectScreenshot).max(20).optional(),
       features: z.array(z.object({ title: text, description: text })).max(100),
       stack: tags,
       linkLabel: text,
     })
-    .catchall(z.unknown()),
+    .catchall(z.unknown())
+    .refine(
+      ({ overview, screenshots }) =>
+        !screenshots?.some(
+          ({ afterParagraph }) => afterParagraph > overview.length,
+        ),
+      {
+        path: ["screenshots"],
+        message: "Place each screenshot after an existing overview paragraph",
+      },
+    ),
   podcasts: z
     .object({
       ...base,

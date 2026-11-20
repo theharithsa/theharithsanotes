@@ -10,6 +10,14 @@ export interface Project {
   imageAlt: string;
   colour: string;
   overview: string[];
+  screenshots?: {
+    afterParagraph: number;
+    image: string;
+    imageAlt: string;
+    caption: string;
+    width: number;
+    height: number;
+  }[];
   features: { title: string; description: string }[];
   stack: string[];
   linkLabel: string;
