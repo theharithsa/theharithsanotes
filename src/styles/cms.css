@@ -44,6 +44,14 @@ body:has(#invitations-room) {
   display: flex;
   flex-direction: column;
 }
+.cms-sidebar-navigation {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+.cms-menu-toggle {
+  display: none;
+}
 .cms-sidebar .wordmark {
   width: 190px;
   min-width: 0;
@@ -148,7 +156,7 @@ body:has(#invitations-room) {
   font-weight: 500;
   color: var(--ink);
 }
-.cms-breadcrumb > span {
+.cms-breadcrumb-divider {
   opacity: 0.4;
 }
 .cms-account {
@@ -851,34 +859,6 @@ body:has(#invitations-room) {
   .cms-workspace {
     display: block;
   }
-  .cms-sidebar {
-    position: relative;
-    height: auto;
-    padding: 17px 15px;
-  }
-  .cms-sidebar .wordmark {
-    width: 175px;
-    margin: 0 0 17px;
-  }
-  .cms-space-name,
-  .cms-nav-label,
-  .cms-sidebar-bottom {
-    display: none;
-  }
-  .cms-sidebar nav {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 3px;
-    padding-bottom: 4px;
-  }
-  .cms-sidebar nav a {
-    white-space: nowrap;
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-  .cms-nav-icon {
-    display: none;
-  }
   .cms-topbar {
     padding-inline: 18px;
     height: 52px;
@@ -905,7 +885,7 @@ body:has(#invitations-room) {
     width: 100%;
   }
   .cms-table-filters label:first-child {
-    flex: 1;
+    flex: 1 0 100%;
   }
   .cms-table th,
   .cms-table td {
@@ -1505,44 +1485,106 @@ body:has(#invitations-room) {
   .cms-sidebar {
     height: auto;
     position: relative;
-    padding: 18px;
-  }
-  .cms-workspace {
-    grid-template-columns: 1fr;
+    padding: 6px 16px;
   }
   .cms-sidebar .wordmark,
   .cms-sidebar-bottom,
-  .cms-space-name {
+  .cms-space-name small {
     display: none;
   }
+  .cms-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .cms-sidebar .cms-space-name {
+    min-width: 0;
+    margin: 0;
+  }
+  .cms-sidebar .cms-space-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  .cms-menu-toggle:not([hidden]) {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid #ffffff40;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+  }
+  .cms-menu-toggle:hover,
+  .cms-menu-toggle[aria-expanded="true"] {
+    background: var(--cms-active);
+  }
+  .cms-menu-icon {
+    width: 14px;
+    height: 8px;
+    border-block: 1px solid currentColor;
+  }
+  .cms-sidebar :is(button, a, summary):focus-visible {
+    outline: 2px solid #f7b374;
+    outline-offset: 2px;
+  }
+  .cms-sidebar-header:has(.cms-menu-toggle:not([hidden])[aria-expanded="false"])
+    + .cms-sidebar-navigation {
+    display: none;
+  }
+  .cms-sidebar-navigation {
+    padding-block: 10px;
+  }
   .cms-write-group summary {
-    padding: 10px;
+    padding: 8px;
+    min-height: 44px;
   }
   .cms-sidebar nav {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 8px;
   }
   .cms-sidebar nav a {
-    font-size: 11px;
-    padding: 8px 5px;
+    padding: 8px;
+    min-height: 44px;
     gap: 4px;
+    overflow-wrap: anywhere;
   }
   .cms-nav-count {
-    font-size: 8px;
-    padding: 2px;
+    padding: 2px 4px;
   }
   .cms-nav-icon {
-    font-size: 11px;
-    width: 16px;
+    display: none;
   }
   .cms-developer-nav {
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 6px;
+    padding: 10px 8px;
+    min-height: 44px;
   }
   .cms-topbar {
-    padding: 0 18px;
+    height: auto;
+    min-height: 52px;
+    padding: 4px 16px;
     gap: 8px;
+  }
+  .cms-breadcrumb {
+    min-width: 0;
+    margin-inline-end: auto;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+  .cms-breadcrumb-parent,
+  .cms-breadcrumb-divider {
+    display: none;
+  }
+  .cms-topbar :is(.cms-quiet-button, .theme-toggle) {
+    min-height: 44px;
   }
   .cms-developer {
     padding: 18px;
@@ -1559,10 +1601,21 @@ body:has(#invitations-room) {
     margin: 18px 0 0;
   }
   .cms-page-heading {
-    padding: 24px 18px;
+    padding: 20px 18px;
+  }
+  .cms-page-heading > div {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+  .cms-page-heading h1 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    overflow-wrap: anywhere;
+  }
+  .cms-page-heading > p {
+    margin: 12px 0 0;
   }
   .cms-collection {
-    padding-top: 20px;
+    padding-top: 16px;
   }
   .cms-key-form {
     padding: 20px;
@@ -1605,13 +1658,6 @@ body:has(#invitations-room) {
 .cms-account button {
   white-space: nowrap;
 }
-@media (max-width: 760px) {
-  .cms-sidebar .cms-space-name {
-    display: flex;
-    margin: 0 6px 12px;
-  }
-}
-
 .cms-restoring {
   padding: clamp(30px, 5vw, 70px);
   max-width: 1100px;
