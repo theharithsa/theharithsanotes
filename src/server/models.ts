@@ -103,8 +103,8 @@ export const pageSlugs = [
   "gogs",
   "privacy",
 ] as const;
+const projectScreenshotLimit = 20;
 const projectScreenshot = z.object({
-  afterParagraph: z.number().int().min(1).max(100),
   image: z.string().regex(/^\/media\/[a-f0-9]{64}\/master\.webp$/),
   imageAlt: z.string().trim().min(1).max(2000),
   caption: z.string().trim().min(1).max(300),
@@ -189,8 +189,26 @@ const schemas: Record<Section, z.ZodType> = {
       imageAlt: text,
       colour: z.string().max(30),
       overview: z.array(text).max(100),
-      screenshots: z.array(projectScreenshot).max(20).optional(),
-      features: z.array(z.object({ title: text, description: text })).max(100),
+      screenshots: z
+        .array(
+          projectScreenshot.extend({
+            afterParagraph: z.number().int().min(1).max(100),
+          }),
+        )
+        .max(projectScreenshotLimit)
+        .optional(),
+      features: z
+        .array(
+          z.object({
+            title: text,
+            description: text,
+            screenshots: z
+              .array(projectScreenshot)
+              .max(projectScreenshotLimit)
+              .optional(),
+          }),
+        )
+        .max(100),
       stack: tags,
       linkLabel: text,
     })
@@ -203,6 +221,17 @@ const schemas: Record<Section, z.ZodType> = {
       {
         path: ["screenshots"],
         message: "Place each screenshot after an existing overview paragraph",
+      },
+    )
+    .refine(
+      ({ screenshots, features }) =>
+        features.reduce(
+          (count, feature) => count + (feature.screenshots?.length ?? 0),
+          screenshots?.length ?? 0,
+        ) <= projectScreenshotLimit,
+      {
+        path: ["features"],
+        message: "A project can include at most 20 screenshots",
       },
     ),
   podcasts: z

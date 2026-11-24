@@ -1,8 +1,8 @@
 ---
 import { sanitizePostHtml } from "../../lib/post-html";
-import { responsiveMedia } from "../../lib/post-media";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import ProjectArt from "../../components/ProjectArt.astro";
+import ProjectScreenshot from "../../components/ProjectScreenshot.astro";
 import Base from "../../layouts/Base.astro";
 import {
   projects as snapshotProjects,
@@ -99,25 +99,7 @@ const { productHunt } = project;
               {project.screenshots
                 ?.filter(({ afterParagraph }) => afterParagraph === index + 1)
                 .map((screenshot) => (
-                  <figure class="project-screenshot">
-                    <a
-                      href={screenshot.image}
-                      title="Open full-size screenshot"
-                    >
-                      <img
-                        {...responsiveMedia(
-                          screenshot.image,
-                          "(max-width: 640px) 92vw, 600px",
-                        )}
-                        alt={screenshot.imageAlt}
-                        width={screenshot.width}
-                        height={screenshot.height}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                    <figcaption>{screenshot.caption}</figcaption>
-                  </figure>
+                  <ProjectScreenshot screenshot={screenshot} />
                 ))}
             </>
           ))}
@@ -133,6 +115,9 @@ const { productHunt } = project;
               <div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
+                {feature.screenshots?.map((screenshot) => (
+                  <ProjectScreenshot screenshot={screenshot} />
+                ))}
               </div>
             ))}
           </div>
