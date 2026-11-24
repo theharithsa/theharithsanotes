@@ -2,6 +2,8 @@
 
 Open [the workspace](https://theharithsa.com/admin) and continue with Google using `theharithsa@gmail.com`. The server checks the verified Google identity and pins its Firebase UID; signing in with another account does not grant access.
 
+On narrow screens, open **Menu** to switch collections, access Developer Settings, or manage invited readers. The menu closes when you choose a section.
+
 Choose Blog, Books, Projects, Podcasts, Entertainment, Photos, GoGs, Pages or Tags in the sidebar. Each collection has a searchable table and publication status. Open a row to edit its properties. Blog and GoGs include a rich text editor with headings, lists, quotes, code, links, images and tables. Existing article HTML is preserved until the body is edited.
 
 Changes autosave as private revisions. **Publish** explicitly updates the public version. **Preview** opens the saved private draft in another tab. Public caches expire within 30 seconds. **History** restores a previous revision into a new draft; publish it when ready. **Unpublish** removes an entry from public pages while keeping its draft and revisions. Home and Meet Vish remain published and can be revised through Pages.

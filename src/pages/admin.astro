@@ -26,58 +26,80 @@ const tables = [
   <section class="cms-workspace" aria-label="Private content workspace">
     <aside class="cms-sidebar">
       <Wordmark />
-      <div class="cms-space-name">
-        <img
-          class="cms-space-avatar"
-          src="/brand/v1/app-icon-192.png"
-          width="40"
-          height="40"
-          alt="The Harithsa Notes icon"
-        />
-        <div>
-          The Harithsa Notes<small>Writing &amp; publishing</small>
+      <div class="cms-sidebar-header">
+        <div class="cms-space-name">
+          <img
+            class="cms-space-avatar"
+            src="/brand/v1/app-icon-192.png"
+            width="40"
+            height="40"
+            alt="The Harithsa Notes icon"
+          />
+          <div>
+            The Harithsa Notes<small>Writing &amp; publishing</small>
+          </div>
         </div>
+        <button
+          id="cms-menu-toggle"
+          class="cms-menu-toggle"
+          type="button"
+          aria-controls="cms-sidebar-navigation"
+          aria-expanded="false"
+          hidden
+        >
+          <span class="cms-menu-icon" aria-hidden="true"></span>
+          Menu
+        </button>
       </div>
-      <details class="cms-write-group" open>
-        <summary>
-          <span aria-hidden="true">✎</span> Write{" "}
-          <small>YOUR COLLECTIONS</small>
-        </summary>
-        <nav aria-label="Content collections">
-          {tables.map(([id, label, icon]) => (
-            <a href={`#${id}`} data-cms-section={id}>
-              <span class="cms-nav-icon" aria-hidden="true">
-                {icon}
-              </span>
-              {label}
-              <small class="cms-nav-count" data-cms-count={id}>
-                —
-              </small>
-            </a>
-          ))}
-        </nav>
-      </details>
-      <a class="cms-developer-nav" href="#developer" data-cms-view="developer">
-        <span aria-hidden="true">{`</>`}</span> Developer Settings
-      </a>
-      <a class="cms-developer-nav" href="/admin/invitations">
-        Invited readers
-      </a>
-      <div class="cms-sidebar-bottom">
-        <a href="/" target="_blank" rel="noopener">
-          View the journal
+      <div class="cms-sidebar-navigation" id="cms-sidebar-navigation">
+        <details class="cms-write-group" open>
+          <summary>
+            <span aria-hidden="true">✎</span> Write{" "}
+            <small>YOUR COLLECTIONS</small>
+          </summary>
+          <nav aria-label="Content collections">
+            {tables.map(([id, label, icon]) => (
+              <a href={`#${id}`} data-cms-section={id}>
+                <span class="cms-nav-icon" aria-hidden="true">
+                  {icon}
+                </span>
+                {label}
+                <small class="cms-nav-count" data-cms-count={id}>
+                  —
+                </small>
+              </a>
+            ))}
+          </nav>
+        </details>
+        <a
+          class="cms-developer-nav"
+          href="#developer"
+          data-cms-view="developer"
+        >
+          <span aria-hidden="true">{`</>`}</span> Developer Settings
         </a>
-        <p>
-          Everything starts as a draft.
-          <br />
-          Publish when it feels ready.
-        </p>
+        <a class="cms-developer-nav" href="/admin/invitations">
+          Invited readers
+        </a>
+        <div class="cms-sidebar-bottom">
+          <a href="/" target="_blank" rel="noopener">
+            View the journal
+          </a>
+          <p>
+            Everything starts as a draft.
+            <br />
+            Publish when it feels ready.
+          </p>
+        </div>
       </div>
     </aside>
     <div class="cms-main">
       <header class="cms-topbar">
         <div class="cms-breadcrumb">
-          Your workspace <span>/</span>{" "}
+          <span class="cms-breadcrumb-parent">Your workspace</span>
+          <span class="cms-breadcrumb-divider" aria-hidden="true">
+            /
+          </span>
           <strong id="cms-breadcrumb">Blog</strong>
         </div>
         <div class="cms-account" hidden>
@@ -442,5 +464,6 @@ const tables = [
       hidden
     />
   </section>
+  <script src="../scripts/workspace-navigation.ts"></script>
   <script src="../scripts/cms.ts"></script>
 </Base>
