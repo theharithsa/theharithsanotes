@@ -6,6 +6,7 @@ export interface Project {
   description: string;
   href: string;
   source: string;
+  productHunt?: { slug: string; postId: string };
   image: string;
   imageAlt: string;
   colour: string;
@@ -160,6 +161,7 @@ export const projects: Project[] = [
   },
   {
     slug: "budget-buddy",
+    productHunt: { slug: "finbuddy-4", postId: "1329568" },
     title: "Budget Buddy / FinBuddy",
     category: "Money & planning",
     description:
