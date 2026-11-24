@@ -26,7 +26,7 @@ Use the [Swagger portal](https://theharithsanotes.com/admin/api) or [OpenAPI JSO
 
 Use `books`, `projects`, `podcasts`, `entertainment`, `photos`, `gogs`, `pages` or `tags` in place of `blogs`. JSON requests are capped at 640 KiB and an entry at 600 KiB. HTML is sanitized; URLs, slugs, image types, nested data and revision expectations are validated by the same code used by the workspace.
 
-For a project, add an optional `screenshots` array to put captioned images alongside the overview. Each item contains `afterParagraph` (the paragraph number in `overview`, starting at 1), `image` (the uploaded `/media/{id}/master.webp` path), `imageAlt`, `caption`, and the master image's `width` and `height` in pixels. Screenshots display beneath their associated paragraphs in array order, with links to the full-size images. Adjust the positions when reordering paragraphs.
+To illustrate a project feature, add a `screenshots` array to its object in `features`. Each screenshot needs `image` (the uploaded `/media/{id}/master.webp` path), `imageAlt`, `caption`, and the master image's `width` and `height` in pixels. The page displays the screenshots beneath the feature description in array order, with links to the full-size images. The project supports up to 20 screenshots. Earlier revisions can still use the top-level `screenshots` array with a 1-based `afterParagraph` placement.
 
 ## Operations and recovery
 

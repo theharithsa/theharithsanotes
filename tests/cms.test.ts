@@ -77,7 +77,7 @@ test("page stories preserve rich formatting and reject executable markup", () =>
   );
 });
 
-test("projects accept captioned screenshots placed after existing overview paragraphs", () => {
+test("projects keep captioned screenshots on their features and accept older overview placements", () => {
   const project = {
     title: "Example tool",
     slug: "example-tool",
@@ -94,7 +94,6 @@ test("projects accept captioned screenshots placed after existing overview parag
     linkLabel: "Open",
   };
   const screenshot = {
-    afterParagraph: 2,
     image: `/media/${"a".repeat(64)}/master.webp`,
     imageAlt: "The example tool overview",
     caption: "The tool shows the active tasks.",
@@ -103,8 +102,23 @@ test("projects accept captioned screenshots placed after existing overview parag
   };
 
   assert.deepEqual(validateData("projects", project, true), project);
-  const updated = { ...project, screenshots: [screenshot] };
-  assert.deepEqual(validateData("projects", updated, true), updated);
+  const withFeature = {
+    ...project,
+    features: [
+      {
+        title: "Active tasks",
+        description: "Review open work.",
+        screenshots: [screenshot],
+      },
+    ],
+  };
+  assert.deepEqual(validateData("projects", withFeature, true), withFeature);
+
+  const legacy = {
+    ...project,
+    screenshots: [{ ...screenshot, afterParagraph: 2 }],
+  };
+  assert.deepEqual(validateData("projects", legacy, true), legacy);
   assert.throws(
     () =>
       validateData("projects", {
@@ -116,9 +130,14 @@ test("projects accept captioned screenshots placed after existing overview parag
   assert.throws(
     () =>
       validateData("projects", {
-        ...project,
-        screenshots: [
-          { ...screenshot, image: "https://example.test/image.webp" },
+        ...withFeature,
+        features: [
+          {
+            ...withFeature.features[0],
+            screenshots: [
+              { ...screenshot, image: "https://example.test/image.webp" },
+            ],
+          },
         ],
       }),
     CmsError,

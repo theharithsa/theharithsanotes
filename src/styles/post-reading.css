@@ -420,6 +420,9 @@
   color: inherit;
   margin-bottom: var(--post-paragraph-gap);
 }
+.post-body .project-feature-grid .project-screenshot {
+  margin-block: 0.75rem 1.5rem;
+}
 .post-body > section > p {
   font: inherit;
   color: inherit;
