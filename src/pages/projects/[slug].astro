@@ -26,6 +26,7 @@ if (!loaded) return Astro.rewrite("/404");
 if (loaded.canonical !== Astro.params.slug)
   return Astro.redirect(`/projects/${loaded.canonical}`, 301);
 const project = loaded.data;
+const { productHunt } = project;
 ---
 
 <Base
@@ -59,6 +60,21 @@ const project = loaded.data;
           {project.source && (
             <a class="project-source" href={project.source}>
               GitHub repository ↗
+            </a>
+          )}
+          {productHunt && (
+            <a
+              class="project-product-hunt"
+              href={`https://www.producthunt.com/products/${encodeURIComponent(productHunt.slug)}?launch=${encodeURIComponent(productHunt.slug)}`}
+            >
+              <img
+                src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=${encodeURIComponent(productHunt.postId)}&theme=light`}
+                alt={`${project.title} on Product Hunt`}
+                width="250"
+                height="54"
+                decoding="async"
+                referrerpolicy="no-referrer"
+              />
             </a>
           )}
         </div>
@@ -133,3 +149,19 @@ const project = loaded.data;
     </div>
   </article>
 </Base>
+
+<style>
+  .project-product-hunt {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.75rem;
+    max-inline-size: 100%;
+  }
+
+  .project-product-hunt img {
+    display: block;
+    inline-size: 11.5rem;
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+</style>

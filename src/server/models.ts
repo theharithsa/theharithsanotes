@@ -182,6 +182,9 @@ const schemas: Record<Section, z.ZodType> = {
       description: text,
       href: url,
       source: url,
+      productHunt: z
+        .object({ slug, postId: z.string().regex(/^[1-9]\d{0,19}$/) })
+        .optional(),
       image: url,
       imageAlt: text,
       colour: z.string().max(30),
